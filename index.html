@@ -225,7 +225,7 @@
   }
 
   .stats-inner {
-    max-width: min(900px, 100%);
+    max-width: 900px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -285,7 +285,7 @@
   .sub-subtitle {
     font-size: 17px;
     color: #5e6876;
-    max-width: min(600px, 100%);
+    max-width: 600px;
     margin: 16px auto 0;
     line-height: 1.65;
   }
@@ -766,7 +766,7 @@
   }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: min(900px, 100%)) {
+  @media (max-width: 900px) {
     nav { padding: 0 20px; }
     .nav-links { display: none; }
     .subsidiaries-grid { grid-template-columns: 1fr; }
@@ -777,7 +777,7 @@
     .stat-item:nth-child(2) { border-right: none; }
   }
 
-  @media (max-width: min(600px, 100%)) {
+  @media (max-width: 600px) {
     .subsidiaries-grid { grid-template-columns: 1fr; }
     .offerings-grid { grid-template-columns: 1fr; }
     .footer-inner { grid-template-columns: 1fr; }
@@ -933,7 +933,7 @@ nav[data-dark] .hamburger span { background: #ffffff; }
 }
 
 /* ── HOMEPAGE SPECIFIC ───────────────────────────── */
-@media (max-width: min(900px, 100%)) {
+@media (max-width: 900px) {
   .hero { padding: 100px 20px 60px; }
   .hero h1 { font-size: clamp(36px, 8vw, 60px); }
   .hero p { font-size: 16px; }
@@ -954,7 +954,7 @@ nav[data-dark] .hamburger span { background: #ffffff; }
   .cta-strip { flex-direction: column; text-align: center; padding: 28px 20px; }
 }
 
-@media (max-width: min(600px, 100%)) {
+@media (max-width: 600px) {
   .hero h1 { font-size: clamp(30px, 9vw, 48px); }
   .stat-number { font-size: 28px; }
   .subsidiaries-grid { grid-template-columns: 1fr; }
@@ -968,7 +968,7 @@ nav[data-dark] .hamburger span { background: #ffffff; }
 }
 
 /* ── INTERIOR PAGES MOBILE ───────────────────────── */
-@media (max-width: min(900px, 100%)) {
+@media (max-width: 900px) {
   .page-header-inner { padding: 36px 20px 36px; }
   .page-header h1 { font-size: clamp(26px, 6vw, 40px); }
   .page-body { padding: 28px 20px 56px; }
@@ -993,7 +993,7 @@ nav[data-dark] .hamburger span { background: #ffffff; }
   .team-links { gap: 8px; }
 }
 
-@media (max-width: min(600px, 100%)) {
+@media (max-width: 600px) {
   .page-header h1 { font-size: clamp(22px, 7vw, 34px); }
   .block-title { font-size: clamp(20px, 6vw, 28px); }
   .feature-title { font-size: clamp(18px, 5vw, 26px); }
@@ -1009,13 +1009,13 @@ nav[data-dark] .hamburger span { background: #ffffff; }
 }
 
 /* ── NAV HEIGHT FIX on very small screens ────────── */
-@media (max-width: min(380px, 100%)) {
+@media (max-width: 380px) {
   nav { padding: 0 12px; }
   .nav-logo img { width: 100px; }
 }
 
 
-@media (max-width: min(900px, 100%)) {
+@media (max-width: 900px) {
   .hamburger { display: flex !important; }
   .nav-links { display: none !important; }
   .nav-cta { display: none !important; }
