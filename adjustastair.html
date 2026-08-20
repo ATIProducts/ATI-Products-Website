@@ -737,6 +737,33 @@ word-break:break-word;overflow-wrap:break-word;
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
+
+/* ── TEXTURED SECTION BACKGROUNDS (original SVG) ── */
+.page-header {
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2280%22%20height%3D%2280%22%20viewBox%3D%220%200%2080%2080%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2300703a%22%20stroke-width%3D%221%22%3E%3Cpath%20d%3D%22M0%200h80v80H0z%22%20opacity%3D%22.18%22%2F%3E%3Cpath%20d%3D%22M20%200v80M40%200v80M60%200v80M0%2020h80M0%2040h80M0%2060h80%22%20opacity%3D%22.09%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: repeat;
+  background-position: center top;
+}
+.page-header::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.92) 78%, #fff 100%);
+  z-index: 0;
+}
+.page-header { position: relative; }
+.page-header-inner { position: relative; z-index: 1; }
+.geo-section {
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2280%22%20height%3D%2280%22%20viewBox%3D%220%200%2080%2080%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2300703a%22%20stroke-width%3D%221%22%3E%3Cpath%20d%3D%22M0%200h80v80H0z%22%20opacity%3D%22.18%22%2F%3E%3Cpath%20d%3D%22M20%200v80M40%200v80M60%200v80M0%2020h80M0%2040h80M0%2060h80%22%20opacity%3D%22.09%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: repeat;
+  position: relative;
+}
+.geo-section::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.93) 100%);
+  z-index: 0;
+}
+.geo-section-inner { position: relative; z-index: 1; }
 </style>
 </head>
 <body>
