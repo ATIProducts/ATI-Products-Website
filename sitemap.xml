@@ -6,34 +6,24 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.atiproductsllc.com/subsidiaries</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <loc>https://www.atiproductsllc.com/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.atiproductsllc.com/offerings</loc>
-    <changefreq>weekly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.atiproductsllc.com/about</loc>
+    <loc>https://www.atiproductsllc.com/subsidiaries</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://www.atiproductsllc.com/affiliates</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://www.atiproductsllc.com/contact</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.atiproductsllc.com/adjustastair</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.atiproductsllc.com/adjustastair-specs</loc>
@@ -46,8 +36,8 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.atiproductsllc.com/google-ads-management</loc>
-    <changefreq>monthly</changefreq>
+    <loc>https://www.atiproductsllc.com/scaffolding-marketplace</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
@@ -56,8 +46,23 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.atiproductsllc.com/scaffolding-marketplace</loc>
+    <loc>https://www.atiproductsllc.com/google-ads-management</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.atiproductsllc.com/marketing-hub</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.atiproductsllc.com/affiliates</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://www.atiproductsllc.com/contact</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
