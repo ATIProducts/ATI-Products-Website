@@ -395,15 +395,17 @@ h3.card-title {
 footer { background: #0d1117; color: #c5c5c5; padding: 64px 48px 36px; }
 .footer-inner {
   max-width: min(1100px, 100%); margin: 0 auto;
-  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  display: grid; grid-template-columns: 2fr 1fr 1.6fr;
   gap: 60px; padding-bottom: 48px;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
-.footer-logo img { height: auto; width: 120px; filter: brightness(0) invert(1); opacity: 0.85; }
+.footer-logo img { height: auto; width: 120px; opacity: 0.85; }
 .footer-brand p { font-size: 13px; line-height: 1.75; color: #b0b0b0; margin-bottom: 10px; max-width: min(280px, 100%); }
 .footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #a0a0a0; margin-bottom: 18px; }
 .footer-col ul { list-style: none; }
+.footer-col-explore ul { column-count: 2; column-gap: 20px; }
+.footer-col-explore ul li { break-inside: avoid; }
 .footer-col ul li { margin-bottom: 11px; }
 .footer-col ul li a { font-size: 13px; color: #a8a8a8; text-decoration: none; transition: color 0.2s; }
 .footer-col ul li a:hover { color: #fff; }
@@ -802,12 +804,13 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
 .blog-card h3 { font-size:17px;font-weight:700;color:var(--text-dark);line-height:1.4;margin-bottom:10px; }
 .blog-card p { font-size:14px;color:var(--text-muted);line-height:1.6;margin:0 0 14px; }
 .blog-card .bc-read { font-size:13px;font-weight:700;color:var(--green);margin-top:auto; }
+@media (max-width: 700px) { .footer-col-explore ul { column-count: 1; } }
 </style>
 </head>
 <body>
 <a href="#main-content" style="position:absolute;top:-40px;left:0;background:#005f30;color:white;padding:8px 16px;z-index:9999;font-weight:600;text-decoration:none;" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 <nav aria-label="Main navigation" role="navigation">
-  <a href="index.html" class="nav-logo"><img src="images/ati-products-llc-logo.webp" alt="ATI Products LLC : Construction Products, Scaffolding, Lead Generation and Business Growth | Arvada, Colorado" itemprop="logo" title="ATI Products LLC | Headquartered in Arvada, Colorado | Serving Contractors in All 50 States Since 1999" width="725" height="62" loading="eager" decoding="sync" fetchpriority="high"></a>
+  <a href="index.html" class="nav-logo"><img src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding, Lead Generation and Business Growth | Arvada, Colorado" itemprop="logo" title="ATI Products LLC | Headquartered in Arvada, Colorado | Serving Contractors in All 50 States Since 1999" width="1726" height="922" loading="eager" decoding="sync" fetchpriority="high"><span style="white-space:nowrap;text-transform:none;letter-spacing:normal;"><span style="color:#00B74F;font-weight:700;font-size:15px;text-transform:none;letter-spacing:normal;">ATI</span> <span style="color:#0d1117;font-weight:700;font-size:15px;text-transform:none;letter-spacing:normal;">Products, LLC</span></span></a>
   <ul class="nav-links"><li><a href="index.html" class="">Home</a></li><li><a href="subsidiaries.html" class="">Subsidiaries</a></li><li><a href="offerings.html" class="">What We Offer</a></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   <a href="contact.html" class="nav-cta">Get in Touch</a>
   <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
@@ -866,7 +869,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
-        <img decoding="async" loading="lazy" width="725" height="62" src="images/ati-products-llc-logo.webp" alt="ATI Products LLC : Construction Products and Business Growth Services | Arvada, Colorado | Since 1999" title="ATI Products LLC | Parent Company | Arvada, CO 80002 | (800) 360-6115">
+        <img decoding="async" loading="lazy" width="1726" height="922" src="images/ati-products-logo-mark-white.webp" alt="ATI Products LLC : Construction Products and Business Growth Services | Arvada, Colorado | Since 1999" title="ATI Products LLC | Parent Company | Arvada, CO 80002 | (800) 360-6115"><span style="white-space:nowrap;text-transform:none;letter-spacing:normal;"><span style="color:#00B74F;font-weight:700;font-size:15px;text-transform:none;letter-spacing:normal;">ATI</span> <span style="color:#ffffff;font-weight:700;font-size:15px;text-transform:none;letter-spacing:normal;">Products, LLC</span></span>
       </div>
       <p>Innovative construction products and lead generation solutions, serving builders and service businesses across the United States since 1999.</p>
       <address style="font-style:normal;font-size:12px;color: #a0a0a0;line-height:1.7;">
@@ -882,7 +885,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
         <li><a href="https://scaffoldexchange.com/" target="_blank" rel="noopener noreferrer">Scaffold Exchange</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div class="footer-col footer-col-explore">
       <h4>Explore</h4>
       <ul>
         <li><a href="index.html">Home</a></li>
