@@ -380,10 +380,13 @@ h3.card-title {
 .team-link .team-sub { font-size: 12px; color: #5e6876; }
 
 /* ── AFFILIATE CARDS ── */
-.affiliate-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; max-width: min(720px, 100%); }
+.affiliate-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; max-width: min(1040px, 100%); }
+@media (max-width: 1100px) and (min-width: 901px) {
+  .affiliate-grid { grid-template-columns: repeat(2,1fr); max-width: min(720px, 100%); }
+}
 .affiliate-card {
   background: #fff; border: 1px solid var(--border);
-  border-radius: var(--radius-lg); padding: 36px 32px;
+  border-radius: var(--radius-lg); padding: 36px 28px;
 }
 .affiliate-card .aff-icon { font-size: 32px; margin-bottom: 16px; display: block; }
 .affiliate-card .aff-type {
