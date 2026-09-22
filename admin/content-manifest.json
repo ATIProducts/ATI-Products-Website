@@ -1,0 +1,23 @@
+{
+  "pages": [
+    { "file": "index.html", "title": "Homepage", "group": "Pages" },
+    { "file": "subsidiaries.html", "title": "Subsidiaries", "group": "Pages" },
+    { "file": "offerings.html", "title": "What We Offer", "group": "Pages" },
+    { "file": "about.html", "title": "About", "group": "Pages" },
+    { "file": "affiliates.html", "title": "Affiliates", "group": "Pages" },
+    { "file": "contact.html", "title": "Contact", "group": "Pages" },
+    { "file": "adjustastair.html", "title": "AdjustaStairs™ System", "group": "Pages" },
+    { "file": "adjustastairspecs.html", "title": "AdjustaStairs™ Specs", "group": "Pages" },
+    { "file": "googleadsmanagement.html", "title": "Google Ads Management", "group": "Pages" },
+    { "file": "leadgeneration.html", "title": "Lead Generation", "group": "Pages" },
+    { "file": "scaffoldingmarketplace.html", "title": "Scaffold Exchange", "group": "Pages" },
+    { "file": "coloradoconstructionsupply.html", "title": "Colorado Supply", "group": "Pages" },
+    { "file": "marketinghub.html", "title": "Marketing Hub", "group": "Pages" },
+    { "file": "blog.html", "title": "Blog (listing page)", "group": "Pages" },
+    { "file": "oshastairwayrequirements.html", "title": "OSHA Stairway Access Requirements", "group": "Blog Posts", "isPost": true },
+    { "file": "buyingvsrentingscaffolding.html", "title": "Buying vs. Renting Scaffolding", "group": "Blog Posts", "isPost": true },
+    { "file": "choosingtemporaryroofaccess.html", "title": "Choosing Temporary Roof Access", "group": "Blog Posts", "isPost": true },
+    { "file": "crmreplacementforcontractors.html", "title": "CRM Replacement for Contractors", "group": "Blog Posts", "isPost": true },
+    { "file": "marketingchannelsforservicebusinesses.html", "title": "Marketing Channels for Service Businesses", "group": "Blog Posts", "isPost": true }
+  ]
+}

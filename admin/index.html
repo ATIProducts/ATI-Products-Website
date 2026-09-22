@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Site Admin | ATI Products</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">ATI Products <span>&middot; Site Admin</span></div>
+  <div class="topbar-actions">
+    <a href="/index.html" target="_blank" class="btn btn-secondary" style="padding:8px 14px;font-size:13px;">View Live Site &#8599;</a>
+    <button id="logout-btn" class="btn btn-secondary" style="padding:8px 14px;font-size:13px;">Log Out</button>
+  </div>
+</div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <button class="nav-item active" data-view="welcome">Overview</button>
+
+    <h2>Actions</h2>
+    <button class="nav-item" data-view="new-post">+ New Blog Post</button>
+
+    <h2>Pages</h2>
+    <div id="pages-list"></div>
+
+    <h2>Blog Posts</h2>
+    <div id="posts-list"></div>
+  </nav>
+
+  <main class="main" id="main">
+    <!-- views are rendered here by admin.js -->
+  </main>
+</div>
+
+<script src="editor-core.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

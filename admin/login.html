@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin Login | ATI Products</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="login-shell">
+  <div class="login-card">
+    <h1>ATI Products &mdash; Site Admin</h1>
+    <p class="sub">Enter the admin password to edit pages and publish blog posts.</p>
+    <div id="error" class="error-msg" style="display:none;"></div>
+    <form id="login-form">
+      <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" value="admin">
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required autofocus>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Log In</button>
+    </form>
+  </div>
+</div>
+<script>
+  var form = document.getElementById('login-form');
+  var errorBox = document.getElementById('error');
+  var submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errorBox.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Logging in…';
+
+    fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+      })
+    })
+      .then(function (res) {
+        return res.json()
+          .catch(function () {
+            throw new Error('The login system isn’t responding (error ' + res.status + '). If the admin was just set up, check the Vercel settings and redeploy — see the setup guide.');
+          })
+          .then(function (data) { return { ok: res.ok, data: data }; });
+      })
+      .then(function (result) {
+        if (!result.ok) {
+          throw new Error(result.data && result.data.error ? result.data.error : 'Login failed.');
+        }
+        window.location.href = '/admin/index.html';
+      })
+      .catch(function (err) {
+        errorBox.textContent = err.message;
+        errorBox.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Log In';
+      });
+  });
+</script>
+</body>
+</html>
