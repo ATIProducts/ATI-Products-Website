@@ -211,6 +211,16 @@ question), that copy is updated too.
   always works and can't be removed from inside the admin. Treat it as the
   spare key. Changing `ADMIN_PASSWORD` in Vercel (then redeploying) logs that
   account out everywhere.
+- **Names.** Anyone can change the name they're shown under on the
+  **My account** screen (including the main admin, whose name is saved in
+  the encrypted user list; it defaults to "Main admin", or to the optional
+  `ADMIN_NAME` Vercel setting). Usernames don't change.
+- **Activity log** (admins only). Lists every change made through the
+  admin, newest first, with who made it and when, filterable by person.
+  There's no separate log to maintain: it reads the GitHub commit history
+  through the same `GITHUB_TOKEN`, so it also shows changes made directly
+  on GitHub (marked as such). Each entry links to the exact change on
+  GitHub.
 - **Removing someone or resetting their password** ends their sessions
   immediately, on every computer.
 - **The list of people** is stored in the repo as `admin/users.enc.json`,
