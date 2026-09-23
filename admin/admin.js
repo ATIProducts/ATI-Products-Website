@@ -257,6 +257,11 @@
     setActiveNav(e.currentTarget);
     renderPeople();
   });
+  document.querySelector('[data-view="activity"]').addEventListener('click', function (e) {
+    if (!confirmLeave()) return;
+    setActiveNav(e.currentTarget);
+    renderActivity();
+  });
 
   function resetScreen() {
     state.hasUnsaved = function () { return false; };
@@ -965,22 +970,59 @@
     });
   }
 
-  // ---------- your account: change password ----------
+  // ---------- your account: name + password ----------
+
+  function renderNameCard(me) {
+    var host = el('div', {});
+    var nameIn = el('input', { type: 'text', value: me.name || '', maxlength: '80', placeholder: 'e.g. Jane Smith' });
+    var btn = el('button', { class: 'btn btn-primary' }, ['Save Name']);
+    btn.addEventListener('click', function () {
+      host.innerHTML = '';
+      var name = nameIn.value.replace(/\s+/g, ' ').trim();
+      if (!name) { showMessage(host, 'Please type your name.', 'error'); nameIn.focus(); return; }
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+      apiJson('/api/account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'name', name: name }),
+      })
+        .then(function (data) {
+          if (state.me) state.me.name = data.name;
+          nameIn.value = data.name;
+          document.getElementById('whoami').textContent = 'Signed in as ' + data.name;
+          showMessage(host, 'Saved. You’ll show up as “' + data.name + '” from now on.', 'success');
+        })
+        .catch(function (err) { showMessage(host, err.message, 'error'); })
+        .finally(function () { btn.disabled = false; btn.textContent = 'Save Name'; });
+    });
+    nameIn.addEventListener('keydown', function (e) { if (e.key === 'Enter') btn.click(); });
+    return el('div', { class: 'card', style: 'max-width:520px;margin-bottom:16px;' }, [
+      el('h3', { style: 'margin-top:0;' }, ['Your name']),
+      host,
+      el('div', { class: 'field' }, [el('label', {}, ['Name shown in the admin and in the change history']), nameIn,
+        el('div', { class: 'hint' }, ['This doesn’t change your username. You still log in with “' + me.username + '”.'])]),
+      el('div', { style: 'margin-top:12px;display:flex;gap:10px;' }, [btn]),
+    ]);
+  }
 
   function renderAccount(firstTime) {
     resetScreen();
     var me = state.me || {};
-    mainEl.appendChild(el('h1', {}, [firstTime ? 'Welcome, ' + (me.name || '') + '!' : 'Change my password']));
+    mainEl.appendChild(el('h1', {}, [firstTime ? 'Welcome, ' + (me.name || '') + '!' : 'My account']));
 
     if (me.builtIn) {
       mainEl.appendChild(el('p', { class: 'sub' }, ['You’re logged in with the main admin account (username “' + me.username + '”).']));
-      mainEl.appendChild(el('div', { class: 'card' }, [
-        el('p', { style: 'margin:0 0 10px;' }, ['This account’s password is stored in Vercel, as the ADMIN_PASSWORD setting, so it can only be changed there (then redeploy).']),
+      mainEl.appendChild(renderNameCard(me));
+      mainEl.appendChild(el('div', { class: 'card', style: 'max-width:520px;' }, [
+        el('h3', { style: 'margin-top:0;' }, ['Password']),
+        el('p', { style: 'margin:0 0 10px;' }, ['This account’s password is stored in Vercel, as the ADMIN_PASSWORD setting, so it can only be changed there (then redeploy). The username is the ADMIN_USERNAME setting.']),
         el('p', { style: 'margin:0;' }, ['Tip: add yourself on the ', el('b', {}, ['People & logins']), ' screen and use your own login day to day. Keep this main account as a spare key.']),
       ]));
       return;
     }
 
+    if (!firstTime) mainEl.appendChild(renderNameCard(me));
     mainEl.appendChild(el('p', { class: 'sub' }, [firstTime
       ? 'Before you start, please choose your own password. You’ll use it from now on instead of the temporary one you were given.'
       : 'Choose a new password. You’ll stay logged in here, and you’ll be logged out on any other computer.']));
@@ -997,6 +1039,7 @@
 
     mainEl.appendChild(messageHost);
     mainEl.appendChild(el('div', { class: 'card', style: 'max-width:520px;' }, [
+      firstTime ? null : el('h3', { style: 'margin-top:0;' }, ['Change my password']),
       el('div', { class: 'field' }, [el('label', {}, [firstTime ? 'Temporary password (the one you were given)' : 'Current password']), current]),
       el('div', { class: 'field' }, [el('label', {}, ['New password']), next,
         el('div', { class: 'hint' }, ['At least 10 characters. A short phrase is easy to remember, like “scaffold-blue-harbor”.'])]),
@@ -1213,13 +1256,104 @@
     loadList();
   }
 
+  // ---------- activity log (admins only) ----------
+
+  function renderActivity() {
+    resetScreen();
+    mainEl.appendChild(el('h1', {}, ['Activity log']));
+    mainEl.appendChild(el('p', { class: 'sub' }, ['Every change made through the admin, newest first: who did it, what they changed, and when. Changes someone made directly on GitHub show up here too.']));
+
+    var messageHost = el('div', {});
+    var personSel = el('select', { 'aria-label': 'Show changes by' }, [el('option', { value: '' }, ['Everyone'])]);
+    var listHost = el('div', { class: 'activity-list' }, [el('p', { class: 'sub' }, ['Loading…'])]);
+    var moreBtn = el('button', { class: 'btn btn-secondary', hidden: 'hidden' }, ['Show older changes']);
+    mainEl.appendChild(messageHost);
+    mainEl.appendChild(el('div', { class: 'activity-filter' }, [el('label', {}, ['Show changes by ']), personSel]));
+    mainEl.appendChild(el('div', { class: 'card' }, [listHost]));
+    mainEl.appendChild(el('div', { style: 'margin-top:14px;text-align:center;' }, [moreBtn]));
+
+    var entries = [];
+    var page = 0;
+    var knownPeople = {};
+
+    function dayLabel(d) {
+      var today = new Date();
+      var y = new Date(); y.setDate(today.getDate() - 1);
+      if (d.toDateString() === today.toDateString()) return 'Today';
+      if (d.toDateString() === y.toDateString()) return 'Yesterday';
+      return d.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    }
+
+    function draw() {
+      listHost.innerHTML = '';
+      var who = personSel.value;
+      var shown = entries.filter(function (e) { return !who || e.username === who || (!e.username && who === '__github' && !e.viaAdmin); });
+      if (!shown.length) {
+        listHost.appendChild(el('p', { class: 'sub', style: 'margin:0;' }, [entries.length ? 'No changes by this person in what’s loaded so far.' : 'No changes yet.']));
+        return;
+      }
+      var lastDay = '';
+      shown.forEach(function (e) {
+        var d = new Date(e.when);
+        var day = dayLabel(d);
+        if (day !== lastDay) {
+          listHost.appendChild(el('h3', { class: 'activity-day' }, [day]));
+          lastDay = day;
+        }
+        var what = e.action + (e.photos ? ' (with ' + e.photos + ' photo' + (e.photos > 1 ? 's' : '') + ')' : '');
+        listHost.appendChild(el('div', { class: 'activity-row' + (e.viaAdmin ? '' : ' activity-outside') }, [
+          el('div', { class: 'activity-time' }, [d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' })]),
+          el('div', { class: 'activity-main' }, [
+            el('div', {}, [el('b', {}, [e.who]), ' — ' + what]),
+            e.detail ? el('div', { class: 'activity-detail' }, [e.detail]) : null,
+          ]),
+          e.url ? el('a', { class: 'activity-link', href: e.url, target: '_blank', rel: 'noopener', title: 'See the exact change on GitHub' }, ['Details ↗']) : null,
+        ]));
+      });
+    }
+
+    function load() {
+      moreBtn.disabled = true;
+      moreBtn.textContent = 'Loading…';
+      apiJson('/api/activity?page=' + (page + 1))
+        .then(function (data) {
+          page = data.page;
+          entries = entries.concat(data.entries);
+          var hasGithub = entries.some(function (e) { return !e.viaAdmin; });
+          data.people.forEach(function (p) {
+            if (knownPeople[p.username]) return;
+            knownPeople[p.username] = true;
+            personSel.appendChild(el('option', { value: p.username }, [p.name]));
+          });
+          if (hasGithub && !knownPeople.__github) {
+            knownPeople.__github = true;
+            personSel.appendChild(el('option', { value: '__github' }, ['Changes made directly on GitHub']));
+          }
+          draw();
+          moreBtn.hidden = !data.hasMore;
+        })
+        .catch(function (err) {
+          listHost.innerHTML = '';
+          showMessage(messageHost, 'Couldn’t load the activity log: ' + err.message, 'error');
+        })
+        .finally(function () { moreBtn.disabled = false; moreBtn.textContent = 'Show older changes'; });
+    }
+
+    personSel.addEventListener('change', draw);
+    moreBtn.addEventListener('click', load);
+    load();
+  }
+
   // ---------- boot ----------
 
   checkAuthOrRedirect().then(function (ok) {
     if (!ok) return;
     var me = state.me || {};
     document.getElementById('whoami').textContent = 'Signed in as ' + (me.name || me.username || '');
-    if (me.role === 'admin') document.getElementById('people-nav').hidden = false;
+    if (me.role === 'admin') {
+      document.getElementById('people-nav').hidden = false;
+      document.getElementById('activity-nav').hidden = false;
+    }
     loadPagesList();
     if (me.mustChangePassword) {
       setActiveNav(document.querySelector('[data-view="account"]'));
