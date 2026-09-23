@@ -1,8 +1,14 @@
 // api/me.js
-// Lets the admin frontend ask "am I still logged in?" (e.g. after the
-// 7-day session expires) without triggering a 401 console error.
-const { isAuthenticated } = require('../lib/auth');
+// Lets the admin screens ask "am I still logged in, and as whom?"
+const { readSession } = require('../lib/auth');
+const { resolveSession, publicUser } = require('../lib/users');
 
 module.exports = async (req, res) => {
-  res.status(200).json({ authenticated: isAuthenticated(req) });
+  let person = null;
+  try {
+    person = await resolveSession(readSession(req));
+  } catch {
+    person = null;
+  }
+  res.status(200).json(person ? { authenticated: true, user: publicUser(person) } : { authenticated: false });
 };

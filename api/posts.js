@@ -14,6 +14,7 @@
 const { requireAuth } = require('../lib/requireAuth');
 const { getFile, putFile } = require('../lib/github');
 const { addManifestEntry } = require('../lib/manifest');
+const { SITE_URL } = require('../lib/site');
 const { renderBlogPostHtml, renderBlogCardHtml, renderSitemapEntry, slugify } = require('../lib/blogTemplate');
 
 const TEMPLATE_PATH = 'admin/templates/blog-post-template.html';
@@ -167,7 +168,7 @@ module.exports = requireAuth(async (req, res) => {
     ok: true,
     slug,
     file: postFile,
-    url: `https://www.atiproductsllc.com/${slug}`,
+    url: `${SITE_URL}/${slug}`,
     steps,
   });
 });

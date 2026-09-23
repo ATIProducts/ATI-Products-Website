@@ -1,14 +1,16 @@
 // api/login.js
 //
 // POST { username, password } -> sets a session cookie on success.
-// Rate limiting note: Vercel serverless functions are stateless between
-// invocations, so a persistent rate-limit counter isn't possible without
-// adding a database. As a floor against brute-forcing, use a genuinely
-// strong ADMIN_PASSWORD (SETUP.md shows how to generate one) — with a
-// long random password, guessing attacks are not practical even without
-// rate limiting.
+// Works for the main admin account (from Vercel settings) and for anyone
+// added on the admin's "People" screen.
+//
+// Rate limiting note: Vercel functions keep no memory between requests, so
+// there's no attempt counter without a database. Passwords created by the
+// admin are long and random, and people choosing their own must use at
+// least 10 characters, which keeps guessing impractical.
 
-const { createSessionCookie, constantTimeStringEqual } = require('../lib/auth');
+const { createSessionCookie } = require('../lib/auth');
+const { authenticate } = require('../lib/users');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -26,9 +28,6 @@ module.exports = async (req, res) => {
   }
   const { username, password } = body || {};
 
-  const expectedUser = process.env.ADMIN_USERNAME || 'admin';
-  const expectedPass = process.env.ADMIN_PASSWORD;
-
   const missing = ['ADMIN_PASSWORD', 'SESSION_SECRET', 'GITHUB_TOKEN', 'GITHUB_OWNER', 'GITHUB_REPO'].filter(
     (name) => !process.env[name]
   );
@@ -39,14 +38,19 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const userOk = constantTimeStringEqual(username || '', expectedUser);
-  const passOk = constantTimeStringEqual(password || '', expectedPass);
+  let person;
+  try {
+    person = await authenticate(username, password);
+  } catch (e) {
+    res.status(502).json({ error: e.message });
+    return;
+  }
 
-  if (!userOk || !passOk) {
+  if (!person) {
     res.status(401).json({ error: 'Incorrect username or password.' });
     return;
   }
 
-  res.setHeader('Set-Cookie', createSessionCookie());
+  res.setHeader('Set-Cookie', createSessionCookie(person));
   res.status(200).json({ ok: true });
 };
