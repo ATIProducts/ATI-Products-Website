@@ -35,15 +35,17 @@ module.exports = requireAuth(
   async (req, res) => {
     try {
       if (req.method === 'GET') {
-        let list;
+        let list, mainProfile;
         try {
-          list = (await users.loadUsers({ fresh: true })).users;
+          const loaded = await users.loadUsers({ fresh: true });
+          list = loaded.users;
+          mainProfile = loaded.main;
         } catch (e) {
           if (e.code !== 'USERS_LOCKED') throw e;
           res.status(409).json({ error: e.message, locked: true, canReset: !!req.user.builtIn });
           return;
         }
-        const people = [users.mainAdmin()].concat(
+        const people = [users.mainAdmin(mainProfile)].concat(
           list.slice().sort((a, b) => a.name.localeCompare(b.name))
         );
         res.status(200).json({ people: people.map(users.publicUser), you: req.user.username });
@@ -108,6 +110,14 @@ module.exports = requireAuth(
         throw fail(400, 'The main admin account is managed in Vercel (its password is the ADMIN_PASSWORD setting) and can’t be changed here.');
       }
 
+      // "jsmith (Jane Smith)" — keeps the Activity log readable even after
+      // someone is removed from the list.
+      let label = username;
+      try {
+        const known = (await users.loadUsers()).users.find((x) => x.username === username);
+        if (known && known.name) label = `${username} (${known.name})`;
+      } catch { /* the save below will report any real problem */ }
+
       if (action === 'reset') {
         const password = users.generatePassword();
         let name = username;
@@ -118,7 +128,7 @@ module.exports = requireAuth(
           u.ver = users.newVersion();
           u.mustChangePassword = true;
           name = u.name;
-        }, `Reset admin password for ${username}`);
+        }, `Reset admin password for ${label}`);
         res.status(200).json({ ok: true, username, name, password });
         return;
       }
@@ -133,7 +143,7 @@ module.exports = requireAuth(
           const u = list.find((x) => x.username === username);
           if (!u) throw fail(404, 'That person wasn’t found. Refresh the page.');
           u.role = role;
-        }, `Make ${username} ${role === 'admin' ? 'an admin' : 'an editor'}`);
+        }, `Make ${label} ${role === 'admin' ? 'an admin' : 'an editor'}`);
         res.status(200).json({ ok: true });
         return;
       }
@@ -144,7 +154,7 @@ module.exports = requireAuth(
           const i = list.findIndex((x) => x.username === username);
           if (i === -1) throw fail(404, 'That person wasn’t found. Refresh the page.');
           list.splice(i, 1);
-        }, `Remove admin login for ${username}`);
+        }, `Remove admin login for ${label}`);
         res.status(200).json({ ok: true });
         return;
       }
