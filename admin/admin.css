@@ -530,3 +530,41 @@ a { color: var(--green); }
 .rte-body:empty::before { content: attr(data-placeholder); color: #9ca3af; }
 .rte-body img { max-width: 100%; height: auto; }
 .seo-panel.form-grid, .seo-body.form-grid { display: grid; }
+
+/* ---- Multi-user: who's signed in, People screen, account ---- */
+.whoami { color: #d1d5db; font-size: 13px; margin-right: 6px; }
+.card-title { font-size: 16px; margin: 0 0 16px; }
+.check-row { display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--text-mid); cursor: pointer; }
+.btn-sm { padding: 6px 12px; font-size: 13px; }
+.muted { color: var(--text-muted); font-size: 12.5px; }
+.tag {
+  display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 700;
+  padding: 2px 8px; border-radius: 99px; background: #e6f4ec; color: var(--green-dark); vertical-align: 1px;
+}
+.tag-warn { background: #fdf3dc; color: #8a5a00; }
+.table-scroll { overflow-x: auto; }
+table.people { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 620px; }
+table.people th {
+  text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--text-muted); padding: 0 12px 10px; border-bottom: 1px solid var(--border);
+}
+table.people td { padding: 14px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+table.people tr:last-child td { border-bottom: none; }
+table.people select {
+  padding: 7px 10px; border: 1.5px solid var(--border); border-radius: 8px;
+  font-family: inherit; font-size: 13.5px; background: #fff; color: var(--text-dark);
+}
+.row-actions { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; align-items: center; }
+.cred-grid {
+  display: grid; grid-template-columns: auto 1fr; gap: 8px 16px; align-items: center;
+  background: var(--bg); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; font-size: 14px;
+}
+.cred-grid code { font-size: 15px; }
+.cred-pw { font-size: 18px !important; font-weight: 700; letter-spacing: 0.03em; }
+.cred-box {
+  width: 100%; font-family: inherit; font-size: 13px; line-height: 1.5; padding: 10px 12px;
+  border: 1.5px solid var(--border); border-radius: 8px; resize: vertical; color: var(--text-mid);
+}
+
+/* Make sure anything marked hidden stays hidden, even buttons styled with display:block. */
+[hidden] { display: none !important; }

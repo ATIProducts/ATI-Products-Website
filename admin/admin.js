@@ -34,6 +34,7 @@
           window.location.href = '/admin/login.html';
           return false;
         }
+        state.me = data.user;
         return true;
       })
       .catch(function () {
@@ -119,7 +120,11 @@
         throw new Error('Your login expired. Please log in again.');
       }
       return res.json().then(function (data) {
-        if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+        if (!res.ok) {
+          var err = new Error(data.error || 'Something went wrong.');
+          err.data = data;
+          throw err;
+        }
         return data;
       });
     });
@@ -241,6 +246,16 @@
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
     renderNewPostForm();
+  });
+  document.querySelector('[data-view="account"]').addEventListener('click', function (e) {
+    if (!confirmLeave()) return;
+    setActiveNav(e.currentTarget);
+    renderAccount(false);
+  });
+  document.querySelector('[data-view="people"]').addEventListener('click', function (e) {
+    if (!confirmLeave()) return;
+    setActiveNav(e.currentTarget);
+    renderPeople();
   });
 
   function resetScreen() {
@@ -841,7 +856,7 @@
       el('summary', {}, ['More options (optional)']),
       el('div', { class: 'seo-body form-grid' }, [
         el('div', { class: 'field' }, [el('label', {}, ['Web address ending']), slugInput,
-          el('div', { class: 'hint' }, ['The page will be at atiproductsllc.com/this-ending'])]),
+          el('div', { class: 'hint' }, ['The page will be at ' + window.location.host.replace(/^www\./, '') + '/this-ending'])]),
         el('div', { class: 'field' }, [el('label', {}, ['Search keywords']), keywordsInput]),
         el('div', { class: 'field field-full' }, [el('label', {}, ['Caption under the main photo']), heroCaptionInput]),
       ]),
@@ -950,11 +965,267 @@
     });
   }
 
+  // ---------- your account: change password ----------
+
+  function renderAccount(firstTime) {
+    resetScreen();
+    var me = state.me || {};
+    mainEl.appendChild(el('h1', {}, [firstTime ? 'Welcome, ' + (me.name || '') + '!' : 'Change my password']));
+
+    if (me.builtIn) {
+      mainEl.appendChild(el('p', { class: 'sub' }, ['You’re logged in with the main admin account (username “' + me.username + '”).']));
+      mainEl.appendChild(el('div', { class: 'card' }, [
+        el('p', { style: 'margin:0 0 10px;' }, ['This account’s password is stored in Vercel, as the ADMIN_PASSWORD setting, so it can only be changed there (then redeploy).']),
+        el('p', { style: 'margin:0;' }, ['Tip: add yourself on the ', el('b', {}, ['People & logins']), ' screen and use your own login day to day. Keep this main account as a spare key.']),
+      ]));
+      return;
+    }
+
+    mainEl.appendChild(el('p', { class: 'sub' }, [firstTime
+      ? 'Before you start, please choose your own password. You’ll use it from now on instead of the temporary one you were given.'
+      : 'Choose a new password. You’ll stay logged in here, and you’ll be logged out on any other computer.']));
+
+    var messageHost = el('div', {});
+    var current = el('input', { type: 'password', autocomplete: 'current-password' });
+    var next = el('input', { type: 'password', autocomplete: 'new-password' });
+    var again = el('input', { type: 'password', autocomplete: 'new-password' });
+    var show = el('input', { type: 'checkbox', id: 'show-pw' });
+    show.addEventListener('change', function () {
+      [current, next, again].forEach(function (i) { i.type = show.checked ? 'text' : 'password'; });
+    });
+    var saveBtn = el('button', { class: 'btn btn-primary' }, ['Save New Password']);
+
+    mainEl.appendChild(messageHost);
+    mainEl.appendChild(el('div', { class: 'card', style: 'max-width:520px;' }, [
+      el('div', { class: 'field' }, [el('label', {}, [firstTime ? 'Temporary password (the one you were given)' : 'Current password']), current]),
+      el('div', { class: 'field' }, [el('label', {}, ['New password']), next,
+        el('div', { class: 'hint' }, ['At least 10 characters. A short phrase is easy to remember, like “scaffold-blue-harbor”.'])]),
+      el('div', { class: 'field' }, [el('label', {}, ['Type the new password again']), again]),
+      el('label', { class: 'check-row' }, [show, ' Show passwords']),
+      el('div', { style: 'margin-top:16px;display:flex;gap:10px;' }, [saveBtn]),
+    ]));
+    current.focus();
+
+    saveBtn.addEventListener('click', function () {
+      messageHost.innerHTML = '';
+      if (next.value.length < 10) { showMessage(messageHost, 'Please choose a password with at least 10 characters.', 'error'); return; }
+      if (next.value !== again.value) { showMessage(messageHost, 'The two new passwords don’t match.', 'error'); return; }
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving…';
+      apiJson('/api/account', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ currentPassword: current.value, newPassword: next.value }),
+      })
+        .then(function () {
+          if (state.me) state.me.mustChangePassword = false;
+          current.value = next.value = again.value = '';
+          showMessage(messageHost, firstTime
+            ? 'All set! Your new password is saved. Pick a page on the left to get started.'
+            : 'Your new password is saved.', 'success');
+        })
+        .catch(function (err) { showMessage(messageHost, err.message, 'error'); })
+        .finally(function () { saveBtn.disabled = false; saveBtn.textContent = 'Save New Password'; });
+    });
+  }
+
+  // ---------- people & logins (admins only) ----------
+
+  function loginMessage(name, username, password) {
+    var address = window.location.origin + '/admin/login.html';
+    return 'Hi ' + name.split(' ')[0] + ',\n\nHere’s your login for editing the ATI website:\n\n' +
+      'Address:  ' + address + '\nUsername: ' + username + '\nTemporary password: ' + password +
+      '\n\nYou’ll be asked to choose your own password the first time you log in.';
+  }
+
+  function showCredentials(title, name, username, password) {
+    var msg = loginMessage(name, username, password);
+    var box = el('textarea', { class: 'cred-box', readonly: 'readonly', rows: '8' });
+    box.value = msg;
+    var copyBtn = el('button', { class: 'btn btn-primary' }, ['Copy Login Details']);
+    var doneBtn = el('button', { class: 'btn btn-secondary' }, ['Done']);
+    var modal = el('div', { class: 'modal-backdrop' }, [
+      el('div', { class: 'modal', role: 'dialog', 'aria-label': title }, [
+        el('h2', {}, [title]),
+        el('p', { class: 'sub' }, ['Send these to ' + name + ' privately (a text message or a password manager is better than email). ',
+          el('b', {}, ['This temporary password is only shown once.'])]),
+        el('div', { class: 'cred-grid' }, [
+          el('span', {}, ['Username']), el('code', {}, [username]),
+          el('span', {}, ['Temporary password']), el('code', { class: 'cred-pw' }, [password]),
+        ]),
+        box,
+        el('div', { class: 'modal-actions' }, [doneBtn, copyBtn]),
+      ]),
+    ]);
+    copyBtn.addEventListener('click', function () {
+      var done = function () { copyBtn.textContent = 'Copied'; setTimeout(function () { copyBtn.textContent = 'Copy Login Details'; }, 1600); };
+      try {
+        navigator.clipboard.writeText(msg).then(done, function () { box.select(); copyBtn.textContent = 'Press Ctrl+C'; });
+      } catch (e) { box.select(); copyBtn.textContent = 'Press Ctrl+C'; }
+    });
+    doneBtn.addEventListener('click', function () {
+      if (!window.confirm('Have you copied or written down the password? It won’t be shown again.')) return;
+      modal.remove();
+    });
+    document.body.appendChild(modal);
+  }
+
+  function renderPeople() {
+    resetScreen();
+    mainEl.appendChild(el('h1', {}, ['People & logins']));
+    mainEl.appendChild(el('p', { class: 'sub' }, ['Everyone here can log in to edit the website with their own username and password. Admins can also add and remove people.']));
+    var messageHost = el('div', {});
+    mainEl.appendChild(messageHost);
+    var listCard = el('div', { class: 'card' }, ['Loading…']);
+    mainEl.appendChild(listCard);
+
+    // --- add someone ---
+    var nameIn = el('input', { type: 'text', placeholder: 'e.g. Jane Smith' });
+    var userIn = el('input', { type: 'text', placeholder: 'e.g. jsmith', autocapitalize: 'none', spellcheck: 'false' });
+    var emailIn = el('input', { type: 'email', placeholder: 'optional' });
+    var roleIn = el('select', {}, [
+      el('option', { value: 'editor' }, ['Editor — can edit pages and write posts']),
+      el('option', { value: 'admin' }, ['Admin — can also add and remove people']),
+    ]);
+    var userTouched = false;
+    userIn.addEventListener('input', function () { userTouched = true; });
+    nameIn.addEventListener('input', function () {
+      if (userTouched) return;
+      var parts = nameIn.value.trim().toLowerCase().replace(/[^a-z\s-]/g, '').split(/\s+/).filter(Boolean);
+      userIn.value = parts.length > 1 ? parts[0][0] + parts[parts.length - 1] : (parts[0] || '');
+    });
+    var addBtn = el('button', { class: 'btn btn-primary' }, ['Add Person']);
+    mainEl.appendChild(el('div', { class: 'card' }, [
+      el('h2', { class: 'card-title' }, ['Add someone']),
+      el('div', { class: 'form-grid' }, [
+        el('div', { class: 'field' }, [el('label', {}, ['Full name']), nameIn]),
+        el('div', { class: 'field' }, [el('label', {}, ['Username']), userIn,
+          el('div', { class: 'hint' }, ['What they’ll type to log in. Lowercase, no spaces.'])]),
+        el('div', { class: 'field' }, [el('label', {}, ['Email']), emailIn,
+          el('div', { class: 'hint' }, ['Optional. Shown next to their changes in GitHub.'])]),
+        el('div', { class: 'field' }, [el('label', {}, ['What can they do?']), roleIn]),
+      ]),
+      el('div', { style: 'display:flex;justify-content:flex-end;' }, [addBtn]),
+    ]));
+
+    addBtn.addEventListener('click', function () {
+      messageHost.innerHTML = '';
+      if (!nameIn.value.trim()) { showMessage(messageHost, 'Please enter their full name.', 'error'); nameIn.focus(); return; }
+      if (!userIn.value.trim()) { showMessage(messageHost, 'Please enter a username.', 'error'); userIn.focus(); return; }
+      addBtn.disabled = true;
+      addBtn.textContent = 'Adding…';
+      apiJson('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'add', name: nameIn.value, username: userIn.value, email: emailIn.value, role: roleIn.value }),
+      })
+        .then(function (data) {
+          showCredentials('Login created for ' + data.name, data.name, data.username, data.password);
+          nameIn.value = userIn.value = emailIn.value = '';
+          roleIn.value = 'editor';
+          userTouched = false;
+          loadList();
+        })
+        .catch(function (err) { showMessage(messageHost, err.message, 'error'); })
+        .finally(function () { addBtn.disabled = false; addBtn.textContent = 'Add Person'; });
+    });
+
+    function act(payload, confirmText, onDone) {
+      if (confirmText && !window.confirm(confirmText)) return;
+      messageHost.innerHTML = '';
+      apiJson('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(function (data) { if (onDone) onDone(data); loadList(); })
+        .catch(function (err) { showMessage(messageHost, err.message, 'error'); loadList(); });
+    }
+
+    function loadList() {
+      apiJson('/api/users')
+        .then(function (data) {
+          listCard.innerHTML = '';
+          var table = el('table', { class: 'people' });
+          table.appendChild(el('thead', {}, [el('tr', {}, [
+            el('th', {}, ['Name']), el('th', {}, ['Username']), el('th', {}, ['Can']), el('th', {}, ['']),
+          ])]));
+          var tbody = el('tbody');
+          data.people.forEach(function (p) {
+            var isYou = p.username === data.you;
+            var nameCell = el('td', {}, [
+              el('b', {}, [p.name]),
+              isYou ? el('span', { class: 'tag' }, ['you']) : null,
+              p.mustChangePassword && !p.builtIn ? el('span', { class: 'tag tag-warn' }, ['hasn’t logged in yet']) : null,
+              p.email ? el('div', { class: 'muted' }, [p.email]) : null,
+            ]);
+            var roleCell;
+            if (p.builtIn) {
+              roleCell = el('td', {}, [el('span', { class: 'muted' }, ['Admin (main account)'])]);
+            } else {
+              var sel = el('select', { 'aria-label': 'Role for ' + p.name }, [
+                el('option', { value: 'editor' }, ['Editor']),
+                el('option', { value: 'admin' }, ['Admin']),
+              ]);
+              sel.value = p.role;
+              sel.addEventListener('change', function () {
+                act({ action: 'role', username: p.username, role: sel.value },
+                  sel.value === 'admin' ? 'Make ' + p.name + ' an admin? They’ll be able to add and remove people.' : 'Make ' + p.name + ' an editor? They won’t be able to manage people any more.',
+                  function () { toast(p.name + ' is now ' + (sel.value === 'admin' ? 'an admin.' : 'an editor.')); });
+              });
+              roleCell = el('td', {}, [sel]);
+            }
+            var actions = el('td', { class: 'row-actions' });
+            if (p.builtIn) {
+              actions.appendChild(el('span', { class: 'muted' }, ['Password is set in Vercel']));
+            } else {
+              actions.appendChild(el('button', { class: 'btn btn-secondary btn-sm', onClick: function () {
+                act({ action: 'reset', username: p.username },
+                  'Give ' + p.name + ' a new temporary password? Their current password will stop working and they’ll be logged out.',
+                  function (d) { showCredentials('New password for ' + d.name, d.name, d.username, d.password); });
+              } }, ['Reset password']));
+              if (!isYou) {
+                actions.appendChild(el('button', { class: 'btn btn-danger btn-sm', onClick: function () {
+                  act({ action: 'remove', username: p.username },
+                    'Remove ' + p.name + '? They won’t be able to log in any more. Their past changes stay on the website.',
+                    function () { toast(p.name + ' was removed.'); });
+                } }, ['Remove']));
+              }
+            }
+            tbody.appendChild(el('tr', {}, [nameCell, el('td', {}, [el('code', {}, [p.username])]), roleCell, actions]));
+          });
+          table.appendChild(tbody);
+          listCard.appendChild(el('div', { class: 'table-scroll' }, [table]));
+        })
+        .catch(function (err) {
+          showMessage(listCard, err.message, 'error');
+          if (err.data && err.data.locked && err.data.canReset) {
+            var freshBtn = el('button', { class: 'btn btn-danger' }, ['Start a Fresh List']);
+            freshBtn.addEventListener('click', function () {
+              if (!window.confirm('Start a fresh, empty list of people? Everyone except the main admin will need to be added again.')) return;
+              act({ action: 'start-fresh' }, null, function () { toast('Fresh list started. You can add people again now.'); });
+            });
+            listCard.appendChild(el('p', { class: 'muted', style: 'margin:4px 0 12px;' }, ['If the old SESSION_SECRET can\u2019t be put back, start a fresh list and add everyone again. Their old passwords won\u2019t work any more.']));
+            listCard.appendChild(freshBtn);
+          }
+        });
+    }
+    loadList();
+  }
+
   // ---------- boot ----------
 
   checkAuthOrRedirect().then(function (ok) {
     if (!ok) return;
+    var me = state.me || {};
+    document.getElementById('whoami').textContent = 'Signed in as ' + (me.name || me.username || '');
+    if (me.role === 'admin') document.getElementById('people-nav').hidden = false;
     loadPagesList();
-    renderWelcome();
+    if (me.mustChangePassword) {
+      setActiveNav(document.querySelector('[data-view="account"]'));
+      renderAccount(true);
+    } else {
+      renderWelcome();
+    }
   });
 })();

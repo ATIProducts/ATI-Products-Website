@@ -7,22 +7,22 @@
 <title>Admin Login | ATI Products</title>
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="admin.css">
+<link rel="stylesheet" href="/admin/admin.css">
 </head>
 <body>
 <div class="login-shell">
   <div class="login-card">
     <h1>ATI Products &mdash; Site Admin</h1>
-    <p class="sub">Enter the admin password to edit pages and publish blog posts.</p>
+    <p class="sub">Log in with your own username and password to edit the website.</p>
     <div id="error" class="error-msg" style="display:none;"></div>
     <form id="login-form">
       <div class="field">
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" autocomplete="username" value="admin">
+        <input type="text" id="username" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="your username" required autofocus>
       </div>
       <div class="field">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" autocomplete="current-password" required autofocus>
+        <input type="password" id="password" name="password" autocomplete="current-password" required>
       </div>
       <button type="submit" class="btn btn-primary btn-block" id="submit-btn">Log In</button>
     </form>
