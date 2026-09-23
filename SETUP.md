@@ -133,7 +133,7 @@ live automatically, same as any other change.
 
 ### Step 6 &mdash; Log in
 
-Visit `https://www.atiproductsllc.com/admin/login.html`, log in with the
+Visit `https://www.ati-products.com/admin/login.html`, log in with the
 username and password from Step 4, and you're in.
 
 Give your boss the login URL and the password (ideally through a password
@@ -202,15 +202,25 @@ question), that copy is updated too.
   URL doesn't expose any content or let anyone make changes.
 - Session cookies are `HttpOnly` (invisible to page JavaScript) and expire
   automatically after 7 days.
-- There's currently one shared username/password for anyone with admin
-  access, not individual accounts. If several people need access with their
-  own logins and an audit trail of who changed what, that's a natural next
-  step (it would use GitHub's own login instead of a single shared
-  password) &mdash; let me know if you want that built out.
-- Rotate the password any time by changing `ADMIN_PASSWORD` in Vercel and
-  redeploying; that immediately invalidates the old password (existing
-  logged-in sessions stay valid until they expire, so also update
-  `SESSION_SECRET` if you need to force an immediate logout everywhere).
+- **Everyone has their own login.** An admin adds people on the
+  **People & logins** screen (as an *Editor*, who can edit, or an *Admin*,
+  who can also add and remove people). New people get a temporary password
+  and choose their own on first login. Every change saved to GitHub records
+  who made it, in the commit message and as the commit author.
+- **The main admin account** (`ADMIN_USERNAME` / `ADMIN_PASSWORD` in Vercel)
+  always works and can't be removed from inside the admin. Treat it as the
+  spare key. Changing `ADMIN_PASSWORD` in Vercel (then redeploying) logs that
+  account out everywhere.
+- **Removing someone or resetting their password** ends their sessions
+  immediately, on every computer.
+- **The list of people** is stored in the repo as `admin/users.enc.json`,
+  encrypted with a key derived from `SESSION_SECRET`, with each password
+  additionally scrambled one-way (scrypt). Anyone can download the file, but
+  it's unreadable without the secret.
+- **Don't change `SESSION_SECRET`.** Doing so locks the list of people
+  (only the main admin can log in until either the old secret is put back,
+  or the main admin uses **Start a Fresh List** on the People screen and
+  re-adds everyone). To log someone out, reset their password or remove them.
 
 ## Troubleshooting
 

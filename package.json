@@ -2,7 +2,7 @@
   "name": "ati-products-site-admin",
   "private": true,
   "version": "1.0.0",
-  "description": "Static site for atiproductsllc.com, plus a password-protected /admin panel (see SETUP.md) backed by Vercel serverless functions in /api.",
+  "description": "Static site for ati-products.com, plus a password-protected /admin panel (see SETUP.md) backed by Vercel serverless functions in /api.",
   "engines": {
     "node": ">=18.0.0"
   },

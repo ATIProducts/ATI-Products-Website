@@ -28,4 +28,4 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-Sitemap: https://www.atiproductsllc.com/sitemap.xml
+Sitemap: https://www.ati-products.com/sitemap.xml

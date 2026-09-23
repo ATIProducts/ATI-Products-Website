@@ -1,0 +1,60 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/adjustastair-specs",
+      "destination": "/adjustastairspecs",
+      "permanent": true
+    },
+    {
+      "source": "/buying-vs-renting-scaffolding",
+      "destination": "/buyingvsrentingscaffolding",
+      "permanent": true
+    },
+    {
+      "source": "/choosing-temporary-roof-access",
+      "destination": "/choosingtemporaryroofaccess",
+      "permanent": true
+    },
+    {
+      "source": "/colorado-construction-supply",
+      "destination": "/coloradoconstructionsupply",
+      "permanent": true
+    },
+    {
+      "source": "/crm-replacement-for-contractors",
+      "destination": "/crmreplacementforcontractors",
+      "permanent": true
+    },
+    {
+      "source": "/google-ads-management",
+      "destination": "/googleadsmanagement",
+      "permanent": true
+    },
+    {
+      "source": "/lead-generation",
+      "destination": "/leadgeneration",
+      "permanent": true
+    },
+    {
+      "source": "/marketing-channels-for-service-businesses",
+      "destination": "/marketingchannelsforservicebusinesses",
+      "permanent": true
+    },
+    {
+      "source": "/marketing-hub",
+      "destination": "/marketinghub",
+      "permanent": true
+    },
+    {
+      "source": "/osha-stairway-requirements",
+      "destination": "/oshastairwayrequirements",
+      "permanent": true
+    },
+    {
+      "source": "/scaffolding-marketplace",
+      "destination": "/scaffoldingmarketplace",
+      "permanent": true
+    }
+  ]
+}
