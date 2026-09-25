@@ -330,6 +330,155 @@
     if (el && el.parentNode) el.parentNode.removeChild(el);
   }
 
+  // ---------- text color ----------
+  //
+  // Colors the selected words inside one block of text (or the whole
+  // block when nothing is selected). color = '#rrggbb', or null for
+  // "normal" (back to the block's own color). Works on plain
+  // contenteditable text, so it's the same code for the page editor and
+  // the article editor. Keeps the markup tidy: one <span style="color:…">
+  // per colored run, no nesting pile-ups, nothing else touched.
+
+  var COLOR_SPAN_RE = /^\s*color\s*:\s*[^;]+;?\s*$/i;
+
+  function isColorSpan(n) {
+    return !!(n && n.nodeType === 1 && n.tagName === 'SPAN' && n.attributes.length === 1 &&
+      n.hasAttribute('style') && COLOR_SPAN_RE.test(n.getAttribute('style')));
+  }
+
+  function textNodesIn(root) {
+    var out = [];
+    var walker = root.ownerDocument.createTreeWalker(root, 4 /* SHOW_TEXT */, null, false);
+    var n;
+    while ((n = walker.nextNode())) out.push(n);
+    return out;
+  }
+
+  function unwrap(el) {
+    var parent = el.parentNode;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  }
+
+  function hasColoredAncestor(node, block) {
+    for (var p = node.parentNode; p && p !== block; p = p.parentNode) {
+      if (p.nodeType === 1 && p.style && p.style.color) return true;
+    }
+    return false;
+  }
+
+  function tidyColorSpans(block) {
+    // Drop empty color spans, merge neighbours with the same color, then
+    // unwrap a color span whose only child is another color span.
+    var i, sp, spans = Array.prototype.slice.call(block.querySelectorAll('span'));
+    for (i = 0; i < spans.length; i++) {
+      sp = spans[i];
+      if (isColorSpan(sp) && sp.parentNode && !sp.textContent.length) sp.parentNode.removeChild(sp);
+    }
+    spans = Array.prototype.slice.call(block.querySelectorAll('span'));
+    for (i = 0; i < spans.length; i++) {
+      sp = spans[i];
+      if (!isColorSpan(sp) || !sp.parentNode) continue;
+      var next = sp.nextSibling;
+      while (next && isColorSpan(next) && next.style.color === sp.style.color) {
+        while (next.firstChild) sp.appendChild(next.firstChild);
+        var gone = next;
+        next = next.nextSibling;
+        gone.parentNode.removeChild(gone);
+      }
+    }
+    // Innermost first, so chains of wrappers collapse fully.
+    spans = Array.prototype.slice.call(block.querySelectorAll('span')).reverse();
+    for (i = 0; i < spans.length; i++) {
+      sp = spans[i];
+      if (isColorSpan(sp) && sp.parentNode && sp.childNodes.length === 1 && isColorSpan(sp.firstChild)) unwrap(sp);
+    }
+    block.normalize();
+  }
+
+  function applyColor(block, range, color) {
+    var doc = block.ownerDocument;
+    var r = doc.createRange();
+    if (!range || range.collapsed || !block.contains(range.commonAncestorContainer)) {
+      r.selectNodeContents(block);
+    } else {
+      r.setStart(range.startContainer, range.startOffset);
+      r.setEnd(range.endContainer, range.endOffset);
+    }
+
+    // Split the text at the selection edges so whole text nodes can be wrapped.
+    var sc = r.startContainer, so = r.startOffset, ec = r.endContainer, eo = r.endOffset;
+    if (ec.nodeType === 3 && eo > 0 && eo < ec.nodeValue.length) ec.splitText(eo);
+    if (sc.nodeType === 3 && so > 0 && so < sc.nodeValue.length) {
+      var tail = sc.splitText(so);
+      if (ec === sc) { ec = tail; eo = eo - so; }
+      sc = tail; so = 0;
+    }
+    if (sc.nodeType === 3 && so >= sc.nodeValue.length && sc.nodeValue.length) {
+      // selection starts at the very end of a text node: begin with the next one
+      so = sc.nodeValue.length;
+    }
+
+    var all = textNodesIn(block);
+    var picked;
+    if (sc.nodeType === 3 && ec.nodeType === 3) {
+      var i0 = all.indexOf(sc), i1 = all.indexOf(ec);
+      if (so >= sc.nodeValue.length) i0++;
+      if (eo === 0) i1--;
+      picked = i0 >= 0 && i1 >= i0 ? all.slice(i0, i1 + 1) : [];
+    } else {
+      var rr = doc.createRange();
+      rr.setStart(sc, so);
+      rr.setEnd(ec, eo);
+      picked = all.filter(function (t) { return rr.intersectsNode(t); });
+    }
+    picked = picked.filter(function (t) { return t.nodeValue.length && !(t.parentNode && /^(SCRIPT|STYLE)$/.test(t.parentNode.tagName)); });
+    if (!picked.length) return null;
+
+    var win = doc.defaultView;
+    var normalColor = null;
+    picked.forEach(function (t) {
+      var parent = t.parentNode;
+      var soleChild = parent !== block && isColorSpan(parent) && parent.childNodes.length === 1;
+      if (color) {
+        if (soleChild) { parent.style.color = color; return; }
+        var sp = doc.createElement('span');
+        sp.setAttribute('style', 'color:' + color);
+        parent.insertBefore(sp, t);
+        sp.appendChild(t);
+      } else {
+        if (soleChild) {
+          unwrap(parent);
+          if (!hasColoredAncestor(t, block)) return;
+        } else if (!hasColoredAncestor(t, block)) {
+          return;
+        }
+        // Still inside something colored: pin it back to the block's own color.
+        if (!normalColor) normalColor = win && win.getComputedStyle ? rgbToHex(win.getComputedStyle(block).color) : '';
+        if (!normalColor) return;
+        var sp2 = doc.createElement('span');
+        sp2.setAttribute('style', 'color:' + normalColor);
+        t.parentNode.insertBefore(sp2, t);
+        sp2.appendChild(t);
+      }
+    });
+    tidyColorSpans(block);
+
+    // Hand back a range covering what was changed, so it can stay selected.
+    var first = picked[0], last = picked[picked.length - 1];
+    if (!first.parentNode || !last.parentNode || !block.contains(first) || !block.contains(last)) return null;
+    var out = doc.createRange();
+    out.setStart(first, 0);
+    out.setEnd(last, last.nodeValue.length);
+    return out;
+  }
+
+  function rgbToHex(rgb) {
+    var m = String(rgb || '').match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!m) return /^#/.test(rgb) ? rgb : '';
+    return '#' + [m[1], m[2], m[3]].map(function (x) { return ('0' + parseInt(x, 10).toString(16)).slice(-2); }).join('');
+  }
+
   // ---------- photos ----------
 
   // Resizes and re-encodes any photo (pasted, dropped, or chosen) so it
@@ -420,5 +569,7 @@
     imageFromDataTransfer: imageFromDataTransfer,
     normalizeText: normalizeText,
     slugify: slugify,
+    applyColor: applyColor,
+    rgbToHex: rgbToHex,
   };
 })();

@@ -211,6 +211,34 @@
     };
   }
 
+  // ---------- text colors ----------
+
+  var TEXT_COLORS = [
+    ['ATI green', '#00703a'], ['Dark green', '#005f30'], ['Light green (for dark backgrounds)', '#9fe8bd'],
+    ['Black', '#0d1117'], ['Dark gray', '#3d4450'], ['Gray', '#5e6876'],
+    ['Orange', '#c2410c'], ['Red', '#b91c1c'], ['Blue', '#1d4ed8'], ['White (for dark backgrounds)', '#ffffff'],
+  ];
+
+  // A row of color swatches + "More colors" + "Normal".
+  // onPick(color) gets '#rrggbb', or null for "back to normal".
+  function createColorPalette(opts) {
+    var keep = function (e) { e.preventDefault(); }; // don't steal the text selection
+    var swatches = TEXT_COLORS.map(function (c) {
+      return el('button', {
+        type: 'button', class: 'swatch', title: c[0], 'aria-label': 'Color: ' + c[0],
+        style: 'background:' + c[1], onMousedown: keep,
+        onClick: function () { opts.onPick(c[1]); },
+      });
+    });
+    var custom = el('input', { type: 'color', value: '#00703a', 'aria-label': 'Pick any color' });
+    custom.addEventListener('change', function () { opts.onPick(custom.value); });
+    var more = el('label', { class: 'swatch-more', title: 'Pick any color' }, [custom, el('span', {}, ['More colors'])]);
+    var normal = el('button', { type: 'button', class: 'swatch-normal', onMousedown: keep, onClick: function () { opts.onPick(null); } }, ['Normal']);
+    return el('div', { class: 'color-palette' + (opts.dark ? ' color-palette-dark' : '') }, [
+      el('span', { class: 'color-palette-label' }, [opts.label || 'Text color:']),
+    ].concat(swatches, [more, normal]));
+  }
+
   // ---------- sidebar ----------
 
   function loadPagesList() {
@@ -246,6 +274,11 @@
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
     renderNewPostForm();
+  });
+  document.querySelector('[data-view="new-page"]').addEventListener('click', function (e) {
+    if (!confirmLeave()) return;
+    setActiveNav(e.currentTarget);
+    renderNewPageForm();
   });
   document.querySelector('[data-view="account"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
@@ -286,6 +319,10 @@
       el('div', { class: 'welcome-tile' }, [
         el('h3', {}, ['Change a photo']),
         el('p', {}, ['Click on any photo on a page. Then copy the new photo from anywhere (a website, an email, a text) and press ' + PASTE_KEYS + '. No need to save it first.']),
+      ]),
+      el('div', { class: 'welcome-tile' }, [
+        el('h3', {}, ['Add a page']),
+        el('p', {}, ['Click “+ New Page.” Start from a simple page or a copy of one you already have. It can be added to the footer of every page for you.']),
       ]),
       el('div', { class: 'welcome-tile' }, [
         el('h3', {}, ['Write a blog post']),
@@ -341,7 +378,11 @@
 
     var hint = el('span', { class: 'context-hint' }, ['Click any text to change it. Click any photo to replace it.']);
     var ctxActions = el('span', { class: 'context-actions' });
-    var contextBar = el('div', { class: 'context-bar' }, [hint, ctxActions]);
+    var lastRange = null;
+    var lastHostId = null;
+    var colorRow = createColorPalette({ dark: true, label: 'Color of the words:', onPick: function (c) { applyPageColor(c); } });
+    colorRow.hidden = true;
+    var contextBar = el('div', { class: 'context-bar' }, [hint, ctxActions, colorRow]);
 
     var seoTitleInput = el('input', { type: 'text' });
     seoTitleInput.value = seoTitle0;
@@ -358,8 +399,30 @@
       ]),
     ]);
 
+    var deleteLink = null;
+    if (page.created && state.me && state.me.role === 'admin') {
+      deleteLink = el('button', { class: 'link-btn link-danger' }, ['Delete this page']);
+      deleteLink.addEventListener('click', function () {
+        if (!window.confirm('Delete the page “' + page.title + '” from the website?\n\nIts link in the footer is removed too. This can’t be undone from the admin.')) return;
+        deleteLink.disabled = true;
+        apiJson('/api/pages?file=' + encodeURIComponent(page.file), { method: 'DELETE' })
+          .then(function () {
+            state.hasUnsaved = function () { return false; };
+            return loadPagesList().then(function () {
+              setActiveNav(document.querySelector('[data-view="welcome"]'));
+              renderWelcome();
+              toast('“' + page.title + '” was deleted. The website updates in about a minute.');
+            });
+          })
+          .catch(function (err) {
+            deleteLink.disabled = false;
+            showMessage(messageHost, 'Couldn’t delete the page: ' + err.message, 'error');
+          });
+      });
+    }
+
     var toolbar = el('div', { class: 'editor-toolbar' }, [
-      el('div', { class: 'editor-sub' }, ['Menus and the footer appear on every page, so they aren’t editable here. ', advancedLink]),
+      el('div', { class: 'editor-sub' }, ['Menus and the footer appear on every page, so they aren’t editable here. ', advancedLink, deleteLink ? ' · ' : null, deleteLink]),
       el('div', { style: 'display:flex;gap:10px;' }, [discardBtn, publishBtn]),
     ]);
 
@@ -381,6 +444,7 @@
     // --- context bar (what the selected thing can do) ---
     function refreshContext() {
       ctxActions.innerHTML = '';
+      colorRow.hidden = !(previewDoc && focusedId);
       if (!previewDoc || !focusedId) {
         hint.textContent = 'Click any text to change it. Click any photo to replace it.';
         return;
@@ -397,6 +461,30 @@
       if (linkTarget) {
         ctxActions.appendChild(el('button', { class: 'chip', onClick: changeLink }, ['Change where this link goes']));
       }
+    }
+
+    // Colors the selected words (or the whole piece of text if nothing is
+    // selected) in the block being edited.
+    function applyPageColor(color) {
+      var id = lastHostId || focusedId;
+      var host = id && previewDoc && previewDoc.querySelector('[data-cms-id="' + id + '"]');
+      if (!host) { toast('Click on some text first, then pick a color.'); return; }
+      var range = lastRange;
+      if (range && !range.collapsed && !host.contains(range.commonAncestorContainer)) {
+        toast('Select words inside one paragraph or heading at a time.');
+        return;
+      }
+      var whole = !range || range.collapsed;
+      var out = CMS.applyColor(host, whole ? null : range, color);
+      if (!out) { toast('Nothing to color there.'); return; }
+      var sel = iframe.contentWindow.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(out);
+      lastRange = out.cloneRange();
+      markDirty(id);
+      toast(color
+        ? (whole ? 'Colored the whole thing. To color only some words, select them first.' : 'Color changed. Click Publish to put it on the live site.')
+        : 'Back to the normal color.');
     }
 
     function changeLink() {
@@ -579,6 +667,13 @@
         var host = active && active.closest && active.closest('[data-cms-id]');
         focusedId = host ? host.getAttribute('data-cms-id') : null;
         linkTarget = null;
+        if (host) {
+          var selNow = previewDoc.getSelection();
+          if (selNow && selNow.rangeCount && host.contains(selNow.getRangeAt(0).startContainer)) {
+            lastRange = selNow.getRangeAt(0).cloneRange();
+            lastHostId = focusedId;
+          }
+        }
         if (host) {
           if (host.tagName === 'A') linkTarget = host;
           else {
@@ -769,6 +864,172 @@
     });
   }
 
+  // ---------- article editor (blog posts and simple pages) ----------
+  //
+  // A Word-like box: headings, bold, bullets, links, colors, and photos
+  // pasted or dragged straight in (they land where the cursor is, or
+  // where they're dropped).
+
+  function createArticleEditor(placeholder) {
+    var toolbar = el('div', { class: 'rte-toolbar' });
+    var body = el('div', { class: 'rte-body', contenteditable: 'true', 'data-placeholder': placeholder });
+    try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (e) { /* older browsers */ }
+
+    var savedRange = null;
+    document.addEventListener('selectionchange', function () {
+      var sel = window.getSelection();
+      if (sel && sel.rangeCount && body.contains(sel.getRangeAt(0).commonAncestorContainer)) {
+        savedRange = sel.getRangeAt(0).cloneRange();
+      }
+    });
+    function restoreSelection() {
+      body.focus();
+      if (!savedRange) return;
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(savedRange);
+    }
+
+    [
+      { label: 'B', cmd: 'bold', title: 'Bold' },
+      { label: 'I', cmd: 'italic', title: 'Italic' },
+      { label: 'Heading', cmd: 'formatBlock', arg: 'H2', title: 'Heading' },
+      { label: 'Subheading', cmd: 'formatBlock', arg: 'H3', title: 'Subheading' },
+      { label: 'Normal text', cmd: 'formatBlock', arg: 'P', title: 'Paragraph' },
+      { label: '• Bullets', cmd: 'insertUnorderedList', title: 'Bullet list' },
+      { label: '1. Numbers', cmd: 'insertOrderedList', title: 'Numbered list' },
+      { label: 'Link', cmd: 'link', title: 'Insert link' },
+      { label: 'Undo', cmd: 'undo', title: 'Undo' },
+    ].forEach(function (c) {
+      toolbar.appendChild(el('button', {
+        type: 'button',
+        title: c.title,
+        onMousedown: function (e) { e.preventDefault(); }, // keep the text selection
+        onClick: function () {
+          body.focus();
+          if (c.cmd === 'link') {
+            var url = window.prompt('Paste the web address for this link (select some words first):', 'https://');
+            if (url && url !== 'https://') document.execCommand('createLink', false, url);
+            return;
+          }
+          document.execCommand(c.cmd, false, c.arg || null);
+        },
+      }, [c.label]));
+    });
+
+    // Text color: a small pop-up of swatches under the "Color" button.
+    var palette = createColorPalette({
+      label: 'Color of the selected words:',
+      onPick: function (color) {
+        var range = savedRange;
+        if (!range || range.collapsed || !body.contains(range.commonAncestorContainer)) {
+          toast('Select the words you want to color first.');
+          return;
+        }
+        var out = CMS.applyColor(body, range, color);
+        if (out) {
+          body.focus();
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(out);
+          savedRange = out.cloneRange();
+        }
+        palettePop.hidden = true;
+      },
+    });
+    var palettePop = el('div', { class: 'rte-color-pop' }, [palette]);
+    palettePop.hidden = true;
+    var colorBtn = el('button', {
+      type: 'button', title: 'Color of the words', class: 'rte-color-btn',
+      onMousedown: function (e) { e.preventDefault(); },
+      onClick: function () { palettePop.hidden = !palettePop.hidden; },
+    }, [el('span', { class: 'rte-color-a' }, ['A']), ' Color ▾']);
+    toolbar.insertBefore(colorBtn, toolbar.children[2]);
+    var wrap = el('div', { class: 'rte-wrap' }, [toolbar, palettePop, body]);
+
+    function insertPhoto(file, atRange) {
+      toast('Adding photo…');
+      CMS.compressImage(file).then(function (p) {
+        body.focus();
+        if (atRange) {
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(atRange);
+        } else {
+          restoreSelection();
+        }
+        var html = '<img src="' + p.dataUrl + '" alt="" data-ext="' + p.ext + '" style="max-width:100%;height:auto;border-radius:12px;margin:12px 0;display:block;">';
+        document.execCommand('insertHTML', false, html);
+      }).catch(function (err) { toast(err.message); });
+    }
+
+    body.addEventListener('paste', function (e) {
+      var file = CMS.imageFromDataTransfer(e.clipboardData);
+      var text = e.clipboardData ? e.clipboardData.getData('text/plain') : '';
+      e.preventDefault();
+      if (file && !text) {
+        var sel = window.getSelection();
+        insertPhoto(file, sel && sel.rangeCount ? sel.getRangeAt(0).cloneRange() : null);
+        return;
+      }
+      if (!text) return;
+      var paras = text.replace(/\r/g, '').split(/\n\s*\n|\n/).map(function (x) { return x.trim(); }).filter(Boolean);
+      if (paras.length <= 1) document.execCommand('insertText', false, paras[0] || text);
+      else document.execCommand('insertHTML', false, paras.map(function (x) { return '<p>' + escapeHtml(x) + '</p>'; }).join(''));
+    });
+    body.addEventListener('drop', function (e) {
+      var file = CMS.imageFromDataTransfer(e.dataTransfer);
+      if (!file) return;
+      e.preventDefault();
+      // Put the photo where it was dropped, not wherever the cursor was.
+      var at = null;
+      if (document.caretRangeFromPoint) at = document.caretRangeFromPoint(e.clientX, e.clientY);
+      else if (document.caretPositionFromPoint) {
+        var pos = document.caretPositionFromPoint(e.clientX, e.clientY);
+        if (pos) { at = document.createRange(); at.setStart(pos.offsetNode, pos.offset); at.collapse(true); }
+      }
+      if (at && !body.contains(at.startContainer)) at = null;
+      insertPhoto(file, at);
+    });
+
+    return { el: wrap, toolbar: toolbar, body: body };
+  }
+
+  // Uploads the main photo (if any) and every photo pasted into the
+  // article, then returns the finished article HTML pointing at them.
+  function uploadArticlePhotos(bodyEl, heroPhoto, slugHint, title, onProgress) {
+    var bodyCopy = bodyEl.cloneNode(true);
+    tidyBody(bodyCopy);
+    var bodyImgs = Array.prototype.filter.call(bodyCopy.querySelectorAll('img'), function (img) {
+      return /^data:/.test(img.getAttribute('src') || '');
+    });
+    var total = bodyImgs.length + (heroPhoto ? 1 : 0);
+    var done = 0;
+    var heroPath = '';
+    function tick() { onProgress(total ? 'Uploading photo ' + Math.min(done + 1, total) + ' of ' + total + '…' : 'Publishing…'); }
+    tick();
+    var chain = Promise.resolve();
+    if (heroPhoto) {
+      chain = chain.then(function () {
+        return uploadPhoto(heroPhoto, slugHint).then(function (path) { heroPath = path; done++; tick(); });
+      });
+    }
+    bodyImgs.forEach(function (img, i) {
+      chain = chain.then(function () {
+        var src = img.getAttribute('src');
+        var ext = img.getAttribute('data-ext') || (src.indexOf('image/webp') > -1 ? 'webp' : 'jpg');
+        return uploadPhoto({ dataUrl: src, ext: ext }, slugHint + '-' + (i + 1)).then(function (path) {
+          img.setAttribute('src', path);
+          img.removeAttribute('data-ext');
+          if (!img.getAttribute('alt')) img.setAttribute('alt', title);
+          done++;
+          tick();
+        });
+      });
+    });
+    return chain.then(function () { return { bodyHtml: bodyCopy.innerHTML, heroPath: heroPath }; });
+  }
+
   function renderNewPostForm() {
     resetScreen();
     mainEl.appendChild(el('h1', {}, ['New Blog Post']));
@@ -790,62 +1051,9 @@
     var heroZone = createPhotoZone({ onPhoto: function (p) { heroPhoto = p; } });
 
     // Article body
-    var rteToolbar = el('div', { class: 'rte-toolbar' });
-    var rteBody = el('div', { class: 'rte-body', contenteditable: 'true', 'data-placeholder': 'Start writing the article here… You can paste text from Word or an email, and paste photos straight in too.' });
-    try { document.execCommand('defaultParagraphSeparator', false, 'p'); } catch (e) { /* older browsers */ }
-
-    [
-      { label: 'B', cmd: 'bold', title: 'Bold' },
-      { label: 'I', cmd: 'italic', title: 'Italic' },
-      { label: 'Heading', cmd: 'formatBlock', arg: 'H2', title: 'Heading' },
-      { label: 'Subheading', cmd: 'formatBlock', arg: 'H3', title: 'Subheading' },
-      { label: 'Normal text', cmd: 'formatBlock', arg: 'P', title: 'Paragraph' },
-      { label: '• Bullets', cmd: 'insertUnorderedList', title: 'Bullet list' },
-      { label: '1. Numbers', cmd: 'insertOrderedList', title: 'Numbered list' },
-      { label: 'Link', cmd: 'link', title: 'Insert link' },
-      { label: 'Undo', cmd: 'undo', title: 'Undo' },
-    ].forEach(function (c) {
-      rteToolbar.appendChild(el('button', {
-        type: 'button',
-        title: c.title,
-        onMousedown: function (e) { e.preventDefault(); }, // keep the text selection
-        onClick: function () {
-          rteBody.focus();
-          if (c.cmd === 'link') {
-            var url = window.prompt('Paste the web address for this link (select some words first):', 'https://');
-            if (url && url !== 'https://') document.execCommand('createLink', false, url);
-            return;
-          }
-          document.execCommand(c.cmd, false, c.arg || null);
-        },
-      }, [c.label]));
-    });
-
-    function insertBodyPhoto(file) {
-      toast('Adding photo…');
-      CMS.compressImage(file).then(function (p) {
-        rteBody.focus();
-        var html = '<img src="' + p.dataUrl + '" alt="" data-ext="' + p.ext + '" style="max-width:100%;height:auto;border-radius:12px;margin:12px 0;display:block;">';
-        document.execCommand('insertHTML', false, html);
-      }).catch(function (err) { toast(err.message); });
-    }
-
-    rteBody.addEventListener('paste', function (e) {
-      var file = CMS.imageFromDataTransfer(e.clipboardData);
-      var text = e.clipboardData ? e.clipboardData.getData('text/plain') : '';
-      e.preventDefault();
-      if (file && !text) { insertBodyPhoto(file); return; }
-      if (!text) return;
-      var paras = text.replace(/\r/g, '').split(/\n\s*\n|\n/).map(function (s) { return s.trim(); }).filter(Boolean);
-      if (paras.length <= 1) document.execCommand('insertText', false, paras[0] || text);
-      else document.execCommand('insertHTML', false, paras.map(function (s) { return '<p>' + escapeHtml(s) + '</p>'; }).join(''));
-    });
-    rteBody.addEventListener('drop', function (e) {
-      var file = CMS.imageFromDataTransfer(e.dataTransfer);
-      if (!file) return;
-      e.preventDefault();
-      insertBodyPhoto(file);
-    });
+    var article = createArticleEditor('Start writing the article here… You can paste text from Word or an email, and paste photos straight in too.');
+    var rteToolbar = article.toolbar;
+    var rteBody = article.body;
 
     // A photo pasted anywhere else on this screen becomes the main photo.
     state.onGlobalPaste = function (e) {
@@ -879,8 +1087,7 @@
       ]),
       el('div', { class: 'field field-full', style: 'margin-top:8px;' }, [
         el('label', {}, ['Article']),
-        rteToolbar,
-        rteBody,
+        article.el,
       ]),
       moreOptions,
     ]));
@@ -902,42 +1109,10 @@
       var slugHint = slugInput.value.trim() || title;
 
       // Work on a copy of the article so the screen stays as-is if anything fails.
-      var bodyCopy = rteBody.cloneNode(true);
-      tidyBody(bodyCopy);
-      var bodyImgs = Array.prototype.filter.call(bodyCopy.querySelectorAll('img'), function (img) {
-        return /^data:/.test(img.getAttribute('src') || '');
-      });
-      var total = bodyImgs.length + (heroPhoto ? 1 : 0);
-      var done = 0;
-      var heroPath = '';
-
-      function progress() {
-        publishBtn.textContent = total ? 'Uploading photo ' + Math.min(done + 1, total) + ' of ' + total + '…' : 'Publishing…';
-      }
-      progress();
-
-      var chain = Promise.resolve();
-      if (heroPhoto) {
-        chain = chain.then(function () {
-          return uploadPhoto(heroPhoto, slugHint).then(function (path) { heroPath = path; done++; progress(); });
-        });
-      }
-      bodyImgs.forEach(function (img, i) {
-        chain = chain.then(function () {
-          var src = img.getAttribute('src');
-          var ext = img.getAttribute('data-ext') || (src.indexOf('image/webp') > -1 ? 'webp' : 'jpg');
-          return uploadPhoto({ dataUrl: src, ext: ext }, slugHint + '-' + (i + 1)).then(function (path) {
-            img.setAttribute('src', path);
-            img.removeAttribute('data-ext');
-            if (!img.getAttribute('alt')) img.setAttribute('alt', title);
-            done++;
-            progress();
-          });
-        });
-      });
+      var chain = uploadArticlePhotos(rteBody, heroPhoto, slugHint, title, function (t) { publishBtn.textContent = t; });
 
       chain
-        .then(function () {
+        .then(function (up) {
           publishBtn.textContent = 'Publishing…';
           return apiJson('/api/posts', {
             method: 'POST',
@@ -949,10 +1124,10 @@
               metaDescription: excerptInput.value.trim(),
               metaKeywords: keywordsInput.value.trim(),
               excerpt: excerptInput.value.trim(),
-              heroImageSrc: heroPath,
+              heroImageSrc: up.heroPath,
               heroImageAlt: heroAltInput.value.trim(),
               heroCaption: heroCaptionInput.value.trim(),
-              bodyHtml: bodyCopy.innerHTML,
+              bodyHtml: up.bodyHtml,
             }),
           });
         })
@@ -966,6 +1141,184 @@
           showMessage(messageHost, 'Couldn’t publish: ' + err.message, 'error');
           publishBtn.disabled = false;
           publishBtn.textContent = 'Publish Post';
+        });
+    });
+  }
+
+  // ---------- new page ----------
+
+  function renderNewPageForm() {
+    resetScreen();
+    mainEl.appendChild(el('h1', {}, ['New Page']));
+    mainEl.appendChild(el('p', { class: 'sub' }, ['Make a new page for the website. It gets its own web address and the same look as the rest of the site. You can change anything on it afterwards, like any other page.']));
+    var messageHost = el('div', {});
+    mainEl.appendChild(messageHost);
+
+    // 1. how to start
+    var mode = 'simple';
+    function choice(value, title, text) {
+      var radio = el('input', { type: 'radio', name: 'page-mode', value: value });
+      if (value === mode) radio.checked = true;
+      radio.addEventListener('change', function () { mode = value; showMode(); });
+      return el('label', { class: 'choice-tile' }, [radio, el('span', {}, [el('b', {}, [title]), el('span', {}, [text])])]);
+    }
+    mainEl.appendChild(el('div', { class: 'card' }, [
+      el('h3', { class: 'card-step' }, ['1. How do you want to start?']),
+      el('div', { class: 'choice-grid' }, [
+        choice('simple', 'A simple page', 'A title, your text and photos, in the website’s style. Best for most new pages.'),
+        choice('copy', 'A copy of an existing page', 'The same layout as a page you already have, like another product page. Then change its words and photos.'),
+      ]),
+    ]));
+
+    // 2. name & address
+    var titleInput = el('input', { type: 'text', placeholder: 'e.g. WebRail Guardrail System' });
+    var slugInput = el('input', { type: 'text', placeholder: 'made from the page name' });
+    var slugTouched = false;
+    var addressHint = el('div', { class: 'hint' });
+    var host = window.location.host.replace(/^www\./, '');
+    function currentSlug() {
+      var raw = slugInput.value.trim() || titleInput.value.trim();
+      return raw ? CMS.slugify(raw) : '';
+    }
+    function updateAddress() {
+      var sl = currentSlug();
+      addressHint.textContent = sl ? 'The page will be at ' + host + '/' + sl : 'Type a page name first.';
+    }
+    titleInput.addEventListener('input', function () {
+      if (!slugTouched) slugInput.value = titleInput.value.trim() ? CMS.slugify(titleInput.value) : '';
+      updateAddress();
+    });
+    slugInput.addEventListener('input', function () { slugTouched = true; updateAddress(); });
+    updateAddress();
+    var descInput = el('textarea', { rows: '2', placeholder: 'One or two sentences about this page, shown under its title in Google.' });
+    var footerBox = el('input', { type: 'checkbox', id: 'np-footer' });
+    footerBox.checked = true;
+    mainEl.appendChild(el('div', { class: 'card' }, [
+      el('h3', { class: 'card-step' }, ['2. Name and web address']),
+      el('div', { class: 'form-grid' }, [
+        el('div', { class: 'field field-full' }, [el('label', {}, ['Page name']), titleInput,
+          el('div', { class: 'hint' }, ['Shown as the big heading on the page, in the browser tab, and in Google.'])]),
+        el('div', { class: 'field field-full' }, [el('label', {}, ['Web address ending']), slugInput, addressHint]),
+        el('div', { class: 'field field-full' }, [el('label', {}, ['Description for Google (optional)']), descInput,
+          el('div', { class: 'hint' }, ['If you leave this empty, a basic one is written for you. You can change it later under “Google search listing.”'])]),
+      ]),
+      el('label', { class: 'check-row', style: 'margin-top:6px;' }, [footerBox, ' Add a link to this page in the footer of every page (the “Explore” list at the bottom)']),
+    ]));
+
+    // 3a. simple page content
+    var heroPhoto = null;
+    var subtitleInput = el('input', { type: 'text', placeholder: 'Optional, e.g. Portable fall arrest guardrail, ready in minutes' });
+    var heroAltInput = el('input', { type: 'text', placeholder: 'e.g. WebRail guardrail installed on a roof edge' });
+    var heroZone = createPhotoZone({ onPhoto: function (p) { heroPhoto = p; } });
+    var article = createArticleEditor('Write the page here… Use Heading for section titles. You can paste text from Word or an email, and paste photos straight in too.');
+    var simpleCard = el('div', { class: 'card' }, [
+      el('h3', { class: 'card-step' }, ['3. What’s on the page']),
+      el('div', { class: 'form-grid' }, [
+        el('div', { class: 'field field-full' }, [el('label', {}, ['Short line under the page name (optional)']), subtitleInput]),
+        el('div', { class: 'field field-full' }, [el('label', {}, ['Main photo (optional, shown at the top)']), heroZone.el]),
+        el('div', { class: 'field field-full' }, [el('label', {}, ['Describe the main photo']), heroAltInput]),
+      ]),
+      el('div', { class: 'field field-full', style: 'margin-top:8px;' }, [el('label', {}, ['Page text']), article.el]),
+    ]);
+
+    // 3b. copy an existing page
+    var sourceSelect = el('select', {});
+    sourceSelect.appendChild(el('option', { value: '' }, ['Choose a page…']));
+    (state.pages || []).forEach(function (p) {
+      sourceSelect.appendChild(el('option', { value: p.file }, [(p.isPost ? 'Blog post: ' : '') + p.title]));
+    });
+    var copyCard = el('div', { class: 'card' }, [
+      el('h3', { class: 'card-step' }, ['3. Which page do you want to copy?']),
+      el('div', { class: 'field' }, [sourceSelect]),
+      el('p', { class: 'hint', style: 'margin-top:10px;' }, ['The new page starts with that page’s words and photos, and your new name as its heading. After it’s created, open it and change the words and photos like on any other page. The original page isn’t changed.']),
+    ]);
+
+    mainEl.appendChild(simpleCard);
+    mainEl.appendChild(copyCard);
+    function showMode() {
+      simpleCard.hidden = mode !== 'simple';
+      copyCard.hidden = mode !== 'copy';
+    }
+    showMode();
+
+    state.onGlobalPaste = function (e) {
+      if (mode !== 'simple' || article.body.contains(e.target)) return;
+      if (e.target && /^(INPUT|TEXTAREA)$/.test(e.target.tagName)) return;
+      if (heroZone.handlePaste(e)) toast('Main photo added.');
+    };
+    state.hasUnsaved = function () {
+      return !!(titleInput.value.trim() || article.body.textContent.trim() || heroPhoto);
+    };
+
+    var createBtn = el('button', { class: 'btn btn-primary' }, ['Create Page']);
+    var resultHost = el('div', {});
+    mainEl.appendChild(el('div', { style: 'display:flex;justify-content:flex-end;gap:10px;margin-top:16px;' }, [createBtn]));
+    mainEl.appendChild(resultHost);
+
+    createBtn.addEventListener('click', function () {
+      messageHost.innerHTML = '';
+      var title = titleInput.value.trim();
+      if (!title) { showMessage(messageHost, 'Please type a page name.', 'error'); titleInput.focus(); window.scrollTo(0, 0); return; }
+      if (mode === 'copy' && !sourceSelect.value) { showMessage(messageHost, 'Please choose which page to copy.', 'error'); window.scrollTo(0, 0); return; }
+      if (mode === 'simple' && article.body.textContent.trim().length < 20) {
+        showMessage(messageHost, 'Please write a bit more on the page before creating it.', 'error'); window.scrollTo(0, 0); return;
+      }
+      var slug = currentSlug();
+      if (!window.confirm('Create the page “' + title + '” at ' + host + '/' + slug + ' and put it on the live website?')) return;
+      createBtn.disabled = true;
+      createBtn.textContent = 'Creating…';
+
+      var ready = mode === 'simple'
+        ? uploadArticlePhotos(article.body, heroPhoto, slug, title, function (t) { createBtn.textContent = t; })
+        : Promise.resolve({ bodyHtml: '', heroPath: '' });
+
+      ready
+        .then(function (up) {
+          createBtn.textContent = 'Creating…';
+          return apiJson('/api/pages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              mode: mode,
+              title: title,
+              slug: slug,
+              description: descInput.value.trim(),
+              addToFooter: footerBox.checked,
+              sourceFile: sourceSelect.value,
+              subtitle: subtitleInput.value.trim(),
+              heroImageSrc: up.heroPath,
+              heroImageAlt: heroAltInput.value.trim(),
+              bodyHtml: up.bodyHtml,
+            }),
+          });
+        })
+        .then(function (data) {
+          state.hasUnsaved = function () { return false; };
+          createBtn.textContent = 'Created';
+          var openBtn = el('button', { class: 'btn btn-primary' }, ['Open the New Page to Edit It']);
+          var extra = data.footer && data.footer.added ? ' A link to it was added to the footer of every page.' : '';
+          resultHost.innerHTML = '';
+          resultHost.appendChild(el('div', { class: 'success-msg' }, [
+            'Created! The page will be live at ' + data.url + ' in about a minute.' + extra,
+          ]));
+          resultHost.appendChild(el('div', { style: 'margin-top:12px;' }, [openBtn]));
+          openBtn.addEventListener('click', function () {
+            var page = { file: data.file, title: data.title, group: 'Pages' };
+            loadPagesList().then(function () {
+              var btns = Array.prototype.slice.call(document.querySelectorAll('#pages-list .nav-item'));
+              var mine = btns.filter(function (b) { return b.textContent === data.title; })[0];
+              if (mine) setActiveNav(mine);
+              renderPageEditor(page);
+            });
+          });
+          loadPagesList();
+          resultHost.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(function (err) {
+          createBtn.disabled = false;
+          createBtn.textContent = 'Create Page';
+          showMessage(messageHost, 'Couldn’t create the page: ' + err.message, 'error');
+          window.scrollTo(0, 0);
         });
     });
   }
