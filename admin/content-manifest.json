@@ -13,6 +13,7 @@
     { "file": "scaffoldingmarketplace.html", "title": "Scaffold Exchange", "group": "Pages" },
     { "file": "coloradoconstructionsupply.html", "title": "Colorado Supply", "group": "Pages" },
     { "file": "marketinghub.html", "title": "Marketing Hub", "group": "Pages" },
+    { "file": "debris-netting.html", "title": "Debris Netting", "group": "Pages" },
     { "file": "blog.html", "title": "Blog (listing page)", "group": "Pages" },
     { "file": "oshastairwayrequirements.html", "title": "OSHA Stairway Access Requirements", "group": "Blog Posts", "isPost": true },
     { "file": "buyingvsrentingscaffolding.html", "title": "Buying vs. Renting Scaffolding", "group": "Blog Posts", "isPost": true },
