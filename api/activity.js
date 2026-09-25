@@ -29,6 +29,8 @@ function describe(msg, titles, nameOf) {
     return { kind: 'edit', action: isPost ? 'Edited a blog post' : 'Edited a page', detail: (t && t.title) || m[1] };
   }
   if ((m = msg.match(/^Add blog post: (.+)$/))) return { kind: 'post', action: 'Published a new blog post', detail: m[1] };
+  if ((m = msg.match(/^Add page: (.+)$/))) return { kind: 'page', action: 'Created a new page', detail: m[1] };
+  if ((m = msg.match(/^Delete page: (.+)$/))) return { kind: 'page-delete', action: 'Deleted a page', detail: m[1] };
   if (/^List new blog post (on blog\.html|in admin manifest): /.test(msg) || /^Add \S+ to sitemap$/.test(msg)) {
     return { kind: 'hidden' };
   }
@@ -130,7 +132,7 @@ module.exports = requireAuth(
           (pendingPhotos[key] = pendingPhotos[key] || []).push(e);
           return;
         }
-        if ((e.kind === 'edit' || e.kind === 'post') && pendingPhotos[key]) {
+        if ((e.kind === 'edit' || e.kind === 'post' || e.kind === 'page') && pendingPhotos[key]) {
           const t = Date.parse(e.when);
           const mine = pendingPhotos[key].filter((p) => !(t - Date.parse(p.when) <= PHOTO_WINDOW_MS));
           e.photos = pendingPhotos[key].length - mine.length;
