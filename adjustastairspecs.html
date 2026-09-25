@@ -793,6 +793,32 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
   .section-banner figcaption.visible-cap { font-size: 13px; padding: 14px 16px; }
 }
 @media (max-width: 700px) { .footer-col-explore ul { column-count: 1; } }
+
+/* ---------- Brochure / spec sheet preview cards ---------- */
+.doc-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr)); gap:16px; }
+.doc-card { display:flex; align-items:center; gap:18px; padding:16px 18px 16px 16px; background:#fff; border:1.5px solid #d5e8dd; border-left:5px solid #00703a; border-radius:12px; text-decoration:none; color:inherit; box-shadow:0 2px 10px rgba(13,17,23,.06); transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease; }
+.doc-card:hover, .doc-card:focus-visible { transform:translateY(-2px); box-shadow:0 12px 28px rgba(0,112,58,.16); border-color:#00703a; }
+.doc-card:focus-visible { outline:3px solid #00703a; outline-offset:3px; }
+.doc-thumb { flex:0 0 auto; width:92px; }
+.doc-thumb.wide { width:112px; }
+.doc-thumb img { display:block; width:100%; height:auto; background:#fff; border:1px solid #e4e7ec; border-radius:4px; box-shadow:0 6px 14px rgba(13,17,23,.20); transform:rotate(-2deg); transition:transform .15s ease; }
+.doc-card:hover .doc-thumb img, .doc-card:focus-visible .doc-thumb img { transform:rotate(0) scale(1.04); }
+.doc-info { display:flex; flex-direction:column; gap:3px; min-width:0; }
+.doc-type { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#00703a; }
+.doc-title { font-size:16px; font-weight:700; color:#0d1117; line-height:1.3; }
+.doc-meta { font-size:13px; color:#5e6876; }
+.doc-cta { margin-top:6px; font-size:14px; font-weight:700; color:#00703a; text-decoration:underline; text-underline-offset:3px; }
+.doc-card-lg { max-width:560px; padding:20px 24px 20px 20px; gap:24px; }
+.doc-card-lg .doc-thumb { width:128px; }
+.doc-card-lg .doc-title { font-size:19px; }
+.doc-cards-compact { grid-template-columns:repeat(auto-fit,minmax(min(150px,100%),1fr)); gap:10px; }
+.doc-cards-compact .doc-card { padding:10px 12px 10px 10px; gap:12px; border-left-width:4px; }
+.doc-cards-compact .doc-thumb { width:50px; }
+.doc-cards-compact .doc-thumb img { box-shadow:0 3px 8px rgba(13,17,23,.18); }
+.doc-cards-compact .doc-title { font-size:14px; }
+.doc-cards-compact .doc-meta { font-size:12px; }
+.doc-cards-compact .doc-cta { margin-top:2px; font-size:13px; }
+@media (prefers-reduced-motion: reduce) { .doc-card, .doc-thumb img { transition:none; } .doc-card:hover { transform:none; } }
 </style>
 </head>
 <body>
@@ -885,7 +911,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
       </div>
     </div>
     <p style="font-size:14px;color:#5e6876;margin-top:16px;line-height:1.7;">The H-Brace accessory increases a Standard unit's load capacity to 1,100 lbs, and the Joiner Kit connects two units for High-Access configurations. Crane hooks are available for lifting and repositioning larger installs. <a href="downloads/adjustastairs-height-adjustable-system-brochure.pdf" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">See full accessory details in the AdjustaStairs™ brochure (PDF)</a>.</p>
-    <div style="margin-top:16px;display:flex;gap:20px;flex-wrap:wrap;"><a href="downloads/adjustastairs-22-step-24in-technical-data-sheet.pdf" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;font-size:14px;font-weight:600;">22 Step / 24" Wide Technical Data Sheet (PDF)</a><a href="downloads/adjustastairs-20-step-48in-technical-data-sheet.pdf" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;font-size:14px;font-weight:600;">20 Step / 48" Wide Technical Data Sheet (PDF)</a></div>
+    <div class="doc-cards" style="margin-top:24px;"><a class="doc-card" href="downloads/adjustastairs-height-adjustable-system-brochure.pdf" target="_blank" rel="noopener noreferrer"><span class="doc-thumb"><img src="images/adjustastairs-height-adjustable-system-brochure-preview.webp" alt="Cover of the AdjustaStairs™ System Brochure brochure (PDF)" width="420" height="544" loading="lazy" decoding="async"></span><span class="doc-info"><span class="doc-type">Brochure</span><span class="doc-title">AdjustaStairs™ System Brochure</span><span class="doc-meta">PDF &middot; 1 page &middot; 489 KB</span><span class="doc-cta">Download the Brochure</span></span></a><a class="doc-card" href="downloads/adjustastairs-22-step-24in-technical-data-sheet.pdf" target="_blank" rel="noopener noreferrer"><span class="doc-thumb wide"><img src="images/adjustastairs-22-step-24in-technical-data-sheet-preview.webp" alt="Cover of the 22 Step / 24" Wide technical data sheet (PDF)" width="560" height="433" loading="lazy" decoding="async"></span><span class="doc-info"><span class="doc-type">Technical Data Sheet</span><span class="doc-title">22 Step / 24" Wide</span><span class="doc-meta">PDF &middot; 1 page &middot; 1.1 MB</span><span class="doc-cta">Download the Sheet</span></span></a><a class="doc-card" href="downloads/adjustastairs-20-step-48in-technical-data-sheet.pdf" target="_blank" rel="noopener noreferrer"><span class="doc-thumb wide"><img src="images/adjustastairs-20-step-48in-technical-data-sheet-preview.webp" alt="Cover of the 20 Step / 48" Wide technical data sheet (PDF)" width="560" height="433" loading="lazy" decoding="async"></span><span class="doc-info"><span class="doc-type">Technical Data Sheet</span><span class="doc-title">20 Step / 48" Wide</span><span class="doc-meta">PDF &middot; 1 page &middot; 1.0 MB</span><span class="doc-cta">Download the Sheet</span></span></a></div>
   </section>
   <section style="background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:48px;margin-bottom:40px;" itemscope itemtype="https://schema.org/HowTo">
     <meta itemprop="name" content="How to Set Up AdjustaStairs™ on a Construction Site">
