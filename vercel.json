@@ -2,6 +2,17 @@
   "cleanUrls": true,
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": ".*\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://www.ati-products.com/:path*",
+      "permanent": false
+    },
+    {
       "source": "/adjustastair-specs",
       "destination": "/adjustastairspecs",
       "permanent": true
