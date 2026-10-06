@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="images/construction-site-background-hdr-800w.webp" fetchpriority="high">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -33,13 +35,13 @@
 <meta name="twitter:title" content="Why Contractors Are Dropping Their CRM | ATI Products">
 <meta name="twitter:description" content="Traditional CRMs go unused by busy contractors. Here is what a simpler lead and bid pipeline looks like, and why more service businesses are switching.">
 <meta name="twitter:image" content="https://www.ati-products.com/og-image.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@graph": [{"@type": "BlogPosting", "headline": "Why Contractors Are Replacing Their CRM With a Simpler Pipeline", "description": "Traditional CRMs go unused by busy contractors. Here is what a simpler lead and bid pipeline looks like, and why more service businesses are switching.", "image": "https://www.ati-products.com/images/ati-business-essentials-lead-generation-marketing.webp", "author": {"@type": "Organization", "name": "ATI Products, LLC", "url": "https://www.ati-products.com"}, "publisher": {"@type": "Organization", "name": "ATI Products, LLC", "logo": {"@type": "ImageObject", "url": "https://www.ati-products.com/images/favicon-192x192.png"}}, "datePublished": "2026-09-10", "dateModified": "2026-09-10", "mainEntityOfPage": {"@type": "WebPage", "@id": "https://www.ati-products.com/crmreplacementforcontractors"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ati-products.com/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.ati-products.com/blog"}, {"@type": "ListItem", "position": 3, "name": "Why Contractors Are Replacing Their CRM With a Simpler Pipeline"}]}]}
 </script>
 <style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-latin-var.woff2) format('woff2');unicode-range:U+0020-007E,U+00A0-00FF,U+0131,U+0152-0153,U+02C6,U+02DA,U+02DC,U+2010-2027,U+2030-203A,U+2122,U+2190-2193,U+2212;}
+@font-face{font-family:'Inter Fallback';src:local('Arial'),local('ArialMT'),local('Helvetica'),local('Liberation Sans');size-adjust:109.38%;ascent-override:88.56%;descent-override:22.05%;line-gap-override:0%;}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -59,7 +61,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', 'Inter Fallback', sans-serif;
   background: var(--off-white);
   color: var(--text-dark);
   line-height: 1.6;
@@ -402,7 +404,7 @@ footer { background: #0d1117; color: #c5c5c5; padding: 64px 48px 36px; }
 .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; }
 .footer-logo img { height: auto; width: 120px; opacity: 0.85; }
 .footer-brand p { font-size: 13px; line-height: 1.75; color: #b0b0b0; margin-bottom: 10px; max-width: min(280px, 100%); }
-.footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #a0a0a0; margin-bottom: 18px; }
+.footer-col h2, .footer-col h4 { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #a0a0a0; margin-bottom: 18px; }
 .footer-col ul { list-style: none; }
 .footer-col-explore ul { column-count: 2; column-gap: 20px; }
 .footer-col-explore ul li { break-inside: avoid; }
@@ -589,7 +591,7 @@ nav[data-dark] .hamburger span { background: #ffffff; }
 /* Raise minimum font sizes for readability */
 .eyebrow, .section-label, .page-header-eyebrow,
 .feature-eyebrow, .aff-type, .offer-block-tag,
-.card-tag, .footer-col h4, .stat-lbl, .stat-cell .l,
+.card-tag, .footer-col h2, .footer-col h4, .stat-lbl, .stat-cell .l,
 .badge-soon, .soon-tag, .info-row .lbl {
   font-size: 12px !important;
   letter-spacing: 0.1em;
@@ -732,7 +734,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
 /* ── TEXTURED SECTION BACKGROUNDS (original SVG) ── */
 .page-header {
   background-color: #0d1117;
-  background-image: url("images/construction-site-background.webp");
+  background-image: url("images/construction-site-background-hdr-800w.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -810,7 +812,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
 <body>
 <a href="#main-content" style="position:absolute;top:-40px;left:0;background:#005f30;color:white;padding:8px 16px;z-index:9999;font-weight:600;text-decoration:none;" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 <nav aria-label="Main navigation" role="navigation">
-  <a href="index.html" class="nav-logo"><img src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding, Lead Generation and Business Growth | Arvada, Colorado" itemprop="logo" title="ATI Products LLC | Headquartered in Arvada, Colorado | Serving Contractors in All 50 States Since 1999" width="1726" height="922" loading="eager" decoding="sync" fetchpriority="high"></a>
+  <a href="index.html" class="nav-logo"><img src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding, Lead Generation and Business Growth | Arvada, Colorado" itemprop="logo" title="ATI Products LLC | Headquartered in Arvada, Colorado | Serving Contractors in All 50 States Since 1999" width="1726" height="922" decoding="async" srcset="images/ati-products-logo-mark-320w.webp 320w" sizes="(max-width: 900px) 35vw, 140px"></a>
   <ul class="nav-links"><li><a href="index.html" class="">Home</a></li><li><a href="subsidiaries.html" class="">Subsidiaries</a></li><li><a href="offerings.html" class="">What We Offer</a></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   <a href="contact.html" class="nav-cta">Get in Touch</a>
   <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
@@ -820,7 +822,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
   <a href="contact.html" class="mobile-nav-cta">Get in Touch</a>
 </div>
 <main id="main-content" role="main">
-<div class="page-header" style="background-image:url('images/construction-site-background.webp');">
+<div class="page-header" style="background-image:url('images/construction-site-background-hdr-800w.webp');">
   <div class="page-header-inner">
     <nav aria-label="Breadcrumb" style="margin-bottom:12px;"><ol style="list-style:none;display:flex;gap:8px;font-size:13px;color:rgba(255,255,255,0.6);flex-wrap:wrap;"><li><a href="index.html" style="color:#9fe8bd;">Home</a></li><li style="color:rgba(255,255,255,0.6);">&#8250;</li><li><a href="blog.html" style="color:#9fe8bd;">Blog</a></li><li style="color:rgba(255,255,255,0.6);">&#8250;</li><li style="color:rgba(255,255,255,0.6);">Why Contractors Are Replacing Their CRM With a Simpler Pipeline</li></ol></nav>
     <span class="page-header-eyebrow">Business Growth</span>
@@ -830,7 +832,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
 </div>
 <div class="page-body">
   <figure class="section-banner reveal">
-    <img decoding="async" loading="lazy" width="1280" height="720" src="images/ati-business-essentials-lead-generation-marketing.webp" alt="ATI Business Essentials LLC: lead generation, Google Ads management and marketing services for service businesses and contractors nationwide" title="ATI Products, LLC | Arvada, Colorado | (800) 360-6115">
+    <img decoding="async" width="1280" height="720" src="images/ati-business-essentials-lead-generation-marketing.webp" alt="ATI Business Essentials LLC: lead generation, Google Ads management and marketing services for service businesses and contractors nationwide" title="ATI Products, LLC | Arvada, Colorado | (800) 360-6115" srcset="images/ati-business-essentials-lead-generation-marketing-480w.webp 480w, images/ati-business-essentials-lead-generation-marketing-640w.webp 640w, images/ati-business-essentials-lead-generation-marketing-800w.webp 800w, images/ati-business-essentials-lead-generation-marketing-900w.webp 900w" sizes="(max-width: 900px) 94vw, 1004px" fetchpriority="low">
     <figcaption class="visible-cap">Every lead tracked, without the overhead of a CRM nobody has time to manage.</figcaption>
   </figure>
   <article class="article-body reveal">
@@ -871,7 +873,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">
-        <img decoding="async" loading="lazy" width="1726" height="922" src="images/ati-products-logo-mark-white.webp" alt="ATI Products LLC : Construction Products and Business Growth Services | Arvada, Colorado | Since 1999" title="ATI Products LLC | Parent Company | Arvada, CO 80002 | (800) 360-6115">
+        <img decoding="async" loading="lazy" width="1726" height="922" src="images/ati-products-logo-mark-white.webp" alt="ATI Products LLC : Construction Products and Business Growth Services | Arvada, Colorado | Since 1999" title="ATI Products LLC | Parent Company | Arvada, CO 80002 | (800) 360-6115" srcset="images/ati-products-logo-mark-white-160w.webp 160w, images/ati-products-logo-mark-white-320w.webp 320w" sizes="(max-width: 900px) 31vw, 120px">
       </div>
       <p>Innovative construction products and lead generation solutions, serving scaffolding companies, general contractors, facility owners, builders, and all service businesses across all 50 states since 1999.</p>
       <address style="font-style:normal;font-size:12px;color: #a0a0a0;line-height:1.7;">
@@ -880,7 +882,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
       </address>
     </div>
     <div class="footer-col">
-      <h4>Subsidiaries</h4>
+      <h2>Subsidiaries</h2>
       <ul>
         <li><a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer">ATI Construction Products</a></li>
         <li><a href="https://ati-businessessentials.com/" target="_blank" rel="noopener noreferrer">ATI Business Essentials</a></li>
@@ -888,7 +890,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
       </ul>
     </div>
     <div class="footer-col footer-col-explore">
-      <h4>Explore</h4>
+      <h2>Explore</h2>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="subsidiaries.html">Subsidiaries</a></li>

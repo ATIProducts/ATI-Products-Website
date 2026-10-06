@@ -168,6 +168,25 @@ a short summary, paste in a main photo, and type or paste the article. Use
 the buttons above the article box for headings, bold, bullet lists, and
 links. Click **Publish Post** and it's live in about a minute.
 
+**Color of words:** click on the text, select the words, and pick a color in
+the black bar above the page (**More colors** for any color, **Normal** to
+go back). With nothing selected, the whole paragraph or heading changes.
+Blog posts and new pages have a **Color** button above the article box.
+
+**Adding a page:** click **+ New Page**. Choose **A simple page** (title,
+optional line under it, optional main photo, and the text) or **A copy of an
+existing page** (same layout as the page you pick, with the new name,
+address and Google details swapped in, and fresh search-engine data).
+Leave **Add a link to this page in the footer** ticked to add it to the
+"Explore" list on every page. The new page, the admin's page list, the
+sitemap and all the footer links are saved as **one** GitHub commit, so the
+site redeploys once. The page then appears under **Pages** on the left,
+where it's edited like any other page. Addresses that are already taken, used
+by a forwarding rule in `vercel.json`, or reserved (`admin`, `api`, ...) are
+refused. Admins can remove a page made this way with **Delete this page**
+(also one commit, footer links removed too); original pages can't be
+deleted from the admin.
+
 **Logging out:** click **Log Out** top right. Sessions also expire on their
 own after 7 days.
 
@@ -175,8 +194,9 @@ own after 7 days.
 
 - **The top menu and the footer** appear on every page, so they aren't
   editable from the page editor (changing them on one page would make that
-  page different from all the others). Ask whoever manages the site for
-  those changes.
+  page different from all the others). New pages can add themselves to the
+  footer's "Explore" list; other menu/footer changes go to whoever manages
+  the site.
 - **Page layout** &mdash; adding a whole new section or moving things around &mdash;
   isn't possible by clicking; that's a design change.
 - There's a small **"Advanced: edit code"** link on each page for anyone
@@ -193,6 +213,25 @@ every one of the 19 pages was verified to come back unchanged after being
 opened and saved with no edits. If a sentence you change also appears
 word-for-word in the page's hidden search-engine data (for example, an FAQ
 question), that copy is updated too.
+
+## Speed and accessibility (PageSpeed Insights)
+
+Every page was tuned to score 100 for Performance and Accessibility in
+Google PageSpeed Insights (mobile and desktop):
+
+- **Font:** Inter is served from `/fonts/inter-latin-var.woff2` (no Google
+  Fonts request, which used to block the first paint), with a size-matched
+  fallback so text doesn't jump when the font arrives.
+- **Photos:** each photo has smaller copies (`name-640w.webp` etc.) listed in
+  a `srcset`, so phones download a small version. Photos uploaded through
+  the admin get their copies made automatically. The header background
+  photos have their own compressed `-hdr-` copies and are preloaded.
+- **Footer headings** are `h2` (styled the same) so headings go in order,
+  and small text colors were adjusted for contrast.
+- **vercel.json** sets long browser caching for `/fonts`, `/images` and
+  `/downloads`.
+
+Scores can vary by a point or two between PageSpeed runs; that's normal.
 
 ## Security notes
 
