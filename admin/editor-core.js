@@ -264,7 +264,13 @@
       var p = photos[imgId];
       if (!img || !p || !p.path) return;
       img.setAttribute('src', p.path);
-      img.removeAttribute('srcset');
+      if (p.srcset) {
+        img.setAttribute('srcset', p.srcset);
+        img.setAttribute('sizes', p.sizes || img.getAttribute('sizes') || '100vw');
+      } else {
+        img.removeAttribute('srcset');
+        img.removeAttribute('sizes');
+      }
       if (p.alt) img.setAttribute('alt', p.alt);
       if (p.width && p.height) {
         img.setAttribute('width', String(p.width));

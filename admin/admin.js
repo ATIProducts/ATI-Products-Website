@@ -141,6 +141,59 @@
     }).then(function (data) { return data.path; });
   }
 
+  // ---------- responsive photos ----------
+  //
+  // Phones shouldn't download a 1920px photo to show it 400px wide. Every
+  // uploaded photo also gets smaller copies (480, 800 and 1200 pixels wide,
+  // when the photo is bigger than that), and the page lists them all in a
+  // "srcset" so each visitor's browser picks the right size. Keeps the
+  // PageSpeed score up when photos are swapped later.
+
+  var RESPONSIVE_WIDTHS = [480, 800, 1200];
+
+  function loadImage(dataUrl) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.onload = function () { resolve(img); };
+      img.onerror = function () { reject(new Error('That photo couldn’t be read.')); };
+      img.src = dataUrl;
+    });
+  }
+
+  function resizedCopy(img, w, ext) {
+    var h = Math.round(img.naturalHeight * w / img.naturalWidth);
+    var canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    var ctx = canvas.getContext('2d');
+    if (ext !== 'webp') { ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, h); }
+    ctx.drawImage(img, 0, 0, w, h);
+    return { dataUrl: canvas.toDataURL(ext === 'webp' ? 'image/webp' : 'image/jpeg', 0.78), ext: ext, width: w, height: h };
+  }
+
+  // Resolves to { src, srcset, width, height }.
+  function uploadResponsive(photo, nameHint) {
+    return loadImage(photo.dataUrl).then(function (img) {
+      var W = img.naturalWidth;
+      var H = img.naturalHeight;
+      return uploadPhoto(photo, nameHint).then(function (mainPath) {
+        var parts = [];
+        var chain = Promise.resolve();
+        RESPONSIVE_WIDTHS.filter(function (w) { return W > w * 1.15; }).forEach(function (w) {
+          chain = chain.then(function () {
+            return uploadPhoto(resizedCopy(img, w, photo.ext), nameHint + '-' + w + 'w').then(function (p) {
+              parts.push(p + ' ' + w + 'w');
+            });
+          });
+        });
+        return chain.then(function () {
+          parts.push(mainPath + ' ' + W + 'w');
+          return { src: mainPath, srcset: parts.length > 1 ? parts.join(', ') : '', width: W, height: H };
+        });
+      });
+    });
+  }
+
   // Any paste on the dashboard goes to whichever screen asked for it.
   document.addEventListener('paste', function (e) {
     if (typeof state.onGlobalPaste === 'function') state.onGlobalPaste(e);
@@ -487,6 +540,17 @@
         : 'Back to the normal color.');
     }
 
+    // How wide a photo shows on the page, for the browser's size choice.
+    function photoSizes(imgId) {
+      var m = master.querySelector('[data-cms-img="' + imgId + '"]');
+      if (m && m.getAttribute('sizes')) return m.getAttribute('sizes');
+      var img = previewDoc && previewDoc.querySelector('[data-cms-img="' + imgId + '"]');
+      if (!img) return '100vw';
+      var w = Math.ceil(img.getBoundingClientRect().width);
+      var vw = iframe.contentWindow.innerWidth || 1350;
+      return w >= vw * 0.9 ? '100vw' : '(max-width: 900px) 100vw, ' + w + 'px';
+    }
+
     function changeLink() {
       if (!linkTarget) return;
       var current = linkTarget.getAttribute('href') || '';
@@ -720,12 +784,14 @@
         chain = chain.then(function () {
           publishBtn.textContent = 'Uploading photo ' + (i + 1) + ' of ' + pending.length + '…';
           var hint2 = photos[imgId].alt || page.title + ' photo';
-          return uploadPhoto(photos[imgId].photo, hint2).then(function (path) {
+          return uploadResponsive(photos[imgId].photo, hint2).then(function (r) {
             uploaded[imgId] = {
-              path: path,
+              path: r.src,
+              srcset: r.srcset,
+              sizes: photoSizes(imgId),
               alt: photos[imgId].alt,
-              width: photos[imgId].photo.width,
-              height: photos[imgId].photo.height,
+              width: r.width,
+              height: r.height,
             };
           });
         });
@@ -1006,20 +1072,29 @@
     var total = bodyImgs.length + (heroPhoto ? 1 : 0);
     var done = 0;
     var heroPath = '';
+    var heroSrcset = '';
     function tick() { onProgress(total ? 'Uploading photo ' + Math.min(done + 1, total) + ' of ' + total + '…' : 'Publishing…'); }
     tick();
     var chain = Promise.resolve();
     if (heroPhoto) {
       chain = chain.then(function () {
-        return uploadPhoto(heroPhoto, slugHint).then(function (path) { heroPath = path; done++; tick(); });
+        return uploadResponsive(heroPhoto, slugHint).then(function (r) { heroPath = r.src; heroSrcset = r.srcset; done++; tick(); });
       });
     }
     bodyImgs.forEach(function (img, i) {
       chain = chain.then(function () {
         var src = img.getAttribute('src');
         var ext = img.getAttribute('data-ext') || (src.indexOf('image/webp') > -1 ? 'webp' : 'jpg');
-        return uploadPhoto({ dataUrl: src, ext: ext }, slugHint + '-' + (i + 1)).then(function (path) {
-          img.setAttribute('src', path);
+        return uploadResponsive({ dataUrl: src, ext: ext }, slugHint + '-' + (i + 1)).then(function (r) {
+          img.setAttribute('src', r.src);
+          if (r.srcset) {
+            img.setAttribute('srcset', r.srcset);
+            img.setAttribute('sizes', '(max-width: 800px) 100vw, 760px');
+          }
+          img.setAttribute('width', String(r.width));
+          img.setAttribute('height', String(r.height));
+          img.setAttribute('loading', 'lazy');
+          img.setAttribute('decoding', 'async');
           img.removeAttribute('data-ext');
           if (!img.getAttribute('alt')) img.setAttribute('alt', title);
           done++;
@@ -1027,7 +1102,7 @@
         });
       });
     });
-    return chain.then(function () { return { bodyHtml: bodyCopy.innerHTML, heroPath: heroPath }; });
+    return chain.then(function () { return { bodyHtml: bodyCopy.innerHTML, heroPath: heroPath, heroSrcset: heroSrcset }; });
   }
 
   function renderNewPostForm() {
@@ -1125,6 +1200,7 @@
               metaKeywords: keywordsInput.value.trim(),
               excerpt: excerptInput.value.trim(),
               heroImageSrc: up.heroPath,
+              heroImageSrcset: up.heroSrcset,
               heroImageAlt: heroAltInput.value.trim(),
               heroCaption: heroCaptionInput.value.trim(),
               bodyHtml: up.bodyHtml,
@@ -1287,6 +1363,7 @@
               sourceFile: sourceSelect.value,
               subtitle: subtitleInput.value.trim(),
               heroImageSrc: up.heroPath,
+              heroImageSrcset: up.heroSrcset,
               heroImageAlt: heroAltInput.value.trim(),
               bodyHtml: up.bodyHtml,
             }),
