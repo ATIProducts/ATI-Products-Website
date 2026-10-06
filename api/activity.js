@@ -34,7 +34,11 @@ function describe(msg, titles, nameOf) {
   if (/^List new blog post (on blog\.html|in admin manifest): /.test(msg) || /^Add \S+ to sitemap$/.test(msg)) {
     return { kind: 'hidden' };
   }
-  if ((m = msg.match(/^Upload image (.+?) via admin$/))) return { kind: 'photo', action: 'Uploaded a photo', detail: m[1].replace(/^.*\//, '') };
+  if ((m = msg.match(/^Upload image (.+?) via admin$/))) {
+    // Smaller copies made automatically for phones aren't separate photos.
+    if (/-\d+w(-\d+)?\.[a-z]+$/i.test(m[1])) return { kind: 'hidden' };
+    return { kind: 'photo', action: 'Uploaded a photo', detail: m[1].replace(/^.*\//, '') };
+  }
   if ((m = msg.match(/^Add admin login for (.+) \((admin|editor)\)$/))) {
     return { kind: 'people', action: 'Added a login', detail: `${m[1]} (${m[2]})` };
   }

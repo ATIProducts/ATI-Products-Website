@@ -84,6 +84,7 @@ async function createPage(body) {
       description: body.description,
       subtitle: body.subtitle,
       heroImageSrc: body.heroImageSrc,
+      heroImageSrcset: body.heroImageSrcset,
       heroImageAlt: body.heroImageAlt,
       bodyHtml: body.bodyHtml,
     });

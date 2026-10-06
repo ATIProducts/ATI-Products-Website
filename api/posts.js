@@ -41,6 +41,7 @@ module.exports = requireAuth(async (req, res) => {
     metaDescription,
     metaKeywords,
     heroImageSrc,
+    heroImageSrcset,
     heroImageAlt,
     heroCaption,
     excerpt,
@@ -72,6 +73,7 @@ module.exports = requireAuth(async (req, res) => {
       metaDescription,
       metaKeywords,
       heroImageSrc,
+      heroImageSrcset,
       heroImageAlt,
       heroCaption,
       bodyHtml,
@@ -133,6 +135,7 @@ module.exports = requireAuth(async (req, res) => {
         title,
         excerpt: excerpt || metaDescription || '',
         heroImageSrc,
+        heroImageSrcset,
         heroImageAlt,
         category,
       });
