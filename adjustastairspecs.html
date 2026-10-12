@@ -828,6 +828,69 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
 .doc-cards-compact .doc-meta { font-size:12px; }
 .doc-cards-compact .doc-cta { margin-top:2px; font-size:13px; }
 @media (prefers-reduced-motion: reduce) { .doc-card, .doc-thumb img { transition:none; } .doc-card:hover { transform:none; } }
+/* ---------- AdjustaStairs size and quote calculator ---------- */
+.asz-section { margin-bottom:48px; scroll-margin-top:90px; }
+.asz-layout { content-visibility:auto; contain-intrinsic-size:auto 1100px; }
+.asz-intro { font-size:15px; color:#5e6876; max-width:720px; margin:10px 0 0; line-height:1.7; }
+.asz-layout { display:grid; grid-template-columns:minmax(0,1fr) 340px; overflow-wrap:normal; word-break:normal; gap:24px; align-items:start; margin-top:24px; }
+.asz-main { display:flex; flex-direction:column; gap:16px; min-width:0; }
+.asz-controls { display:grid; grid-template-columns:minmax(240px,1fr) auto auto; gap:16px; align-items:start; padding:16px; background:#f7f8f9; border:1px solid #e4e7ec; border-radius:10px; }
+.asz-field { display:flex; flex-direction:column; gap:6px; }
+.asz-field label, .asz-label { font-size:13px; font-weight:600; color:#0d1117; }
+.asz-row { display:flex; gap:8px; }
+.asz-input { height:46px; width:100%; min-width:0; padding:0 12px; font:inherit; font-size:15px; color:#0d1117; background:#fff; border:1px solid #cfd7e0; border-radius:6px; }
+.asz-input:focus-visible, .asz-seg button:focus-visible, .asz-calc:focus-visible, .asz-select:focus-visible, .asz-quote:focus-visible { outline:3px solid #00703a; outline-offset:2px; }
+.asz-qty { width:96px; }
+.asz-calc { display:inline-flex; align-items:center; justify-content:center; white-space:nowrap; height:46px; flex-shrink:0; padding:0 20px; font:inherit; font-size:15px; font-weight:700; color:#fff; background:#00703a; border:0; border-radius:6px; cursor:pointer; }
+.asz-calc:hover { background:#005f30; }
+.asz-error { margin:0; font-size:13px; font-weight:600; color:#b91c1c; }
+.asz-seg { display:flex; height:46px; overflow:hidden; background:#fff; border:1px solid #cfd7e0; border-radius:6px; }
+.asz-seg button { flex:1 0 auto; display:flex; align-items:center; justify-content:center; white-space:nowrap; min-height:0; padding:0 14px; font:inherit; font-size:17px; font-weight:800; color:#0d1117; background:transparent; border:0; cursor:pointer; }
+.asz-seg button:hover { background:#f0f2f4; }
+.asz-seg button[aria-pressed="true"] { color:#fff; background:#0d1117; }
+.asz-note { margin:0; padding:8px 16px; font-size:13.5px; color:#3d4450; background:#f0f8f3; border-left:4px solid #00703a; border-radius:6px; }
+.asz-headrow { display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:4px 16px; }
+.asz-micro { margin:0; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#5e6876; }
+.asz-notshown { margin:0; font-size:12px; color:#5e6876; }
+.asz-msg { margin:0; font-size:15px; color:#5e6876; }
+.asz-cards { list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:12px; }
+.asz-card { display:flex; flex-direction:column; gap:12px; height:100%; padding:16px; background:#fff; border:1px solid #e4e7ec; border-radius:10px; cursor:pointer; transition:border-color .15s; }
+.asz-card:hover { border-color:#0d1117; }
+.asz-card.is-selected { border-color:#0d1117; box-shadow:inset 0 0 0 2px #0d1117; }
+.asz-card-top { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; }
+.asz-steps { white-space:nowrap; font-size:22px; font-weight:800; letter-spacing:-.01em; line-height:1; text-transform:uppercase; color:#0d1117; }
+.asz-pill { flex-shrink:0; padding:2px 8px; font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#005f30; background:#f0f8f3; border:1px solid #9fd4b4; border-radius:999px; }
+.asz-ra { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0; }
+.asz-ra div { display:flex; flex-direction:column; gap:4px; }
+.asz-ra dt { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#5e6876; }
+.asz-ra dd { margin:0; white-space:nowrap; font-size:19px; font-weight:800; line-height:1; color:#0d1117; }
+.asz-gauge { display:flex; flex-direction:column; gap:6px; }
+.asz-track { position:relative; height:8px; background:#e4e7ec; border-radius:999px; }
+.asz-zone { position:absolute; top:0; bottom:0; background:#cfe9d9; border-radius:999px; }
+.asz-dot { position:absolute; top:50%; width:16px; height:16px; background:#00703a; border:2px solid #fff; border-radius:50%; transform:translate(-50%,-50%); }
+.asz-dot.is-warn { background:#c2410c; }
+.asz-band { margin:0; font-size:12px; font-weight:600; color:#00703a; }
+.asz-band.is-warn { color:#c2410c; }
+.asz-card-foot { margin-top:auto; padding-top:12px; border-top:1px solid #e4e7ec; }
+.asz-select { display:flex; align-items:center; justify-content:center; width:100%; min-height:40px; height:40px; padding:0; font:inherit; font-size:13px; font-weight:700; color:#0d1117; background:#fff; border:1px solid #cfd7e0; border-radius:6px; cursor:pointer; }
+.asz-select:hover { border-color:#0d1117; }
+.asz-select[aria-pressed="true"] { color:#fff; background:#0d1117; border-color:#0d1117; }
+.asz-panel { display:flex; flex-direction:column; gap:14px; padding:20px; background:#fff; border:3px solid #0d1117; border-radius:10px; position:sticky; top:90px; }
+.asz-panel-label { margin:0; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#5e6876; }
+.asz-panel-title { margin:0; font-size:22px; font-weight:800; line-height:1.1; letter-spacing:-.01em; text-transform:uppercase; color:#0d1117; }
+.asz-facts { display:grid; grid-template-columns:auto 1fr; gap:6px 16px; margin:0; font-size:14px; }
+.asz-facts dt { color:#5e6876; }
+.asz-facts dd { margin:0; font-weight:600; color:#0d1117; }
+.asz-muted { font-weight:400; color:#5e6876; }
+.asz-mono { font-family:ui-monospace,'SF Mono',Consolas,monospace; font-weight:500 !important; }
+.asz-panel-note { margin:0; padding-top:14px; border-top:1px solid #e4e7ec; font-size:14.5px; color:#5e6876; line-height:1.6; }
+.asz-quote { display:flex; align-items:center; justify-content:center; min-height:50px; font-size:16px; font-weight:700; color:#fff; text-decoration:none; background:#00703a; border-radius:6px; }
+.asz-quote:hover { background:#005f30; }
+.asz-panel-call { margin:-4px 0 0; font-size:13px; text-align:center; color:#5e6876; }
+.asz-panel-call a { color:#00703a; font-weight:700; }
+@media (max-width: 1024px) { .asz-layout { grid-template-columns:1fr; } .asz-panel { position:static; } }
+@media (max-width: 700px) { .asz-controls { grid-template-columns:1fr 1fr; } .asz-height { grid-column:1 / -1; } }
+@media (max-width: 380px) { .asz-controls { grid-template-columns:1fr; } .asz-qty { width:100%; } }
 </style>
 </head>
 <body>
@@ -865,6 +928,34 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
     <div class="stat-cell reveal"><div class="n" data-count-to="0">0</div><div class="l">Tools Required</div></div>
     <div class="stat-cell reveal"><div class="n">Same-Day</div><div class="l">Quotes Available</div></div>
   </div>
+  <section id="sizing" class="asz-section" aria-labelledby="asz-title">
+    <span class="section-label">Size and Quote</span><h2 class="block-title" id="asz-title" style="margin-bottom:8px;">Find the Right AdjustaStairs™ for Your Reach</h2>
+    <p class="asz-intro">Enter the height you need to reach, pick a width, then choose a model. Every compatible model shows its run, its angle and where that angle sits against the OSHA stairway range.</p>
+    <div class="asz-layout" id="asz" data-cms-skip>
+      <div class="asz-main">
+        <div class="asz-controls">
+          <div class="asz-field asz-height">
+            <label for="asz-h">Height to reach (ft)</label>
+            <div class="asz-row"><input class="asz-input" id="asz-h" type="text" inputmode="decimal" autocomplete="off" placeholder="10' 6&quot;" value="10'" aria-describedby="asz-err"><button type="button" class="asz-calc">Calculate</button></div>
+            <p class="asz-error" id="asz-err" role="alert" hidden></p>
+          </div>
+          <div class="asz-field" role="group" aria-labelledby="asz-wl">
+            <span class="asz-label" id="asz-wl">Width</span>
+            <div class="asz-seg"><button type="button" data-w="24" aria-pressed="true" title="Single file, one hand free">24&quot;</button><button type="button" data-w="36" aria-pressed="false" title="Single file with tools or materials">36&quot;</button><button type="button" data-w="48" aria-pressed="false" title="Two-way traffic">48&quot;</button></div>
+          </div>
+          <div class="asz-field">
+            <label for="asz-q">Quantity</label>
+            <input class="asz-input asz-qty" id="asz-q" type="number" inputmode="numeric" min="1" max="50" step="1" value="1">
+          </div>
+        </div>
+        <p class="asz-note">Estimate only. Final configuration depends on site conditions, anchoring and your project's fall-protection plan.</p>
+        <div class="asz-headrow"><h3 class="asz-micro" id="asz-head">Compatible models for 10'</h3><p class="asz-notshown">Not shown: 8, 10, 12 steps reach up to 9' 7" · 22 to 40 steps start at 11'.</p></div>
+        <p class="asz-msg" hidden></p>
+        <ul class="asz-cards" aria-labelledby="asz-head"><li><div class="asz-card is-selected" data-steps="14"><div class="asz-card-top"><span class="asz-steps" title="14 Step AdjustaStairs (Standard)">14 Step</span><span class="asz-pill">Standard</span></div><dl class="asz-ra"><div><dt>Run</dt><dd>9.26 ft</dd></div><div><dt>Angle</dt><dd>47.19°</dd></div></dl><div class="asz-gauge" aria-label="47 degrees, Within OSHA 30–50° range"><div class="asz-track"><div class="asz-zone" style="left:25%;right:25%"></div><div class="asz-dot" style="left:67.96608988848216%"></div></div><p class="asz-band">Within OSHA 30–50° range</p></div><div class="asz-card-foot"><button type="button" class="asz-select" aria-pressed="true" data-steps="14">Selected</button></div></div></li><li><div class="asz-card" data-steps="16"><div class="asz-card-top"><span class="asz-steps" title="16 Step AdjustaStairs (Standard)">16 Step</span><span class="asz-pill">Standard</span></div><dl class="asz-ra"><div><dt>Run</dt><dd>11.93 ft</dd></div><div><dt>Angle</dt><dd>39.98°</dd></div></dl><div class="asz-gauge" aria-label="40 degrees, Within OSHA 30–50° range"><div class="asz-track"><div class="asz-zone" style="left:25%;right:25%"></div><div class="asz-dot" style="left:49.94103147346472%"></div></div><p class="asz-band">Within OSHA 30–50° range</p></div><div class="asz-card-foot"><button type="button" class="asz-select" aria-pressed="false" data-steps="16">Select</button></div></div></li><li><div class="asz-card" data-steps="18"><div class="asz-card-top"><span class="asz-steps" title="18 Step AdjustaStairs (Standard)">18 Step</span><span class="asz-pill">Standard</span></div><dl class="asz-ra"><div><dt>Run</dt><dd>14.36 ft</dd></div><div><dt>Angle</dt><dd>34.85°</dd></div></dl><div class="asz-gauge" aria-label="35 degrees, Within OSHA 30–50° range"><div class="asz-track"><div class="asz-zone" style="left:25%;right:25%"></div><div class="asz-dot" style="left:37.13747817679611%"></div></div><p class="asz-band">Within OSHA 30–50° range</p></div><div class="asz-card-foot"><button type="button" class="asz-select" aria-pressed="false" data-steps="18">Select</button></div></div></li><li><div class="asz-card" data-steps="20"><div class="asz-card-top"><span class="asz-steps" title="20 Step AdjustaStairs (Standard)">20 Step</span><span class="asz-pill">Standard</span></div><dl class="asz-ra"><div><dt>Run</dt><dd>16.78 ft</dd></div><div><dt>Angle</dt><dd>30.8°</dd></div></dl><div class="asz-gauge" aria-label="31 degrees, Within OSHA 30–50° range"><div class="asz-track"><div class="asz-zone" style="left:25%;right:25%"></div><div class="asz-dot" style="left:26.98785403683096%"></div></div><p class="asz-band">Within OSHA 30–50° range</p></div><div class="asz-card-foot"><button type="button" class="asz-select" aria-pressed="false" data-steps="20">Select</button></div></div></li></ul>
+      </div>
+      <aside class="asz-panel" aria-live="polite" aria-label="Your configuration"><p class="asz-panel-label">Your configuration</p><p class="asz-panel-title">14 Step AdjustaStairs (Standard)</p><dl class="asz-facts"><dt>Height</dt><dd>10'</dd><dt>Width</dt><dd>24"<span class="asz-muted"> · Single file, one hand free</span></dd><dt>SKU</dt><dd class="asz-mono">15AS1424</dd><dt>Run / angle</dt><dd>9.26 ft / 47.19°</dd><dt>Quantity</dt><dd>1</dd></dl><p class="asz-panel-note">Pricing for this configuration is quoted by ATI, usually the same business day.</p><a class="asz-quote" href="contact.html?interest=adjustastairs" data-quote>Request a quote</a><p class="asz-panel-call">Or call <a href="tel:+18003606115">(800) 360-6115</a></p></aside>
+    </div>
+  </section>
   <section style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-bottom:40px;" class="two-col">
     <div>
       <span class="section-label">Materials</span><h2 class="block-title reveal" style="margin-bottom:8px;">Built from Aircraft-Grade Aluminum</h2><p style="font-size:16px;color:#5e6876;max-width:640px;margin:12px 0 0;line-height:1.7;"><a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">ATI Construction Products</a> uses aircraft-grade aluminum throughout for the ideal balance of strength, weight, and durability on real job sites.</p>
@@ -1115,4 +1206,211 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){const nav=d
 
 </script>
 
+<script>
+// AdjustaStairs sizing calculator (shared by the page and the build step).
+// Same math as the Scaffold Exchange sizer: the stair length for a model is
+// its maximum height divided by sin(max pitch); for a target height the run
+// is sqrt(length^2 - height^2) and the angle is atan(height / run).
+var ASZ = (function () {
+  var MODELS = {"widths":["24","36","48"],"maxPitchDeg":55,"rows":[{"steps":8,"minHeightFt":4,"maxHeightFt":6.333333333333333,"line":"standard","sku":"15AS08"},{"steps":10,"minHeightFt":5,"maxHeightFt":8,"line":"standard","sku":"15AS10"},{"steps":12,"minHeightFt":6,"maxHeightFt":9.583333333333334,"line":"standard","sku":"15AS12"},{"steps":14,"minHeightFt":7,"maxHeightFt":11.166666666666666,"line":"standard","sku":"15AS14"},{"steps":16,"minHeightFt":8,"maxHeightFt":12.75,"line":"standard","sku":"15AS16"},{"steps":18,"minHeightFt":9,"maxHeightFt":14.333333333333334,"line":"standard","sku":"15AS18"},{"steps":20,"minHeightFt":10,"maxHeightFt":16,"line":"standard","sku":"15AS20"},{"steps":22,"minHeightFt":11,"maxHeightFt":17.166666666666668,"line":"high_access","sku":null},{"steps":24,"minHeightFt":12,"maxHeightFt":19.166666666666668,"line":"high_access","sku":null},{"steps":26,"minHeightFt":13,"maxHeightFt":20.75,"line":"high_access","sku":null},{"steps":28,"minHeightFt":14,"maxHeightFt":22.333333333333332,"line":"high_access","sku":null},{"steps":30,"minHeightFt":15,"maxHeightFt":24,"line":"high_access","sku":null},{"steps":32,"minHeightFt":16,"maxHeightFt":25.583333333333332,"line":"high_access","sku":null},{"steps":34,"minHeightFt":17,"maxHeightFt":27.166666666666668,"line":"high_access","sku":null},{"steps":36,"minHeightFt":18,"maxHeightFt":28.75,"line":"high_access","sku":null},{"steps":38,"minHeightFt":19,"maxHeightFt":30.333333333333332,"line":"high_access","sku":null},{"steps":40,"minHeightFt":20,"maxHeightFt":32,"line":"high_access","sku":null}]};
+  var OSHA_MIN = 30, OSHA_MAX = 50;
+  var WIDTH_NOTES = { '24': 'Single file, one hand free', '36': 'Single file with tools or materials', '48': 'Two-way traffic' };
+  var BAND_TEXT = { below_stair: 'Below OSHA 30–50° range', stair: 'Within OSHA 30–50° range', steep: 'Over 50°: confirm with ATI' };
+  var FEET_RE = /^(?:(\d+(?:\.\d+)?)\s*(?:ft|feet|foot|')\s*(?:(\d+(?:\.\d+)?)\s*(?:in|inch|inches|")?)?|(\d+(?:\.\d+)?)\s*(?:in|inch|inches|")|(\d+(?:\.\d+)?))$/;
+
+  function round2(x) { return Math.round(100 * x) / 100; }
+  function parseFeet(v) {
+    var m = String(v == null ? '' : v).trim().toLowerCase().match(FEET_RE), t;
+    if (!m) return null;
+    t = m[1] != null ? parseFloat(m[1]) + (m[2] != null ? parseFloat(m[2]) / 12 : 0) : m[3] != null ? parseFloat(m[3]) / 12 : parseFloat(m[4]);
+    return isFinite(t) && t > 0 ? t : null;
+  }
+  function formatFeet(ft) {
+    var inches = Math.round(12 * ft), f = Math.floor(inches / 12), i = inches % 12;
+    return i ? f + "' " + i + '"' : f + "'";
+  }
+  function stairLength(row) { return row.maxHeightFt / Math.sin(MODELS.maxPitchDeg * Math.PI / 180); }
+  function runAndAngle(h, len) {
+    var run = Math.sqrt(Math.max(0, len * len - h * h));
+    return { run: run, angle: 180 * Math.atan2(h, run) / Math.PI };
+  }
+  function band(a) { return a < OSHA_MIN ? 'below_stair' : a > OSHA_MAX ? 'steep' : 'stair'; }
+  function compatible(h) { return MODELS.rows.filter(function (r) { return h >= r.minHeightFt && h <= r.maxHeightFt; }); }
+  function sized(h) {
+    return compatible(h).map(function (r) {
+      var ra = runAndAngle(h, stairLength(r));
+      return { row: r, run: ra.run, angle: ra.angle, band: band(ra.angle) };
+    });
+  }
+  function lineLabel(r) { return r.line === 'high_access' ? 'High-Access' : 'Standard'; }
+  function modelLabel(r) { return r.steps + ' Step AdjustaStairs (' + lineLabel(r) + ')'; }
+  function outOfRange(h) {
+    if (compatible(h).length) return null;
+    var lo = Math.min.apply(null, MODELS.rows.map(function (r) { return r.minHeightFt; }));
+    var hi = Math.max.apply(null, MODELS.rows.map(function (r) { return r.maxHeightFt; }));
+    if (h < lo) return 'That height is below the published range (' + formatFeet(lo) + ' minimum). ATI can advise on the shortest configuration.';
+    if (h > hi) return 'That height is above the published range (' + formatFeet(hi) + ' maximum). Ask ATI about an engineered configuration.';
+    return 'There is no published model for exactly ' + formatFeet(h) + '. Ask ATI for the closest configuration.';
+  }
+  function notShown(h) {
+    var below = MODELS.rows.filter(function (r) { return r.maxHeightFt < h; });
+    var above = MODELS.rows.filter(function (r) { return r.minHeightFt > h; });
+    var parts = [];
+    if (below.length) parts.push(below.map(function (r) { return r.steps; }).join(', ') + ' steps reach up to ' + formatFeet(Math.max.apply(null, below.map(function (r) { return r.maxHeightFt; }))));
+    if (above.length) {
+      var a = above[0].steps, b = above[above.length - 1].steps;
+      parts.push((a === b ? '' + a : a + ' to ' + b) + ' steps start at ' + formatFeet(Math.min.apply(null, above.map(function (r) { return r.minHeightFt; }))));
+    }
+    return parts.length ? 'Not shown: ' + parts.join(' · ') + '.' : '';
+  }
+  function resolve(state) {
+    var list = compatible(state.h);
+    return list.filter(function (r) { return r.steps === state.steps; })[0] || list[0] || null;
+  }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function pct(a) { return (Math.min(60, Math.max(20, a)) - 20) / 40 * 100; }
+
+  function cardsHtml(state) {
+    var sel = resolve(state);
+    return sized(state.h).map(function (s) {
+      var on = sel && sel.steps === s.row.steps, ok = s.band === 'stair';
+      return '<li><div class="asz-card' + (on ? ' is-selected' : '') + '" data-steps="' + s.row.steps + '">' +
+        '<div class="asz-card-top"><span class="asz-steps" title="' + esc(modelLabel(s.row)) + '">' + s.row.steps + ' Step</span>' +
+        '<span class="asz-pill">' + lineLabel(s.row) + '</span></div>' +
+        '<dl class="asz-ra"><div><dt>Run</dt><dd>' + round2(s.run) + ' ft</dd></div><div><dt>Angle</dt><dd>' + round2(s.angle) + '°</dd></div></dl>' +
+        '<div class="asz-gauge" aria-label="' + Math.round(s.angle) + ' degrees, ' + BAND_TEXT[s.band] + '">' +
+        '<div class="asz-track"><div class="asz-zone" style="left:' + pct(OSHA_MIN) + '%;right:' + (100 - pct(OSHA_MAX)) + '%"></div>' +
+        '<div class="asz-dot' + (ok ? '' : ' is-warn') + '" style="left:' + pct(s.angle) + '%"></div></div>' +
+        '<p class="asz-band' + (ok ? '' : ' is-warn') + '">' + BAND_TEXT[s.band] + '</p></div>' +
+        '<div class="asz-card-foot"><button type="button" class="asz-select" aria-pressed="' + on + '" data-steps="' + s.row.steps + '">' + (on ? 'Selected' : 'Select') + '</button></div>' +
+        '</div></li>';
+    }).join('');
+  }
+
+  function summary(state, pageUrl) {
+    var r = resolve(state), lines = ['AdjustaStairs quote request', 'Target height: ' + formatFeet(state.h)];
+    if (r) {
+      var ra = runAndAngle(state.h, stairLength(r));
+      lines.push('Model: ' + modelLabel(r) + ', ' + state.w + '" wide' + (r.sku ? ' (SKU ' + r.sku + state.w + ')' : ''));
+      lines.push('Run ' + round2(ra.run) + ' ft, angle ' + Math.round(10 * ra.angle) / 10 + '°');
+    }
+    lines.push('Quantity: ' + state.qty);
+    if (pageUrl) lines.push('Configured at ' + pageUrl);
+    return lines.join('\n');
+  }
+
+  function configHtml(state) {
+    var r = resolve(state);
+    if (!r) return '<p class="asz-panel-label">Your configuration</p><p class="asz-muted">No model reaches ' + formatFeet(state.h) + '. Adjust the height to see compatible models.</p>';
+    var ra = runAndAngle(state.h, stairLength(r));
+    return '<p class="asz-panel-label">Your configuration</p>' +
+      '<p class="asz-panel-title">' + esc(modelLabel(r)) + '</p>' +
+      '<dl class="asz-facts">' +
+      '<dt>Height</dt><dd>' + esc(formatFeet(state.h)) + '</dd>' +
+      '<dt>Width</dt><dd>' + state.w + '"' + (WIDTH_NOTES[state.w] ? '<span class="asz-muted"> · ' + WIDTH_NOTES[state.w] + '</span>' : '') + '</dd>' +
+      (r.sku ? '<dt>SKU</dt><dd class="asz-mono">' + r.sku + state.w + '</dd>' : '') +
+      '<dt>Run / angle</dt><dd>' + round2(ra.run) + ' ft / ' + round2(ra.angle) + '°</dd>' +
+      '<dt>Quantity</dt><dd>' + state.qty + '</dd></dl>' +
+      '<p class="asz-panel-note">Pricing for this configuration is quoted by ATI, usually the same business day.</p>' +
+      '<a class="asz-quote" href="contact.html?interest=adjustastairs" data-quote>Request a quote</a>' +
+      '<p class="asz-panel-call">Or call <a href="tel:+18003606115">(800) 360-6115</a></p>';
+  }
+
+  function headingText(h) { return h != null && compatible(h).length ? 'Compatible models for ' + formatFeet(h) : 'Compatible models'; }
+
+  return {
+    MODELS: MODELS, parseFeet: parseFeet, formatFeet: formatFeet, cardsHtml: cardsHtml, configHtml: configHtml,
+    notShown: notShown, outOfRange: outOfRange, headingText: headingText, summary: summary, resolve: resolve,
+    compatible: compatible, sized: sized, round2: round2, WIDTH_NOTES: WIDTH_NOTES
+  };
+})();
+(function () {
+  var root = document.getElementById('asz');
+  if (!root || !window.URLSearchParams) return;
+  // The calculator is drawn into the page already, so it only needs to
+  // wake up when someone scrolls to it (or arrives with a size in the link).
+  if (location.search.length > 1 || !('IntersectionObserver' in window)) return init();
+  var io = new IntersectionObserver(function (en) {
+    if (en.some(function (e) { return e.isIntersecting; })) { io.disconnect(); init(); }
+  }, { rootMargin: '300px 0px' });
+  io.observe(root);
+
+  function init() {
+  var $ = function (s) { return root.querySelector(s); };
+  var input = $('#asz-h'), calc = $('.asz-calc'), err = $('.asz-error'), qty = $('#asz-q');
+  var head = $('#asz-head'), notShown = $('.asz-notshown'), msg = $('.asz-msg'), cards = $('.asz-cards'), panel = $('.asz-panel');
+  var segs = root.querySelectorAll('.asz-seg button');
+  var M = ASZ.MODELS;
+  var state = { h: 10, steps: null, w: M.widths[0], qty: 1 };
+
+  // Start from the address bar, e.g. ?h=20&steps=28&w=36&qty=2
+  var q = new URLSearchParams(location.search);
+  var h0 = ASZ.parseFeet(q.get('h') || ''); if (h0) state.h = h0;
+  var s0 = Number(q.get('steps')); if (M.rows.some(function (r) { return r.steps === s0; })) state.steps = s0;
+  if (M.widths.indexOf(q.get('w')) > -1) state.w = q.get('w');
+  var q0 = Number(q.get('qty')); if (q.has('qty') && isFinite(q0)) state.qty = Math.min(50, Math.max(1, Math.floor(q0)));
+  input.value = ASZ.formatFeet(state.h);
+  qty.value = state.qty;
+
+  function pageUrl() {
+    var p = new URLSearchParams();
+    p.set('h', String(ASZ.round2(state.h)));
+    var r = ASZ.resolve(state); if (r) p.set('steps', String(r.steps));
+    p.set('w', state.w); if (state.qty > 1) p.set('qty', String(state.qty));
+    return p.toString();
+  }
+  function syncUrl() {
+    try { history.replaceState(history.state, '', location.pathname + '?' + pageUrl() + location.hash); } catch (e) { /* ignore */ }
+  }
+  function render(updateUrl) {
+    segs.forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-w') === state.w)); });
+    head.textContent = ASZ.headingText(state.h);
+    var oor = ASZ.outOfRange(state.h);
+    msg.hidden = !oor; msg.textContent = oor || '';
+    notShown.textContent = oor ? '' : ASZ.notShown(state.h);
+    cards.innerHTML = ASZ.cardsHtml(state);
+    panel.innerHTML = ASZ.configHtml(state);
+    quoteLink();
+    if (updateUrl) syncUrl();
+  }
+  function quoteLink() {
+    var link = panel.querySelector('[data-quote]');
+    if (!link) return;
+    var where = location.host.replace(/^www\./, '') + location.pathname + '?' + pageUrl();
+    link.href = 'contact.html?interest=adjustastairs&message=' + encodeURIComponent(ASZ.summary(state, where));
+  }
+  function calculate() {
+    var h = ASZ.parseFeet(input.value);
+    if (h == null) {
+      err.textContent = 'Enter the height you need to reach in feet, e.g. 10, 10.5 or 10\' 6".';
+      err.hidden = false; input.setAttribute('aria-invalid', 'true');
+      return;
+    }
+    err.hidden = true; input.removeAttribute('aria-invalid');
+    state.h = h; render(true);
+  }
+  calc.addEventListener('click', calculate);
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); calculate(); } });
+  segs.forEach(function (b) {
+    b.addEventListener('click', function () { state.w = b.getAttribute('data-w'); render(true); });
+  });
+  qty.addEventListener('input', function () {
+    var n = Math.floor(Number(qty.value));
+    state.qty = isFinite(n) ? Math.min(50, Math.max(1, n)) : 1;
+    render(true);
+  });
+  qty.addEventListener('blur', function () { qty.value = state.qty; });
+  cards.addEventListener('click', function (e) {
+    var c = e.target.closest('[data-steps]');
+    if (!c) return;
+    state.steps = Number(c.getAttribute('data-steps'));
+    render(true);
+  });
+  // The page arrives already showing the default (10', 24", qty 1), so
+  // only redraw when the address asks for something else.
+  if (state.h === 10 && state.steps == null && state.w === M.widths[0] && state.qty === 1) quoteLink();
+  else render(true);
+  }
+})();
+</script>
 </body></html>

@@ -939,6 +939,19 @@ function handleSubmit(e) {
   e.target.style.display = "none";
   document.getElementById("success").style.display = "block";
 }
+// Quote requests from the AdjustaStairs size calculator arrive with the
+// chosen setup in the address, e.g. contact.html?interest=adjustastairs&message=...
+(function () {
+  if (!window.URLSearchParams) return;
+  var q = new URLSearchParams(location.search);
+  var msg = q.get("message"), box = document.getElementById("message"), sel = document.getElementById("interest");
+  if (msg && box && !box.value) box.value = msg.slice(0, 2000);
+  if (q.get("interest") === "adjustastairs" && sel) {
+    for (var i = 0; i < sel.options.length; i++) {
+      if (/AdjustaStairs/.test(sel.options[i].text)) { sel.selectedIndex = i; break; }
+    }
+  }
+})();
 </script>
 
 </main>
