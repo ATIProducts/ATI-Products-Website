@@ -64,6 +64,9 @@
     if (SKIP_TAGS[tag]) return true;
     if (el.getAttribute('aria-hidden') === 'true') return true;
     if (el.id === 'mobile-nav-drawer') return true;
+    // Interactive tools (like the AdjustaStairs size calculator) redraw
+    // themselves in the browser, so their text isn't edited here.
+    if (el.hasAttribute && el.hasAttribute('data-cms-skip')) return true;
     if (el.classList && (el.classList.contains('sr-only') || el.classList.contains('mobile-nav'))) return true;
     return false;
   }
