@@ -29,6 +29,8 @@ function describe(msg, titles, nameOf) {
     return { kind: 'edit', action: isPost ? 'Edited a blog post' : 'Edited a page', detail: (t && t.title) || m[1] };
   }
   if ((m = msg.match(/^Add blog post: (.+)$/))) return { kind: 'post', action: 'Published a new blog post', detail: m[1] };
+  if (/^Update Google Analytics ID via admin$/.test(msg)) return { kind: 'other', action: 'Connected Google Analytics', detail: '' };
+  if (/^Turn off Google Analytics via admin$/.test(msg)) return { kind: 'other', action: 'Turned off Google Analytics', detail: '' };
   if ((m = msg.match(/^Add page: (.+)$/))) return { kind: 'page', action: 'Created a new page', detail: m[1] };
   if ((m = msg.match(/^Delete page: (.+)$/))) return { kind: 'page-delete', action: 'Deleted a page', detail: m[1] };
   if (/^List new blog post (on blog\.html|in admin manifest): /.test(msg) || /^Add \S+ to sitemap$/.test(msg)) {

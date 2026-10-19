@@ -32,7 +32,8 @@ const { requireAuth } = require('../lib/requireAuth');
 const { getFile, putFile, getHeadSha, commitFiles } = require('../lib/github');
 const { getManifest } = require('../lib/manifest');
 const { SITE_URL } = require('../lib/site');
-const { renderSitemapEntry } = require('../lib/blogTemplate');
+const { renderSitemapEntry, touchLastmod } = require('../lib/blogTemplate');
+const { syncFaqSchema, touchDateModified } = require('../lib/pageSync');
 const { renderSimplePage, copyPage, addFooterLink, removeFooterLink } = require('../lib/pageTemplate');
 
 const PAGE_TEMPLATE = 'admin/templates/page-template.html';
@@ -249,10 +250,28 @@ module.exports = requireAuth(async (req, res) => {
       return;
     }
 
+    // The page and its "last updated" date in sitemap.xml are saved as one
+    // commit. If someone else saved at the same moment, try once more.
+    const page = syncFaqSchema(touchDateModified(content));
+    const save = async () => {
+      const head = await getHeadSha();
+      const files = [{ path: file, content: page }];
+      const sitemap = await getFile('sitemap.xml', head);
+      if (sitemap) {
+        const touched = touchLastmod(sitemap.content, file);
+        if (touched !== sitemap.content) files.push({ path: 'sitemap.xml', content: touched });
+      }
+      return commitFiles(files, `Update ${file} via admin`, head);
+    };
     try {
-      const existing = await getFile(file);
-      const result = await putFile(file, content, `Update ${file} via admin`, existing ? existing.sha : undefined);
-      res.status(200).json({ ok: true, commit: result && result.commit && result.commit.sha });
+      let sha;
+      try {
+        sha = await save();
+      } catch (e) {
+        if (e.status !== 409) throw e;
+        sha = await save();
+      }
+      res.status(200).json({ ok: true, commit: sha });
     } catch (e) {
       res.status(502).json({ error: `Could not save to GitHub: ${e.message}` });
     }
