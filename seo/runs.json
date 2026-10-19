@@ -1,12 +1,10 @@
 {
  "pagespeed": {
-  "at": "2026-10-19T20:58:03.219Z",
+  "at": "2026-10-19T20:58:42.873Z",
   "by": "Sabra Starr",
   "strategy": "mobile",
   "pages": [
-   "/",
-   "/affiliates",
-   "/about"
+   "/affiliates"
   ],
   "errors": []
  },
