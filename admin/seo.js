@@ -417,14 +417,31 @@
     return el('div', { class: 'sd-idx ' + (good ? 'good' : 'bad') }, [
       r.coverageState || r.verdict,
       r.lastCrawlTime ? el('small', {}, ['crawled ' + ago(r.lastCrawlTime)]) : null,
-      good ? null : el('a', { href: inspectLink(p.url), target: '_blank', rel: 'noopener', class: 'sd-link', style: 'font-size:12px', onClick: function (e) { e.stopPropagation(); } }, ['Request indexing ↗']),
+      good ? null : el('a', { href: consoleHome(), title: 'Copies this page’s address and opens Search Console. Paste it into the “Inspect any URL” bar at the top, then click Request indexing.', target: '_blank', rel: 'noopener', class: 'sd-link', style: 'font-size:12px', onClick: function (e) {
+        e.stopPropagation();
+        var a = e.currentTarget;
+        copyText(p.url);
+        a.textContent = 'Address copied. Paste it in the top bar ↗';
+      } }, ['Request indexing ↗']),
     ]);
   }
-  // Opens this page in Search Console's URL Inspection, where the
-  // "Request indexing" button is. Google only allows that by hand.
-  function inspectLink(url) {
+  // Search Console's own page links (inspect?id=...) can 404, so this opens
+  // the property's home page and puts the page address on the clipboard to
+  // paste into the "Inspect any URL" bar. Google only allows the request by hand.
+  function consoleHome() {
     var site = (S.core && S.core.connections && S.core.connections.gscSite) || 'sc-domain:ati-products.com';
-    return 'https://search.google.com/search-console/inspect?resource_id=' + encodeURIComponent(site) + '&id=' + encodeURIComponent(url);
+    return 'https://search.google.com/search-console?resource_id=' + encodeURIComponent(site);
+  }
+  function copyText(t) {
+    try { if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t).catch(function () { copyFallback(t); }); } catch (e) {}
+    copyFallback(t);
+  }
+  function copyFallback(t) {
+    var ta = document.createElement('textarea');
+    ta.value = t; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
   }
   function checksList(checks, pillar) {
     return el('div', {}, [
