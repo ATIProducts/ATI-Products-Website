@@ -250,5 +250,47 @@
    "si": 953.5846297809894,
    "at": "2026-10-19T20:56:20.578Z"
   }
+ },
+ "/buyingvsrentingscaffolding": {
+  "mobile": {
+   "perf": 100,
+   "a11y": 100,
+   "bp": 100,
+   "seo": 100,
+   "lcp": 1654.5,
+   "fcp": 923.5,
+   "cls": 0,
+   "tbt": 0,
+   "si": 923.5,
+   "at": "2026-10-19T20:56:33.975Z"
+  }
+ },
+ "/choosingtemporaryroofaccess": {
+  "mobile": {
+   "perf": 100,
+   "a11y": 100,
+   "bp": 100,
+   "seo": 100,
+   "lcp": 1726.5,
+   "fcp": 930.5,
+   "cls": 0,
+   "tbt": 0,
+   "si": 930.5,
+   "at": "2026-10-19T20:56:33.736Z"
+  }
+ },
+ "/crmreplacementforcontractors": {
+  "mobile": {
+   "perf": 100,
+   "a11y": 100,
+   "bp": 100,
+   "seo": 100,
+   "lcp": 1576,
+   "fcp": 917,
+   "cls": 0,
+   "tbt": 0,
+   "si": 917,
+   "at": "2026-10-19T20:56:33.897Z"
+  }
  }
 }
