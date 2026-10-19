@@ -7,7 +7,7 @@
   "userCanonical": "https://www.ati-products.com/",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:26.335Z"
+  "checkedAt": "2026-10-19T20:47:08.305Z"
  },
  "/subsidiaries": {
   "verdict": "PASS",
@@ -17,7 +17,7 @@
   "userCanonical": "https://www.ati-products.com/subsidiaries",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:26.149Z"
+  "checkedAt": "2026-10-19T20:47:07.907Z"
  },
  "/offerings": {
   "verdict": "PASS",
@@ -27,7 +27,7 @@
   "userCanonical": "https://www.ati-products.com/offerings",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:26.203Z"
+  "checkedAt": "2026-10-19T20:47:07.895Z"
  },
  "/about": {
   "verdict": "PASS",
@@ -37,7 +37,7 @@
   "userCanonical": "https://www.ati-products.com/about",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:26.369Z"
+  "checkedAt": "2026-10-19T20:47:07.910Z"
  },
  "/affiliates": {
   "verdict": "PASS",
@@ -47,17 +47,17 @@
   "userCanonical": "https://www.ati-products.com/affiliates",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:26.474Z"
+  "checkedAt": "2026-10-19T20:47:08.532Z"
  },
  "/contact": {
   "verdict": "NEUTRAL",
-  "coverageState": "URL is unknown to Google",
+  "coverageState": "Discovered - currently not indexed",
   "lastCrawlTime": "",
   "googleCanonical": "",
   "userCanonical": "",
   "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:37:32.469Z"
+  "checkedAt": "2026-10-19T20:47:14.231Z"
  },
  "/adjustastair": {
   "verdict": "PASS",
@@ -67,7 +67,7 @@
   "userCanonical": "https://www.ati-products.com/adjustastair",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:32.459Z"
+  "checkedAt": "2026-10-19T20:47:14.762Z"
  },
  "/adjustastairspecs": {
   "verdict": "PASS",
@@ -77,19 +77,9 @@
   "userCanonical": "https://www.ati-products.com/adjustastairspecs",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:32.806Z"
+  "checkedAt": "2026-10-19T20:47:14.588Z"
  },
  "/googleadsmanagement": {
-  "verdict": "NEUTRAL",
-  "coverageState": "Discovered - currently not indexed",
-  "lastCrawlTime": "",
-  "googleCanonical": "",
-  "userCanonical": "",
-  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:37:32.611Z"
- },
- "/leadgeneration": {
   "verdict": "NEUTRAL",
   "coverageState": "URL is unknown to Google",
   "lastCrawlTime": "",
@@ -97,7 +87,17 @@
   "userCanonical": "",
   "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:37:32.888Z"
+  "checkedAt": "2026-10-19T20:47:14.695Z"
+ },
+ "/leadgeneration": {
+  "verdict": "NEUTRAL",
+  "coverageState": "Discovered - currently not indexed",
+  "lastCrawlTime": "",
+  "googleCanonical": "",
+  "userCanonical": "",
+  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+  "checkedAt": "2026-10-19T20:47:14.939Z"
  },
  "/scaffoldingmarketplace": {
   "verdict": "NEUTRAL",
@@ -107,7 +107,7 @@
   "userCanonical": "",
   "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:37:38.874Z"
+  "checkedAt": "2026-10-19T20:47:21.101Z"
  },
  "/coloradoconstructionsupply": {
   "verdict": "NEUTRAL",
@@ -117,7 +117,7 @@
   "userCanonical": "",
   "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:37:38.569Z"
+  "checkedAt": "2026-10-19T20:47:20.692Z"
  },
  "/marketinghub": {
   "verdict": "PASS",
@@ -127,7 +127,7 @@
   "userCanonical": "https://www.ati-products.com/marketinghub",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:39.308Z"
+  "checkedAt": "2026-10-19T20:47:21.085Z"
  },
  "/debris-netting": {
   "verdict": "PASS",
@@ -137,7 +137,7 @@
   "userCanonical": "https://www.ati-products.com/debris-netting",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:39.491Z"
+  "checkedAt": "2026-10-19T20:47:21.236Z"
  },
  "/used-scaffolding": {
   "verdict": "PASS",
@@ -147,7 +147,7 @@
   "userCanonical": "https://www.ati-products.com/used-scaffolding",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:39.151Z"
+  "checkedAt": "2026-10-19T20:47:21.782Z"
  },
  "/website-design-for-contractors": {
   "verdict": "PASS",
@@ -157,7 +157,7 @@
   "userCanonical": "https://www.ati-products.com/website-design-for-contractors",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:44.691Z"
+  "checkedAt": "2026-10-19T20:47:27.026Z"
  },
  "/blog": {
   "verdict": "NEUTRAL",
@@ -167,7 +167,7 @@
   "userCanonical": "",
   "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:37:45.054Z"
+  "checkedAt": "2026-10-19T20:47:27.438Z"
  },
  "/oshastairwayrequirements": {
   "verdict": "PASS",
@@ -177,7 +177,7 @@
   "userCanonical": "https://www.ati-products.com/oshastairwayrequirements",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:45.244Z"
+  "checkedAt": "2026-10-19T20:47:27.517Z"
  },
  "/buyingvsrentingscaffolding": {
   "verdict": "NEUTRAL",
@@ -187,7 +187,7 @@
   "userCanonical": "",
   "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:37:45.439Z"
+  "checkedAt": "2026-10-19T20:47:27.615Z"
  },
  "/choosingtemporaryroofaccess": {
   "verdict": "NEUTRAL",
@@ -197,7 +197,7 @@
   "userCanonical": "",
   "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:37:45.597Z"
+  "checkedAt": "2026-10-19T20:47:27.879Z"
  },
  "/crmreplacementforcontractors": {
   "verdict": "PASS",
@@ -207,7 +207,7 @@
   "userCanonical": "https://www.ati-products.com/crmreplacementforcontractors",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:51.099Z"
+  "checkedAt": "2026-10-19T20:47:33.375Z"
  },
  "/marketingchannelsforservicebusinesses": {
   "verdict": "PASS",
@@ -217,6 +217,6 @@
   "userCanonical": "https://www.ati-products.com/marketingchannelsforservicebusinesses",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:37:51.741Z"
+  "checkedAt": "2026-10-19T20:47:33.538Z"
  }
 }
