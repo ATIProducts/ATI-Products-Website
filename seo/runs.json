@@ -1,10 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-10-19T22:41:30.561Z",
+  "at": "2026-10-19T22:42:22.946Z",
   "by": "Sabra Starr",
   "strategy": "mobile",
   "pages": [
-   "/website-design-for-contractors"
+   "/contact",
+   "/googleadsmanagement",
+   "/adjustastair"
   ],
   "errors": []
  },
