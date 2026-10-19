@@ -245,6 +245,57 @@
       recompute();
     }).catch(function (e) { S.msg.ps = e.message; }).then(function () { S.busy.ps = false; draw(); });
   }
+  // Keeps measuring 3 pages at a time until every page has a speed score
+  // from the last 7 days. The page has to stay open while it runs.
+  function measureAll() {
+    if (S.busy.ps) return;
+    S.busy.ps = true; S.busy.all = true; S.stopAll = false;
+    S.msg.ps = 'Starting… keep this page open.';
+    draw();
+    var measured = {}, failed = 0, lastErr = '', rounds = 0;
+    var done = 0;
+    var finish = function (prefix) {
+      S.busy.ps = false; S.busy.all = false;
+      S.msg.ps = prefix + 'Measured ' + done + ' page(s)' + (failed ? ', ' + failed + ' failed (' + lastErr + ')' : '') +
+        (S.psRemaining ? '. ' + S.psRemaining + ' page(s) still to measure.' : '. Every page has a speed score.');
+      S.core.runs.pagespeed = { at: new Date().toISOString(), by: 'you' };
+      draw();
+      recompute();
+    };
+    var step = function () {
+      if (S.stopAll) return finish('Stopped. ');
+      rounds++;
+      post({ action: 'pagespeed', strategy: 'mobile' }).then(function (r) {
+        Object.keys(r.results || {}).forEach(function (p) {
+          var pg = S.core.pages.find(function (x) { return x.path === p; });
+          if (pg) pg.speed = r.results[p];
+        });
+        r.measured.forEach(function (p) { if (!r.errors.some(function (x) { return x.path === p; })) measured[p] = true; });
+        done = Object.keys(measured).length;
+        failed += r.errors.length;
+        if (r.errors.length) lastErr = r.errors[0].error;
+        S.psRemaining = r.remaining;
+        var progressed = r.errors.length < r.measured.length;
+        if (r.remaining > 0 && progressed && rounds < 20 && !S.stopAll) {
+          S.msg.ps = 'Measuring… ' + done + ' done, ' + r.remaining + ' to go (about ' + Math.max(1, Math.round(Math.ceil(r.remaining / 3) * 0.5)) + ' min left). Keep this page open.';
+          draw();
+          step();
+        } else {
+          finish(S.stopAll ? 'Stopped. ' : '');
+        }
+      }).catch(function (e) { lastErr = e.message; failed++; finish(''); });
+    };
+    step();
+  }
+  function speedButtons(primaryLabel) {
+    if (S.busy.all) {
+      return [el('button', { class: 'sd-btn sd-btn-sm', type: 'button', onClick: function () { S.stopAll = true; S.msg.ps = 'Stopping after the current 3 pages…'; draw(); } }, ['Stop'])];
+    }
+    return [
+      el('button', { class: 'sd-btn sd-btn-sm sd-btn-primary', type: 'button', disabled: S.busy.ps ? true : null, onClick: measureAll }, [primaryLabel || 'Measure all']),
+      el('button', { class: 'sd-btn sd-btn-sm', type: 'button', disabled: S.busy.ps ? true : null, onClick: function () { runPageSpeed('mobile'); } }, [S.busy.ps ? 'Measuring…' : 'Measure the 3 oldest']),
+    ];
+  }
   function runIndex() {
     S.busy.idx = true; S.msg.idx = ''; draw();
     post({ action: 'index' }).then(function (r) {
@@ -286,7 +337,9 @@
       el('p', { class: 'sd-label' }, ['Checks']),
       el('p', { class: 'sd-note', style: 'margin:6px 0 14px' }, ['Page scores update every time this dashboard opens. Speed and Google’s index status are measured separately because they take longer.']),
       el('div', { class: 'sd-actions' }, [
-        el('button', { class: 'sd-btn sd-btn-primary', type: 'button', disabled: S.busy.ps ? true : null, onClick: function () { runPageSpeed('mobile'); } }, [S.busy.ps ? 'Measuring 3 pages… (about 30 seconds)' : 'Measure speed (3 pages at a time)']),
+        S.busy.all
+          ? el('button', { class: 'sd-btn', type: 'button', onClick: function () { S.stopAll = true; S.msg.ps = 'Stopping after the current 3 pages…'; draw(); } }, ['Stop measuring'])
+          : el('button', { class: 'sd-btn sd-btn-primary', type: 'button', disabled: S.busy.ps ? true : null, onClick: measureAll }, [S.busy.ps ? 'Measuring…' : 'Measure speed of every page (about 4 minutes)']),
         el('button', { class: 'sd-btn', type: 'button', disabled: S.busy.idx || !c.connections.google ? true : null, onClick: runIndex, title: c.connections.google ? '' : 'Connect Google first' }, [S.busy.idx ? 'Asking Google…' : 'Check Google index status']),
       ]),
       S.msg.ps ? el('p', { class: 'sd-msg' }, [S.msg.ps]) : null,
@@ -361,7 +414,17 @@
     var r = p.index;
     if (!r) return el('span', { class: 'sd-idx' }, [el('span', { class: 'sd-na' }, ['Not checked'])]);
     var good = /indexed/i.test(r.coverageState) && !/not indexed/i.test(r.coverageState);
-    return el('div', { class: 'sd-idx ' + (good ? 'good' : 'bad') }, [r.coverageState || r.verdict, r.lastCrawlTime ? el('small', {}, ['crawled ' + ago(r.lastCrawlTime)]) : null]);
+    return el('div', { class: 'sd-idx ' + (good ? 'good' : 'bad') }, [
+      r.coverageState || r.verdict,
+      r.lastCrawlTime ? el('small', {}, ['crawled ' + ago(r.lastCrawlTime)]) : null,
+      good ? null : el('a', { href: inspectLink(p.url), target: '_blank', rel: 'noopener', class: 'sd-link', style: 'font-size:12px', onClick: function (e) { e.stopPropagation(); } }, ['Request indexing ↗']),
+    ]);
+  }
+  // Opens this page in Search Console's URL Inspection, where the
+  // "Request indexing" button is. Google only allows that by hand.
+  function inspectLink(url) {
+    var site = (S.core && S.core.connections && S.core.connections.gscSite) || 'sc-domain:ati-products.com';
+    return 'https://search.google.com/search-console/inspect?resource_id=' + encodeURIComponent(site) + '&id=' + encodeURIComponent(url);
   }
   function checksList(checks, pillar) {
     return el('div', {}, [
@@ -425,10 +488,10 @@
       ]),
       el('div', { class: 'sd-bulk' }, [
         el('b', {}, ['SPEED']),
-        el('button', { class: 'sd-btn sd-btn-sm sd-btn-primary', type: 'button', disabled: S.busy.ps ? true : null, onClick: function () { runPageSpeed('mobile'); } }, [S.busy.ps ? 'Measuring…' : 'Measure the 3 oldest']),
-        unmeasured ? unmeasured + ' page(s) not measured yet · about 30 seconds per click' : 'Every page has a mobile speed score.',
+      ].concat(speedButtons('Measure all'), [
+        S.busy.all ? '' : unmeasured ? unmeasured + ' page(s) not measured yet · “Measure all” takes about ' + Math.max(1, Math.round(Math.ceil(unmeasured / 3) * 0.5)) + ' min' : 'Every page has a mobile speed score.',
         S.msg.ps ? el('span', {}, [' · ' + S.msg.ps]) : null,
-      ]),
+      ])),
       el('div', { class: 'sd-table-wrap' }, [el('table', { class: 'sd-table' }, [
         el('thead', {}, [el('tr', {}, [el('th', {}, ['Page']), el('th', {}, ['Type']), el('th', {}, ['SEO · AEO · GEO']), el('th', { class: 'num' }, ['Speed']), el('th', { class: 'num' }, ['Clicks 28d']), el('th', { class: 'num' }, ['Impr. 28d']), el('th', {}, ['Google index']), el('th', { class: 'num' }, ['Words'])])]),
         el('tbody', {}, rows.length ? rows : [el('tr', {}, [el('td', { colspan: '8', class: 'sd-empty' }, ['No pages match.'])])]),
