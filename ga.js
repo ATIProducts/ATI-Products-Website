@@ -3,7 +3,7 @@
 // seconds pass) before loading Google's script, so it doesn't slow the
 // page down. Leave the ID empty to turn tracking off.
 (function () {
-  var ID = "";
+  var ID = "G-FBNTV3FJQ5";
   var w = window, d = document;
   w.dataLayer = w.dataLayer || [];
   w.gtag = w.gtag || function () { w.dataLayer.push(arguments); };
