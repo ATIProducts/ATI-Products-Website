@@ -22,5 +22,11 @@
     "error": "PageSpeed’s free limit was reached. Add PAGESPEED_API_KEY in Vercel (see SETUP.md) or try again tomorrow."
    }
   ]
+ },
+ "index": {
+  "at": "2026-10-19T20:37:53.189Z",
+  "by": "Sabra Starr",
+  "checked": 22,
+  "errors": []
  }
 }
