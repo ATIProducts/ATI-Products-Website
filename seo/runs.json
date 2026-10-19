@@ -1,0 +1,26 @@
+{
+ "pagespeed": {
+  "at": "2026-10-19T19:52:31.698Z",
+  "by": "Sabra Starr",
+  "strategy": "mobile",
+  "pages": [
+   "/",
+   "/subsidiaries",
+   "/offerings"
+  ],
+  "errors": [
+   {
+    "path": "/",
+    "error": "PageSpeed’s free limit was reached. Add PAGESPEED_API_KEY in Vercel (see SETUP.md) or try again tomorrow."
+   },
+   {
+    "path": "/subsidiaries",
+    "error": "PageSpeed’s free limit was reached. Add PAGESPEED_API_KEY in Vercel (see SETUP.md) or try again tomorrow."
+   },
+   {
+    "path": "/offerings",
+    "error": "PageSpeed’s free limit was reached. Add PAGESPEED_API_KEY in Vercel (see SETUP.md) or try again tomorrow."
+   }
+  ]
+ }
+}
