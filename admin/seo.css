@@ -84,6 +84,7 @@
 .sd-pill.bad { background:var(--sd-red-wash); color:var(--sd-red); }
 .sd-idx { font-size:12.5px; line-height:1.45; }
 .sd-idx.good { color:var(--sd-green-dark); } .sd-idx.bad { color:var(--sd-red); } .sd-idx small { display:block; color:var(--sd-muted); font-size:11.5px; }
+.sd-idx a { display:block; width:max-content; margin-top:3px; }
 
 .sd-detail { padding:6px 0 4px; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
 .sd-detail h4 { font-size:12px; letter-spacing:.08em; text-transform:uppercase; margin:0 0 8px; color:var(--sd-mid); }
