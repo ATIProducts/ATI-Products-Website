@@ -96,5 +96,21 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/seo.js": {
+      "maxDuration": 60
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/seo?task=cron",
+      "schedule": "0 13 * * *"
+    }
+  ],
+  "git": {
+    "deploymentEnabled": {
+      "seo-data": false
+    }
+  }
 }

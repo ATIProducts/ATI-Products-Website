@@ -233,6 +233,78 @@ Google PageSpeed Insights (mobile and desktop):
 
 Scores can vary by a point or two between PageSpeed runs; that's normal.
 
+## SEO dashboard (SEO, AEO and GEO)
+
+Admins see **SEO dashboard** at the top of the /admin menu. It checks every page of the live site each time it opens and scores it three ways: **SEO** (classic Google search), **AEO** (answer engines and featured answers) and **GEO** (being cited by AI tools like ChatGPT). It also lists every fix in one place under **Recommendations**.
+
+**How to Improve** (the second tab) explains each score in plain English, ranks everything that's costing points by how much it would raise the site average, says why each one matters and how to fix it, and has a button to open each affected page in the editor. Clicking the SEO, AEO or GEO number on the Overview tab jumps there.
+
+In the page editor, admins also get **SEO, AEO and GEO score for this page**. Click **Check this page** to score the page as it would look if you published right now, including unpublished changes, next to its published score.
+
+Two things are kept up to date automatically when you publish a page from the editor: the hidden FAQ data Google reads is rebuilt from the page's visible FAQ, and the page's "last updated" date is set to today (in the sitemap and in the page's data).
+
+The page scores, site audit and internal links work right away with no setup. These parts need a one-time connection to Google:
+
+| Tab or number | Needs |
+|---|---|
+| Clicks, impressions, Keywords, Rankings, index status | Steps 1 and 2 (Search Console) |
+| Speed scores | Step 3 is optional but recommended (without it Google allows only a few a day) |
+| Users, sessions, Analytics tab, quote requests and phone taps | Step 4 (Google Analytics) |
+| Daily automatic check | Step 5 |
+
+### Step 1: Create a Google service account (about 10 minutes)
+
+A service account is a robot Google login that the dashboard uses to read your data. It can only read.
+
+1. Go to [console.cloud.google.com](https://console.cloud.google.com) and sign in with the Google account that owns Search Console for ati-products.com.
+2. At the top, click the project picker, then **New project**. Name it `ATI Website SEO` and click **Create**. Make sure it's selected.
+3. Open **APIs and Services**, then **Library**. Search for and **Enable** each of these: **Google Search Console API**, **Google Analytics Data API** and **PageSpeed Insights API**.
+4. Open **IAM and Admin**, then **Service Accounts**, then **Create service account**. Name it `ati-seo-dashboard`, click **Create and continue**, skip the optional roles, and click **Done**.
+5. Click the new service account, open the **Keys** tab, then **Add key**, **Create new key**, **JSON**, **Create**. A small .json file downloads. Keep it private, it works like a password.
+6. Copy the service account's email address (it ends in `.iam.gserviceaccount.com`). You'll need it in steps 2 and 4.
+7. In Vercel, open the project, then **Settings**, **Environment Variables**, and add `GOOGLE_SERVICE_ACCOUNT_JSON`. For the value, open the downloaded .json file in Notepad or TextEdit and paste **all** of it.
+
+If Google says key creation is turned off for your organization, a Google Workspace admin has to allow it (the policy is called "Disable service account key creation").
+
+### Step 2: Give it access to Search Console
+
+1. In [Search Console](https://search.google.com/search-console), pick the **ati-products.com** property.
+2. Open **Settings**, then **Users and permissions**, then **Add user**.
+3. Paste the service account email, choose **Full**, and click **Add**.
+
+The dashboard reads the domain property `sc-domain:ati-products.com`. If your property is the "URL prefix" kind instead, add `GSC_SITE_URL` in Vercel with the value `https://www.ati-products.com/`.
+
+### Step 3: PageSpeed key (optional, recommended)
+
+1. In the same Google Cloud project, open **APIs and Services**, then **Credentials**, then **Create credentials**, **API key**.
+2. Click the new key, under **API restrictions** choose **Restrict key** and tick **PageSpeed Insights API**, then **Save**.
+3. In Vercel, add `PAGESPEED_API_KEY` with the key as the value.
+
+### Step 4: Google Analytics (visitor counts)
+
+1. Go to [analytics.google.com](https://analytics.google.com). Click **Admin** (the gear), then **Create**, **Property**. Name it `ATI Products website`, set your time zone, and follow the steps.
+2. When asked for a data stream, choose **Web**, enter `https://www.ati-products.com`, and click **Create stream**. Copy the **Measurement ID** (it starts with `G-`).
+3. In **Admin**, open **Property details** and copy the **Property ID** (a number).
+4. In **Admin**, open **Property access management**, click **+**, **Add users**, paste the service account email, choose **Viewer**, and click **Add**.
+5. In /admin, open **SEO dashboard**. Under **Connections** at the bottom of the Overview tab, paste the measurement ID and the property ID and click **Save**.
+
+Saving the measurement ID updates one small file on the site (`ga.js`), and the site starts counting visitors about a minute later. It also counts **quote requests** (contact form sent), **phone taps** and **calculator quotes**. Google's tracking script waits until the visitor scrolls or taps (or 8 seconds pass) before it loads, so it doesn't lower the PageSpeed score. To turn tracking off, clear the measurement ID and save.
+
+### Step 5: Daily automatic check
+
+1. In Vercel, add `CRON_SECRET` with any long random text as the value (for example, 40 letters and numbers typed at random).
+2. That's it. Every morning Vercel runs the check: it asks Google which pages are indexed and measures the speed of the 3 pages measured longest ago. You'll see the last run on the Overview tab.
+
+### After adding variables
+
+In Vercel, open **Deployments**, click the three dots on the newest one, and choose **Redeploy** so the new variables take effect. Then open the dashboard and click **Refresh**.
+
+### Where the dashboard keeps its data
+
+The first time the dashboard opens, it creates a GitHub branch called **seo-data**. It holds speed results, index checks, tracked keywords, settings and which recommendations were marked done. That branch is never published and has Vercel deployments turned off, so saving dashboard data never rebuilds the website. Please don't delete or merge it. (Deleting it just resets the dashboard's history.)
+
+The dashboard reads the **live** site, so fixes show up on it after they're published.
+
 ## Security notes
 
 - The password gate is enforced on the server, not just hidden in the
