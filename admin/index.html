@@ -8,6 +8,7 @@
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/admin/admin.css">
+<link rel="stylesheet" href="/admin/seo.css">
 </head>
 <body>
 
@@ -23,6 +24,7 @@
 <div class="layout">
   <nav class="sidebar" id="sidebar">
     <button class="nav-item active" data-view="welcome">Overview</button>
+    <button class="nav-item" data-view="seo" id="seo-nav" hidden>SEO dashboard</button>
 
     <h2>Actions</h2>
     <button class="nav-item" data-view="new-post">+ New Blog Post</button>
@@ -46,6 +48,7 @@
 </div>
 
 <script src="/admin/editor-core.js"></script>
+<script src="/admin/seo.js"></script>
 <script src="/admin/admin.js"></script>
 </body>
 </html>

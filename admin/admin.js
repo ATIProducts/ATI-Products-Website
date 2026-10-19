@@ -343,6 +343,13 @@
     setActiveNav(e.currentTarget);
     renderPeople();
   });
+  document.querySelector('[data-view="seo"]').addEventListener('click', function (e) {
+    if (!confirmLeave()) return;
+    setActiveNav(e.currentTarget);
+    resetScreen();
+    mainEl.classList.add('main-wide');
+    window.ATISEO.render(mainEl);
+  });
   document.querySelector('[data-view="activity"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
@@ -452,6 +459,19 @@
       ]),
     ]);
 
+    // Admins can score the page (including unpublished edits) right here.
+    var tipsPanel = null;
+    if (state.me && state.me.role === 'admin' && window.ATISEO) {
+      var tipsBody = el('div', { class: 'seo-body' });
+      tipsPanel = el('details', { class: 'tips-panel' }, [el('summary', {}, ['SEO, AEO and GEO score for this page']), tipsBody]);
+      window.ATISEO.pageTips(tipsBody, page.file, function () {
+        return CMS.applyEdits(master.cloneNode(true), previewDoc, new Set(dirty), {}, {
+          title: seoTitleInput.value,
+          description: seoDescInput.value,
+        });
+      });
+    }
+
     var deleteLink = null;
     if (page.created && state.me && state.me.role === 'admin') {
       deleteLink = el('button', { class: 'link-btn link-danger' }, ['Delete this page']);
@@ -484,6 +504,7 @@
     mainEl.appendChild(messageHost);
     mainEl.appendChild(toolbar);
     mainEl.appendChild(seoPanel);
+    if (tipsPanel) mainEl.appendChild(tipsPanel);
     mainEl.appendChild(contextBar);
     mainEl.appendChild(iframe);
 
@@ -1783,6 +1804,7 @@
     if (me.role === 'admin') {
       document.getElementById('people-nav').hidden = false;
       document.getElementById('activity-nav').hidden = false;
+      document.getElementById('seo-nav').hidden = false;
     }
     loadPagesList();
     if (me.mustChangePassword) {
