@@ -893,7 +893,7 @@ nav[data-dark] .hamburger span { background: #ffffff; }
           <select id="interest" name="interest" required aria-required="true">
             <option value="" disabled selected>Select an option</option>
             <option>Construction Products Quote</option>
-            <option>AdjustaStairs™ / Access Systems</option>
+            <option>AdjustaStairs™ / Z-Stack™ / Access Systems</option>
             <option>Scaffolding Equipment</option>
             <option>Fall Protection / Safety Equipment</option>
             <option>Lead Generation Services</option>
@@ -950,7 +950,7 @@ function handleSubmit(e) {
   var interest = v("interest");
   var data = {
     access_key: v("access_key"),
-    subject: (/AdjustaStairs/.test(interest) && /quote request/i.test(v("message")) ? "AdjustaStairs quote request from " : "New website message from ") + name,
+    subject: (/AdjustaStairs|Z-Stack/.test(interest) && /quote request/i.test(v("message")) ? (/^Z-Stack/i.test(v("message")) ? "Z-Stack quote request from " : "AdjustaStairs quote request from ") : "New website message from ") + name,
     from_name: "ATI Products Website",
     name: name,
     email: v("email"),
@@ -982,14 +982,14 @@ function handleSubmit(e) {
     btn.textContent = label;
   });
 }
-// Quote requests from the AdjustaStairs size calculator arrive with the
+// Quote requests from the AdjustaStairs and Z-Stack calculators arrive with the
 // chosen setup in the address, e.g. contact.html?interest=adjustastairs&message=...
 (function () {
   if (!window.URLSearchParams) return;
   var q = new URLSearchParams(location.search);
   var msg = q.get("message"), box = document.getElementById("message"), sel = document.getElementById("interest");
   if (msg && box && !box.value) box.value = msg.slice(0, 2000);
-  if (q.get("interest") === "adjustastairs" && sel) {
+  if ((q.get("interest") === "adjustastairs" || q.get("interest") === "zstack") && sel) {
     for (var i = 0; i < sel.options.length; i++) {
       if (/AdjustaStairs/.test(sel.options[i].text)) { sel.selectedIndex = i; break; }
     }
@@ -1038,6 +1038,7 @@ function handleSubmit(e) {
         <li><a href="blog.html">Blog</a></li>
         <li><a href="adjustastair.html">AdjustaStairs™ System</a></li>
         <li><a href="adjustastairspecs.html">AdjustaStairs™ Specs</a></li>
+        <li><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a></li>
         <li><a href="googleadsmanagement.html">Google Ads Management</a></li>
         <li><a href="leadgeneration.html">Lead Generation</a></li>
         <li><a href="scaffoldingmarketplace.html">Scaffold Exchange</a></li>
