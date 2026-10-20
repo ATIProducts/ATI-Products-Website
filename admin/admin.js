@@ -92,6 +92,12 @@
     if (button) button.classList.add('active');
   }
 
+  // Remembers which screen is open in the address (#seo/pages, #page/about.html)
+  // so a browser refresh comes back to the same place.
+  function setRoute(route) {
+    try { history.replaceState(null, '', route ? '#' + route : location.pathname + location.search); } catch (e) {}
+  }
+
   function showMessage(container, text, kind) {
     container.innerHTML = '';
     var box = el('div', { class: kind === 'error' ? 'error-msg' : 'success-msg' }, [text]);
@@ -310,6 +316,7 @@
         onClick: function () {
           if (!confirmLeave()) return;
           setActiveNav(btn);
+          setRoute('page/' + encodeURIComponent(page.file));
           renderPageEditor(page);
         },
       }, [page.title]);
@@ -321,31 +328,37 @@
   document.querySelector('[data-view="welcome"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
+    setRoute('welcome');
     renderWelcome();
   });
   document.querySelector('[data-view="new-post"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
+    setRoute('new-post');
     renderNewPostForm();
   });
   document.querySelector('[data-view="new-page"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
+    setRoute('new-page');
     renderNewPageForm();
   });
   document.querySelector('[data-view="account"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
+    setRoute('account');
     renderAccount(false);
   });
   document.querySelector('[data-view="people"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
+    setRoute('people');
     renderPeople();
   });
   document.querySelector('[data-view="seo"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
+    if (!/^#seo(\/|$)/.test(location.hash)) setRoute('seo');
     resetScreen();
     mainEl.classList.add('main-wide');
     window.ATISEO.render(mainEl);
@@ -353,6 +366,7 @@
   document.querySelector('[data-view="activity"]').addEventListener('click', function (e) {
     if (!confirmLeave()) return;
     setActiveNav(e.currentTarget);
+    setRoute('activity');
     renderActivity();
   });
 
@@ -1797,6 +1811,26 @@
 
   // ---------- boot ----------
 
+  // Reopens the screen named in the address after a refresh.
+  function openRoute(route, listReady) {
+    var view = route.split('/')[0];
+    var navBtn = view && document.querySelector('[data-view="' + view + '"]');
+    if (navBtn && !navBtn.closest('[hidden]') && !navBtn.hidden) { navBtn.click(); return; }
+    if (view === 'page') {
+      var file = decodeURIComponent(route.slice(5));
+      renderWelcome();
+      Promise.resolve(listReady).then(function () {
+        var page = (state.pages || []).filter(function (p) { return p.file === file; })[0];
+        if (!page) { setRoute(''); return; }
+        var btns = document.querySelectorAll('#pages-list .nav-item, #posts-list .nav-item');
+        for (var i = 0; i < btns.length; i++) if (btns[i].textContent === page.title) { btns[i].click(); return; }
+      });
+      return;
+    }
+    setRoute('');
+    renderWelcome();
+  }
+
   checkAuthOrRedirect().then(function (ok) {
     if (!ok) return;
     var me = state.me || {};
@@ -1806,12 +1840,12 @@
       document.getElementById('activity-nav').hidden = false;
       document.getElementById('seo-nav').hidden = false;
     }
-    loadPagesList();
+    var listReady = loadPagesList();
     if (me.mustChangePassword) {
       setActiveNav(document.querySelector('[data-view="account"]'));
       renderAccount(true);
     } else {
-      renderWelcome();
+      openRoute(location.hash.replace(/^#/, ''), listReady);
     }
   });
 })();

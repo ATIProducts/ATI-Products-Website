@@ -185,6 +185,9 @@
 
   function draw() {
     if (!root) return;
+    // Don't draw over another admin screen if one was opened while loading.
+    if (!/^#seo(\/|$)/.test(location.hash)) return;
+    try { history.replaceState(null, '', '#seo/' + S.tab); } catch (e) {}
     var scrollY = window.scrollY;
     root.innerHTML = '';
     var c = S.core;
@@ -650,6 +653,15 @@
         el('tbody', {}, s.rankings.length ? s.rankings.map(function (r) {
           var ch = r.change;
           var chEl = ch == null ? el('span', { class: 'sd-change flat' }, ['–']) : el('span', { class: 'sd-change ' + (Math.abs(ch) < 0.5 ? 'flat' : ch > 0 ? 'up' : 'down') }, [Math.abs(ch) < 0.5 ? '0' : (ch > 0 ? '▲ ' : '▼ ') + num(Math.abs(ch), 1)]);
+          // With only a handful of searches, one person seeing a lower result moves
+          // the average a lot, so say so instead of showing a scary arrow.
+          var seen = r.weeks.filter(function (w) { return w.position != null; });
+          var wa = seen[seen.length - 1], wb = seen[seen.length - 2];
+          if (ch != null && wa && wb && (wa.impressions < 10 || wb.impressions < 10)) {
+            chEl = el('span', { class: 'sd-change flat', title: 'Compares ' + num(wb.impressions) + ' search(es) one week with ' + num(wa.impressions) + ' the next. With this few, the average swings a lot.' }, [
+              (ch > 0 ? '▲ ' : '▼ ') + num(Math.abs(ch), 1), el('small', { class: 'sd-few' }, ['few searches']),
+            ]);
+          }
           return el('tr', {}, [
             el('td', { class: 'sd-pt' }, [r.keyword]),
             el('td', { class: 'num' }, [r.position == null ? el('span', { class: 'sd-na' }, ['not seen']) : '#' + num(r.position, 1)]),
@@ -667,7 +679,7 @@
     return el('div', {}, [
       el('div', { class: 'sd-card-h' }, [el('p', { class: 'sd-label' }, ['Weekly positions · ' + tracked.length + '/25 tracked']), S.search && S.search.trackedIsDefault ? el('span', { class: 'sd-note' }, ['Starting list based on your goals. Add or remove any.']) : null]),
       table,
-      el('p', { class: 'sd-note', style: 'margin:10px 0 18px' }, ['Positions come from real Google searches in Search Console, averaged per week (Monday to Sunday). “Not seen” means the site didn’t show for that exact search that week. ▲ means it moved up.']),
+      el('p', { class: 'sd-note', style: 'margin:10px 0 18px' }, ['Positions come from real Google searches in Search Console, averaged per week (Monday to Sunday). “Not seen” means the site didn’t show for that exact search that week. ▲ means it moved up. “Few searches” means fewer than 10 people saw it in one of the weeks compared, so the change isn’t reliable yet.']),
       card([
         el('p', { class: 'sd-label' }, ['Track a keyword']),
         el('div', { class: 'sd-filters', style: 'margin-top:10px' }, [input, el('button', { class: 'sd-btn sd-btn-primary', type: 'button', onClick: add }, ['+ Add'])]),
@@ -1009,8 +1021,12 @@
     pageTips: pageTips,
     render: function (container) {
       root = container;
+      var want = (location.hash.match(/^#seo\/([a-z]+)/) || [])[1];
+      if (want && TABS.some(function (t) { return t[0] === want; })) S.tab = want;
       draw();
       load('core');
+      if (S.tab === 'keywords' || S.tab === 'rankings') load('search');
+      if (S.tab === 'analytics') load('analytics');
     },
   };
 })();
