@@ -10,7 +10,14 @@
         }
       ],
       "destination": "https://www.ati-products.com/:path*",
-      "permanent": false
+      "permanent": false,
+      "missing": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": ".*vercel-cron.*"
+        }
+      ]
     },
     {
       "source": "/adjustastair-specs",
