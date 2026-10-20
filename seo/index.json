@@ -7,7 +7,8 @@
   "userCanonical": "https://www.ati-products.com/",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:09.186Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=4VKLTVYjQUfPqAG-Ueo33g&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:42:55.027Z"
  },
  "/subsidiaries": {
   "verdict": "PASS",
@@ -17,7 +18,8 @@
   "userCanonical": "https://www.ati-products.com/subsidiaries",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:08.853Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=nvwFysmgABXdlVVrQdOSAQ&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:42:54.961Z"
  },
  "/offerings": {
   "verdict": "PASS",
@@ -27,7 +29,8 @@
   "userCanonical": "https://www.ati-products.com/offerings",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:09.127Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=yTctobkoWeIi7jdoynOWJw&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:42:55.071Z"
  },
  "/about": {
   "verdict": "PASS",
@@ -37,7 +40,8 @@
   "userCanonical": "https://www.ati-products.com/about",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:09.345Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=p_WM215lmZ3WDMttdn0i2w&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:42:54.992Z"
  },
  "/affiliates": {
   "verdict": "PASS",
@@ -47,17 +51,19 @@
   "userCanonical": "https://www.ati-products.com/affiliates",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:08.906Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=7JoCVz8IUwtdFF2c8MgKSg&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:42:54.759Z"
  },
  "/contact": {
-  "verdict": "NEUTRAL",
-  "coverageState": "Discovered - currently not indexed",
-  "lastCrawlTime": "",
-  "googleCanonical": "",
-  "userCanonical": "",
-  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:55:15.230Z"
+  "verdict": "PASS",
+  "coverageState": "Submitted and indexed",
+  "lastCrawlTime": "2026-10-19T22:49:51Z",
+  "googleCanonical": "https://www.ati-products.com/contact",
+  "userCanonical": "https://www.ati-products.com/contact",
+  "robotsTxtState": "ALLOWED",
+  "pageFetchState": "SUCCESSFUL",
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=tZO7p8TbLLFPuPXyynLQ2A&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:01.325Z"
  },
  "/adjustastair": {
   "verdict": "PASS",
@@ -67,7 +73,8 @@
   "userCanonical": "https://www.ati-products.com/adjustastair",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:15.553Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=JmTQXLXfdBjiRGIVxIxygQ&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:01.159Z"
  },
  "/adjustastairspecs": {
   "verdict": "PASS",
@@ -77,47 +84,52 @@
   "userCanonical": "https://www.ati-products.com/adjustastairspecs",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:15.491Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=aulV-KXiXmbMM072VIwTiQ&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:01.339Z"
  },
  "/googleadsmanagement": {
-  "verdict": "NEUTRAL",
-  "coverageState": "URL is unknown to Google",
-  "lastCrawlTime": "",
-  "googleCanonical": "",
-  "userCanonical": "",
-  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:55:15.303Z"
+  "verdict": "PASS",
+  "coverageState": "Submitted and indexed",
+  "lastCrawlTime": "2026-10-19T22:49:51Z",
+  "googleCanonical": "https://www.ati-products.com/googleadsmanagement",
+  "userCanonical": "https://www.ati-products.com/googleadsmanagement",
+  "robotsTxtState": "ALLOWED",
+  "pageFetchState": "SUCCESSFUL",
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=HhecHa-GGDZ0Y5N_BTABYQ&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:01.447Z"
  },
  "/leadgeneration": {
-  "verdict": "NEUTRAL",
-  "coverageState": "URL is unknown to Google",
-  "lastCrawlTime": "",
-  "googleCanonical": "",
-  "userCanonical": "",
-  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:55:15.829Z"
+  "verdict": "PASS",
+  "coverageState": "Submitted and indexed",
+  "lastCrawlTime": "2026-10-19T22:49:51Z",
+  "googleCanonical": "https://www.ati-products.com/leadgeneration",
+  "userCanonical": "https://www.ati-products.com/leadgeneration",
+  "robotsTxtState": "ALLOWED",
+  "pageFetchState": "SUCCESSFUL",
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=8uG4ECeBEtGB8Y3hEZnk_g&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:01.895Z"
  },
  "/scaffoldingmarketplace": {
-  "verdict": "NEUTRAL",
-  "coverageState": "URL is unknown to Google",
-  "lastCrawlTime": "",
-  "googleCanonical": "",
-  "userCanonical": "",
-  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:55:21.541Z"
+  "verdict": "PASS",
+  "coverageState": "Submitted and indexed",
+  "lastCrawlTime": "2026-10-19T22:51:51Z",
+  "googleCanonical": "https://www.ati-products.com/scaffoldingmarketplace",
+  "userCanonical": "https://www.ati-products.com/scaffoldingmarketplace",
+  "robotsTxtState": "ALLOWED",
+  "pageFetchState": "SUCCESSFUL",
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=YHOnwmsL15rfaWCsrP46Uw&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:07.657Z"
  },
  "/coloradoconstructionsupply": {
-  "verdict": "NEUTRAL",
-  "coverageState": "Discovered - currently not indexed",
-  "lastCrawlTime": "",
-  "googleCanonical": "",
-  "userCanonical": "",
-  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:55:21.650Z"
+  "verdict": "PASS",
+  "coverageState": "Submitted and indexed",
+  "lastCrawlTime": "2026-10-19T22:51:51Z",
+  "googleCanonical": "https://www.ati-products.com/coloradoconstructionsupply",
+  "userCanonical": "https://www.ati-products.com/coloradoconstructionsupply",
+  "robotsTxtState": "ALLOWED",
+  "pageFetchState": "SUCCESSFUL",
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=FndMHmDF9yq8rHSanhrpAg&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:07.675Z"
  },
  "/marketinghub": {
   "verdict": "PASS",
@@ -127,7 +139,8 @@
   "userCanonical": "https://www.ati-products.com/marketinghub",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:21.901Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=tqyBhtsp-feQNWT9p6mPAg&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:07.496Z"
  },
  "/debris-netting": {
   "verdict": "PASS",
@@ -137,7 +150,8 @@
   "userCanonical": "https://www.ati-products.com/debris-netting",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:22.176Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=ns1k0gKkEqaLqsAz0ijoyA&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:13.278Z"
  },
  "/used-scaffolding": {
   "verdict": "PASS",
@@ -147,7 +161,8 @@
   "userCanonical": "https://www.ati-products.com/used-scaffolding",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:22.745Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=2rUnj7IM7_lmx1ma1cmmTw&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:09.555Z"
  },
  "/website-design-for-contractors": {
   "verdict": "PASS",
@@ -157,17 +172,19 @@
   "userCanonical": "https://www.ati-products.com/website-design-for-contractors",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:27.954Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=FfluFFpuBiR8PGoKFqEhtA&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:13.936Z"
  },
  "/blog": {
-  "verdict": "NEUTRAL",
-  "coverageState": "Discovered - currently not indexed",
-  "lastCrawlTime": "",
-  "googleCanonical": "",
-  "userCanonical": "",
-  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:55:28.077Z"
+  "verdict": "PASS",
+  "coverageState": "Submitted and indexed",
+  "lastCrawlTime": "2026-10-19T22:51:51Z",
+  "googleCanonical": "https://www.ati-products.com/blog",
+  "userCanonical": "https://www.ati-products.com/blog",
+  "robotsTxtState": "ALLOWED",
+  "pageFetchState": "SUCCESSFUL",
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=C9jvLMlVkY_1GjwoH1ErbA&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:13.982Z"
  },
  "/oshastairwayrequirements": {
   "verdict": "PASS",
@@ -177,19 +194,10 @@
   "userCanonical": "https://www.ati-products.com/oshastairwayrequirements",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:28.362Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=MbFBskHT0cYB4Ql0z6Ws9g&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:14.052Z"
  },
  "/buyingvsrentingscaffolding": {
-  "verdict": "NEUTRAL",
-  "coverageState": "Discovered - currently not indexed",
-  "lastCrawlTime": "",
-  "googleCanonical": "",
-  "userCanonical": "",
-  "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-  "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:55:28.284Z"
- },
- "/choosingtemporaryroofaccess": {
   "verdict": "NEUTRAL",
   "coverageState": "URL is unknown to Google",
   "lastCrawlTime": "",
@@ -197,7 +205,19 @@
   "userCanonical": "",
   "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
   "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-  "checkedAt": "2026-10-19T20:55:29.099Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=jqQ7ER24ZibyXUPlITcw0w&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:15.745Z"
+ },
+ "/choosingtemporaryroofaccess": {
+  "verdict": "PASS",
+  "coverageState": "Submitted and indexed",
+  "lastCrawlTime": "2026-10-19T22:53:50Z",
+  "googleCanonical": "https://www.ati-products.com/choosingtemporaryroofaccess",
+  "userCanonical": "https://www.ati-products.com/choosingtemporaryroofaccess",
+  "robotsTxtState": "ALLOWED",
+  "pageFetchState": "SUCCESSFUL",
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=1-TZpqwZYrffnfQThhCkyA&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:19.685Z"
  },
  "/crmreplacementforcontractors": {
   "verdict": "PASS",
@@ -207,7 +227,8 @@
   "userCanonical": "https://www.ati-products.com/crmreplacementforcontractors",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:34.491Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=Ly6LilF2kbYTm4zSZolDOA&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:20.344Z"
  },
  "/marketingchannelsforservicebusinesses": {
   "verdict": "PASS",
@@ -217,6 +238,7 @@
   "userCanonical": "https://www.ati-products.com/marketingchannelsforservicebusinesses",
   "robotsTxtState": "ALLOWED",
   "pageFetchState": "SUCCESSFUL",
-  "checkedAt": "2026-10-19T20:55:34.855Z"
+  "link": "https://search.google.com/search-console/inspect?resource_id=sc-domain:ati-products.com&id=qwYxkbubj0yBNXcS-jmLOw&utm_medium=link&utm_source=api",
+  "checkedAt": "2026-10-20T17:43:20.107Z"
  }
 }
