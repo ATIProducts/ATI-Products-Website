@@ -390,6 +390,22 @@ h3.card-title {
   font-size: 13px; color: #5e6876; line-height: 1.7;
 }
 
+/* ── FACT TABLE ── */
+.wd-speed { background:#fff; border:1px solid #e4e7ec; border-radius:16px; padding:48px; margin-bottom:40px; }
+.wd-speed p { font-size:15.5px; color:#5e6876; line-height:1.75; margin:0 0 16px; max-width:820px; }
+.wd-speed a { display:inline; min-height:0; }
+.wd-speed table { width:100%; border-collapse:collapse; font-size:14.5px; line-height:1.6; margin:4px 0 16px; }
+.wd-speed th, .wd-speed td { text-align:left; padding:11px 12px; border-bottom:1px solid #e4e7ec; vertical-align:top; color:#3d4450; }
+.wd-speed thead th { font-size:12px; letter-spacing:.06em; text-transform:uppercase; border-bottom:2px solid #0d1117; }
+.wd-speed td:first-child { color:#0d1117; font-weight:700; width:26%; }
+.wd-speed td:last-child { white-space:nowrap; }
+@media (max-width: 640px) {
+  .wd-speed { padding:28px 20px; }
+  .wd-speed thead { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+  .wd-speed tr { display:block; border-bottom:1px solid #e4e7ec; padding:8px 0; }
+  .wd-speed td { display:block; border:0; padding:3px 0; width:auto !important; white-space:normal !important; }
+}
+
 /* ── FOOTER ── */
 footer { background: #0d1117; color: #c5c5c5; padding: 64px 48px 36px; }
 .footer-inner {
@@ -988,6 +1004,24 @@ word-break:break-word;overflow-wrap:break-word;
       <div><h3>General Contractors</h3><p>A professional presence for bids, project types and the markets you serve.</p></div>
       <div><h3>Construction Supply</h3><p>Product pages, spec sheets and quote requests, like the site you are on.</p></div>
     </div>
+  </section>
+
+  <!-- Speed targets -->
+  <section class="wd-speed reveal" aria-labelledby="wd-speed-title">
+    <span class="section-label">Speed Targets</span>
+    <h2 class="block-title" id="wd-speed-title" style="margin-bottom:12px;">How Fast Should a Contractor Website Be?</h2>
+    <p>Google publishes the targets it uses to judge how fast and stable a page feels. Here is what each one means, so you can check any website, including your current one, at PageSpeed Insights.</p>
+    <div class="fact-table-wrap"><table class="wd-table">
+      <thead><tr><th scope="col">Measure</th><th scope="col">Google&rsquo;s target</th><th scope="col">Source</th></tr></thead>
+      <tbody>
+        <tr><td>PageSpeed score</td><td>90 to 100 is good, 50 to 89 needs improvement, below 50 is poor</td><td><a href="https://developers.google.com/speed/docs/insights/v5/about" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">PageSpeed Insights</a></td></tr>
+        <tr><td>Largest Contentful Paint</td><td>Main content shows within 2.5 seconds</td><td><a href="https://web.dev/articles/vitals" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">web.dev</a></td></tr>
+        <tr><td>Interaction to Next Paint</td><td>Taps and clicks respond in 200 milliseconds or less</td><td><a href="https://web.dev/articles/vitals" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">web.dev</a></td></tr>
+        <tr><td>Cumulative Layout Shift</td><td>The page doesn&rsquo;t jump around while it loads: 0.1 or less</td><td><a href="https://web.dev/articles/vitals" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">web.dev</a></td></tr>
+        <tr><td>Real-visitor data</td><td>Google grades real visits over the previous 28 days</td><td><a href="https://developers.google.com/speed/docs/insights/v5/about" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">PageSpeed Insights</a></td></tr>
+      </tbody>
+    </table></div>
+    <p>This website, built by the ATI team, scores 99 to 100 on PageSpeed Insights, and its main content loads in about 1.4 to 1.7 seconds in Google&rsquo;s mobile test. ATI Products has served contractors in all 50 states since 1999.</p>
   </section>
 
   <!-- FAQ -->
