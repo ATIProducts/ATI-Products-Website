@@ -507,16 +507,15 @@ async function cron(req, res) {
     return;
   }
   const done = { at: new Date().toISOString(), steps: [] };
-  try {
-    if (google.status().google) {
-      const r = await runIndexCheck(null);
-      done.steps.push(`index: ${Object.keys(r.index).length} checked${r.errors.length ? `, ${r.errors.length} errors` : ''}`);
-    }
-  } catch (e) { done.steps.push('index failed: ' + e.message); }
-  try {
-    const r = await runPageSpeed('mobile', null);
-    done.steps.push(`pagespeed: ${r.measured.join(', ')}${r.errors.length ? ` (${r.errors.length} errors)` : ''}`);
-  } catch (e) { done.steps.push('pagespeed failed: ' + e.message); }
+  // Both run at once so the whole check fits in the time Vercel allows.
+  const [idx, ps] = await Promise.allSettled([
+    google.status().google ? runIndexCheck(null) : Promise.resolve(null),
+    runPageSpeed('mobile', null),
+  ]);
+  if (idx.status === 'rejected') done.steps.push('index failed: ' + idx.reason.message);
+  else if (idx.value) done.steps.push(`index: ${Object.keys(idx.value.index).length} checked${idx.value.errors.length ? `, ${idx.value.errors.length} errors` : ''}`);
+  if (ps.status === 'rejected') done.steps.push('pagespeed failed: ' + ps.reason.message);
+  else done.steps.push(`pagespeed: ${ps.value.measured.join(', ')}${ps.value.errors.length ? ` (${ps.value.errors.length} errors)` : ''}`);
   done.ok = !done.steps.some((s) => /failed/.test(s));
   await store.update('runs', (d) => Object.assign(d, { cron: done }), 'Record daily SEO check').catch(() => {});
   res.status(200).json(done);
