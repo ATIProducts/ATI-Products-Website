@@ -15,5 +15,13 @@
   "by": "Daily check",
   "checked": 23,
   "errors": []
+ },
+ "cron": {
+  "at": "2026-10-21T13:26:00.679Z",
+  "steps": [
+   "index: 23 checked",
+   "pagespeed: /scaffoldingmarketplace, /used-scaffolding, /debris-netting"
+  ],
+  "ok": true
  }
 }
