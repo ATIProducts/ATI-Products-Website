@@ -950,15 +950,26 @@ word-break:break-word;overflow-wrap:break-word;
 .zsz-card-top { display:flex; align-items:center; justify-content:space-between; gap:8px; }
 .zsz-name { font-size:22px; font-weight:800; letter-spacing:-.01em; line-height:1; text-transform:uppercase; color:#0d1117; }
 .zsz-pill { flex-shrink:0; padding:2px 8px; font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#005f30; background:#f0f8f3; border:1px solid #9fd4b4; border-radius:999px; white-space:nowrap; }
-.zsz-card-mid { display:flex; gap:16px; align-items:flex-end; }
-.zsz-svg { flex-shrink:0; overflow:visible; }
+.zsz-card-mid { display:flex; justify-content:center; padding:10px 0 4px; background:#fbfcfd; border:1px solid #eef0f3; border-radius:8px; }
+.zsz-svg { display:block; max-width:100%; height:auto; overflow:visible; }
 .zsz-mod { fill:#eef1f4; stroke:#0d1117; stroke-width:1.2; }
 .zsz-mod.alt { fill:#f8f9fa; }
 .zsz-flight { stroke:#c8102e; stroke-width:2.2; stroke-linecap:round; }
-.zsz-target { stroke:#00703a; stroke-width:2; stroke-dasharray:4 3; }
-.zsz-count { margin:0 0 10px; font-size:34px; font-weight:800; line-height:1; color:#0d1117; }
+.zsz-target { stroke:#00703a; stroke-width:1.6; stroke-dasharray:4 3; }
+.zsz-flight { fill:none; stroke-linejoin:round; }
+.zsz-railmod { fill:#fff; stroke:#0d1117; stroke-width:1.2; stroke-dasharray:3 2; }
+.zsz-rails { stroke:#c8102e; stroke-width:2; }
+.zsz-roof { fill:#dfe3e8; stroke:#9aa4b0; stroke-width:1; }
+.zsz-ground { stroke:#5e6876; stroke-width:1.5; }
+.zsz-trans { fill:none; stroke:#d97706; stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
+.zsz-trans-rail { fill:none; stroke:#d97706; stroke-width:1.4; stroke-linecap:round; opacity:.8; }
+.zsz-split { margin:0; font-size:12.5px; font-weight:600; color:#5e6876; }
+.zsz-mini dd { white-space:normal !important; line-height:1.25; }
+.zsz-nw { white-space:nowrap; }
+.zsz-amt { display:block; margin-top:2px; font-size:12.5px; font-weight:600; color:#5e6876; white-space:nowrap; }
+.zsz-count { margin:0 0 2px; font-size:34px; font-weight:800; line-height:1; color:#0d1117; }
 .zsz-count span { font-size:15px; font-weight:700; color:#5e6876; }
-.zsz-mini { display:grid; gap:8px; margin:0; }
+.zsz-mini { display:grid; grid-template-columns:auto minmax(0,1.4fr) auto; gap:10px 14px; margin:0; }
 .zsz-mini div { display:flex; flex-direction:column; gap:2px; }
 .zsz-mini dt { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#5e6876; }
 .zsz-mini dd { margin:0; font-size:15px; font-weight:800; color:#0d1117; white-space:nowrap; }
@@ -971,6 +982,9 @@ word-break:break-word;overflow-wrap:break-word;
 .zsz-legend span { display:inline-flex; align-items:center; gap:6px; }
 .zsz-legend i { display:inline-block; width:16px; height:0; border-top:2px dashed #00703a; }
 .zsz-legend i.f { border-top:2.5px solid #c8102e; }
+.zsz-legend i.t { border-top:3px solid #d97706; }
+.zsz-legend i.r { width:12px; height:10px; border:1.5px dashed #0d1117; border-top:2px solid #c8102e; }
+.zsz-legend i.b { width:12px; height:10px; border:1px solid #9aa4b0; background:#dfe3e8; }
 .zsz-panel { display:flex; flex-direction:column; gap:14px; padding:20px; background:#fff; border:3px solid #0d1117; border-radius:10px; position:sticky; top:90px; }
 .zsz-panel-label { margin:0; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#5e6876; }
 .zsz-panel-title { margin:0; font-size:22px; font-weight:800; line-height:1.1; letter-spacing:-.01em; text-transform:uppercase; color:#0d1117; }
@@ -990,7 +1004,7 @@ word-break:break-word;overflow-wrap:break-word;
 @media (max-width: 420px) { .zsz-controls { grid-template-columns:1fr; } .zsz-qty { width:100%; } }
 </style>
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://www.ati-products.com/z-stack-stair-tower", "url": "https://www.ati-products.com/z-stack-stair-tower", "name": "Z-Stack™ Modular Stair Towers", "description": "Z-Stack™ modular aluminum stair towers in 36\" Standard and 24\" Compact sizes. Craneable and reusable. Height calculator, brochure and same-day quotes.", "isPartOf": {"@type": "WebSite", "name": "ATI Products, LLC", "url": "https://www.ati-products.com/"}, "primaryImageOfPage": {"@type": "ImageObject", "url": "https://www.ati-products.com/images/z-stack-compact-stair-tower-roof-access.webp"}, "about": {"@type": "Thing", "name": "Modular stair tower"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ati-products.com/"}, {"@type": "ListItem", "position": 2, "name": "What We Offer", "item": "https://www.ati-products.com/offerings"}, {"@type": "ListItem", "position": 3, "name": "Z-Stack™ Stair Towers", "item": "https://www.ati-products.com/z-stack-stair-tower"}]}, {"@type": "Product", "name": "Z-Stack™ Modular Stair Tower", "brand": {"@type": "Brand", "name": "Z-Stack™"}, "manufacturer": {"@type": "Organization", "name": "SafeSmart"}, "description": "Modular, pre-engineered aluminum stair tower. Bolt-together modules with two stair flights and a landing stack to the required height and can be craned into place. Standard (36 in stairs) and Compact (24 in stairs) sizes.", "url": "https://www.ati-products.com/z-stack-stair-tower", "image": ["https://www.ati-products.com/images/z-stack-compact-stair-tower-roof-access.webp", "https://www.ati-products.com/images/z-stack-stair-tower-crane-lift.webp", "https://www.ati-products.com/images/z-stack-standard-tower-render.webp"], "category": "Construction Access Systems", "material": "Aluminum", "additionalProperty": [{"@type": "PropertyValue", "name": "Stair width", "value": "36 in (Standard); 24 in (Compact)"}, {"@type": "PropertyValue", "name": "Module footprint", "value": "9 ft 4 in x 6 ft 10 in (Standard); 7 ft 7 in x 4 ft 11 in (Compact)"}, {"@type": "PropertyValue", "name": "Height added per module", "value": "104.75 in (Standard); 97.54 in (Compact)"}, {"@type": "PropertyValue", "name": "Load rating", "value": "Up to 1,100 lbs per module (Standard)"}, {"@type": "PropertyValue", "name": "Tie-off brackets", "value": "Every third module"}], "offers": {"@type": "Offer", "availability": "https://schema.org/InStock", "areaServed": "US", "seller": {"@type": "Organization", "name": "ATI Construction Products, LLC", "telephone": "+1-800-360-6115", "address": {"@type": "PostalAddress", "addressLocality": "Arvada", "addressRegion": "CO", "postalCode": "80002", "addressCountry": "US"}}, "priceSpecification": {"@type": "PriceSpecification", "description": "Same-day quotes available. Call (800) 360-6115 or fill out the contact form."}}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Z-Stack stair tower?", "acceptedAnswer": {"@type": "Answer", "text": "Z-Stack™ is a modular, pre-engineered aluminum stair tower made by SafeSmart and supplied by ATI Construction Products. Bolt-together modules, each with two stair flights and a landing, stack to the height you need and can be craned into place as one tower."}}, {"@type": "Question", "name": "How tall can a Z-Stack tower be?", "acceptedAnswer": {"@type": "Answer", "text": "There is no fixed limit. Middle modules repeat to add height, about 8' 8 3/4\" each for Standard and 8' 1 1/2\" for Compact, and towers have climbed almost 10 stories on SafeSmart projects. Taller towers need a tie-off bracket every third module."}}, {"@type": "Question", "name": "How many Z-Stack modules do I need for 28 feet?", "acceptedAnswer": {"@type": "Answer", "text": "For 28 feet, a Standard tower uses 3 modules with a top landing at 26' 7\", and an AdaptaStep™ bridge covers the last 1' 5\". A Compact tower also uses 3 modules, topping out at 24' 10 1/2\", with AdjustaStairs™ for the last 3' 1 1/2\". Try any height in the Z-Stack height calculator."}}, {"@type": "Question", "name": "What is the difference between Standard and Compact Z-Stack?", "acceptedAnswer": {"@type": "Answer", "text": "Standard modules have 36\" stairs and a 9' 4\" x 6' 10\" footprint, for larger crews carrying tools and materials. Compact modules have 24\" stairs and a 7' 7\" x 4' 11\" footprint, for roof access, ladder replacement and tight sites."}}, {"@type": "Question", "name": "Can a Z-Stack tower be lifted by crane?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Module joiners double as crane hooks for single modules, and lifting bars let you lift the whole tower as one structure without twisting. Lifting bars are required to lift 4 or more modules together."}}, {"@type": "Question", "name": "How is a Z-Stack tower secured to a building?", "acceptedAnswer": {"@type": "Answer", "text": "Adjustable base jacks anchor and level the base on an approved surface, and telescopic tie-off brackets secure the tower to the nearby structure every third module to reduce sway."}}, {"@type": "Question", "name": "Does a Z-Stack tower meet OSHA stair requirements?", "acceptedAnswer": {"@type": "Answer", "text": "Z-Stack™ is engineered with integrated stairs, landings and guardrails to provide compliant stair access. OSHA requires a stairway or ladder at any break in elevation of 19 inches or more under 1926.1051, and your site's competent person still confirms the setup for each job."}}, {"@type": "Question", "name": "Is Z-Stack for temporary or permanent access?", "acceptedAnswer": {"@type": "Answer", "text": "Both. Contractors reuse Z-Stack™ towers from job to job, and facilities install them as permanent roof and equipment access, often enclosed in security mesh with an entry gate."}}, {"@type": "Question", "name": "Where can I buy a Z-Stack stair tower?", "acceptedAnswer": {"@type": "Answer", "text": "ATI Construction Products supplies Z-Stack™ towers, accessories and transitions with same-day quotes and nationwide shipping. Call (800) 360-6115 or use the calculator on this page to send your setup for a quote."}}]}]}
+{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://www.ati-products.com/z-stack-stair-tower", "url": "https://www.ati-products.com/z-stack-stair-tower", "name": "Z-Stack™ Modular Stair Towers", "description": "Z-Stack™ modular aluminum stair towers in 36\" Standard and 24\" Compact sizes. Craneable and reusable. Height calculator, brochure and same-day quotes.", "isPartOf": {"@type": "WebSite", "name": "ATI Products, LLC", "url": "https://www.ati-products.com/"}, "primaryImageOfPage": {"@type": "ImageObject", "url": "https://www.ati-products.com/images/z-stack-compact-stair-tower-roof-access.webp"}, "about": {"@type": "Thing", "name": "Modular stair tower"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ati-products.com/"}, {"@type": "ListItem", "position": 2, "name": "What We Offer", "item": "https://www.ati-products.com/offerings"}, {"@type": "ListItem", "position": 3, "name": "Z-Stack™ Stair Towers", "item": "https://www.ati-products.com/z-stack-stair-tower"}]}, {"@type": "Product", "name": "Z-Stack™ Modular Stair Tower", "brand": {"@type": "Brand", "name": "Z-Stack™"}, "manufacturer": {"@type": "Organization", "name": "SafeSmart"}, "description": "Modular, pre-engineered aluminum stair tower. Bolt-together modules with two stair flights and a landing stack to the required height and can be craned into place. Standard (36 in stairs) and Compact (24 in stairs) sizes.", "url": "https://www.ati-products.com/z-stack-stair-tower", "image": ["https://www.ati-products.com/images/z-stack-compact-stair-tower-roof-access.webp", "https://www.ati-products.com/images/z-stack-stair-tower-crane-lift.webp", "https://www.ati-products.com/images/z-stack-standard-tower-render.webp"], "category": "Construction Access Systems", "material": "Aluminum", "additionalProperty": [{"@type": "PropertyValue", "name": "Stair width", "value": "36 in (Standard); 24 in (Compact)"}, {"@type": "PropertyValue", "name": "Module footprint", "value": "9 ft 4 in x 6 ft 10 in (Standard); 7 ft 7 in x 4 ft 11 in (Compact)"}, {"@type": "PropertyValue", "name": "Height added per module", "value": "104.75 in (Standard); 97.54 in (Compact)"}, {"@type": "PropertyValue", "name": "Load rating", "value": "Up to 1,100 lbs per module (Standard)"}, {"@type": "PropertyValue", "name": "Tie-off brackets", "value": "Every third module"}], "offers": {"@type": "Offer", "availability": "https://schema.org/InStock", "areaServed": "US", "seller": {"@type": "Organization", "name": "ATI Construction Products, LLC", "telephone": "+1-800-360-6115", "address": {"@type": "PostalAddress", "addressLocality": "Arvada", "addressRegion": "CO", "postalCode": "80002", "addressCountry": "US"}}, "priceSpecification": {"@type": "PriceSpecification", "description": "Same-day quotes available. Call (800) 360-6115 or fill out the contact form."}}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Z-Stack stair tower?", "acceptedAnswer": {"@type": "Answer", "text": "Z-Stack™ is a modular, pre-engineered aluminum stair tower made by SafeSmart and supplied by ATI Construction Products. Bolt-together modules, each with two stair flights and a landing, stack to the height you need and can be craned into place as one tower."}}, {"@type": "Question", "name": "How tall can a Z-Stack tower be?", "acceptedAnswer": {"@type": "Answer", "text": "There is no fixed limit. Middle modules repeat to add height, about 8' 8 3/4\" each for Standard and 8' 1 1/2\" for Compact, and towers have climbed almost 10 stories on SafeSmart projects. Taller towers need a tie-off bracket every third module."}}, {"@type": "Question", "name": "How many Z-Stack modules do I need for 28 feet?", "acceptedAnswer": {"@type": "Answer", "text": "For 28 feet, a Standard tower uses 4 modules: 3 stair modules with the top landing at 26' 7\", plus the top railing module. An AdaptaStep™ bridge covers the last 1' 5\" to the roof. A Compact tower also uses 4 modules, with the top landing at 24' 10 1/2\" and AdjustaStairs™ for the last 3' 1 1/2\". Try any height in the Z-Stack height calculator."}}, {"@type": "Question", "name": "What is the difference between Standard and Compact Z-Stack?", "acceptedAnswer": {"@type": "Answer", "text": "Standard modules have 36\" stairs and a 9' 4\" x 6' 10\" footprint, for larger crews carrying tools and materials. Compact modules have 24\" stairs and a 7' 7\" x 4' 11\" footprint, for roof access, ladder replacement and tight sites."}}, {"@type": "Question", "name": "Can a Z-Stack tower be lifted by crane?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Module joiners double as crane hooks for single modules, and lifting bars let you lift the whole tower as one structure without twisting. Lifting bars are required to lift 4 or more modules together."}}, {"@type": "Question", "name": "How is a Z-Stack tower secured to a building?", "acceptedAnswer": {"@type": "Answer", "text": "Adjustable base jacks anchor and level the base on an approved surface, and telescopic tie-off brackets secure the tower to the nearby structure every third module to reduce sway."}}, {"@type": "Question", "name": "Does a Z-Stack tower meet OSHA stair requirements?", "acceptedAnswer": {"@type": "Answer", "text": "Z-Stack™ is engineered with integrated stairs, landings and guardrails to provide compliant stair access. OSHA requires a stairway or ladder at any break in elevation of 19 inches or more under 1926.1051, and your site's competent person still confirms the setup for each job."}}, {"@type": "Question", "name": "Is Z-Stack for temporary or permanent access?", "acceptedAnswer": {"@type": "Answer", "text": "Both. Contractors reuse Z-Stack™ towers from job to job, and facilities install them as permanent roof and equipment access, often enclosed in security mesh with an entry gate."}}, {"@type": "Question", "name": "Where can I buy a Z-Stack stair tower?", "acceptedAnswer": {"@type": "Answer", "text": "ATI Construction Products supplies Z-Stack™ towers, accessories and transitions with same-day quotes and nationwide shipping. Call (800) 360-6115 or use the calculator on this page to send your setup for a quote."}}]}]}
 </script>
 </head>
 <body>
@@ -1067,7 +1081,7 @@ word-break:break-word;overflow-wrap:break-word;
   <!-- Height calculator -->
   <section id="sizing" class="zsz-section" aria-labelledby="zsz-title">
     <span class="section-label">Size and Quote</span><h2 class="block-title" id="zsz-title" style="margin-bottom:8px;">How Many Z-Stack™ Modules Do You Need?</h2>
-    <p class="zsz-intro">Enter the height you need to reach. The calculator stacks Standard and Compact modules as high as they go without passing your height, then shows how to finish the last few inches, how many tie-off brackets the tower needs, and the footprint. Pick a tower to send the setup to ATI for a quote.</p>
+    <p class="zsz-intro">Enter the height you need to reach. The calculator stacks Standard and Compact stair modules up to your height, adds the top module that forms the guardrail around the top landing, and picks the AdaptaStep™ bridge or AdjustaStairs™ that connects the landing to the roof. It also shows tie-off brackets and the footprint. Pick a tower to send the setup to ATI for a quote.</p>
     <div class="zsz-layout" id="zsz" data-cms-skip>
       <div class="zsz-main">
         <div class="zsz-controls">
@@ -1084,10 +1098,10 @@ word-break:break-word;overflow-wrap:break-word;
         <p class="zsz-note">Planning estimate from SafeSmart&rsquo;s published module heights. ATI confirms the final layout, anchoring and tie-off points for your site.</p>
         <h3 class="zsz-micro" id="zsz-head">Tower options for 28'</h3>
         <p class="zsz-msg" hidden></p>
-        <ul class="zsz-cards" aria-labelledby="zsz-head"><li><div class="zsz-card is-selected" data-type="standard"><div class="zsz-card-top"><span class="zsz-name">Standard</span><span class="zsz-pill">36" stairs</span></div><div class="zsz-card-mid"><svg class="zsz-svg" viewBox="0 0 64 120" width="64" height="120" aria-hidden="true" focusable="false"><rect x="14" y="82.4" width="36" height="37.6" rx="1.5" class="zsz-mod"/><path d="M16 118L48 84.4" class="zsz-flight"/><rect x="14" y="46.43" width="36" height="35.97" rx="1.5" class="zsz-mod alt"/><path d="M16 80.4L48 48.43" class="zsz-flight"/><rect x="14" y="10.45" width="36" height="35.97" rx="1.5" class="zsz-mod"/><path d="M16 44.43L48 12.45" class="zsz-flight"/><line x1="2" x2="62" y1="4.62" y2="4.62" class="zsz-target"/></svg><div><p class="zsz-count">3<span> modules</span></p><dl class="zsz-mini"><div><dt>Top landing</dt><dd>26' 7&quot;</dd></div><div><dt>Finish</dt><dd>AdaptaStep™ bridge</dd></div><div><dt>Tie-off brackets</dt><dd>1</dd></div></dl></div></div><p class="zsz-use">Wider stairs for crews carrying tools and materials. Footprint 9' 4&quot; x 6' 10&quot;.</p><div class="zsz-card-foot"><button type="button" class="zsz-select" aria-pressed="true" data-type="standard">Selected</button></div></div></li><li><div class="zsz-card" data-type="compact"><div class="zsz-card-top"><span class="zsz-name">Compact</span><span class="zsz-pill">24" stairs</span></div><div class="zsz-card-mid"><svg class="zsz-svg" viewBox="0 0 64 120" width="64" height="120" aria-hidden="true" focusable="false"><rect x="14" y="84.51" width="36" height="35.49" rx="1.5" class="zsz-mod"/><path d="M16 118L48 86.51" class="zsz-flight"/><rect x="14" y="51.02" width="36" height="33.5" rx="1.5" class="zsz-mod alt"/><path d="M16 82.51L48 53.02" class="zsz-flight"/><rect x="14" y="17.52" width="36" height="33.5" rx="1.5" class="zsz-mod"/><path d="M16 49.02L48 19.52" class="zsz-flight"/><line x1="2" x2="62" y1="4.62" y2="4.62" class="zsz-target"/></svg><div><p class="zsz-count">3<span> modules</span></p><dl class="zsz-mini"><div><dt>Top landing</dt><dd>24' 10 1/2&quot;</dd></div><div><dt>Finish</dt><dd>AdjustaStairs™ up</dd></div><div><dt>Tie-off brackets</dt><dd>1</dd></div></dl></div></div><p class="zsz-use">Smaller footprint for roof and equipment access. Footprint 7' 7&quot; x 4' 11&quot;.</p><div class="zsz-card-foot"><button type="button" class="zsz-select" aria-pressed="false" data-type="compact">Select</button></div></div></li></ul>
-        <p class="zsz-legend"><span><i></i> Your height</span><span><i class="f"></i> Stair flights in each module</span></p>
+        <ul class="zsz-cards" aria-labelledby="zsz-head"><li><div class="zsz-card is-selected" data-type="standard"><div class="zsz-card-top"><span class="zsz-name">Standard</span><span class="zsz-pill">36" stairs</span></div><p class="zsz-count">4<span> modules</span></p><p class="zsz-split">3 stair modules + 1 top railing module</p><div class="zsz-card-mid"><svg class="zsz-svg" viewBox="0 0 220 190" width="220" height="190" role="img" aria-label="3 stair modules plus a top railing module, with AdaptaStep™ bridge (+1' 5&quot;) to the roof"><rect x="30" y="142.03" width="48" height="44.97" rx="1.5" class="zsz-mod"/><path d="M74 185L34 164.51L74 144.03" class="zsz-flight"/><rect x="30" y="99.01" width="48" height="43.02" rx="1.5" class="zsz-mod alt"/><path d="M74 140.03L34 120.52L74 101.01" class="zsz-flight"/><rect x="30" y="55.98" width="48" height="43.02" rx="1.5" class="zsz-mod"/><path d="M74 97.01L34 77.49L74 57.98" class="zsz-flight"/><rect x="30" y="12.96" width="48" height="43.02" rx="1.5" class="zsz-railmod"/><path d="M30 34.47H78M30 45.22H78" class="zsz-rails"/><rect x="128" y="49" width="91" height="138" class="zsz-roof"/><path d="M78 55.98L128 49" class="zsz-trans"/><path d="M78 48.98L128 42" class="zsz-trans-rail"/><line x1="1" x2="219" y1="49" y2="49" class="zsz-target"/><line x1="0" x2="220" y1="187" y2="187" class="zsz-ground"/></svg></div><dl class="zsz-mini"><div><dt>Top landing</dt><dd>26' 7&quot;</dd></div><div><dt>To the roof</dt><dd><span class="zsz-nw">AdaptaStep™</span> bridge<span class="zsz-amt">Up 1' 5&quot;</span></dd></div><div><dt>Tie-offs</dt><dd>1</dd></div></dl><p class="zsz-use">Wider stairs for crews carrying tools and materials. Footprint 9' 4&quot; x 6' 10&quot;.</p><div class="zsz-card-foot"><button type="button" class="zsz-select" aria-pressed="true" data-type="standard">Selected</button></div></div></li><li><div class="zsz-card" data-type="compact"><div class="zsz-card-top"><span class="zsz-name">Compact</span><span class="zsz-pill">24" stairs</span></div><p class="zsz-count">4<span> modules</span></p><p class="zsz-split">3 stair modules + 1 top railing module</p><div class="zsz-card-mid"><svg class="zsz-svg" viewBox="0 0 220 190" width="220" height="190" role="img" aria-label="3 stair modules plus a top railing module, with AdjustaStairs™ (+3' 1 1/2&quot;) to the roof"><rect x="30" y="141.58" width="48" height="45.42" rx="1.5" class="zsz-mod"/><path d="M74 185L34 164.29L74 143.58" class="zsz-flight"/><rect x="30" y="98.71" width="48" height="42.87" rx="1.5" class="zsz-mod alt"/><path d="M74 139.58L34 120.14L74 100.71" class="zsz-flight"/><rect x="30" y="55.83" width="48" height="42.87" rx="1.5" class="zsz-mod"/><path d="M74 96.71L34 77.27L74 57.83" class="zsz-flight"/><rect x="30" y="12.96" width="48" height="42.87" rx="1.5" class="zsz-railmod"/><path d="M30 34.39H78M30 45.11H78" class="zsz-rails"/><rect x="128" y="39.32" width="91" height="147.68" class="zsz-roof"/><path d="M78 55.83v-4.13h12.5v-4.13h12.5v-4.13h12.5v-4.13h12.5" class="zsz-trans zsz-trans-steps"/><path d="M78 47.83L128 31.32" class="zsz-trans-rail"/><line x1="1" x2="219" y1="39.32" y2="39.32" class="zsz-target"/><line x1="0" x2="220" y1="187" y2="187" class="zsz-ground"/></svg></div><dl class="zsz-mini"><div><dt>Top landing</dt><dd>24' 10 1/2&quot;</dd></div><div><dt>To the roof</dt><dd><span class="zsz-nw">AdjustaStairs™</span><span class="zsz-amt">Up 3' 1 1/2&quot;</span></dd></div><div><dt>Tie-offs</dt><dd>1</dd></div></dl><p class="zsz-use">Smaller footprint for roof and equipment access. Footprint 7' 7&quot; x 4' 11&quot;.</p><div class="zsz-card-foot"><button type="button" class="zsz-select" aria-pressed="false" data-type="compact">Select</button></div></div></li></ul>
+        <p class="zsz-legend"><span><i class="f"></i> Two stair flights per module</span><span><i class="r"></i> Top railing module</span><span><i class="t"></i> Bridge or stairs to the roof</span><span><i class="b"></i> Roof at your height</span></p>
       </div>
-      <aside class="zsz-panel" aria-live="polite" aria-label="Your tower"><p class="zsz-panel-label">Your tower</p><p class="zsz-panel-title">Z-Stack™ Standard Tower</p><dl class="zsz-facts"><dt>Height to reach</dt><dd>28'</dd><dt>Modules</dt><dd>3 (1 base, 2 added)</dd><dt>Top landing</dt><dd>26' 7&quot;</dd><dt>Finish</dt><dd>AdaptaStep™ bridge to step up the last 1' 5&quot;.</dd><dt>Tie-off brackets</dt><dd>1 <span class="zsz-muted">(one every third module)</span></dd><dt>Stair width</dt><dd>36"</dd><dt>Footprint</dt><dd>9' 4&quot; x 6' 10&quot;</dd><dt>Quantity</dt><dd>1</dd></dl><p class="zsz-panel-note">ATI confirms the final layout, anchoring and pricing, usually the same business day.</p><a class="zsz-quote" href="contact.html?interest=zstack" data-quote>Request a quote</a><p class="zsz-panel-call">Or call <a href="tel:+18003606115">(800) 360-6115</a></p></aside>
+      <aside class="zsz-panel" aria-live="polite" aria-label="Your tower"><p class="zsz-panel-label">Your tower</p><p class="zsz-panel-title">Z-Stack™ Standard Tower</p><dl class="zsz-facts"><dt>Height to reach</dt><dd>28'</dd><dt>Modules</dt><dd>4 <span class="zsz-muted">(3 stair, 1 top railing)</span></dd><dt>Top landing</dt><dd>26' 7&quot;</dd><dt>Overall height</dt><dd>About 35' 3 3/4&quot; <span class="zsz-muted">with the railing module</span></dd><dt>To the roof</dt><dd>AdaptaStep™ bridge to the roof, stepping up 1' 5&quot;.</dd><dt>Tie-off brackets</dt><dd>1 <span class="zsz-muted">(one every third module)</span></dd><dt>Stair width</dt><dd>36"</dd><dt>Footprint</dt><dd>9' 4&quot; x 6' 10&quot;</dd><dt>Quantity</dt><dd>1</dd></dl><p class="zsz-tip">Craning the whole tower in one lift? Lifting bars are required for 4 or more modules.</p><p class="zsz-panel-note">ATI confirms the final layout, anchoring and pricing, usually the same business day.</p><a class="zsz-quote" href="contact.html?interest=zstack" data-quote>Request a quote</a><p class="zsz-panel-call">Or call <a href="tel:+18003606115">(800) 360-6115</a></p></aside>
     </div>
   </section>
 
@@ -1129,7 +1143,7 @@ word-break:break-word;overflow-wrap:break-word;
         <ol class="dn-steps" style="grid-template-columns:1fr;gap:12px;margin-top:20px;">
           <li><h3>Set the base module</h3><p>Four height-adjustable base jacks anchor the tower to an approved surface and level it on uneven ground. Castors and a mobile chassis are available for indoor sites.</p></li>
           <li><h3>Stack middle modules</h3><p>Repeat middle modules to gain height. Each one adds two stair flights and a landing. Tie the tower to the structure with a tie-off bracket every third module.</p></li>
-          <li><h3>Finish with the top module</h3><p>The top module carries the top handrail and gate. Add joiners and a lifting bar there if the whole tower will be craned.</p></li>
+          <li><h3>Finish with the top module</h3><p>Every tower gets one more module above the top landing. It has no stairs and works as the guardrail around the landing, with the top handrail and gate. Add joiners and a lifting bar there if the whole tower will be craned.</p></li>
         </ol>
       </div>
       <figure class="zs-fig is-render">
@@ -1192,11 +1206,11 @@ word-break:break-word;overflow-wrap:break-word;
   <section class="dn-panel" id="landing" aria-labelledby="zs-land-title">
     <span class="section-label">Top Landing</span>
     <h2 class="block-title reveal" id="zs-land-title" style="margin-bottom:12px;">What If the Tower Doesn&rsquo;t Line Up With the Roof?</h2>
-    <p class="dn-lead" style="max-width:780px;">Modules come in fixed heights, so the top landing rarely matches the roof or platform exactly. SafeSmart&rsquo;s planning rule: a gap of 9.5" or less needs nothing added. Bigger gaps get a transition, and a gap of 48" or more means adding another module.</p>
+    <p class="dn-lead" style="max-width:780px;">Modules come in fixed heights, so the top landing rarely matches the roof or platform exactly. Every tower finishes with a transition from the top landing to the roof: an AdaptaStep™ bridge when the difference is 24" or less, and AdjustaStairs™ from 24" to 48". If 48" or more would be left, the tower gets another stair module. The height calculator above picks the right one for your height.</p>
     <div class="zs-landing">
       <div>
         <img src="images/z-stack-adaptastep-bridging-platform.webp" alt="AdaptaStep™ bridging platform with red guardrails used to step between a Z-Stack™ landing and a roof" width="567" height="464" decoding="async" loading="lazy">
-        <div><span class="zs-tag">9.6" to 24" difference</span><h3>AdaptaStep™ Bridging</h3><p>A modular bridging platform that bolts onto the Z-Stack™ and spans to the destination surface. It can run up to 30 feet long and joins AdaptaStep catwalks for rooftop and equipment access. <a href="downloads/adaptastep-access-platform-brochure.pdf" style="color:#00703a;text-decoration:underline;" target="_blank" rel="noopener noreferrer">AdaptaStep™ brochure (PDF)</a>.</p></div>
+        <div><span class="zs-tag">Up to 24" difference</span><h3>AdaptaStep™ Bridging</h3><p>A modular bridging platform that bolts onto the Z-Stack™ and spans to the destination surface. It can run up to 30 feet long and joins AdaptaStep catwalks for rooftop and equipment access. <a href="downloads/adaptastep-access-platform-brochure.pdf" style="color:#00703a;text-decoration:underline;" target="_blank" rel="noopener noreferrer">AdaptaStep™ brochure (PDF)</a>.</p></div>
       </div>
       <div>
         <img src="images/z-stack-adjustastairs-transition.webp" alt="AdjustaStairs™ self-leveling stair transition with handrails connecting a Z-Stack™ landing to a higher level" width="642" height="599" decoding="async" loading="lazy">
@@ -1287,7 +1301,7 @@ word-break:break-word;overflow-wrap:break-word;
     </div>
     <div class="dn-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">How many Z-Stack modules do I need for 28 feet?</h3>
-      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">For 28 feet, a Standard tower uses 3 modules with a top landing at 26' 7", and an AdaptaStep™ bridge covers the last 1' 5". A Compact tower also uses 3 modules, topping out at 24' 10 1/2", with AdjustaStairs™ for the last 3' 1 1/2". Try any height in the <a href="#sizing" style="color:#00703a;text-decoration:underline;">Z-Stack height calculator</a>.</p></div>
+      <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">For 28 feet, a Standard tower uses 4 modules: 3 stair modules with the top landing at 26' 7", plus the top railing module. An AdaptaStep™ bridge covers the last 1' 5" to the roof. A Compact tower also uses 4 modules, with the top landing at 24' 10 1/2" and AdjustaStairs™ for the last 3' 1 1/2". Try any height in the <a href="#sizing" style="color:#00703a;text-decoration:underline;">Z-Stack height calculator</a>.</p></div>
     </div>
     <div class="dn-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What is the difference between Standard and Compact Z-Stack?</h3>
@@ -1507,19 +1521,22 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){const nav=d
 <script src="/ga.js" async></script>
 <script>
 // Z-Stack(TM) tower height calculator (shared by the page and the build step).
-// Heights and finish rules are SafeSmart's published planning figures:
-// the base module exits at 109.50" (Standard) or 103.34" (Compact) including
-// base jacks, and each added module adds 104.75" or 97.54". The tower uses the
-// most modules that stay at or below the target, then the leftover rise is
-// finished with nothing (9.5" or less), an AdaptaStep bridge (up to 24"),
-// AdjustaStairs (up to 48"), or one more module and a step down.
+// Heights are SafeSmart's published planning figures: the base module exits at
+// 109.50" (Standard) or 103.34" (Compact) including base jacks, and each added
+// stair module adds 104.75" or 97.54". The tower uses the most stair modules
+// that stay at or below the target (one more if 48" or more would be left).
+// Every tower then gets:
+//   - one extra module on top, with no stairs, that works as the guardrail
+//     around the top landing, and
+//   - a transition from the top landing to the roof: an AdaptaStep bridge
+//     for a difference of up to 24", AdjustaStairs above that.
 var ZSZ = (function () {
   var TYPES = {
     standard: { key: 'standard', name: 'Standard', width: 36, base: 109.5, add: 104.75, footprint: "9' 4\" x 6' 10\"", use: 'Wider stairs for crews carrying tools and materials' },
     compact: { key: 'compact', name: 'Compact', width: 24, base: 103.34, add: 97.54, footprint: "7' 7\" x 4' 11\"", use: 'Smaller footprint for roof and equipment access' }
   };
   var ORDER = ['standard', 'compact'];
-  var NONE_MAX = 9.5, BRIDGE_MAX = 24, STAIRS_MAX = 48, MAX_FT = 150;
+  var BRIDGE_MAX = 24, STAIRS_MAX = 48, MAX_FT = 150;
   var FEET_RE = /^(?:(\d+(?:\.\d+)?)\s*(?:ft|feet|foot|')\s*(?:(\d+(?:\.\d+)?)\s*(?:in|inch|inches|")?)?|(\d+(?:\.\d+)?)\s*(?:in|inch|inches|")|(\d+(?:\.\d+)?))$/;
 
   function r2(x) { return Math.round(100 * x) / 100; }
@@ -1539,46 +1556,68 @@ var ZSZ = (function () {
   function towerHeight(n, t) { return n <= 0 ? 0 : t.base + (n - 1) * t.add; }
   function tieOffs(n) { return Math.floor(n / 3); }
 
-  // Returns the module count, exit height and how to finish the last bit of rise.
+  // Stair modules, top landing, the railing module on top, and the transition.
   function plan(targetIn, t) {
     var n = 1;
     while (towerHeight(n + 1, t) <= targetIn && n < 500) n++;
-    var tower = r2(towerHeight(n, t)), rem = r2(targetIn - tower);
-    var finish;
-    if (rem >= STAIRS_MAX) {
-      n += 1; tower = r2(towerHeight(n, t));
-      finish = { kind: 'down', inches: r2(tower - targetIn) };
-    } else if (rem < 0) finish = { kind: 'down', inches: r2(-rem) };
-    else if (rem === 0) finish = { kind: 'exact', inches: 0 };
-    else if (rem <= NONE_MAX) finish = { kind: 'none', inches: rem };
-    else if (rem <= BRIDGE_MAX) finish = { kind: 'bridge', inches: rem };
-    else finish = { kind: 'stairs', inches: rem };
-    return { type: t, modules: n, towerIn: tower, finish: finish, tieOffs: tieOffs(n), lifting: n >= 4, belowOne: targetIn < t.base - STAIRS_MAX };
+    if (r2(targetIn - towerHeight(n, t)) >= STAIRS_MAX) n += 1;
+    var landing = r2(towerHeight(n, t)), diff = r2(targetIn - landing), mag = Math.abs(diff);
+    var finish = { kind: mag <= BRIDGE_MAX ? 'bridge' : 'stairs', dir: diff > 0 ? 'up' : diff < 0 ? 'down' : 'level', inches: mag };
+    var total = n + 1;
+    return {
+      type: t, stairModules: n, modules: total, towerIn: landing, overallIn: r2(landing + t.add), targetIn: targetIn,
+      finish: finish, tieOffs: tieOffs(total), lifting: total >= 4, belowOne: targetIn < t.base - STAIRS_MAX
+    };
   }
   function finishText(f) {
-    if (f.kind === 'exact') return 'No transition needed. The top landing meets your height.';
-    if (f.kind === 'none') return 'Nothing added. The top landing is ' + ftIn(f.inches) + ' below your height, within the 9.5" allowance.';
-    if (f.kind === 'bridge') return 'AdaptaStep™ bridge to step up the last ' + ftIn(f.inches) + '.';
-    if (f.kind === 'stairs') return 'AdjustaStairs™ to climb the last ' + ftIn(f.inches) + '.';
-    return 'AdjustaStairs™ to step down ' + ftIn(f.inches) + ' from the top landing.';
+    var amt = ftIn(f.inches);
+    if (f.kind === 'bridge') {
+      if (f.dir === 'level') return 'AdaptaStep™ bridge straight across to the roof. The top landing is level with your height.';
+      return 'AdaptaStep™ bridge to the roof, stepping ' + f.dir + ' ' + amt + '.';
+    }
+    return 'AdjustaStairs™ to the roof, ' + (f.dir === 'up' ? 'climbing the last ' : 'stepping down ') + amt + '.';
   }
   function finishShort(f) {
-    return { exact: 'None needed', none: 'Nothing added', bridge: 'AdaptaStep™ bridge', stairs: 'AdjustaStairs™ up', down: 'AdjustaStairs™ down' }[f.kind];
+    var amt = f.dir === 'level' ? 'level' : (f.dir === 'up' ? '+' : '−') + ftIn(f.inches);
+    return (f.kind === 'bridge' ? 'AdaptaStep™ bridge' : 'AdjustaStairs™') + ' (' + amt + ')';
+  }
+  function finishMini(f) {
+    var amt = f.dir === 'level' ? 'Level with the roof' : (f.dir === 'up' ? 'Up ' : 'Down ') + ftIn(f.inches);
+    return '<span class="zsz-nw">' + esc(f.kind === 'bridge' ? 'AdaptaStep™' : 'AdjustaStairs™') + '</span>' + (f.kind === 'bridge' ? ' bridge' : '') + '<span class="zsz-amt">' + esc(amt) + '</span>';
   }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
-  // A small elevation drawing: one block per module, a dashed line at the target.
-  function diagram(p, targetIn) {
-    var W = 64, H = 120, top = Math.max(p.towerIn, targetIn) * 1.04, sc = H / top, y = H, out = '';
-    for (var i = 0; i < p.modules; i++) {
-      var h = (i ? p.type.add : p.type.base) * sc;
-      y -= h;
-      out += '<rect x="14" y="' + r2(y) + '" width="36" height="' + r2(h) + '" rx="1.5" class="zsz-mod' + (i % 2 ? ' alt' : '') + '"/>' +
-        '<path d="M16 ' + r2(y + h - 2) + 'L48 ' + r2(y + 2) + '" class="zsz-flight"/>';
+  // Elevation drawing: stair modules (each with two flights that turn at the
+  // middle, drawn as a "<"), the railing module on top, the roof at your
+  // height, and the transition from the top landing across to the roof.
+  function diagram(p) {
+    var W = 220, H = 190, G = H - 3, X = 30, TW = 48, RX = 128;
+    var sc = (G - 6) / (Math.max(p.overallIn, p.targetIn) * 1.04);
+    var y = G, out = '';
+    for (var i = 0; i < p.stairModules; i++) {
+      var h = (i ? p.type.add : p.type.base) * sc, yt = y - h, ym = yt + h / 2;
+      out += '<rect x="' + X + '" y="' + r2(yt) + '" width="' + TW + '" height="' + r2(h) + '" rx="1.5" class="zsz-mod' + (i % 2 ? ' alt' : '') + '"/>' +
+        '<path d="M' + (X + TW - 4) + ' ' + r2(y - 2) + 'L' + (X + 4) + ' ' + r2(ym) + 'L' + (X + TW - 4) + ' ' + r2(yt + 2) + '" class="zsz-flight"/>';
+      y = yt;
     }
-    var ty = r2(H - targetIn * sc);
-    return '<svg class="zsz-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" aria-hidden="true" focusable="false">' + out +
-      '<line x1="2" x2="62" y1="' + ty + '" y2="' + ty + '" class="zsz-target"/></svg>';
+    var ly = r2(y), rh = p.type.add * sc, ry = r2(y - rh);
+    out += '<rect x="' + X + '" y="' + ry + '" width="' + TW + '" height="' + r2(rh) + '" rx="1.5" class="zsz-railmod"/>' +
+      '<path d="M' + X + ' ' + r2(ly - rh * 0.5) + 'H' + (X + TW) + 'M' + X + ' ' + r2(ly - rh * 0.25) + 'H' + (X + TW) + '" class="zsz-rails"/>';
+    var ty = r2(G - p.targetIn * sc), x1 = X + TW, x2 = RX;
+    out += '<rect x="' + RX + '" y="' + ty + '" width="' + (W - RX - 1) + '" height="' + r2(G - ty) + '" class="zsz-roof"/>';
+    if (p.finish.kind === 'bridge') {
+      out += '<path d="M' + x1 + ' ' + ly + 'L' + x2 + ' ' + ty + '" class="zsz-trans"/>' +
+        '<path d="M' + x1 + ' ' + r2(ly - 7) + 'L' + x2 + ' ' + r2(ty - 7) + '" class="zsz-trans-rail"/>';
+    } else {
+      var steps = 4, d = 'M' + x1 + ' ' + ly, dx = (x2 - x1) / steps, dy = (ty - ly) / steps;
+      for (var s = 0; s < steps; s++) d += (dy < 0 ? 'v' + r2(dy) + 'h' + r2(dx) : 'h' + r2(dx) + 'v' + r2(dy));
+      out += '<path d="' + d + '" class="zsz-trans zsz-trans-steps"/>' +
+        '<path d="M' + x1 + ' ' + r2(ly - 8) + 'L' + x2 + ' ' + r2(ty - 8) + '" class="zsz-trans-rail"/>';
+    }
+    out += '<line x1="1" x2="' + (W - 1) + '" y1="' + ty + '" y2="' + ty + '" class="zsz-target"/>' +
+      '<line x1="0" x2="' + W + '" y1="' + G + '" y2="' + G + '" class="zsz-ground"/>';
+    return '<svg class="zsz-svg" viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="' +
+      esc(p.stairModules + ' stair modules plus a top railing module, with ' + finishShort(p.finish) + ' to the roof') + '">' + out + '</svg>';
   }
 
   function cardsHtml(state) {
@@ -1586,11 +1625,12 @@ var ZSZ = (function () {
       var t = TYPES[k], p = plan(state.h * 12, t), on = state.type === k;
       return '<li><div class="zsz-card' + (on ? ' is-selected' : '') + '" data-type="' + k + '">' +
         '<div class="zsz-card-top"><span class="zsz-name">' + t.name + '</span><span class="zsz-pill">' + t.width + '" stairs</span></div>' +
-        '<div class="zsz-card-mid">' + diagram(p, state.h * 12) +
-        '<div><p class="zsz-count">' + p.modules + '<span> module' + (p.modules === 1 ? '' : 's') + '</span></p>' +
+        '<p class="zsz-count">' + p.modules + '<span> modules</span></p>' +
+        '<p class="zsz-split">' + p.stairModules + ' stair module' + (p.stairModules === 1 ? '' : 's') + ' + 1 top railing module</p>' +
+        '<div class="zsz-card-mid">' + diagram(p) + '</div>' +
         '<dl class="zsz-mini"><div><dt>Top landing</dt><dd>' + esc(ftIn(p.towerIn)) + '</dd></div>' +
-        '<div><dt>Finish</dt><dd>' + esc(finishShort(p.finish)) + '</dd></div>' +
-        '<div><dt>Tie-off brackets</dt><dd>' + p.tieOffs + '</dd></div></dl></div></div>' +
+        '<div><dt>To the roof</dt><dd>' + finishMini(p.finish) + '</dd></div>' +
+        '<div><dt>Tie-offs</dt><dd>' + p.tieOffs + '</dd></div></dl>' +
         '<p class="zsz-use">' + esc(t.use) + '. Footprint ' + esc(t.footprint) + '.</p>' +
         '<div class="zsz-card-foot"><button type="button" class="zsz-select" aria-pressed="' + on + '" data-type="' + k + '">' + (on ? 'Selected' : 'Select') + '</button></div>' +
         '</div></li>';
@@ -1603,9 +1643,10 @@ var ZSZ = (function () {
       '<p class="zsz-panel-title">Z-Stack™ ' + t.name + ' Tower</p>' +
       '<dl class="zsz-facts">' +
       '<dt>Height to reach</dt><dd>' + esc(ftIn(state.h * 12)) + '</dd>' +
-      '<dt>Modules</dt><dd>' + p.modules + ' (1 base' + (p.modules > 1 ? ', ' + (p.modules - 1) + ' added' : '') + ')</dd>' +
+      '<dt>Modules</dt><dd>' + p.modules + ' <span class="zsz-muted">(' + p.stairModules + ' stair, 1 top railing)</span></dd>' +
       '<dt>Top landing</dt><dd>' + esc(ftIn(p.towerIn)) + '</dd>' +
-      '<dt>Finish</dt><dd>' + esc(finishText(p.finish)) + '</dd>' +
+      '<dt>Overall height</dt><dd>About ' + esc(ftIn(p.overallIn)) + ' <span class="zsz-muted">with the railing module</span></dd>' +
+      '<dt>To the roof</dt><dd>' + esc(finishText(p.finish)) + '</dd>' +
       '<dt>Tie-off brackets</dt><dd>' + p.tieOffs + (p.tieOffs ? ' <span class="zsz-muted">(one every third module)</span>' : ' <span class="zsz-muted">(none under 3 modules)</span>') + '</dd>' +
       '<dt>Stair width</dt><dd>' + t.width + '"</dd>' +
       '<dt>Footprint</dt><dd>' + esc(t.footprint) + '</dd>' +
@@ -1621,8 +1662,8 @@ var ZSZ = (function () {
     var t = TYPES[state.type] || TYPES.standard, p = plan(state.h * 12, t);
     var lines = ['Z-Stack quote request', 'Height to reach: ' + ftIn(state.h * 12),
       'Tower: Z-Stack ' + t.name + ' (' + t.width + '" stairs, footprint ' + t.footprint + ')',
-      'Modules: ' + p.modules + ', top landing ' + ftIn(p.towerIn),
-      'Finish: ' + finishText(p.finish).replace(/™/g, ''),
+      'Modules: ' + p.modules + ' (' + p.stairModules + ' stair + 1 top railing), top landing ' + ftIn(p.towerIn),
+      'To the roof: ' + finishText(p.finish).replace(/™/g, ''),
       'Tie-off brackets: ' + p.tieOffs, 'Quantity: ' + state.qty];
     if (pageUrl) lines.push('Configured at ' + pageUrl);
     return lines.join('\n');
