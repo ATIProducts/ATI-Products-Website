@@ -1,10 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-10-20T19:20:36.692Z",
-  "by": "Sabra Starr",
+  "at": "2026-10-21T13:26:15.703Z",
+  "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/z-stack-stair-tower"
+   "/scaffoldingmarketplace",
+   "/used-scaffolding",
+   "/debris-netting"
   ],
   "errors": []
  },
