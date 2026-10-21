@@ -832,18 +832,46 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
 .post-faq-item { border-bottom:1px solid #e4e7ec; padding:20px 0; }
 .post-faq-item h3 { font-size:17px; font-weight:700; color:#0d1117; margin:0 0 8px; }
 .post-faq-item p { font-size:15.5px; color:#5e6876; line-height:1.75; margin:0; }
+/* ── WHAT WE OFFER DROPDOWN ── */
+.nav-dd { position:relative; display:flex; align-items:center; gap:0; }
+.nav-dd-btn { display:inline-flex; align-items:center; justify-content:center; width:26px; height:44px; margin-left:-2px; padding:0; border:0; background:none; color:var(--text-mid); cursor:pointer; border-radius:6px; }
+.nav-dd-btn:hover { color:var(--text-dark); }
+.nav-dd-btn:focus-visible { outline:3px solid #00703a; outline-offset:1px; }
+.nav-dd-btn svg { transition:transform .15s; }
+.nav-dd:hover .nav-dd-btn svg, .nav-dd.open .nav-dd-btn svg, .nav-dd:focus-within .nav-dd-btn svg { transform:rotate(180deg); }
+.nav-dd-menu { position:absolute; top:100%; left:50%; transform:translateX(-50%); display:none; grid-template-columns:1fr 1fr; gap:4px 28px; width:min(580px,92vw); padding:18px 22px 14px; background:#fff; border:1px solid #e4e7ec; border-radius:12px; box-shadow:0 16px 40px rgba(13,17,23,.14); z-index:300; text-align:left; }
+.nav-dd-menu::before { content:""; position:absolute; left:0; right:0; top:-16px; height:16px; }
+.nav-dd:hover .nav-dd-menu, .nav-dd:focus-within .nav-dd-menu, .nav-dd.open .nav-dd-menu { display:grid; }
+.nav-dd.is-closed .nav-dd-menu { display:none !important; }
+.nav-dd-col { display:flex; flex-direction:column; min-width:0; }
+.nav-dd-h { margin:0 0 6px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#00703a; }
+.nav-links .nav-dd-menu a { display:flex; align-items:center; min-height:38px; margin:0 -8px; padding:6px 8px; border-radius:6px; font-size:14.5px; font-weight:500; color:#3d4450; text-decoration:none !important; white-space:nowrap; }
+.nav-links .nav-dd-menu a:hover, .nav-links .nav-dd-menu a:focus-visible { background:#f0f8f3; color:#0d1117; }
+.nav-links .nav-dd-menu a[aria-current="page"] { color:#00703a; font-weight:700; }
+.nav-links .nav-dd-menu a.nav-dd-all { grid-column:1 / -1; justify-content:flex-start; margin-top:8px; padding-top:12px; border-top:1px solid #e4e7ec; border-radius:0 0 6px 6px; font-weight:700; color:#00703a; }
+.mnav-group { display:flex; align-items:stretch; border-bottom:1px solid #f0f0f0; }
+.mobile-nav .mnav-group a { flex:1; border-bottom:0; }
+.mnav-sub-btn { flex:0 0 56px; display:flex; align-items:center; justify-content:center; padding:0; border:0; border-left:1px solid #f0f0f0; background:none; color:#3d4450; cursor:pointer; }
+.mnav-sub-btn svg { width:14px; height:14px; transition:transform .15s; }
+.mnav-sub-btn[aria-expanded="true"] svg { transform:rotate(180deg); }
+.mnav-sub { display:block; background:#f7f8f9; border-bottom:1px solid #f0f0f0; }
+.mnav-sub[hidden] { display:none; }
+.mobile-nav { max-height:calc(100vh - 66px); max-height:calc(100dvh - 66px); overflow-y:auto; overscroll-behavior:contain; }
+.mnav-sub-h { display:block; padding:12px 24px 2px 40px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#00703a; }
+.mobile-nav .mnav-sub a { padding:10px 24px 10px 40px; font-size:14.5px; font-weight:500; border-bottom:0; }
+.mobile-nav .mnav-sub a[aria-current="page"] { color:#00703a; font-weight:700; }
 </style>
 </head>
 <body>
 <a href="#main-content" style="position:absolute;top:-40px;left:0;background:#005f30;color:white;padding:8px 16px;z-index:9999;font-weight:600;text-decoration:none;" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 <nav aria-label="Main navigation" role="navigation">
   <a href="index.html" class="nav-logo"><img src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding, Lead Generation and Business Growth | Arvada, Colorado" itemprop="logo" title="ATI Products LLC | Headquartered in Arvada, Colorado | Serving Contractors in All 50 States Since 1999" width="1726" height="922" decoding="async" srcset="images/ati-products-logo-mark-320w.webp 320w" sizes="(max-width: 900px) 35vw, 140px"></a>
-  <ul class="nav-links"><li><a href="index.html" class="">Home</a></li><li><a href="subsidiaries.html" class="">Subsidiaries</a></li><li><a href="offerings.html" class="">What We Offer</a></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+  <ul class="nav-links"><li><a href="index.html" class="">Home</a></li><li><a href="subsidiaries.html" class="">Subsidiaries</a></li><li class="nav-dd"><a href="offerings.html" class="">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><p class="nav-dd-h">Construction Products</p><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="used-scaffolding.html">Used Scaffolding</a><a href="scaffoldingmarketplace.html">Scaffold Exchange</a><a href="coloradoconstructionsupply.html">Colorado Construction Supply</a></div><div class="nav-dd-col"><p class="nav-dd-h">Business Growth</p><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="active">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   <a href="contact.html" class="nav-cta">Get in Touch</a>
   <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="toggleNav(this)"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-nav" id="mobile-nav-drawer" role="navigation" aria-label="Mobile navigation">
-  <a href="index.html" class="">Home</a><a href="subsidiaries.html" class="">Subsidiaries</a><a href="offerings.html" class="">What We Offer</a><a href="about.html" class="">About</a><a href="affiliates.html" class="">Affiliates</a><a href="blog.html" class="active">Blog</a><a href="contact.html" class="">Contact</a>
+  <a href="index.html" class="">Home</a><a href="subsidiaries.html" class="">Subsidiaries</a><span class="mnav-group"><a href="offerings.html" class="">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="false" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub" hidden><span class="mnav-sub-h">Construction Products</span><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="used-scaffolding.html">Used Scaffolding</a><a href="scaffoldingmarketplace.html">Scaffold Exchange</a><a href="coloradoconstructionsupply.html">Colorado Construction Supply</a><span class="mnav-sub-h">Business Growth</span><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></span><a href="about.html" class="">About</a><a href="affiliates.html" class="">Affiliates</a><a href="blog.html" class="active">Blog</a><a href="contact.html" class="">Contact</a>
   <a href="contact.html" class="mobile-nav-cta">Get in Touch</a>
 </div>
 <main id="main-content" role="main">
@@ -985,5 +1013,25 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){const nav=d
 })();
 </script>
 <script src="/ga.js" async></script>
+<script>
+/* What We Offer dropdown (header) and expandable list (phone menu) */
+(function () {
+  var dd = document.querySelector('.nav-dd'), btn = dd && dd.querySelector('.nav-dd-btn');
+  function setOpen(o) { dd.classList.toggle('open', o); dd.classList.toggle('is-closed', !o && dd.contains(document.activeElement)); btn.setAttribute('aria-expanded', String(o)); }
+  if (btn) {
+    btn.addEventListener('click', function (e) { e.stopPropagation(); setOpen(!dd.classList.contains('open')); });
+    document.addEventListener('click', function (e) { if (!dd.contains(e.target) && dd.classList.contains('open')) setOpen(false); });
+    dd.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setOpen(false); btn.focus(); } });
+    dd.addEventListener('mouseleave', function () { dd.classList.remove('is-closed'); });
+    dd.addEventListener('focusout', function (e) { if (!dd.contains(e.relatedTarget)) { dd.classList.remove('is-closed'); if (dd.classList.contains('open')) setOpen(false); } });
+  }
+  var mb = document.querySelector('.mnav-sub-btn');
+  if (mb) mb.addEventListener('click', function (e) {
+    e.stopPropagation();
+    var sub = document.getElementById(mb.getAttribute('aria-controls')), o = sub.hidden;
+    sub.hidden = !o; mb.setAttribute('aria-expanded', String(o));
+  });
+})();
+</script>
 </body>
 </html>
