@@ -1,12 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-10-22T13:26:15.548Z",
+  "at": "2026-10-23T13:26:16.604Z",
   "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/crmreplacementforcontractors",
-   "/buyingvsrentingscaffolding",
-   "/marketingchannelsforservicebusinesses"
+   "/offerings",
+   "/",
+   "/affiliates"
   ],
   "errors": []
  },
