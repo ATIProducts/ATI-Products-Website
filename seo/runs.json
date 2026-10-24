@@ -26,10 +26,10 @@
   ]
  },
  "cron": {
-  "at": "2026-10-23T13:26:00.709Z",
+  "at": "2026-10-24T13:26:00.719Z",
   "steps": [
-   "index: 23 checked",
-   "pagespeed: /offerings, /, /affiliates"
+   "index: 23 checked, 2 errors",
+   "pagespeed: /marketinghub, /subsidiaries, /about"
   ],
   "ok": true
  }
