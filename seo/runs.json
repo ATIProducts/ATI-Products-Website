@@ -1,12 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-10-23T13:26:16.604Z",
+  "at": "2026-10-24T13:26:21.649Z",
   "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/offerings",
-   "/",
-   "/affiliates"
+   "/marketinghub",
+   "/subsidiaries",
+   "/about"
   ],
   "errors": []
  },
