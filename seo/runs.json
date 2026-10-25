@@ -11,19 +11,10 @@
   "errors": []
  },
  "index": {
-  "at": "2026-10-24T13:26:50.726Z",
+  "at": "2026-10-25T13:26:35.285Z",
   "by": "Daily check",
-  "checked": 21,
-  "errors": [
-   {
-    "path": "/affiliates",
-    "error": "Search Console error: Internal error encountered."
-   },
-   {
-    "path": "/z-stack-stair-tower",
-    "error": "Search Console error: Internal error encountered."
-   }
-  ]
+  "checked": 23,
+  "errors": []
  },
  "cron": {
   "at": "2026-10-24T13:26:00.719Z",
