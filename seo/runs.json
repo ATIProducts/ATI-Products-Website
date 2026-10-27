@@ -17,10 +17,10 @@
   "errors": []
  },
  "cron": {
-  "at": "2026-10-26T13:26:00.786Z",
+  "at": "2026-10-27T13:26:00.740Z",
   "steps": [
    "index: 23 checked",
-   "pagespeed: /adjustastair, /leadgeneration, /coloradoconstructionsupply"
+   "pagespeed: /adjustastairspecs, /z-stack-stair-tower, /debris-netting"
   ],
   "ok": true
  }
