@@ -1,12 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-10-28T13:26:13.193Z",
+  "at": "2026-10-29T13:26:23.539Z",
   "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/scaffoldingmarketplace",
-   "/oshastairwayrequirements",
-   "/choosingtemporaryroofaccess"
+   "/blog",
+   "/used-scaffolding",
+   "/buyingvsrentingscaffolding"
   ],
   "errors": []
  },
