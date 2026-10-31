@@ -1,12 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-10-30T13:26:16.817Z",
+  "at": "2026-10-31T13:26:16.029Z",
   "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/crmreplacementforcontractors",
-   "/marketingchannelsforservicebusinesses",
-   "/affiliates"
+   "/",
+   "/offerings",
+   "/marketinghub"
   ],
   "errors": []
  },
