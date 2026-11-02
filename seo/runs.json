@@ -1,12 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-11-01T13:26:14.824Z",
+  "at": "2026-11-02T13:26:19.700Z",
   "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/about",
-   "/subsidiaries",
-   "/website-design-for-contractors"
+   "/googleadsmanagement",
+   "/contact",
+   "/coloradoconstructionsupply"
   ],
   "errors": []
  },
