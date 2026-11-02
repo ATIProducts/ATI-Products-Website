@@ -855,7 +855,7 @@ p a,li a:not(.btn-green):not(.btn-outline-dark):not(.nav-cta):not(.card-link){te
 .mobile-nav .mnav-sub a.mnav-sub-h { padding:14px 24px 4px 40px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#00703a; }
 @media (max-width:1000px) { .nav-dd-menu { gap:4px 16px; padding:16px 16px 12px; } .nav-links .nav-dd-menu a { font-size:13.5px; } }
 @media (max-width:1100px) { nav { padding-left:24px; padding-right:24px; } .nav-links { gap:22px; } } .nav-links > li > a { white-space:nowrap; }
-@media (min-width:1101px) { .footer-inner { grid-template-columns:1.2fr 2.7fr 0.8fr 1fr; gap:40px; } } @media (min-width:701px) and (max-width:1100px) { .footer-inner { grid-template-columns:1fr 1fr; gap:36px 40px; } .footer-col-offer { grid-column:1 / -1; } } .footer-col h2 a { color:inherit; text-decoration:none; } .footer-col h2 a:hover { color:#fff; } .footer-offer-groups { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px 28px; } .footer-offer-group h3 { font-size:12px; font-weight:700; margin-bottom:12px; } .footer-offer-group h3 a { color:#7fd9a8; text-decoration:none; } .footer-offer-group h3 a:hover { color:#fff; text-decoration:underline; } .footer-col-explore ul { column-count:1; } @media (max-width:700px) { .footer-inner { grid-template-columns:1fr 1fr !important; gap:28px 20px !important; } .footer-brand, .footer-col-offer { grid-column:1 / -1; } .footer-offer-groups { grid-template-columns:1fr 1fr; gap:20px; } }
+@media (min-width:1101px) { .footer-inner { grid-template-columns:1.5fr 1.1fr 0.9fr 1fr; gap:48px; } } @media (min-width:701px) and (max-width:1100px) { .footer-inner { grid-template-columns:1fr 1fr; gap:36px 48px; } } .footer-col h2 a { color:inherit; text-decoration:none; } .footer-col h2 a:hover { color:#fff; } .footer-offer-groups { display:flex; flex-direction:column; } .footer-offer-group summary { list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:40px; padding:8px 0; font-size:13px; color:#a8a8a8; border-bottom:1px solid rgba(255,255,255,0.08); transition:color .2s; } .footer-offer-group summary::-webkit-details-marker { display:none; } .footer-offer-group summary::after { content:''; flex-shrink:0; width:7px; height:7px; margin:-4px 4px 0 0; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg); transition:transform .2s, margin .2s; } .footer-offer-group[open] summary::after { transform:rotate(-135deg); margin-top:4px; } .footer-offer-group summary:hover, .footer-offer-group[open] summary { color:#fff; } .footer-offer-group summary:focus-visible { outline:2px solid #3ddc84; outline-offset:3px; border-radius:2px; } .footer-offer-group ul { padding:12px 0 4px 14px; } .footer-col-explore ul { column-count:1; } @media (max-width:700px) { .footer-inner { grid-template-columns:1fr 1fr !important; gap:28px 20px !important; } .footer-brand, .footer-col-offer { grid-column:1 / -1; } } @media (prefers-reduced-motion: reduce) { .footer-offer-group summary::after { transition:none; } }
 .mnav-group { display:flex; align-items:stretch; border-bottom:1px solid #f0f0f0; }
 .mobile-nav .mnav-group a { flex:1; border-bottom:0; }
 .mnav-sub-btn { flex:0 0 56px; display:flex; align-items:center; justify-content:center; padding:0; border:0; border-left:1px solid #f0f0f0; background:none; color:#3d4450; cursor:pointer; }
@@ -1017,32 +1017,35 @@ body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color:
     <div class="footer-col footer-col-offer">
       <h2><a href="offerings.html">What We Offer</a></h2>
       <div class="footer-offer-groups">
-        <div class="footer-offer-group">
-          <h3><a href="offerings.html#construction-products">Construction Products</a></h3>
+        <details class="footer-offer-group">
+          <summary>Construction Products</summary>
           <ul>
+            <li><a href="offerings.html#construction-products">All Construction Products</a></li>
             <li><a href="adjustastair.html">AdjustaStairs™ System</a></li>
             <li><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a></li>
             <li><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a></li>
             <li><a href="debris-netting.html">Debris and Safety Netting</a></li>
             <li><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></li>
           </ul>
-        </div>
-        <div class="footer-offer-group">
-          <h3><a href="offerings.html#business-essentials">Business Essentials</a></h3>
+        </details>
+        <details class="footer-offer-group">
+          <summary>Business Essentials</summary>
           <ul>
+            <li><a href="offerings.html#business-essentials">All Business Essentials</a></li>
             <li><a href="leadgeneration.html">Leads Plus</a></li>
             <li><a href="marketinghub.html">Marketing Hub</a></li>
             <li><a href="googleadsmanagement.html">Google Ads Management</a></li>
             <li><a href="website-design-for-contractors.html">Website Design</a></li>
           </ul>
-        </div>
-        <div class="footer-offer-group">
-          <h3><a href="offerings.html#scaffold-exchange">Scaffold Exchange</a></h3>
+        </details>
+        <details class="footer-offer-group">
+          <summary>Scaffold Exchange</summary>
           <ul>
+            <li><a href="offerings.html#scaffold-exchange">All Scaffold Exchange</a></li>
             <li><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a></li>
             <li><a href="used-scaffolding.html">Used Scaffolding</a></li>
           </ul>
-        </div>
+        </details>
       </div>
     </div>
     <div class="footer-col footer-col-explore">
