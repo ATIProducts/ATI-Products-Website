@@ -1,7 +1,6 @@
 {
   "pages": [
     { "file": "index.html", "title": "Homepage", "group": "Pages" },
-    { "file": "subsidiaries.html", "title": "Subsidiaries", "group": "Pages" },
     { "file": "offerings.html", "title": "What We Offer", "group": "Pages" },
     { "file": "about.html", "title": "About", "group": "Pages" },
     { "file": "affiliates.html", "title": "Affiliates", "group": "Pages" },

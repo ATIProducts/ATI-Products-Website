@@ -34,7 +34,6 @@ ATI Products, LLC does not manufacture the products it distributes. Its AdjustaS
 
 - [Homepage](https://www.ati-products.com/): Overview of ATI Products, LLC and its three subsidiaries, with links to every product, service and guide.
 - [About ATI Products, LLC](https://www.ati-products.com/about): Company history, founded 1999, headquartered in Arvada, Colorado.
-- [What We Offer](https://www.ati-products.com/offerings): Overview of all products and services across subsidiaries.
-- [Subsidiaries](https://www.ati-products.com/subsidiaries): Full detail on all three ATI subsidiaries.
+- [What We Offer](https://www.ati-products.com/offerings): All three ATI subsidiaries (ATI Construction Products, ATI Business Essentials and Scaffold Exchange) with every product and service each one offers.
 - [Affiliates](https://www.ati-products.com/affiliates): Trusted partners and recommended tools.
 - [Contact](https://www.ati-products.com/contact): Contact ATI Products, LLC at +1-800-360-6115, or visit the Arvada, Colorado headquarters (80002).

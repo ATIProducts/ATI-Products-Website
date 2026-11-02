@@ -83,6 +83,16 @@
       "source": "/scaffolding-marketplace",
       "destination": "/scaffoldingmarketplace",
       "permanent": true
+    },
+    {
+      "source": "/subsidiaries",
+      "destination": "/offerings",
+      "permanent": true
+    },
+    {
+      "source": "/subsidiaries.html",
+      "destination": "/offerings",
+      "permanent": true
     }
   ],
   "headers": [
