@@ -1028,6 +1028,7 @@ h1 .brand-logo, h2 .brand-logo { height:.7em; vertical-align:baseline; margin:0 
 .mobile-nav .mnav-sub a.mnav-sub-h { padding:14px 24px 4px 40px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#00703a; }
 @media (max-width:1000px) { .nav-dd-menu { gap:4px 16px; padding:16px 16px 12px; } .nav-links .nav-dd-menu a { font-size:13.5px; } }
 @media (max-width:1100px) { nav { padding-left:24px; padding-right:24px; } .nav-links { gap:22px; } } .nav-links > li > a { white-space:nowrap; }
+@media (min-width:1101px) { .footer-inner { grid-template-columns:1.2fr 2.7fr 0.8fr 1fr; gap:40px; } } @media (min-width:701px) and (max-width:1100px) { .footer-inner { grid-template-columns:1fr 1fr; gap:36px 40px; } .footer-col-offer { grid-column:1 / -1; } } .footer-col h2 a { color:inherit; text-decoration:none; } .footer-col h2 a:hover { color:#fff; } .footer-offer-groups { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px 28px; } .footer-offer-group h3 { font-size:12px; font-weight:700; margin-bottom:12px; } .footer-offer-group h3 a { color:#7fd9a8; text-decoration:none; } .footer-offer-group h3 a:hover { color:#fff; text-decoration:underline; } .footer-col-explore ul { column-count:1; } @media (max-width:700px) { .footer-inner { grid-template-columns:1fr 1fr !important; gap:28px 20px !important; } .footer-brand, .footer-col-offer { grid-column:1 / -1; } .footer-offer-groups { grid-template-columns:1fr 1fr; gap:20px; } }
 .mnav-group { display:flex; align-items:stretch; border-bottom:1px solid #f0f0f0; }
 .mobile-nav .mnav-group a { flex:1; border-bottom:0; }
 .mnav-sub-btn { flex:0 0 56px; display:flex; align-items:center; justify-content:center; padding:0; border:0; border-left:1px solid #f0f0f0; background:none; color:#3d4450; cursor:pointer; }
@@ -1039,6 +1040,58 @@ h1 .brand-logo, h2 .brand-logo { height:.7em; vertical-align:baseline; margin:0 
 .mnav-sub-h { display:block; padding:12px 24px 2px 40px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#00703a; }
 .mobile-nav .mnav-sub a { padding:10px 24px 10px 40px; font-size:14.5px; font-weight:500; border-bottom:0; }
 .mobile-nav .mnav-sub a[aria-current="page"] { color:#00703a; font-weight:700; }
+
+/* ══ SITE THEME (matches the homepage) ══
+   Selectors start with "body" so they win over each page's own rules without !important. */
+body { --accent-bright: #3ddc84; --wash: #eef6f1; --wash-border: #cfe6d7; --be-blue: #1d4ed8; --se-orange: #c2410c; }
+/* Page header: left-to-right fade like the homepage hero, three-company color strip */
+body .page-header { border-bottom: 6px solid transparent; border-image: linear-gradient(90deg, #00703a 0 33.3%, #1d4ed8 33.3% 66.6%, #c2410c 66.6%) 1; }
+body .page-header::after { background: linear-gradient(90deg, rgba(10,18,35,0.94) 0%, rgba(10,18,35,0.80) 45%, rgba(10,18,35,0.42) 100%); }
+body .page-header-inner { padding-top: 64px; padding-bottom: 64px; }
+body .page-header-eyebrow { color: var(--accent-bright); font-weight: 800; letter-spacing: 0.16em; gap: 12px; }
+body .page-header-eyebrow::before { width: 28px; background: currentColor; }
+body .page-header h1 { font-size: clamp(32px, 4.6vw, 58px); font-weight: 700; line-height: 1.1; max-width: 920px; }
+body .page-header .lead { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.7; color: rgba(255,255,255,0.86); max-width: 700px; }
+/* Section labels and titles */
+body .section-label, body .feature-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: 0.16em; color: var(--green); }
+body .section-label::before, body .feature-eyebrow::before { content: ''; width: 28px; height: 2px; background: currentColor; flex-shrink: 0; }
+body h2.block-title, body .feature-title { font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+body h2.block-title { font-size: clamp(26px, 3.2vw, 40px); }
+/* Cards: white, colored top edge, lift on hover */
+body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li { background: #fff; border: 1px solid var(--border); border-top: 4px solid var(--green); border-radius: 12px; transition: transform .25s, box-shadow .25s; }
+body .dn-cards > div:hover, body .offer-block:hover, body .affiliate-card:hover, body .dn-steps li:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(15,26,46,0.12); }
+body .offer-block:has(.offer-block-tag.business) { border-top-color: var(--be-blue); }
+body .offer-block:has(.offer-block-tag.exchange) { border-top-color: var(--se-orange); }
+/* Photos */
+body .section-banner, body .feature-img img, body .dn-intro-img { border-radius: 14px; box-shadow: 0 20px 50px rgba(15,26,46,0.16); }
+/* Buttons */
+body .btn-green, body .btn-white, body .btn-outline-dark { border-radius: 8px; padding: 14px 24px; font-size: 15px; transition: transform .15s, background .2s, box-shadow .2s, color .2s; }
+body .btn-green { background: var(--green); box-shadow: 0 8px 24px rgba(0,112,58,0.25); }
+body .btn-green:hover { background: #005f30; transform: translateY(-2px); }
+body .btn-white:hover, body .btn-outline-dark:hover { transform: translateY(-2px); }
+/* Stats */
+body .stat-row { background: #0f1a2e; }
+/* Closing call to action: green with a faint job-site photo, like the homepage banner */
+body .cta-strip { position: relative; overflow: hidden; isolation: isolate; background: #005f30; border-radius: 16px; padding: 56px; }
+body .cta-strip::before { content: ''; position: absolute; inset: 0; z-index: -1; background: url('images/construction-site-background-hdr-800w.webp') center/cover no-repeat; opacity: 0.16; }
+body .cta-strip h2 { font-size: clamp(24px, 2.8vw, 34px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+/* Service coverage band: dark with the shipping photo, like the homepage */
+body .geo-section { background: linear-gradient(100deg, rgba(15,26,46,0.96) 25%, rgba(15,26,46,0.62) 100%), url('images/nationwide-scaffolding-shipping-800w.webp') center/cover no-repeat; color: #fff; padding-top: 80px; padding-bottom: 80px; border-top: 0; }
+body .geo-section::after, body .geo-section::before { display: none; }
+body .geo-section h2 { color: #fff; font-weight: 700; font-size: clamp(24px, 3vw, 36px); letter-spacing: -0.02em; }
+body .geo-section p { color: rgba(255,255,255,0.82); }
+body .geo-section .eyebrow { color: var(--accent-bright); }
+body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.88); }
+@media (max-width: 700px) {
+  body .page-header-inner { padding-top: 44px; padding-bottom: 44px; }
+  body h2.block-title { font-size: clamp(24px, 7vw, 30px); }
+  body .cta-strip { padding: 36px 24px; }
+  body .geo-section { padding-top: 56px; padding-bottom: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li, body .btn-green, body .btn-white, body .btn-outline-dark { transition: none; transform: none !important; }
+}
+/* ══ END SITE THEME ══ */
 </style>
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://www.ati-products.com/z-stack-stair-tower", "url": "https://www.ati-products.com/z-stack-stair-tower", "name": "Z-Stack™ Modular Stair Towers", "description": "Z-Stack™ modular aluminum stair towers in 36\" Standard and 24\" Compact sizes. Craneable and reusable. Height calculator, brochure and same-day quotes.", "isPartOf": {"@type": "WebSite", "name": "ATI Products, LLC", "url": "https://www.ati-products.com/"}, "primaryImageOfPage": {"@type": "ImageObject", "url": "https://www.ati-products.com/images/z-stack-compact-stair-tower-roof-access.webp"}, "about": {"@type": "Thing", "name": "Modular stair tower"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.ati-products.com/"}, {"@type": "ListItem", "position": 2, "name": "What We Offer", "item": "https://www.ati-products.com/offerings"}, {"@type": "ListItem", "position": 3, "name": "Z-Stack™ Stair Towers", "item": "https://www.ati-products.com/z-stack-stair-tower"}]}, {"@type": "Product", "name": "Z-Stack™ Modular Stair Tower", "brand": {"@type": "Brand", "name": "Z-Stack™"}, "manufacturer": {"@type": "Organization", "name": "SafeSmart"}, "description": "Modular, pre-engineered aluminum stair tower. Bolt-together modules with two stair flights and a landing stack to the required height and can be craned into place. Standard (36 in stairs) and Compact (24 in stairs) sizes.", "url": "https://www.ati-products.com/z-stack-stair-tower", "image": ["https://www.ati-products.com/images/z-stack-compact-stair-tower-roof-access.webp", "https://www.ati-products.com/images/z-stack-stair-tower-crane-lift.webp", "https://www.ati-products.com/images/z-stack-standard-tower-render.webp"], "category": "Construction Access Systems", "material": "Aluminum", "additionalProperty": [{"@type": "PropertyValue", "name": "Stair width", "value": "36 in (Standard); 24 in (Compact)"}, {"@type": "PropertyValue", "name": "Module footprint", "value": "9 ft 4 in x 6 ft 10 in (Standard); 7 ft 7 in x 4 ft 11 in (Compact)"}, {"@type": "PropertyValue", "name": "Height added per module", "value": "104.75 in (Standard); 97.54 in (Compact)"}, {"@type": "PropertyValue", "name": "Load rating", "value": "Up to 1,100 lbs per module (Standard)"}, {"@type": "PropertyValue", "name": "Tie-off brackets", "value": "Every third module"}], "offers": {"@type": "Offer", "availability": "https://schema.org/InStock", "areaServed": "US", "seller": {"@type": "Organization", "name": "ATI Construction Products, LLC", "telephone": "+1-800-360-6115", "address": {"@type": "PostalAddress", "addressLocality": "Arvada", "addressRegion": "CO", "postalCode": "80002", "addressCountry": "US"}}, "priceSpecification": {"@type": "PriceSpecification", "description": "Same-day quotes available. Call (800) 360-6115 or fill out the contact form."}}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a Z-Stack stair tower?", "acceptedAnswer": {"@type": "Answer", "text": "Z-Stack™ is a modular, pre-engineered aluminum stair tower made by SafeSmart and supplied by ATI Construction Products. Bolt-together modules, each with two stair flights and a landing, stack to the height you need and can be craned into place as one tower."}}, {"@type": "Question", "name": "How tall can a Z-Stack tower be?", "acceptedAnswer": {"@type": "Answer", "text": "There is no fixed limit. Middle modules repeat to add height, about 8' 8 3/4\" each for Standard and 8' 1 1/2\" for Compact, and towers have climbed almost 10 stories on SafeSmart projects. Taller towers need a tie-off bracket every third module."}}, {"@type": "Question", "name": "How many Z-Stack modules do I need for 28 feet?", "acceptedAnswer": {"@type": "Answer", "text": "For 28 feet, a Standard tower uses 4 modules: 3 stair modules with the top landing at 26' 7\", plus the top railing module. An AdaptaStep™ bridge covers the last 1' 5\" to the roof. A Compact tower also uses 4 modules, with the top landing at 24' 10 1/2\" and AdjustaStairs™ for the last 3' 1 1/2\". Try any height in the Z-Stack height calculator."}}, {"@type": "Question", "name": "What is the difference between Standard and Compact Z-Stack?", "acceptedAnswer": {"@type": "Answer", "text": "Standard modules have 36\" stairs and a 9' 4\" x 6' 10\" footprint, for larger crews carrying tools and materials. Compact modules have 24\" stairs and a 7' 7\" x 4' 11\" footprint, for roof access, ladder replacement and tight sites."}}, {"@type": "Question", "name": "Can a Z-Stack tower be lifted by crane?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Module joiners double as crane hooks for single modules, and lifting bars let you lift the whole tower as one structure without twisting. Lifting bars are required to lift 4 or more modules together."}}, {"@type": "Question", "name": "How is a Z-Stack tower secured to a building?", "acceptedAnswer": {"@type": "Answer", "text": "Adjustable base jacks anchor and level the base on an approved surface, and telescopic tie-off brackets secure the tower to the nearby structure every third module to reduce sway."}}, {"@type": "Question", "name": "Does a Z-Stack tower meet OSHA stair requirements?", "acceptedAnswer": {"@type": "Answer", "text": "Z-Stack™ is engineered with integrated stairs, landings and guardrails to provide compliant stair access. OSHA requires a stairway or ladder at any break in elevation of 19 inches or more under 1926.1051, and your site's competent person still confirms the setup for each job."}}, {"@type": "Question", "name": "Is Z-Stack for temporary or permanent access?", "acceptedAnswer": {"@type": "Answer", "text": "Both. Contractors reuse Z-Stack™ towers from job to job, and facilities install them as permanent roof and equipment access, often enclosed in security mesh with an entry gate."}}, {"@type": "Question", "name": "Where can I buy a Z-Stack stair tower?", "acceptedAnswer": {"@type": "Answer", "text": "ATI Construction Products supplies Z-Stack™ towers, accessories and transitions with same-day quotes and nationwide shipping. Call (800) 360-6115 or use the calculator on this page to send your setup for a quote."}}]}]}
@@ -1426,34 +1479,54 @@ h1 .brand-logo, h2 .brand-logo { height:.7em; vertical-align:baseline; margin:0 
         <a href="tel:+18003606115" style="color: #aaaaaa;text-decoration:none;">(800) 360-6115</a>
       </address>
     </div>
-    <div class="footer-col">
-      <h2>Subsidiaries</h2>
-      <ul>
-        <li><a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer">ATI Construction Products</a></li>
-        <li><a href="https://ati-businessessentials.com/" target="_blank" rel="noopener noreferrer">ATI Business Essentials</a></li>
-        <li><a href="https://scaffoldexchange.com/" target="_blank" rel="noopener noreferrer">Scaffold Exchange</a></li>
-      </ul>
+    <div class="footer-col footer-col-offer">
+      <h2><a href="offerings.html">What We Offer</a></h2>
+      <div class="footer-offer-groups">
+        <div class="footer-offer-group">
+          <h3><a href="offerings.html#construction-products">Construction Products</a></h3>
+          <ul>
+            <li><a href="adjustastair.html">AdjustaStairs™ System</a></li>
+            <li><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a></li>
+            <li><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a></li>
+            <li><a href="debris-netting.html">Debris and Safety Netting</a></li>
+            <li><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></li>
+          </ul>
+        </div>
+        <div class="footer-offer-group">
+          <h3><a href="offerings.html#business-essentials">Business Essentials</a></h3>
+          <ul>
+            <li><a href="leadgeneration.html">Leads Plus</a></li>
+            <li><a href="marketinghub.html">Marketing Hub</a></li>
+            <li><a href="googleadsmanagement.html">Google Ads Management</a></li>
+            <li><a href="website-design-for-contractors.html">Website Design</a></li>
+          </ul>
+        </div>
+        <div class="footer-offer-group">
+          <h3><a href="offerings.html#scaffold-exchange">Scaffold Exchange</a></h3>
+          <ul>
+            <li><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a></li>
+            <li><a href="used-scaffolding.html">Used Scaffolding</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="footer-col footer-col-explore">
-      <h2>Explore</h2>
+      <h2>Company</h2>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="offerings.html">What We Offer</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="affiliates.html">Affiliates</a></li>
-        <li><a href="contact.html">Contact</a></li>
         <li><a href="blog.html">Blog</a></li>
-        <li><a href="adjustastair.html">AdjustaStairs™ System</a></li>
-        <li><a href="adjustastairspecs.html">AdjustaStairs™ Specs</a></li>
-        <li><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a></li>
-        <li><a href="googleadsmanagement.html">Google Ads Management</a></li>
-        <li><a href="leadgeneration.html">Lead Generation</a></li>
-        <li><a href="scaffoldingmarketplace.html">Scaffold Exchange</a></li>
-        <li><a href="nationwide-construction-supply.html">Nationwide Supply</a></li>
-        <li><a href="marketinghub.html">Marketing Hub</a></li>
-        <li><a href="debris-netting.html">Debris Netting</a></li>
-        <li><a href="used-scaffolding.html">Used Scaffolding</a></li>
-        <li><a href="website-design-for-contractors.html">Website Design</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>Our Companies</h2>
+      <ul>
+        <li><a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer">ATI Construction Products</a></li>
+        <li><a href="https://ati-businessessentials.com/" target="_blank" rel="noopener noreferrer">ATI Business Essentials</a></li>
+        <li><a href="https://scaffoldexchange.com/" target="_blank" rel="noopener noreferrer">Scaffold Exchange</a></li>
       </ul>
     </div>
   </div>

@@ -876,6 +876,7 @@ word-break:break-word;overflow-wrap:break-word;
 .mobile-nav .mnav-sub a.mnav-sub-h { padding:14px 24px 4px 40px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#00703a; }
 @media (max-width:1000px) { .nav-dd-menu { gap:4px 16px; padding:16px 16px 12px; } .nav-links .nav-dd-menu a { font-size:13.5px; } }
 @media (max-width:1100px) { nav { padding-left:24px; padding-right:24px; } .nav-links { gap:22px; } } .nav-links > li > a { white-space:nowrap; }
+@media (min-width:1101px) { .footer-inner { grid-template-columns:1.2fr 2.7fr 0.8fr 1fr; gap:40px; } } @media (min-width:701px) and (max-width:1100px) { .footer-inner { grid-template-columns:1fr 1fr; gap:36px 40px; } .footer-col-offer { grid-column:1 / -1; } } .footer-col h2 a { color:inherit; text-decoration:none; } .footer-col h2 a:hover { color:#fff; } .footer-offer-groups { display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:20px 28px; } .footer-offer-group h3 { font-size:12px; font-weight:700; margin-bottom:12px; } .footer-offer-group h3 a { color:#7fd9a8; text-decoration:none; } .footer-offer-group h3 a:hover { color:#fff; text-decoration:underline; } .footer-col-explore ul { column-count:1; } @media (max-width:700px) { .footer-inner { grid-template-columns:1fr 1fr !important; gap:28px 20px !important; } .footer-brand, .footer-col-offer { grid-column:1 / -1; } .footer-offer-groups { grid-template-columns:1fr 1fr; gap:20px; } }
 .mnav-group { display:flex; align-items:stretch; border-bottom:1px solid #f0f0f0; }
 .mobile-nav .mnav-group a { flex:1; border-bottom:0; }
 .mnav-sub-btn { flex:0 0 56px; display:flex; align-items:center; justify-content:center; padding:0; border:0; border-left:1px solid #f0f0f0; background:none; color:#3d4450; cursor:pointer; }
@@ -887,6 +888,58 @@ word-break:break-word;overflow-wrap:break-word;
 .mnav-sub-h { display:block; padding:12px 24px 2px 40px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#00703a; }
 .mobile-nav .mnav-sub a { padding:10px 24px 10px 40px; font-size:14.5px; font-weight:500; border-bottom:0; }
 .mobile-nav .mnav-sub a[aria-current="page"] { color:#00703a; font-weight:700; }
+
+/* ══ SITE THEME (matches the homepage) ══
+   Selectors start with "body" so they win over each page's own rules without !important. */
+body { --accent-bright: #3ddc84; --wash: #eef6f1; --wash-border: #cfe6d7; --be-blue: #1d4ed8; --se-orange: #c2410c; }
+/* Page header: left-to-right fade like the homepage hero, three-company color strip */
+body .page-header { border-bottom: 6px solid transparent; border-image: linear-gradient(90deg, #00703a 0 33.3%, #1d4ed8 33.3% 66.6%, #c2410c 66.6%) 1; }
+body .page-header::after { background: linear-gradient(90deg, rgba(10,18,35,0.94) 0%, rgba(10,18,35,0.80) 45%, rgba(10,18,35,0.42) 100%); }
+body .page-header-inner { padding-top: 64px; padding-bottom: 64px; }
+body .page-header-eyebrow { color: var(--accent-bright); font-weight: 800; letter-spacing: 0.16em; gap: 12px; }
+body .page-header-eyebrow::before { width: 28px; background: currentColor; }
+body .page-header h1 { font-size: clamp(32px, 4.6vw, 58px); font-weight: 700; line-height: 1.1; max-width: 920px; }
+body .page-header .lead { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.7; color: rgba(255,255,255,0.86); max-width: 700px; }
+/* Section labels and titles */
+body .section-label, body .feature-eyebrow { display: inline-flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: 0.16em; color: var(--green); }
+body .section-label::before, body .feature-eyebrow::before { content: ''; width: 28px; height: 2px; background: currentColor; flex-shrink: 0; }
+body h2.block-title, body .feature-title { font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+body h2.block-title { font-size: clamp(26px, 3.2vw, 40px); }
+/* Cards: white, colored top edge, lift on hover */
+body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li { background: #fff; border: 1px solid var(--border); border-top: 4px solid var(--green); border-radius: 12px; transition: transform .25s, box-shadow .25s; }
+body .dn-cards > div:hover, body .offer-block:hover, body .affiliate-card:hover, body .dn-steps li:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(15,26,46,0.12); }
+body .offer-block:has(.offer-block-tag.business) { border-top-color: var(--be-blue); }
+body .offer-block:has(.offer-block-tag.exchange) { border-top-color: var(--se-orange); }
+/* Photos */
+body .section-banner, body .feature-img img, body .dn-intro-img { border-radius: 14px; box-shadow: 0 20px 50px rgba(15,26,46,0.16); }
+/* Buttons */
+body .btn-green, body .btn-white, body .btn-outline-dark { border-radius: 8px; padding: 14px 24px; font-size: 15px; transition: transform .15s, background .2s, box-shadow .2s, color .2s; }
+body .btn-green { background: var(--green); box-shadow: 0 8px 24px rgba(0,112,58,0.25); }
+body .btn-green:hover { background: #005f30; transform: translateY(-2px); }
+body .btn-white:hover, body .btn-outline-dark:hover { transform: translateY(-2px); }
+/* Stats */
+body .stat-row { background: #0f1a2e; }
+/* Closing call to action: green with a faint job-site photo, like the homepage banner */
+body .cta-strip { position: relative; overflow: hidden; isolation: isolate; background: #005f30; border-radius: 16px; padding: 56px; }
+body .cta-strip::before { content: ''; position: absolute; inset: 0; z-index: -1; background: url('images/construction-site-background-hdr-800w.webp') center/cover no-repeat; opacity: 0.16; }
+body .cta-strip h2 { font-size: clamp(24px, 2.8vw, 34px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+/* Service coverage band: dark with the shipping photo, like the homepage */
+body .geo-section { background: linear-gradient(100deg, rgba(15,26,46,0.96) 25%, rgba(15,26,46,0.62) 100%), url('images/nationwide-scaffolding-shipping-800w.webp') center/cover no-repeat; color: #fff; padding-top: 80px; padding-bottom: 80px; border-top: 0; }
+body .geo-section::after, body .geo-section::before { display: none; }
+body .geo-section h2 { color: #fff; font-weight: 700; font-size: clamp(24px, 3vw, 36px); letter-spacing: -0.02em; }
+body .geo-section p { color: rgba(255,255,255,0.82); }
+body .geo-section .eyebrow { color: var(--accent-bright); }
+body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.88); }
+@media (max-width: 700px) {
+  body .page-header-inner { padding-top: 44px; padding-bottom: 44px; }
+  body h2.block-title { font-size: clamp(24px, 7vw, 30px); }
+  body .cta-strip { padding: 36px 24px; }
+  body .geo-section { padding-top: 56px; padding-bottom: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li, body .btn-green, body .btn-white, body .btn-outline-dark { transition: none; transform: none !important; }
+}
+/* ══ END SITE THEME ══ */
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://www.ati-products.com/debris-netting","url":"https://www.ati-products.com/debris-netting","name":"Debris Netting and Safety Netting Systems","description":"DS-1320 debris netting (ANSI A10.37) and RB-412 personnel safety netting (OSHA 1926, ANSI A10.11-2016). Made in the USA. Same-day quotes: (800) 360-6115.","isPartOf":{"@type":"WebSite","name":"ATI Products, LLC","url":"https://www.ati-products.com/"},"primaryImageOfPage":{"@type":"ImageObject","url":"https://www.ati-products.com/images/debris-netting-installed-on-building-exterior.webp"}},{"@type":"Product","name":"DS-1320 Debris Netting System","brand":{"@type":"Brand","name":"ATI Construction Products, LLC"},"description":"Galvanized steel debris netting system with a 13-foot adjustable arm that installs at the working level. ANSI A10.37 compliant. Made in the USA. Not rated for fall protection.","url":"https://www.ati-products.com/debris-netting#ds-1320","image":"https://www.ati-products.com/images/debris-netting-installed-on-building-exterior.webp","material":"A-36, 10-gauge galvanized steel","category":"Construction Debris Netting System","countryOfOrigin":"US","additionalProperty":[{"@type":"PropertyValue","name":"Standard","value":"ANSI A10.37"},{"@type":"PropertyValue","name":"Weight","value":"86 lbs"},{"@type":"PropertyValue","name":"Arm Extension","value":"13 ft from slab edge"},{"@type":"PropertyValue","name":"Slab Depth","value":"4 in to 22 in"},{"@type":"PropertyValue","name":"Fall Protection Rated","value":"No"}],"offers":{"@type":"Offer","availability":"https://schema.org/InStock","areaServed":"US","seller":{"@type":"Organization","name":"ATI Construction Products, LLC"}}},{"@type":"Product","name":"RB-412 PSN Personnel Safety Netting System","brand":{"@type":"Brand","name":"ATI Construction Products, LLC"},"description":"Fall-protection-rated personnel safety netting system with high-tensile synthetic diamond mesh nets. Compliant with OSHA 1926 and ANSI A10.11-2016. Made in the USA. Rental and purchase options available.","url":"https://www.ati-products.com/debris-netting#rb-412","image":"https://www.ati-products.com/images/personnel-safety-netting-high-rise-construction.webp","material":"6061-T aluminum","category":"Fall Protection Netting System","countryOfOrigin":"US","additionalProperty":[{"@type":"PropertyValue","name":"Standard","value":"OSHA 1926, ANSI A10.11-2016"},{"@type":"PropertyValue","name":"Weight","value":"105 lbs"},{"@type":"PropertyValue","name":"Pole Extension","value":"20 ft"},{"@type":"PropertyValue","name":"Slab Depth","value":"4 in to 22 in"},{"@type":"PropertyValue","name":"Fall Protection Rated","value":"Yes"}],"offers":{"@type":"Offer","availability":"https://schema.org/InStock","areaServed":"US","seller":{"@type":"Organization","name":"ATI Construction Products, LLC"}}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the DS-1320 Debris Netting System?","acceptedAnswer":{"@type":"Answer","text":"The DS-1320 is a galvanized steel debris netting system from ATI Construction Products that installs at the working level, clamped to the edge of the slab. Its adjustable arm extends 13 feet from the slab edge to catch material falling from the levels above, and it is designed to meet ANSI A10.37."}},{"@type":"Question","name":"Is the DS-1320 rated for fall protection?","acceptedAnswer":{"@type":"Answer","text":"No. The DS-1320 is built for falling debris and is not rated for fall protection. Where workers need protection from falls, use the RB-412 PSN Personnel Safety Netting System, which is rated for fall protection and compliant with OSHA 1926 and ANSI A10.11-2016."}},{"@type":"Question","name":"What is the difference between debris netting and safety netting?","acceptedAnswer":{"@type":"Answer","text":"Debris netting catches tools, fasteners and materials that fall from upper levels, and it is not rated to catch a person. Personnel safety netting is rated for fall protection and is designed to catch workers who fall. ATI's DS-1320 is a debris netting system built to ANSI A10.37, and the RB-412 PSN is a personnel safety netting system that meets OSHA 1926 and ANSI A10.11-2016. Many high-rise jobs use both."}},{"@type":"Question","name":"How far below the work surface can a safety net be installed?","acceptedAnswer":{"@type":"Answer","text":"Under OSHA 1926.502(c), a personnel safety net must be installed as close as practicable under the working surface and never more than 30 feet below it. It has to extend 8 to 13 feet out from the edge, depending on how far below the work it hangs, and be drop-tested with a 400-pound bag after it is installed. Call ATI at (800) 360-6115 to plan an RB-412 layout for your building."}},{"@type":"Question","name":"What slab thicknesses do the netting brackets fit?","acceptedAnswer":{"@type":"Answer","text":"Both the DS-1320 and the RB-412 use a patent-pending slab bracket that fits decks from 4 to 22 inches deep. The bracket is adjusted to the slab and tightened with an impact wrench."}},{"@type":"Question","name":"Can I rent safety netting, or do I have to buy it?","acceptedAnswer":{"@type":"Answer","text":"The RB-412 PSN Personnel Safety Netting System is available to rent or to buy. Call (800) 360-6115 for DS-1320 and custom netting options and pricing for your project."}},{"@type":"Question","name":"Can ATI design netting for an unusual building or site?","acceptedAnswer":{"@type":"Answer","text":"Yes. ATI designs custom debris and containment netting systems to your site's exact dimensions and load requirements. They can work alongside the DS-1320 and RB-412 or on their own."}},{"@type":"Question","name":"How fast can I get a quote, and do you ship?","acceptedAnswer":{"@type":"Answer","text":"ATI offers same-day quotes on most products and ships nationwide from Arvada, Colorado. Call (800) 360-6115 or send the online quote form."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.ati-products.com/"},{"@type":"ListItem","position":2,"name":"What We Offer","item":"https://www.ati-products.com/offerings"},{"@type":"ListItem","position":3,"name":"Debris Netting","item":"https://www.ati-products.com/debris-netting"}]},{"@type":"LocalBusiness","name":"ATI Construction Products, LLC","url":"https://ati-constructionproducts.com/","telephone":"+1-800-360-6115","address":{"@type":"PostalAddress","addressLocality":"Arvada","addressRegion":"CO","postalCode":"80002","addressCountry":"US"},"areaServed":{"@type":"Country","name":"United States"}}]}
@@ -1110,7 +1163,7 @@ word-break:break-word;overflow-wrap:break-word;
     </div>
     <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
       <a href="contact.html" class="btn-white">Get a Same-Day Quote</a>
-      <a href="nationwide-construction-supply.html" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);color:#fff;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:700;text-decoration:none;border:1.5px solid rgba(255,255,255,0.4);">Colorado Supply</a>
+      <a href="nationwide-construction-supply.html" style="display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.15);color:#fff;padding:12px 24px;border-radius:6px;font-size:14px;font-weight:700;text-decoration:none;border:1.5px solid rgba(255,255,255,0.4);">Nationwide Supply</a>
     </div>
   </div>
 
@@ -1163,34 +1216,54 @@ word-break:break-word;overflow-wrap:break-word;
         <a href="tel:+18003606115" style="color: #aaaaaa;text-decoration:none;">(800) 360-6115</a>
       </address>
     </div>
-    <div class="footer-col">
-      <h2>Subsidiaries</h2>
-      <ul>
-        <li><a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer">ATI Construction Products</a></li>
-        <li><a href="https://ati-businessessentials.com/" target="_blank" rel="noopener noreferrer">ATI Business Essentials</a></li>
-        <li><a href="https://scaffoldexchange.com/" target="_blank" rel="noopener noreferrer">Scaffold Exchange</a></li>
-      </ul>
+    <div class="footer-col footer-col-offer">
+      <h2><a href="offerings.html">What We Offer</a></h2>
+      <div class="footer-offer-groups">
+        <div class="footer-offer-group">
+          <h3><a href="offerings.html#construction-products">Construction Products</a></h3>
+          <ul>
+            <li><a href="adjustastair.html">AdjustaStairs™ System</a></li>
+            <li><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a></li>
+            <li><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a></li>
+            <li><a href="debris-netting.html">Debris and Safety Netting</a></li>
+            <li><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></li>
+          </ul>
+        </div>
+        <div class="footer-offer-group">
+          <h3><a href="offerings.html#business-essentials">Business Essentials</a></h3>
+          <ul>
+            <li><a href="leadgeneration.html">Leads Plus</a></li>
+            <li><a href="marketinghub.html">Marketing Hub</a></li>
+            <li><a href="googleadsmanagement.html">Google Ads Management</a></li>
+            <li><a href="website-design-for-contractors.html">Website Design</a></li>
+          </ul>
+        </div>
+        <div class="footer-offer-group">
+          <h3><a href="offerings.html#scaffold-exchange">Scaffold Exchange</a></h3>
+          <ul>
+            <li><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a></li>
+            <li><a href="used-scaffolding.html">Used Scaffolding</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="footer-col footer-col-explore">
-      <h2>Explore</h2>
+      <h2>Company</h2>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="offerings.html">What We Offer</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="affiliates.html">Affiliates</a></li>
-        <li><a href="contact.html">Contact</a></li>
         <li><a href="blog.html">Blog</a></li>
-        <li><a href="adjustastair.html">AdjustaStairs™ System</a></li>
-        <li><a href="adjustastairspecs.html">AdjustaStairs™ Specs</a></li>
-        <li><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a></li>
-        <li><a href="googleadsmanagement.html">Google Ads Management</a></li>
-        <li><a href="leadgeneration.html">Lead Generation</a></li>
-        <li><a href="scaffoldingmarketplace.html">Scaffold Exchange</a></li>
-        <li><a href="nationwide-construction-supply.html">Nationwide Supply</a></li>
-        <li><a href="marketinghub.html">Marketing Hub</a></li>
-        <li><a href="debris-netting.html">Debris Netting</a></li>
-        <li><a href="used-scaffolding.html">Used Scaffolding</a></li>
-        <li><a href="website-design-for-contractors.html">Website Design</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>Our Companies</h2>
+      <ul>
+        <li><a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer">ATI Construction Products</a></li>
+        <li><a href="https://ati-businessessentials.com/" target="_blank" rel="noopener noreferrer">ATI Business Essentials</a></li>
+        <li><a href="https://scaffoldexchange.com/" target="_blank" rel="noopener noreferrer">Scaffold Exchange</a></li>
       </ul>
     </div>
   </div>
