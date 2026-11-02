@@ -36,7 +36,17 @@
     },
     {
       "source": "/colorado-construction-supply",
-      "destination": "/coloradoconstructionsupply",
+      "destination": "/nationwide-construction-supply",
+      "permanent": true
+    },
+    {
+      "source": "/coloradoconstructionsupply",
+      "destination": "/nationwide-construction-supply",
+      "permanent": true
+    },
+    {
+      "source": "/coloradoconstructionsupply.html",
+      "destination": "/nationwide-construction-supply",
       "permanent": true
     },
     {
