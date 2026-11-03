@@ -930,14 +930,48 @@ body .geo-section h2 { color: #fff; font-weight: 700; font-size: clamp(24px, 3vw
 body .geo-section p { color: rgba(255,255,255,0.82); }
 body .geo-section .eyebrow { color: var(--accent-bright); }
 body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.88); }
+/* Photo header at the top of a card */
+body .offer-block:has(> .card-photo), body .value-card:has(> .card-photo), body .affiliate-card:has(> .card-photo) { padding: 0 24px 26px; overflow: hidden; }
+body .card-photo { display: block; width: calc(100% + 48px); max-width: none; height: 180px; object-fit: cover; margin: 0 -24px 20px; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+body .offer-block:hover > .card-photo, body .value-card:hover > .card-photo, body .affiliate-card:hover > .card-photo { transform: scale(1.04); }
+/* Row of photo tiles with a label */
+body .photo-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 40px 0 56px; }
+body .photo-tile { position: relative; display: block; height: 260px; border-radius: 14px; overflow: hidden; color: #fff; text-decoration: none; background: #0f1a2e; isolation: isolate; }
+body .photo-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+body .photo-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,35,0.92) 0%, rgba(10,18,35,0.2) 60%, rgba(10,18,35,0) 100%); transition: background .3s; }
+body .photo-tile:hover img, body .photo-tile:focus-visible img { transform: scale(1.07); }
+body .photo-tile:hover::after { background: linear-gradient(to top, rgba(0,80,40,0.92) 0%, rgba(10,18,35,0.25) 65%, rgba(10,18,35,0.05) 100%); }
+body .photo-tile .pt-txt { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 1; }
+body .photo-tile .pt-txt small { display: block; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 6px; }
+body .photo-tile .pt-txt strong { display: block; font-size: 20px; font-weight: 700; line-height: 1.2; }
+/* Photo gallery (mixed tall and wide tiles) */
+body .photo-mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 190px; grid-auto-flow: dense; gap: 12px; margin: 24px 0 8px; }
+body .pm-item { position: relative; display: block; overflow: hidden; border-radius: 12px; background: #0f1a2e; color: #fff; text-decoration: none; isolation: isolate; }
+body .pm-item.tall { grid-row: span 2; }
+body .pm-item.wide { grid-column: span 2; }
+body .pm-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+body .pm-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,35,0.75) 0%, rgba(10,18,35,0) 45%); }
+body .pm-item .pm-cap { position: absolute; left: 14px; right: 14px; bottom: 12px; z-index: 1; font-size: 13px; font-weight: 600; line-height: 1.35; }
+body .pm-item:hover img, body .pm-item:focus-visible img { transform: scale(1.06); }
+body .mosaic-head { margin-top: 56px; }
+/* Material swatches */
+body .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; margin-top: 18px; }
+body .swatch { margin: 0; }
+body .swatch img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); transition: transform .3s, box-shadow .3s; }
+body .swatch:hover img { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(15,26,46,0.14); }
+body .swatch figcaption { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--text-dark); }
+body figure.photo-tile { margin: 0; }
 @media (max-width: 700px) {
+  body .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
+  body .photo-tiles { grid-template-columns: 1fr; }
+  body .photo-tile { height: 200px; }
   body .page-header-inner { padding-top: 44px; padding-bottom: 44px; }
   body h2.block-title { font-size: clamp(24px, 7vw, 30px); }
   body .cta-strip { padding: 36px 24px; }
   body .geo-section { padding-top: 56px; padding-bottom: 56px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li, body .btn-green, body .btn-white, body .btn-outline-dark { transition: none; transform: none !important; }
+  body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li, body .btn-green, body .btn-white, body .btn-outline-dark, body .card-photo, body .photo-tile img, body .pm-item img { transition: none; transform: none !important; }
 }
 /* ══ END SITE THEME ══ */
 </style>
@@ -1094,6 +1128,24 @@ body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color:
       <div><h3>Construction Debris Netting</h3><p>Netting for containment and demolition control, keeping dust and debris on your site and off neighboring properties.</p></div>
       <div><h3>Poly Sheeting and Tarps</h3><p>Poly sheeting, vapor barriers, and tarps for construction and remediation containment.</p></div>
       <div><h3>Custom Cut Sheeting</h3><p>Sheeting cut to the sizes your job needs, for dust and debris control.</p></div>
+    </div>
+    <div class="photo-tiles reveal" style="margin:36px 0 8px;">
+      <figure class="photo-tile"><img src="images/building-wrapped-blue-containment-mesh.jpg" alt="Multi-story building under construction fully wrapped in blue containment mesh, with a tower crane beside it" width="800" height="474" loading="lazy" decoding="async"><figcaption class="pt-txt"><small>Containment</small><strong>Full building wrap</strong></figcaption></figure>
+      <figure class="photo-tile"><img src="images/building-printed-orange-debris-netting.jpg" alt="Orange debris netting printed with a contractor's name along the open floors of a building under construction" width="800" height="600" loading="lazy" decoding="async"><figcaption class="pt-txt"><small>Debris control</small><strong>Printed slab-edge netting</strong></figcaption></figure>
+      <figure class="photo-tile"><img src="images/containment-mesh-roll.webp" alt="Roll of black containment mesh partly unrolled to show the weave" width="603" height="252" loading="lazy" decoding="async"><figcaption class="pt-txt"><small>Materials</small><strong>Mesh by the roll</strong></figcaption></figure>
+    </div>
+    <h3 style="font-size:20px;font-weight:700;color:var(--text-dark);margin:40px 0 4px;">Mesh and Netting Styles</h3>
+    <p style="font-size:15px;color:#5e6876;line-height:1.7;max-width:720px;">Examples of mesh and netting for containment and debris control, from dense knit mesh to open-weave netting. <a href="contact.html" style="color:#00703a;text-decoration:underline;">Ask us</a> about colors and sizes for your job.</p>
+    <div class="swatch-grid reveal">
+      <figure class="swatch"><img src="images/netting-swatch-black-knit-mesh.webp" alt="Close-up of black knit containment mesh" width="500" height="250" loading="lazy" decoding="async"><figcaption>Black knit mesh</figcaption></figure>
+      <figure class="swatch"><img src="images/netting-swatch-blue-knit-mesh.webp" alt="Close-up of blue knit containment mesh" width="500" height="250" loading="lazy" decoding="async"><figcaption>Blue knit mesh</figcaption></figure>
+      <figure class="swatch"><img src="images/netting-swatch-tan-knit-mesh.webp" alt="Close-up of tan knit containment mesh" width="500" height="250" loading="lazy" decoding="async"><figcaption>Tan knit mesh</figcaption></figure>
+      <figure class="swatch"><img src="images/netting-swatch-green-knit-mesh.webp" alt="Close-up of green knit containment mesh" width="500" height="250" loading="lazy" decoding="async"><figcaption>Green knit mesh</figcaption></figure>
+      <figure class="swatch"><img src="images/netting-swatch-white-knit-mesh.webp" alt="Close-up of white knit containment mesh" width="500" height="250" loading="lazy" decoding="async"><figcaption>White knit mesh</figcaption></figure>
+      <figure class="swatch"><img src="images/netting-swatch-black-open-knit-mesh.webp" alt="Close-up of black open-knit mesh" width="500" height="250" loading="lazy" decoding="async"><figcaption>Black open-knit mesh</figcaption></figure>
+      <figure class="swatch"><img src="images/netting-swatch-black-open-weave.webp" alt="Close-up of black open-weave netting" width="500" height="250" loading="lazy" decoding="async"><figcaption>Black open-weave netting</figcaption></figure>
+      <figure class="swatch"><img src="images/netting-swatch-blue-open-weave.webp" alt="Close-up of blue open-weave netting" width="500" height="250" loading="lazy" decoding="async"><figcaption>Blue open-weave netting</figcaption></figure>
+      <figure class="swatch"><img src="images/netting-swatch-green-open-weave.webp" alt="Close-up of green open-weave netting" width="500" height="250" loading="lazy" decoding="async"><figcaption>Green open-weave netting</figcaption></figure>
     </div>
   </section>
 

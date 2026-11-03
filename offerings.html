@@ -889,16 +889,134 @@ body .geo-section h2 { color: #fff; font-weight: 700; font-size: clamp(24px, 3vw
 body .geo-section p { color: rgba(255,255,255,0.82); }
 body .geo-section .eyebrow { color: var(--accent-bright); }
 body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.88); }
+/* Photo header at the top of a card */
+body .offer-block:has(> .card-photo), body .value-card:has(> .card-photo), body .affiliate-card:has(> .card-photo) { padding: 0 24px 26px; overflow: hidden; }
+body .card-photo { display: block; width: calc(100% + 48px); max-width: none; height: 180px; object-fit: cover; margin: 0 -24px 20px; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+body .offer-block:hover > .card-photo, body .value-card:hover > .card-photo, body .affiliate-card:hover > .card-photo { transform: scale(1.04); }
+/* Row of photo tiles with a label */
+body .photo-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 40px 0 56px; }
+body .photo-tile { position: relative; display: block; height: 260px; border-radius: 14px; overflow: hidden; color: #fff; text-decoration: none; background: #0f1a2e; isolation: isolate; }
+body .photo-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+body .photo-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,35,0.92) 0%, rgba(10,18,35,0.2) 60%, rgba(10,18,35,0) 100%); transition: background .3s; }
+body .photo-tile:hover img, body .photo-tile:focus-visible img { transform: scale(1.07); }
+body .photo-tile:hover::after { background: linear-gradient(to top, rgba(0,80,40,0.92) 0%, rgba(10,18,35,0.25) 65%, rgba(10,18,35,0.05) 100%); }
+body .photo-tile .pt-txt { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 1; }
+body .photo-tile .pt-txt small { display: block; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 6px; }
+body .photo-tile .pt-txt strong { display: block; font-size: 20px; font-weight: 700; line-height: 1.2; }
+/* Photo gallery (mixed tall and wide tiles) */
+body .photo-mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 190px; grid-auto-flow: dense; gap: 12px; margin: 24px 0 8px; }
+body .pm-item { position: relative; display: block; overflow: hidden; border-radius: 12px; background: #0f1a2e; color: #fff; text-decoration: none; isolation: isolate; }
+body .pm-item.tall { grid-row: span 2; }
+body .pm-item.wide { grid-column: span 2; }
+body .pm-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+body .pm-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,35,0.75) 0%, rgba(10,18,35,0) 45%); }
+body .pm-item .pm-cap { position: absolute; left: 14px; right: 14px; bottom: 12px; z-index: 1; font-size: 13px; font-weight: 600; line-height: 1.35; }
+body .pm-item:hover img, body .pm-item:focus-visible img { transform: scale(1.06); }
+body .mosaic-head { margin-top: 56px; }
+/* Material swatches */
+body .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; margin-top: 18px; }
+body .swatch { margin: 0; }
+body .swatch img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); transition: transform .3s, box-shadow .3s; }
+body .swatch:hover img { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(15,26,46,0.14); }
+body .swatch figcaption { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--text-dark); }
+body figure.photo-tile { margin: 0; }
 @media (max-width: 700px) {
+  body .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
+  body .photo-tiles { grid-template-columns: 1fr; }
+  body .photo-tile { height: 200px; }
   body .page-header-inner { padding-top: 44px; padding-bottom: 44px; }
   body h2.block-title { font-size: clamp(24px, 7vw, 30px); }
   body .cta-strip { padding: 36px 24px; }
   body .geo-section { padding-top: 56px; padding-bottom: 56px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li, body .btn-green, body .btn-white, body .btn-outline-dark { transition: none; transform: none !important; }
+  body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li, body .btn-green, body .btn-white, body .btn-outline-dark, body .card-photo, body .photo-tile img, body .pm-item img { transition: none; transform: none !important; }
 }
 /* ══ END SITE THEME ══ */
+/* ══ WHAT WE OFFER PAGE DESIGN ══ */
+/* Stats: three across on a shipping photo */
+body .page-body > .stat-row { grid-template-columns: repeat(3, 1fr); background: linear-gradient(100deg, rgba(15,26,46,0.95) 30%, rgba(15,26,46,0.7) 100%), url('images/nationwide-scaffolding-shipping-800w.webp') center/cover no-repeat; }
+body .page-body > .stat-row .stat-cell { border-top: 0; border-right: 1px solid rgba(255,255,255,0.12); padding: 34px 16px; }
+body .page-body > .stat-row .stat-cell:last-child { border-right: 0; }
+body .page-body > .stat-row .stat-cell .n { font-size: clamp(36px, 4.4vw, 54px); color: #fff; }
+body .page-body > .stat-row .stat-cell .n span { color: var(--accent-bright); }
+body .page-body > .stat-row .stat-cell .l { color: rgba(255,255,255,0.78); }
+/* Company bands: full width (box-shadow + clip-path, so no sideways scroll) */
+body .co-band { position: relative; padding: 88px 0 80px; margin: 0; box-shadow: 0 0 0 100vmax var(--band); clip-path: inset(0 -100vmax); background: var(--band); --band: #fff; --accent: var(--green); }
+body .co-band + .co-band { margin-top: 0; }
+body .co-cp { margin-top: 56px; }
+body .co-be { --band: #0f1a2e; --accent: #8db8ff; color: #fff; }
+body .co-se { --band: #fff4ec; --accent: #c2410c; }
+body .co-band::before { content: attr(data-num); position: absolute; top: 28px; right: 0; font-size: clamp(110px, 16vw, 210px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: currentColor; opacity: 0.06; pointer-events: none; }
+body .co-band .feature-block { border-bottom: 0; padding: 0 0 8px; position: relative; }
+body .co-band .feature-eyebrow { color: var(--accent); }
+body .co-band .feature-block h3[style] { color: var(--accent) !important; }
+body .co-band .feature-img { position: relative; overflow: visible; border-radius: 16px; }
+body .co-band .feature-img::before { content: ''; position: absolute; inset: 18px -18px -18px 18px; border-radius: 16px; background: var(--accent); opacity: 0.18; }
+body .co-band .feature-img img { position: relative; height: 340px; border-radius: 16px; }
+/* Dark Business Essentials band */
+body .co-be .feature-title { color: #fff; }
+body .co-be .feature-text { color: rgba(255,255,255,0.8); }
+body .co-be .feature-text a { color: #b9d3ff !important; }
+body .co-be .feature-block img[alt$="logo"] { background: #fff; padding: 8px 12px; border-radius: 10px; box-sizing: content-box; }
+body .co-be .btn-green { background: #fff; color: #0f1a2e; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+body .co-be .btn-green:hover { background: #e8eefc; }
+body .co-se .btn-green { background: #c2410c; box-shadow: 0 8px 24px rgba(194,65,12,0.25); }
+body .co-se .btn-green:hover { background: #9a3412; }
+/* Offer cards: three across with a tall photo card first */
+body .co-band .offer-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 56px; }
+body .co-band .ob-feature { grid-row: span 2; }
+body .co-se .offer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+body .co-se .ob-feature { grid-row: auto; }
+body .co-be .offer-block:last-child { grid-column: 1 / -1; }
+body .co-be .offer-block:last-child ul { columns: 2; column-gap: 32px; }
+body .co-be .offer-block:last-child ul li { break-inside: avoid; }
+body .co-band .offer-block { padding: 26px 24px; }
+body .co-band .offer-block h3 { font-size: 18px; }
+body .co-band .offer-block ul li { display: block; position: relative; padding-left: 28px; }
+body .co-band .offer-block ul li::before { position: absolute; left: 0; top: 0.62em; content: '✓'; flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: var(--green); background: #e8f5ee; }
+body .co-be .offer-block ul li::before { color: #1d4ed8; background: #e8eefc; }
+body .co-se .offer-block ul li::before { color: #c2410c; background: #fdeee4; }
+body .co-se .offer-block-tag.exchange { background: #fdeee4; color: #9a3412; }
+/* Photo feature card */
+body .co-band .ob-feature { position: relative; overflow: hidden; isolation: isolate; border: 0; color: #fff; min-height: 420px; display: flex; flex-direction: column; justify-content: flex-end; background: #0f1a2e center/cover no-repeat; }
+body .co-band .ob-feature::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(10,18,35,0.95) 0%, rgba(10,18,35,0.78) 55%, rgba(10,18,35,0.35) 100%); transition: background .3s; }
+body .co-cp .ob-feature { background-image: url('images/rb-412-psn-safety-netting-system-on-high-rise-800w.webp'); }
+body .co-be .ob-feature { background-image: url('images/marketing-performance-data-review-768w.webp'); }
+body .co-se .ob-feature { background-image: url('images/scaffold-exchange-marketplace-800w.webp'); }
+body .co-band .ob-feature h3, body .co-band .ob-feature h3 a { color: #fff !important; font-size: 24px; }
+body .co-band .ob-feature .offer-block-tag { background: rgba(255,255,255,0.16); color: #fff; align-self: flex-start; }
+body .co-band .ob-feature ul li { color: rgba(255,255,255,0.9); border-bottom-color: rgba(255,255,255,0.14); }
+body .co-band .ob-feature ul li::before { color: #0f1a2e; background: var(--accent-bright); }
+body .co-band .ob-feature a { color: #fff !important; }
+body .co-band .ob-feature:hover { box-shadow: 0 22px 50px rgba(15,26,46,0.35); }
+/* Numbers table */
+body .of-nums { background: var(--wash); border-color: var(--wash-border); margin-top: 72px; }
+body .of-table tbody tr { transition: background .2s; }
+body .of-table tbody tr:hover { background: rgba(255,255,255,0.7); }
+body .of-table td:first-child { border-left: 3px solid var(--green); padding-left: 14px; }
+/* FAQ: heading on the left, question cards on the right */
+body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; border: 1px solid var(--border) !important; border-radius: 12px; padding: 20px 24px !important; margin-bottom: 12px; }
+@media (min-width: 901px) {
+  body .page-body > section[itemtype$="FAQPage"] { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 56px; align-items: start; }
+  body .page-body > section[itemtype$="FAQPage"] > .section-label { grid-column: 1; grid-row: 1; }
+  body .page-body > section[itemtype$="FAQPage"] > h2 { grid-column: 1; grid-row: 2; position: sticky; top: 100px; }
+  body .page-body > section[itemtype$="FAQPage"] > div { grid-column: 2; grid-row: 1 / span 3; margin-top: 0 !important; }
+}
+@media (max-width: 1000px) {
+  body .co-band .offer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body .co-band .ob-feature { grid-row: auto; grid-column: 1 / -1; min-height: 360px; }
+}
+@media (max-width: 700px) {
+  body .co-band { padding: 64px 0 56px; }
+  body .co-band .offer-grid, body .co-se .offer-grid { grid-template-columns: 1fr; margin-top: 36px; }
+  body .co-be .offer-block:last-child ul { columns: 1; }
+  body .co-band .feature-img img { height: 240px; }
+  body .co-band .feature-img::before { inset: 12px -8px -12px 12px; }
+  body .page-body > .stat-row .stat-cell { padding: 24px 6px; }
+}
+/* ══ END WHAT WE OFFER PAGE DESIGN ══ */
+
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[{"@type":"ImageObject","name":"ATI Products LLC Logo","description":"ATI Products LLC : construction products, scaffolding, lead generation and business growth services. Headquartered in Arvada, Colorado. Serving all 50 states since 1999.","contentLocation":{"@type":"Place","name":"Arvada, Colorado"}}]}
@@ -966,7 +1084,7 @@ body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color:
     <a href="about.html" class="btn-white">Learn More About ATI &rarr;</a>
   </div>
 
-    <section id="construction-products" style="margin-bottom:56px;">
+    <section id="construction-products" class="co-band co-cp" data-num="01">
   <div class="feature-block reveal">
     <div class="grid-2-1">
       <div>
@@ -984,35 +1102,55 @@ body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color:
     </div>
   </div>
     <div class="offer-grid">
-      <div class="offer-block reveal">
+      <div class="offer-block ob-feature reveal">
   <span class="offer-block-tag construction">Construction</span>
   <h3>Safety and Compliance</h3>
   <ul><li><a href="debris-netting.html#ds-1320" style="color:#00703a;text-decoration:underline;">DS-1320 Debris Netting System</a></li><li><a href="debris-netting.html#rb-412" style="color:#00703a;text-decoration:underline;">RB-412 PSN Personnel Safety Netting</a></li><li><a href="https://www.osha.gov/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">OSHA</a> and <a href="https://www.msha.gov/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">MSHA</a> Compliance Tools</li><li><a href="https://www.sitedocs.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">SiteDocs Paperless Safety</a> (<a href="affiliates.html" style="color:#00703a;text-decoration:underline;">why ATI uses it</a>)</li><li>Personal Protective Equipment</li><li>Mobile Fall Protection</li><li>Personnel Fall Protection</li></ul>
 </div>
       <div class="offer-block reveal">
+  <img class="card-photo" src="images/adjustastairs-foundation-wall-crane-site.jpg" srcset="images/adjustastairs-foundation-wall-crane-site-640w.jpg 640w, images/adjustastairs-foundation-wall-crane-site.jpg 1080w" sizes="(max-width: 700px) 92vw, 360px" alt="AdjustaStairs™ with red handrails giving access to the top of a concrete foundation wall on a construction site" width="1080" height="1080" loading="lazy" decoding="async">
   <span class="offer-block-tag construction">Construction</span>
   <h3>Access Systems</h3>
   <ul><li><a href="adjustastair.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ Adjustable Stair Systems</a></li><li><a href="adjustastairspecs.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ Specs and Sizing</a></li><li>AdaptaStep™ and AdaptaSpan™ (<a href="downloads/adaptastep-access-platform-brochure.pdf" style="color:#00703a;text-decoration:underline;" target="_blank" rel="noopener noreferrer">AdaptaStep brochure, PDF</a>)</li><li><a href="z-stack-stair-tower.html" style="color:#00703a;text-decoration:underline;">Z-Stack™ Modular Stair Towers</a></li><li>Aluminum Scaffolding Systems</li><li><a href="downloads/webrail-fall-arrest-guardrail-brochure.pdf" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">Engineered Edge Protection</a> (WebRail brochure, PDF)</li><li>Custom Aluminum Ramps and Stairs</li></ul>
 </div>
       <div class="offer-block reveal">
+  <img class="card-photo" src="images/construction-crew-multi-story-building-project-800w.webp" alt="Construction crew walking a multi-story building site with a tower crane overhead" width="800" height="533" loading="lazy" decoding="async">
   <span class="offer-block-tag construction">Construction</span>
   <h3>Heavy Infrastructure</h3>
   <ul><li>PPE and Studson Type 2 Helmets</li><li>Scaffold and Shoring Services</li><li>Industrial Netting Systems</li><li>Temporary Structure Solutions</li></ul>
 </div>
       <div class="offer-block reveal">
+  <img class="card-photo" src="images/building-wrapped-blue-containment-mesh.jpg" alt="Multi-story building under construction fully wrapped in blue containment mesh" width="800" height="474" loading="lazy" decoding="async">
   <span class="offer-block-tag construction">Construction</span>
   <h3><a href="debris-netting.html" style="color:inherit;text-decoration:underline;text-decoration-color:#00703a;text-underline-offset:3px;">Debris Netting and Containment Systems</a></h3>
   <ul><li>Poly Sheeting and Tarps</li><li>Custom Design Netting Systems</li><li><a href="debris-netting.html" style="color:#00703a;text-decoration:underline;">Construction Debris Netting</a></li><li>Dust and Debris Control</li><li>Custom Cut Sheeting</li><li><a href="debris-netting.html" style="color:#00703a;text-decoration:underline;">See the full Debris Netting page</a></li></ul>
 </div>
       <div class="offer-block reveal">
+  <img class="card-photo" src="images/da7ff76163a2.webp" alt="Warehouse aisles stocked with scaffolding and construction supplies ready to ship" width="1024" height="576" loading="lazy" decoding="async">
   <span class="offer-block-tag construction">Construction</span>
   <h3>Same-Day Quotes</h3>
   <ul><li>Rapid Pricing on All Products</li><li>Volume and Project Discounts</li><li>Nationwide Shipping</li><li>Dedicated Account Support</li><li>Net Terms Available</li><li><a href="nationwide-construction-supply.html" style="color:#00703a;text-decoration:underline;">See Nationwide Shipping and Supply</a></li></ul>
 </div>
     </div>
-  </section>
+  <div class="photo-tiles reveal">
+    <a class="photo-tile" href="z-stack-stair-tower.html"><img class="" src="images/z-stack-stair-tower-multi-level-construction-800w.webp" alt="Tall Z-Stack™ stair tower beside a curved concrete building under construction" width="800" height="1000" loading="lazy" decoding="async"><span class="pt-txt"><small>On the job</small><strong>Z-Stack™ Stair Towers</strong></span></a>
+    <a class="photo-tile" href="adjustastair.html"><img class="" src="images/adjustastairs-by-ati-branded-stair-system-two-work-800w.webp" alt="Two workers climbing AdjustaStairs™ to a raised construction platform" width="800" height="652" loading="lazy" decoding="async"><span class="pt-txt"><small>On the job</small><strong>AdjustaStairs™ System</strong></span></a>
+    <a class="photo-tile" href="debris-netting.html#ds-1320"><img class="" src="images/ds-1320-debris-netting-system-on-slab-edges-800w.webp" alt="DS-1320 debris netting system installed on the slab edges of a building" width="800" height="405" loading="lazy" decoding="async"><span class="pt-txt"><small>On the job</small><strong>DS-1320 Debris Netting</strong></span></a>
+  </div>
+<div class="mosaic-head reveal"><span class="section-label">On Real Job Sites</span><h2 class="block-title">AdjustaStairs™ at Work</h2><p style="font-size:15.5px;color:#5e6876;line-height:1.7;max-width:680px;">From high-rise podiums and shoring walls to excavations, hillsides and a shoreline seawall, AdjustaStairs™ adjusts to the height each site needs.</p></div>
+  <div class="photo-mosaic reveal">
+    <a class="pm-item tall" href="adjustastair.html"><img src="images/adjustastairs-high-rise-podium-access.jpg" srcset="images/adjustastairs-high-rise-podium-access-640w.jpg 640w, images/adjustastairs-high-rise-podium-access.jpg 800w" sizes="(max-width: 700px) 46vw, 270px" alt="Worker descending AdjustaStairs™ from the podium level of a high-rise under construction" width="800" height="1066" loading="lazy" decoding="async"><span class="pm-cap">High-rise podium access</span></a>
+    <a class="pm-item wide" href="adjustastair.html"><img src="images/adjustastairs-embankment-beside-old-steps.jpg" srcset="images/adjustastairs-embankment-beside-old-steps-640w.jpg 640w, images/adjustastairs-embankment-beside-old-steps.jpg 1200w" sizes="(max-width: 700px) 92vw, 540px" alt="Aluminum AdjustaStairs™ installed on an embankment next to worn earth steps" width="1200" height="675" loading="lazy" decoding="async"><span class="pm-cap">Embankment access</span></a>
+    <a class="pm-item tall" href="adjustastair.html"><img src="images/adjustastairs-long-hillside-run.jpg" srcset="images/adjustastairs-long-hillside-run-640w.jpg 640w, images/adjustastairs-long-hillside-run.jpg 1200w" sizes="(max-width: 700px) 46vw, 270px" alt="Long run of AdjustaStairs™ with red handrails climbing a steep rocky hillside" width="1200" height="1599" loading="lazy" decoding="async"><span class="pm-cap">Long hillside run</span></a>
+    <a class="pm-item" href="adjustastair.html"><img src="images/adjustastairs-excavation-crew.jpg" srcset="images/adjustastairs-excavation-crew-640w.jpg 640w, images/adjustastairs-excavation-crew.jpg 800w" sizes="(max-width: 700px) 46vw, 270px" alt="Crew in hard hats using AdjustaStairs™ to climb out of a deep excavation" width="800" height="854" loading="lazy" decoding="async"><span class="pm-cap">Excavation access</span></a>
+    <a class="pm-item" href="adjustastair.html"><img src="images/adjustastairs-tilt-up-wall-opening.jpg" srcset="images/adjustastairs-tilt-up-wall-opening-640w.jpg 640w, images/adjustastairs-tilt-up-wall-opening.jpg 800w" sizes="(max-width: 700px) 46vw, 270px" alt="AdjustaStairs™ leading up to an opening in a concrete tilt-up wall" width="800" height="711" loading="lazy" decoding="async"><span class="pm-cap">Tilt-up wall opening</span></a>
+    <a class="pm-item wide" href="adjustastair.html"><img src="images/adjustastairs-shoring-wall-stair-tower.jpg" srcset="images/adjustastairs-shoring-wall-stair-tower-640w.jpg 640w, images/adjustastairs-shoring-wall-stair-tower.jpg 800w" sizes="(max-width: 700px) 92vw, 540px" alt="AdjustaStairs™ and a stair tower running up a tall concrete shoring wall beside red formwork" width="800" height="450" loading="lazy" decoding="async"><span class="pm-cap">Shoring wall stair tower</span></a>
+    <a class="pm-item" href="adjustastair.html"><img src="images/adjustastairs-seawall-shoreline-access.jpg" srcset="images/adjustastairs-seawall-shoreline-access-640w.jpg 640w, images/adjustastairs-seawall-shoreline-access.jpg 800w" sizes="(max-width: 700px) 46vw, 270px" alt="AdjustaStairs™ with red handrails giving access from a concrete seawall down to the water" width="800" height="600" loading="lazy" decoding="async"><span class="pm-cap">Seawall shoreline access</span></a>
+    <a class="pm-item" href="adjustastair.html"><img src="images/adjustastairs-arena-seating-access.jpg" alt="AdjustaStairs™ set up inside an arena to reach the lower seating level" width="480" height="640" loading="lazy" decoding="async"><span class="pm-cap">Arena seating access</span></a>
+  </div>
+</section>
 
-  <section id="business-essentials" style="margin-bottom:56px;">
+  <section id="business-essentials" class="co-band co-be" data-num="02">
   <div class="feature-block reveal">
     <div class="grid-1-2">
       <figure class="feature-img" aria-label="ATI Business Essentials">
@@ -1029,12 +1167,13 @@ body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color:
     </div>
   </div>
     <div class="offer-grid">
-      <div class="offer-block reveal">
+      <div class="offer-block ob-feature reveal">
   <span class="offer-block-tag business">Business</span>
   <h3><a href="leadgeneration.html" style="color:inherit;text-decoration:underline;text-decoration-color:#00703a;text-underline-offset:3px;">Leads Plus</a></h3>
   <ul><li>Trains Google to Find More of Your Best Customers</li><li>Replaces Your CRM: One Simple Place for Leads</li><li>Lead and Call Capture Automation</li><li>Full Bid and Job Pipeline Tracking</li><li>Real-Time Lead Notifications</li><li><a href="leadgeneration.html" style="color:#00703a;text-decoration:underline;">See the full Leads Plus page</a></li></ul>
 </div>
       <div class="offer-block reveal">
+  <img class="card-photo" src="images/ati-business-essentials-lead-generation-marketing-480w.webp" alt="ATI Business Essentials team reviewing marketing results on a screen" width="480" height="336" loading="lazy" decoding="async">
   <span class="offer-block-tag business">Business</span>
   <h3><a href="marketinghub.html" style="color:inherit;text-decoration:underline;text-decoration-color:#00703a;text-underline-offset:3px;">Marketing Hub</a></h3>
   <ul><li>Connects Social Media, Paid Ads, Leads Plus, and Your Website in One Place</li><li>Logs Every Change So You See What Moved Your Numbers</li><li>AI That Learns Your Industry and Your Business, Continuously</li><li>Warm Outreach Tools Built In</li><li>Built for Small Businesses Who Want to Manage Their Own Marketing</li><li><a href="marketinghub.html" style="color:#00703a;text-decoration:underline;">See the full Marketing Hub page</a></li></ul>
@@ -1062,7 +1201,7 @@ body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color:
     </div>
   </section>
 
-  <section id="scaffold-exchange">
+  <section id="scaffold-exchange" class="co-band co-se" data-num="03">
   <div class="feature-block reveal">
     <div class="grid-2-1">
       <div>
@@ -1079,12 +1218,13 @@ body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color:
     </div>
   </div>
     <div class="offer-grid">
-      <div class="offer-block reveal">
+      <div class="offer-block ob-feature reveal">
   <span class="offer-block-tag exchange">Marketplace</span>
   <h3><a href="scaffoldingmarketplace.html" style="color:inherit;text-decoration:underline;text-decoration-color:#00703a;text-underline-offset:3px;">Equipment Marketplace</a></h3>
   <ul><li><a href="used-scaffolding.html" style="color:#00703a;text-decoration:underline;">New and Used Scaffolding</a></li><li>Shoring Equipment</li><li>Nationwide Networking for Used Scaffolding</li><li>Equipment Sourcing</li><li><a href="scaffoldingmarketplace.html" style="color:#00703a;text-decoration:underline;">Scaffold Exchange Platform</a></li><li>Network Directory to Request Quotes</li></ul>
 </div>
       <div class="offer-block reveal">
+  <img class="card-photo" src="images/aec325e3e8ce.webp" alt="Scaffold frames, planks and tubes stacked on racks, ready to buy or sell" width="960" height="544" loading="lazy" decoding="async">
   <span class="offer-block-tag exchange">Marketplace</span>
   <h3><a href="used-scaffolding.html" style="color:inherit;text-decoration:underline;text-decoration-color:#00703a;text-underline-offset:3px;">Buying and Selling</a></h3>
   <ul><li>Free Standard Listings with No Commission</li><li>Optional Sponsored Spot: 90 Days for $100</li><li>Post a Free Wanted Request</li><li><a href="https://scaffoldexchange.com/map" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">Supplier Map</a> to Request Quotes Near Your Job</li><li>Brokered Sales for Fleets Worth More Than $50,000</li><li><a href="scaffoldingmarketplace.html" style="color:#00703a;text-decoration:underline;">See the full Scaffold Exchange page</a></li></ul>

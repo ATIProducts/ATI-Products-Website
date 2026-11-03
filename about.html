@@ -947,14 +947,48 @@ body .geo-section h2 { color: #fff; font-weight: 700; font-size: clamp(24px, 3vw
 body .geo-section p { color: rgba(255,255,255,0.82); }
 body .geo-section .eyebrow { color: var(--accent-bright); }
 body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.88); }
+/* Photo header at the top of a card */
+body .offer-block:has(> .card-photo), body .value-card:has(> .card-photo), body .affiliate-card:has(> .card-photo) { padding: 0 24px 26px; overflow: hidden; }
+body .card-photo { display: block; width: calc(100% + 48px); max-width: none; height: 180px; object-fit: cover; margin: 0 -24px 20px; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+body .offer-block:hover > .card-photo, body .value-card:hover > .card-photo, body .affiliate-card:hover > .card-photo { transform: scale(1.04); }
+/* Row of photo tiles with a label */
+body .photo-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 40px 0 56px; }
+body .photo-tile { position: relative; display: block; height: 260px; border-radius: 14px; overflow: hidden; color: #fff; text-decoration: none; background: #0f1a2e; isolation: isolate; }
+body .photo-tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+body .photo-tile::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,35,0.92) 0%, rgba(10,18,35,0.2) 60%, rgba(10,18,35,0) 100%); transition: background .3s; }
+body .photo-tile:hover img, body .photo-tile:focus-visible img { transform: scale(1.07); }
+body .photo-tile:hover::after { background: linear-gradient(to top, rgba(0,80,40,0.92) 0%, rgba(10,18,35,0.25) 65%, rgba(10,18,35,0.05) 100%); }
+body .photo-tile .pt-txt { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 1; }
+body .photo-tile .pt-txt small { display: block; font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 6px; }
+body .photo-tile .pt-txt strong { display: block; font-size: 20px; font-weight: 700; line-height: 1.2; }
+/* Photo gallery (mixed tall and wide tiles) */
+body .photo-mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 190px; grid-auto-flow: dense; gap: 12px; margin: 24px 0 8px; }
+body .pm-item { position: relative; display: block; overflow: hidden; border-radius: 12px; background: #0f1a2e; color: #fff; text-decoration: none; isolation: isolate; }
+body .pm-item.tall { grid-row: span 2; }
+body .pm-item.wide { grid-column: span 2; }
+body .pm-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+body .pm-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,18,35,0.75) 0%, rgba(10,18,35,0) 45%); }
+body .pm-item .pm-cap { position: absolute; left: 14px; right: 14px; bottom: 12px; z-index: 1; font-size: 13px; font-weight: 600; line-height: 1.35; }
+body .pm-item:hover img, body .pm-item:focus-visible img { transform: scale(1.06); }
+body .mosaic-head { margin-top: 56px; }
+/* Material swatches */
+body .swatch-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; margin-top: 18px; }
+body .swatch { margin: 0; }
+body .swatch img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); transition: transform .3s, box-shadow .3s; }
+body .swatch:hover img { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(15,26,46,0.14); }
+body .swatch figcaption { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--text-dark); }
+body figure.photo-tile { margin: 0; }
 @media (max-width: 700px) {
+  body .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
+  body .photo-tiles { grid-template-columns: 1fr; }
+  body .photo-tile { height: 200px; }
   body .page-header-inner { padding-top: 44px; padding-bottom: 44px; }
   body h2.block-title { font-size: clamp(24px, 7vw, 30px); }
   body .cta-strip { padding: 36px 24px; }
   body .geo-section { padding-top: 56px; padding-bottom: 56px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li, body .btn-green, body .btn-white, body .btn-outline-dark { transition: none; transform: none !important; }
+  body .dn-cards > div, body .offer-block, body .affiliate-card, body .dn-steps li, body .btn-green, body .btn-white, body .btn-outline-dark, body .card-photo, body .photo-tile img, body .pm-item img { transition: none; transform: none !important; }
 }
 /* ══ END SITE THEME ══ */
 </style>
@@ -1023,32 +1057,48 @@ body .geo-section .state-tag { background: rgba(255,255,255,0.07); border-color:
     </div>
   </div>
 
+  <!-- Our companies in photos -->
+  <div class="photo-tiles reveal">
+    <a class="photo-tile" href="offerings.html#construction-products"><img class="" src="images/scaffolding-equipment-construction-supplies-640w.webp" alt="Scaffolding and construction supplies stocked in a warehouse" width="640" height="435" loading="lazy" decoding="async"><span class="pt-txt"><small>ATI Construction Products</small><strong>Supplies and access systems</strong></span></a>
+    <a class="photo-tile" href="offerings.html#business-essentials"><img class="" src="images/marketing-performance-data-review-640w.webp" alt="Team reviewing marketing performance data on a large screen" width="640" height="377" loading="lazy" decoding="async"><span class="pt-txt"><small>ATI Business Essentials</small><strong>Leads and marketing</strong></span></a>
+    <a class="photo-tile" href="offerings.html#scaffold-exchange"><img class="" src="images/aec325e3e8ce.webp" alt="Scaffold frames and planks stacked on racks" width="960" height="544" loading="lazy" decoding="async"><span class="pt-txt"><small>Scaffold Exchange</small><strong>Buy and sell scaffolding</strong></span></a>
+  </div>
+
   <!-- Values -->
   <div style="margin-bottom:56px;">
     <span class="section-label">What Sets ATI Apart</span>
     <h2 class="block-title">Our Core Values</h2>
     <div class="values-grid reveal-group">
       <div class="value-card reveal">
-        <span class="value-icon">🛡️</span>
+        <img class="card-photo" src="images/ati-products-homepage-hero-construction-site-hdr-800w.webp" alt="Supervisors reviewing a steel-frame building under construction at sunset" width="800" height="533" loading="lazy" decoding="async">
         <h3>25 Years of Experience</h3>
         <p>A quarter-century of expertise across construction safety, access systems, and business growth services for contractors nationwide.</p>
       </div>
       <div class="value-card reveal">
-        <span class="value-icon">🤝</span>
+        <img class="card-photo" src="images/adjustastairs-crew-climbing-embankment.jpg" srcset="images/adjustastairs-crew-climbing-embankment-640w.jpg 640w, images/adjustastairs-crew-climbing-embankment.jpg 800w" sizes="(max-width: 900px) 92vw, 520px" alt="Two crew members in high-visibility jackets climbing AdjustaStairs™ up an embankment" width="800" height="1066" loading="lazy" decoding="async">
         <h3>Customer-First Service</h3>
         <p>Every interaction backed by responsive, knowledgeable support from quote to delivery. Same-day quotes available on most construction products.</p>
       </div>
       <div class="value-card reveal">
-        <span class="value-icon">🗺️</span>
+        <img class="card-photo" src="images/nationwide-scaffolding-shipping-800w.webp" alt="Scaffolding loaded for shipping to job sites across the country" width="800" height="450" loading="lazy" decoding="async">
         <h3>Nationwide Reach</h3>
         <p>Headquartered in Arvada, CO and serving clients in all 50 states. We know how to get products where they need to go.</p>
       </div>
       <div class="value-card reveal">
-        <span class="value-icon">💡</span>
+        <img class="card-photo" src="images/adjustastairs-long-hillside-run.jpg" srcset="images/adjustastairs-long-hillside-run-640w.jpg 640w, images/adjustastairs-long-hillside-run.jpg 1200w" sizes="(max-width: 900px) 92vw, 520px" alt="Long run of AdjustaStairs™ climbing a steep rocky hillside" width="1200" height="1599" loading="lazy" decoding="async">
         <h3>Innovation at Every Level</h3>
         <p>From <a href="adjustastair.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ adjustable stair systems</a> to a lead platform that replaces your CRM via <a href="https://ati-businessessentials.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">ATI Business Essentials</a>, we bring modern solutions to traditional industries.</p>
       </div>
     </div>
+  </div>
+
+  <div class="mosaic-head reveal"><span class="section-label">Our Products at Work</span><h2 class="block-title">On Job Sites Across the Country</h2></div>
+  <div class="photo-mosaic reveal">
+    <a class="pm-item tall" href="adjustastair.html"><img src="images/adjustastairs-steel-frame-building-entry.jpg" srcset="images/adjustastairs-steel-frame-building-entry-640w.jpg 640w, images/adjustastairs-steel-frame-building-entry.jpg 800w" sizes="(max-width: 700px) 46vw, 270px" alt="AdjustaStairs™ reaching the upper level of a steel-frame building under construction" width="800" height="1066" loading="lazy" decoding="async"><span class="pm-cap">Steel-frame building access</span></a>
+    <a class="pm-item wide" href="adjustastair.html"><img src="images/adjustastairs-apartment-entry-access.jpg" srcset="images/adjustastairs-apartment-entry-access-640w.jpg 640w, images/adjustastairs-apartment-entry-access.jpg 1200w" sizes="(max-width: 700px) 92vw, 540px" alt="Crew installing AdjustaStairs™ as temporary access to a second-floor apartment entry" width="1200" height="978" loading="lazy" decoding="async"><span class="pm-cap">Apartment entry access</span></a>
+    <a class="pm-item tall" href="adjustastair.html"><img src="images/adjustastairs-interior-floor-to-floor.jpg" srcset="images/adjustastairs-interior-floor-to-floor-640w.jpg 640w, images/adjustastairs-interior-floor-to-floor.jpg 800w" sizes="(max-width: 700px) 46vw, 270px" alt="AdjustaStairs™ connecting two concrete floors inside a building under construction" width="800" height="1066" loading="lazy" decoding="async"><span class="pm-cap">Floor-to-floor access</span></a>
+    <a class="pm-item" href="adjustastair.html"><img src="images/adjustastairs-shaft-stair-tower.jpg" srcset="images/adjustastairs-shaft-stair-tower-640w.jpg 640w, images/adjustastairs-shaft-stair-tower.jpg 800w" sizes="(max-width: 700px) 46vw, 270px" alt="AdjustaStairs™ and a stair tower set against a rock wall in a deep shaft" width="800" height="600" loading="lazy" decoding="async"><span class="pm-cap">Shaft stair tower</span></a>
+    <a class="pm-item" href="adjustastair.html"><img src="images/adjustastairs-formwork-deck-access.jpg" srcset="images/adjustastairs-formwork-deck-access-640w.jpg 640w, images/adjustastairs-formwork-deck-access.jpg 800w" sizes="(max-width: 700px) 46vw, 270px" alt="AdjustaStairs™ climbing to a formwork deck on a concrete building site" width="800" height="1067" loading="lazy" decoding="async"><span class="pm-cap">Formwork deck access</span></a>
   </div>
 
   <!-- At a glance -->
