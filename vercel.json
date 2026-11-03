@@ -21,7 +21,17 @@
     },
     {
       "source": "/adjustastair-specs",
-      "destination": "/adjustastairspecs",
+      "destination": "/adjustastair",
+      "permanent": true
+    },
+    {
+      "source": "/adjustastairspecs",
+      "destination": "/adjustastair",
+      "permanent": true
+    },
+    {
+      "source": "/adjustastairspecs.html",
+      "destination": "/adjustastair",
       "permanent": true
     },
     {

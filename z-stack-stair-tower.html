@@ -1113,6 +1113,40 @@ body .swatch img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 
 body .swatch:hover img { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(15,26,46,0.14); }
 body .swatch figcaption { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--text-dark); }
 body figure.photo-tile { margin: 0; }
+/* Page bands (the What We Offer look): full-width alternating bands, big faded numbers,
+   an offset color block behind intro photos and a dark FAQ band. Classes added per page. */
+body .pg-cp { --pg: #00703a; --pg-soft: rgba(0,112,58,0.16); --pg-tint: #eef6f1; --pg-on-dark: #3ddc84; }
+body .pg-be { --pg: #1d4ed8; --pg-soft: rgba(29,78,216,0.16); --pg-tint: #eef3fd; --pg-on-dark: #8db8ff; }
+body .pg-se { --pg: #c2410c; --pg-soft: rgba(194,65,12,0.16); --pg-tint: #fff4ec; --pg-on-dark: #fdba74; }
+body .pg-band, body .pg-faq { --band: #fff; position: relative; margin: 0 !important; padding: 80px 0 !important; background: var(--band) !important; border: 0 !important; border-radius: 0 !important; box-shadow: 0 0 0 100vmax var(--band) !important; clip-path: inset(0 -100vmax); }
+body .pg-band-tint { --band: var(--pg-tint); }
+body .pg-band[data-num]::after { content: attr(data-num); position: absolute; top: 20px; right: 0; font-size: clamp(90px, 12vw, 170px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: var(--pg); opacity: 0.07; pointer-events: none; }
+body .pg-band .section-label, body .pg-band .feature-eyebrow { color: var(--pg); }
+body .pg-band-tint [style*="background:#f7f8f9"], body .pg-band-tint [style*="background: #f7f8f9"] { background: #fff !important; }
+body .page-body .pg-shot { border-radius: 16px; box-shadow: 18px 18px 0 var(--pg-soft), 0 20px 50px rgba(15,26,46,0.16) !important; }
+body .pg-faq { --band: #0f1a2e; color: #fff; padding: 88px 0 !important; }
+body .pg-faq .faq-head .section-label { color: var(--pg-on-dark); }
+body .pg-faq .faq-head h2 { color: #fff !important; }
+body .pg-faq .faq-head p { color: rgba(255,255,255,0.8) !important; }
+body .pg-faq .faq-head a { color: var(--pg-on-dark) !important; }
+body .pg-faq .faq-list > div[style*="margin-top"] { margin-top: 0 !important; }
+body .pg-faq .faq-list [itemprop="mainEntity"] { background: #fff; color: var(--text-dark); border: 0 !important; border-radius: 12px; padding: 20px 24px !important; margin-bottom: 12px; }
+body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
+@media (min-width: 901px) {
+  body .pg-faq { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 56px; align-items: start; }
+  body .pg-faq .faq-head { position: sticky; top: 100px; }
+}
+@media (max-width: 900px) { body .pg-faq .faq-head { margin-bottom: 24px; } }
+@media (max-width: 700px) {
+  body .pg-band, body .pg-faq { padding: 56px 0 !important; }
+  body .page-body .pg-shot { box-shadow: 10px 10px 0 var(--pg-soft), 0 14px 32px rgba(15,26,46,0.14) !important; }
+}
+/* Wider content on large screens (pages were capped at 1100px) */
+@media (min-width: 1200px) {
+  body .page-body, body .page-header-inner, body .footer-inner, body .geo-section-inner { max-width: 1320px; }
+  body section[style*="max-width:1100px"] { max-width: 1320px !important; }
+  body .page-body p { max-width: 1000px; }
+}
 @media (max-width: 700px) {
   body .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
   body .photo-tiles { grid-template-columns: 1fr; }
@@ -1137,7 +1171,7 @@ body figure.photo-tile { margin: 0; }
   <a href="index.html" class="nav-logo">
     <img src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding and Business Growth | Arvada, Colorado" title="ATI Products LLC | Arvada, CO | Serving All 50 States" width="1726" height="922" decoding="async" itemprop="logo" srcset="images/ati-products-logo-mark-320w.webp 320w" sizes="(max-width: 900px) 35vw, 140px">
   </a>
-  <ul class="nav-links"><li><a href="index.html" class="">Home</a></li><li class="nav-dd"><a href="offerings.html" class="active">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html" aria-current="page">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+  <ul class="nav-links"><li><a href="index.html" class="">Home</a></li><li class="nav-dd"><a href="offerings.html" class="active">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="z-stack-stair-tower.html" aria-current="page">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   <a href="contact.html" class="nav-cta">Get in Touch</a>
   <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="toggleNav(this)">
     <span></span><span></span><span></span>
@@ -1145,7 +1179,7 @@ body figure.photo-tile { margin: 0; }
 </nav>
 <div class="mobile-nav" id="mobile-nav-drawer" role="navigation" aria-label="Mobile navigation">
   <a href="index.html">Home</a>
-  <span class="mnav-group"><a href="offerings.html">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="true" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub"><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html" aria-current="page">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
+  <span class="mnav-group"><a href="offerings.html">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="true" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub"><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="z-stack-stair-tower.html" aria-current="page">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
   <a href="about.html">About</a>
   <a href="affiliates.html">Affiliates</a>
     <a href="blog.html" class="">Blog</a>
@@ -1171,12 +1205,12 @@ body figure.photo-tile { margin: 0; }
   </div>
 </div>
 
-<div class="page-body">
+<div class="page-body pg-cp">
 
   <!-- Intro -->
-  <div class="zs-intro">
+  <div class="zs-intro pg-band">
     <figure itemscope itemtype="https://schema.org/ImageObject">
-      <img itemprop="contentUrl" fetchpriority="low" title="ATI Products, LLC | Arvada, Colorado | (800) 360-6115" class="zs-tall" src="images/z-stack-compact-stair-tower-roof-access.webp" alt="Compact Z-Stack™ aluminum stair tower standing against an industrial building wall, with red guardrails at the top landing for roof access" width="438" height="803" decoding="async">
+      <img itemprop="contentUrl" fetchpriority="low" title="ATI Products, LLC | Arvada, Colorado | (800) 360-6115" class="zs-tall pg-shot" src="images/z-stack-compact-stair-tower-roof-access.webp" alt="Compact Z-Stack™ aluminum stair tower standing against an industrial building wall, with red guardrails at the top landing for roof access" width="438" height="803" decoding="async">
       <figcaption itemprop="description">A Compact Z-Stack™ tower giving stair access to a roof edge.</figcaption>
     </figure>
     <div>
@@ -1202,7 +1236,7 @@ body figure.photo-tile { margin: 0; }
   </div>
 
   <!-- Height calculator -->
-  <section id="sizing" class="zsz-section" aria-labelledby="zsz-title">
+  <section id="sizing" class="zsz-section pg-band pg-band-tint" aria-labelledby="zsz-title" data-num="01">
     <span class="section-label">Size and Quote</span><h2 class="block-title" id="zsz-title" style="margin-bottom:8px;">How Many Z-Stack™ Modules Do You Need?</h2>
     <p class="zsz-intro">Enter the height you need to reach. The calculator stacks Standard and Compact stair modules up to your height, adds the top module that forms the guardrail around the top landing, and picks the AdaptaStep™ bridge or AdjustaStairs™ that connects the landing to the roof. It also shows tie-off brackets and the footprint. Pick a tower to send the setup to ATI for a quote.</p>
     <div class="zsz-layout" id="zsz" data-cms-skip>
@@ -1229,7 +1263,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Sizes -->
-  <section class="dn-panel" id="sizes" aria-labelledby="zs-sizes-title">
+  <section class="dn-panel pg-band" id="sizes" aria-labelledby="zs-sizes-title" data-num="02">
     <span class="section-label">Two Tower Sizes</span>
     <h2 class="block-title reveal" id="zs-sizes-title" style="margin-bottom:12px;">What Is the Difference Between Standard and Compact Z-Stack™?</h2>
     <p class="dn-lead" style="max-width:780px;">Both sizes use the same bolt-together module system. Standard towers have wider stairs for crews moving tools and materials. Compact towers fit where space is tight and work as a true ladder replacement for roof and equipment access.</p>
@@ -1257,7 +1291,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Assembly -->
-  <section class="dn-panel" id="assembly" aria-labelledby="zs-asm-title">
+  <section class="dn-panel pg-band pg-band-tint" id="assembly" aria-labelledby="zs-asm-title" data-num="03">
     <span class="section-label">How It Assembles</span>
     <h2 class="block-title reveal" id="zs-asm-title" style="margin-bottom:12px;">How Do Z-Stack™ Modules Stack Together?</h2>
     <div class="zs-split">
@@ -1282,7 +1316,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Crane -->
-  <section class="dn-panel" id="crane" aria-labelledby="zs-crane-title">
+  <section class="dn-panel pg-band" id="crane" aria-labelledby="zs-crane-title" data-num="04">
     <span class="section-label">Craneable</span>
     <h2 class="block-title reveal" id="zs-crane-title" style="margin-bottom:16px;">Can a Z-Stack™ Tower Be Moved by Crane?</h2>
     <div class="zs-split">
@@ -1298,7 +1332,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Compare -->
-  <section class="dn-panel" id="compare" aria-labelledby="zs-cmp-title">
+  <section class="dn-panel pg-band pg-band-tint" id="compare" aria-labelledby="zs-cmp-title" data-num="05">
     <span class="section-label">Compare</span>
     <h2 class="block-title reveal" id="zs-cmp-title" style="margin-bottom:16px;">Is a Z-Stack™ Better Than a Scaffold Stair Tower or a Ladder?</h2>
     <p class="dn-lead" style="max-width:780px;">For repeated trips between levels, usually yes. Scaffold stair towers take a crew and time to build piece by piece, and ladders make workers climb hand over hand without tools. Here is how they compare.</p>
@@ -1326,7 +1360,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Landing solutions -->
-  <section class="dn-panel" id="landing" aria-labelledby="zs-land-title">
+  <section class="dn-panel pg-band" id="landing" aria-labelledby="zs-land-title" data-num="06">
     <span class="section-label">Top Landing</span>
     <h2 class="block-title reveal" id="zs-land-title" style="margin-bottom:12px;">What If the Tower Doesn&rsquo;t Line Up With the Roof?</h2>
     <p class="dn-lead" style="max-width:780px;">Modules come in fixed heights, so the top landing rarely matches the roof or platform exactly. Every tower finishes with a transition from the top landing to the roof: an AdaptaStep™ bridge when the difference is 24" or less, and AdjustaStairs™ from 24" to 48". If 48" or more would be left, the tower gets another stair module. The height calculator above picks the right one for your height.</p>
@@ -1337,13 +1371,13 @@ body figure.photo-tile { margin: 0; }
       </div>
       <div>
         <img src="images/z-stack-adjustastairs-transition.webp" alt="AdjustaStairs™ self-leveling stair transition with handrails connecting a Z-Stack™ landing to a higher level" width="642" height="599" decoding="async" loading="lazy">
-        <div><span class="zs-tag">24" to 48" difference</span><h3><a href="adjustastair.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™</a> Transition</h3><p>Self-leveling stairs connect the top landing to a higher or lower level, with no unsafe step-downs or site-built steps. See <a href="adjustastairspecs.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ specs and sizing</a>.</p></div>
+        <div><span class="zs-tag">24" to 48" difference</span><h3><a href="adjustastair.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™</a> Transition</h3><p>Self-leveling stairs connect the top landing to a higher or lower level, with no unsafe step-downs or site-built steps. See <a href="adjustastair.html#models" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ specs and sizing</a>.</p></div>
       </div>
     </div>
   </section>
 
   <!-- Accessories -->
-  <section class="dn-panel" id="accessories" aria-labelledby="zs-acc-title">
+  <section class="dn-panel pg-band pg-band-tint" id="accessories" aria-labelledby="zs-acc-title" data-num="07">
     <span class="section-label">Accessories</span>
     <h2 class="block-title reveal" id="zs-acc-title" style="margin-bottom:12px;">Which Accessories Are Available for Z-Stack™?</h2>
     <p class="dn-lead" style="max-width:780px;">Add-ons adapt a tower to the site, the people using it and how long it will stay.</p>
@@ -1358,7 +1392,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Uses -->
-  <section class="dn-panel" id="uses" aria-labelledby="zs-uses-title">
+  <section class="dn-panel pg-band" id="uses" aria-labelledby="zs-uses-title" data-num="08">
     <span class="section-label">Applications</span>
     <h2 class="block-title reveal" id="zs-uses-title" style="margin-bottom:16px;">Where Are Z-Stack™ Stair Towers Used?</h2>
     <div class="zs-split" style="margin-bottom:24px;">
@@ -1380,7 +1414,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Projects -->
-  <section class="dn-panel" id="projects" aria-labelledby="zs-proj-title">
+  <section class="dn-panel pg-band pg-band-tint" id="projects" aria-labelledby="zs-proj-title" data-num="09">
     <span class="section-label">Project Profiles</span>
     <h2 class="block-title reveal" id="zs-proj-title" style="margin-bottom:12px;"><img class="brand-logo" src="images/safesmart-logo-red.webp" alt="SafeSmart" width="600" height="83" loading="lazy" decoding="async"> Z-Stack™ on Real Projects</h2>
     <p class="dn-lead" style="max-width:780px;">Two project profiles from SafeSmart, the manufacturer of Z-Stack™.</p>
@@ -1408,7 +1442,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Brochure -->
-  <section class="dn-panel" id="brochure" aria-labelledby="zs-doc-title">
+  <section class="dn-panel pg-band" id="brochure" aria-labelledby="zs-doc-title" data-num="10">
     <span class="section-label">Download</span>
     <h2 class="block-title reveal" id="zs-doc-title" style="margin-bottom:12px;">Z-Stack™ Brochure</h2>
     <p class="dn-lead" style="max-width:780px;">Full module layouts, component lists, accessories, landing solutions and project profiles, in one PDF. The AdaptaStep™ brochure covers the bridging platforms, catwalks and crossovers that connect a tower to the roof.</p>
@@ -1417,10 +1451,11 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- FAQ -->
-  <section itemscope itemtype="https://schema.org/FAQPage" style="margin-bottom:40px;" id="faq">
-    <span class="section-label">Frequently Asked Questions</span>
+  <section class="pg-faq" itemscope itemtype="https://schema.org/FAQPage" style="margin-bottom:40px;" id="faq">
+    <div class="faq-head"><span class="section-label">Frequently Asked Questions</span>
     <h2 class="block-title reveal" style="margin-bottom:8px;">Z-Stack™ Stair Tower FAQ</h2>
-    <div class="dn-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    </div>
+    <div class="faq-list"><div class="dn-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What is a Z-Stack stair tower?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">Z-Stack™ is a modular, pre-engineered aluminum stair tower made by SafeSmart and supplied by ATI Construction Products. Bolt-together modules, each with two stair flights and a landing, stack to the height you need and can be craned into place as one tower.</p></div>
     </div>
@@ -1456,6 +1491,7 @@ body figure.photo-tile { margin: 0; }
       <h3 itemprop="name">Where can I buy a Z-Stack stair tower?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">ATI Construction Products supplies Z-Stack™ towers, accessories and transitions with same-day quotes and nationwide shipping. Call (800) 360-6115 or use the calculator on this page to send your setup for a quote.</p></div>
     </div>
+  </div>
   </section>
 
   <!-- CTA Strip -->
@@ -1529,7 +1565,6 @@ body figure.photo-tile { margin: 0; }
             <a href="offerings.html">See everything we offer</a>
             <p class="footer-dd-h"><a href="offerings.html#construction-products">Construction Products</a></p>
             <a href="adjustastair.html">AdjustaStairs™ System</a>
-            <a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a>
             <a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a>
             <a href="debris-netting.html">Debris and Safety Netting</a>
             <a href="nationwide-construction-supply.html">Nationwide Construction Supply</a>
@@ -1788,7 +1823,7 @@ var ZSZ = (function () {
       '<dt>Footprint</dt><dd>' + esc(t.footprint) + '</dd>' +
       '<dt>Quantity</dt><dd>' + state.qty + '</dd></dl>' +
       (p.lifting ? '<p class="zsz-tip">Craning the whole tower in one lift? Lifting bars are required for 4 or more modules.</p>' : '') +
-      (p.belowOne ? '<p class="zsz-tip">That height is less than one module. A standalone <a href="adjustastairspecs.html">AdjustaStairs™</a> may fit better.</p>' : '') +
+      (p.belowOne ? '<p class="zsz-tip">That height is less than one module. A standalone <a href="adjustastair.html">AdjustaStairs™</a> may fit better.</p>' : '') +
       '<p class="zsz-panel-note">ATI confirms the final layout, anchoring and pricing, usually the same business day.</p>' +
       '<a class="zsz-quote" href="contact.html?interest=zstack" data-quote>Request a quote</a>' +
       '<p class="zsz-panel-call">Or call <a href="tel:+18003606115">(800) 360-6115</a></p>';

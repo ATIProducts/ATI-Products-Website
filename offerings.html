@@ -920,6 +920,40 @@ body .swatch img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 
 body .swatch:hover img { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(15,26,46,0.14); }
 body .swatch figcaption { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--text-dark); }
 body figure.photo-tile { margin: 0; }
+/* Page bands (the What We Offer look): full-width alternating bands, big faded numbers,
+   an offset color block behind intro photos and a dark FAQ band. Classes added per page. */
+body .pg-cp { --pg: #00703a; --pg-soft: rgba(0,112,58,0.16); --pg-tint: #eef6f1; --pg-on-dark: #3ddc84; }
+body .pg-be { --pg: #1d4ed8; --pg-soft: rgba(29,78,216,0.16); --pg-tint: #eef3fd; --pg-on-dark: #8db8ff; }
+body .pg-se { --pg: #c2410c; --pg-soft: rgba(194,65,12,0.16); --pg-tint: #fff4ec; --pg-on-dark: #fdba74; }
+body .pg-band, body .pg-faq { --band: #fff; position: relative; margin: 0 !important; padding: 80px 0 !important; background: var(--band) !important; border: 0 !important; border-radius: 0 !important; box-shadow: 0 0 0 100vmax var(--band) !important; clip-path: inset(0 -100vmax); }
+body .pg-band-tint { --band: var(--pg-tint); }
+body .pg-band[data-num]::after { content: attr(data-num); position: absolute; top: 20px; right: 0; font-size: clamp(90px, 12vw, 170px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: var(--pg); opacity: 0.07; pointer-events: none; }
+body .pg-band .section-label, body .pg-band .feature-eyebrow { color: var(--pg); }
+body .pg-band-tint [style*="background:#f7f8f9"], body .pg-band-tint [style*="background: #f7f8f9"] { background: #fff !important; }
+body .page-body .pg-shot { border-radius: 16px; box-shadow: 18px 18px 0 var(--pg-soft), 0 20px 50px rgba(15,26,46,0.16) !important; }
+body .pg-faq { --band: #0f1a2e; color: #fff; padding: 88px 0 !important; }
+body .pg-faq .faq-head .section-label { color: var(--pg-on-dark); }
+body .pg-faq .faq-head h2 { color: #fff !important; }
+body .pg-faq .faq-head p { color: rgba(255,255,255,0.8) !important; }
+body .pg-faq .faq-head a { color: var(--pg-on-dark) !important; }
+body .pg-faq .faq-list > div[style*="margin-top"] { margin-top: 0 !important; }
+body .pg-faq .faq-list [itemprop="mainEntity"] { background: #fff; color: var(--text-dark); border: 0 !important; border-radius: 12px; padding: 20px 24px !important; margin-bottom: 12px; }
+body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
+@media (min-width: 901px) {
+  body .pg-faq { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 56px; align-items: start; }
+  body .pg-faq .faq-head { position: sticky; top: 100px; }
+}
+@media (max-width: 900px) { body .pg-faq .faq-head { margin-bottom: 24px; } }
+@media (max-width: 700px) {
+  body .pg-band, body .pg-faq { padding: 56px 0 !important; }
+  body .page-body .pg-shot { box-shadow: 10px 10px 0 var(--pg-soft), 0 14px 32px rgba(15,26,46,0.14) !important; }
+}
+/* Wider content on large screens (pages were capped at 1100px) */
+@media (min-width: 1200px) {
+  body .page-body, body .page-header-inner, body .footer-inner, body .geo-section-inner { max-width: 1320px; }
+  body section[style*="max-width:1100px"] { max-width: 1320px !important; }
+  body .page-body p { max-width: 1000px; }
+}
 @media (max-width: 700px) {
   body .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
   body .photo-tiles { grid-template-columns: 1fr; }
@@ -1015,6 +1049,19 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
   body .co-band .feature-img::before { inset: 12px -8px -12px 12px; }
   body .page-body > .stat-row .stat-cell { padding: 24px 6px; }
 }
+/* Company photo: fills the height of the text beside it and drifts as the page scrolls */
+body .co-band .feature-img { margin: 0; display: flex; flex-direction: column; }
+body .co-band .fi-frame { position: relative; display: block; flex: 1; min-height: 340px; overflow: hidden; border-radius: 16px; box-shadow: 0 20px 50px rgba(15,26,46,0.16); }
+body .co-band .fi-frame img { position: absolute; left: 0; top: -60px; width: 100%; max-width: none; height: calc(100% + 120px); border-radius: 0; box-shadow: none; transform: translate3d(0, var(--py, 0px), 0); }
+@media (min-width: 901px) { body .co-band .grid-2-1, body .co-band .grid-1-2 { align-items: stretch; } }
+@media (max-width: 700px) { body .co-band .fi-frame { min-height: 260px; } }
+/* Visit + Get a Quote buttons side by side */
+body .co-band .co-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+body .co-band .co-actions > a { margin: 0; }
+body .co-band .co-actions .btn-outline-dark { color: var(--accent); border: 2px solid var(--accent); background: transparent; padding: 12px 22px; }
+body .co-band .co-actions .btn-outline-dark:hover { background: var(--accent); color: #fff; }
+body .co-be .co-actions .btn-outline-dark { color: #fff; border-color: rgba(255,255,255,0.75); }
+body .co-be .co-actions .btn-outline-dark:hover { background: #fff; color: #0f1a2e; border-color: #fff; }
 /* ══ END WHAT WE OFFER PAGE DESIGN ══ */
 
 </style>
@@ -1028,7 +1075,7 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
   <a href="index.html" class="nav-logo">
     <img decoding="async" width="1726" height="922" src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding, Lead Generation and Business Growth | Arvada, Colorado" itemprop="logo" style="height:auto;width:140px;max-height:34px;object-fit:contain;display:block;" title="ATI Products LLC | Headquartered in Arvada, Colorado | Serving Contractors in All 50 States Since 1999" srcset="images/ati-products-logo-mark-320w.webp 320w" sizes="(max-width: 900px) 35vw, 140px">
   </a>
-  <ul class="nav-links"><li class="nav-dd"><a href="offerings.html" class="active">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+  <ul class="nav-links"><li class="nav-dd"><a href="offerings.html" class="active">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   <a href="contact.html" class="nav-cta">Get in Touch</a>
   <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="toggleNav(this)">
     <span></span><span></span><span></span>
@@ -1036,7 +1083,7 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
 </nav>
 <div class="mobile-nav" id="mobile-nav-drawer" role="navigation" aria-label="Mobile navigation">
     <a href="index.html" class="">Home</a>
-    <span class="mnav-group"><a href="offerings.html" class="active">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="false" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub" hidden><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
+    <span class="mnav-group"><a href="offerings.html" class="active">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="false" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub" hidden><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
     <a href="about.html" class="">About</a>
     <a href="affiliates.html" class="">Affiliates</a>
     <a href="blog.html" class="">Blog</a>
@@ -1094,10 +1141,10 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
         <h3 style="font-size:15px;font-weight:600;color:var(--green);margin-bottom:16px;">Innovative Products for the Construction Industry</h3>
         <p class="feature-text">Brand-name construction supplies, <a href="https://www.osha.gov/fall-protection" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">safety equipment</a>, and innovative access systems from <a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">ATI Construction Products</a>, at discount rates. Same-day quotes on most products, shipped nationwide. Serving general contractors, scaffolding companies, facility owners, and specialty trades across all 50 states since 1999.</p>
         <div class="doc-cards" style="margin:0 0 28px;"><a class="doc-card" href="downloads/webrail-fall-arrest-guardrail-brochure.pdf" target="_blank" rel="noopener noreferrer"><span class="doc-thumb"><img src="images/webrail-fall-arrest-guardrail-brochure-preview.webp" alt="Cover of the WebRail Fall Arrest Guardrail brochure (PDF)" width="420" height="544" loading="lazy" decoding="async" srcset="images/webrail-fall-arrest-guardrail-brochure-preview-320w.webp 320w" sizes="(max-width: 900px) 25vw, 96px"></span><span class="doc-info"><span class="doc-type">Brochure</span><span class="doc-title">WebRail Fall Arrest Guardrail</span><span class="doc-meta">PDF &middot; 2 pages &middot; 752 KB</span><span class="doc-cta">Download the Brochure (PDF)</span></span></a></div>
-        <a rel="noopener noreferrer" target="_blank" href="https://ati-constructionproducts.com/" class="btn-green">Visit ATI Construction Products</a>
+        <div class="co-actions"><a rel="noopener noreferrer" target="_blank" href="https://ati-constructionproducts.com/" class="btn-green">Visit ATI Construction Products</a><a href="contact.html?interest=construction" class="btn-outline-dark">Get a Quote</a></div>
       </div>
       <figure class="feature-img" aria-label="ATI Construction Products">
-        <img decoding="async" width="1280" height="896" src="images/ati-construction-products-scaffolding-adjustastairs.webp" alt="ATI Construction Products LLC : scaffolding, AdjustaStairs™ stair systems, fall protection and safety equipment supplier headquartered in Arvada, Colorado" loading="lazy" srcset="images/ati-construction-products-scaffolding-adjustastairs-480w.webp 480w, images/ati-construction-products-scaffolding-adjustastairs-800w.webp 800w, images/ati-construction-products-scaffolding-adjustastairs-900w.webp 900w" sizes="(max-width: 900px) 94vw, 583px">
+        <span class="fi-frame"><img decoding="async" width="1280" height="896" src="images/ati-construction-products-scaffolding-adjustastairs.webp" alt="ATI Construction Products LLC : scaffolding, AdjustaStairs™ stair systems, fall protection and safety equipment supplier headquartered in Arvada, Colorado" loading="lazy" srcset="images/ati-construction-products-scaffolding-adjustastairs-480w.webp 480w, images/ati-construction-products-scaffolding-adjustastairs-800w.webp 800w, images/ati-construction-products-scaffolding-adjustastairs-900w.webp 900w" sizes="(max-width: 900px) 94vw, 583px"></span>
       </figure>
     </div>
   </div>
@@ -1111,7 +1158,7 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
   <img class="card-photo" src="images/adjustastairs-foundation-wall-crane-site.jpg" srcset="images/adjustastairs-foundation-wall-crane-site-640w.jpg 640w, images/adjustastairs-foundation-wall-crane-site.jpg 1080w" sizes="(max-width: 700px) 92vw, 360px" alt="AdjustaStairs™ with red handrails giving access to the top of a concrete foundation wall on a construction site" width="1080" height="1080" loading="lazy" decoding="async">
   <span class="offer-block-tag construction">Construction</span>
   <h3>Access Systems</h3>
-  <ul><li><a href="adjustastair.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ Adjustable Stair Systems</a></li><li><a href="adjustastairspecs.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ Specs and Sizing</a></li><li>AdaptaStep™ and AdaptaSpan™ (<a href="downloads/adaptastep-access-platform-brochure.pdf" style="color:#00703a;text-decoration:underline;" target="_blank" rel="noopener noreferrer">AdaptaStep brochure, PDF</a>)</li><li><a href="z-stack-stair-tower.html" style="color:#00703a;text-decoration:underline;">Z-Stack™ Modular Stair Towers</a></li><li>Aluminum Scaffolding Systems</li><li><a href="downloads/webrail-fall-arrest-guardrail-brochure.pdf" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">Engineered Edge Protection</a> (WebRail brochure, PDF)</li><li>Custom Aluminum Ramps and Stairs</li></ul>
+  <ul><li><a href="adjustastair.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ Adjustable Stair Systems</a></li><li><a href="adjustastair.html#sizing" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ Size Calculator</a></li><li>AdaptaStep™ and AdaptaSpan™ (<a href="downloads/adaptastep-access-platform-brochure.pdf" style="color:#00703a;text-decoration:underline;" target="_blank" rel="noopener noreferrer">AdaptaStep brochure, PDF</a>)</li><li><a href="z-stack-stair-tower.html" style="color:#00703a;text-decoration:underline;">Z-Stack™ Modular Stair Towers</a></li><li>Aluminum Scaffolding Systems</li><li><a href="downloads/webrail-fall-arrest-guardrail-brochure.pdf" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">Engineered Edge Protection</a> (WebRail brochure, PDF)</li><li>Custom Aluminum Ramps and Stairs</li></ul>
 </div>
       <div class="offer-block reveal">
   <img class="card-photo" src="images/construction-crew-multi-story-building-project-800w.webp" alt="Construction crew walking a multi-story building site with a tower crane overhead" width="800" height="533" loading="lazy" decoding="async">
@@ -1154,7 +1201,7 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
   <div class="feature-block reveal">
     <div class="grid-1-2">
       <figure class="feature-img" aria-label="ATI Business Essentials">
-        <img decoding="async" width="1280" height="896" src="images/ati-business-essentials-lead-generation-marketing.webp" alt="ATI Business Essentials LLC : lead generation, Google Ads management and marketing services for service businesses and contractors nationwide" loading="lazy" srcset="images/ati-business-essentials-lead-generation-marketing-480w.webp 480w, images/ati-business-essentials-lead-generation-marketing-640w.webp 640w, images/ati-business-essentials-lead-generation-marketing-800w.webp 800w, images/ati-business-essentials-lead-generation-marketing-900w.webp 900w" sizes="(max-width: 900px) 94vw, 583px">
+        <span class="fi-frame"><img decoding="async" width="1280" height="896" src="images/ati-business-essentials-lead-generation-marketing.webp" alt="ATI Business Essentials LLC : lead generation, Google Ads management and marketing services for service businesses and contractors nationwide" loading="lazy" srcset="images/ati-business-essentials-lead-generation-marketing-480w.webp 480w, images/ati-business-essentials-lead-generation-marketing-640w.webp 640w, images/ati-business-essentials-lead-generation-marketing-800w.webp 800w, images/ati-business-essentials-lead-generation-marketing-900w.webp 900w" sizes="(max-width: 900px) 94vw, 583px"></span>
       </figure>
       <div>
         <img src="images/ati-business-essentials-logo.webp" alt="ATI Business Essentials logo" width="1806" height="1696" loading="lazy" decoding="async" style="height:48px;width:auto;margin-bottom:14px;display:block;" srcset="images/ati-business-essentials-logo-160w.webp 160w" sizes="(max-width: 900px) 14vw, 51px">
@@ -1162,7 +1209,7 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
         <h2 class="feature-title">ATI Business Essentials, LLC</h2>
         <h3 style="font-size:15px;font-weight:600;color:var(--green);margin-bottom:16px;">Lead Gen, Marketing and Growth Services for Service Businesses</h3>
         <p class="feature-text">Two connected platforms for service businesses at <a href="https://ati-businessessentials.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">ATI Business Essentials</a>: Leads Plus, a simple CRM replacement for lead and bid pipeline management, and Marketing Hub, which connects paid ads, social media, and your website with AI-driven insights. Built for service businesses and kept refreshingly simple.</p>
-        <a rel="noopener noreferrer" target="_blank" href="https://ati-businessessentials.com/" class="btn-green">Visit ATI Business Essentials</a>
+        <div class="co-actions"><a rel="noopener noreferrer" target="_blank" href="https://ati-businessessentials.com/" class="btn-green">Visit ATI Business Essentials</a><a href="contact.html?interest=business" class="btn-outline-dark">Get a Quote</a></div>
       </div>
     </div>
   </div>
@@ -1210,10 +1257,10 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
         <h2 class="feature-title">Scaffold Exchange</h2>
         <h3 style="font-size:15px;font-weight:600;color:var(--green);margin-bottom:16px;">A Marketplace for Buying and Selling Scaffolding</h3>
         <p class="feature-text">An online marketplace connecting contractors, suppliers, and project owners to buy and sell scaffolding equipment with confidence. Visit <a href="https://scaffoldexchange.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">Scaffold Exchange</a> to list used or surplus scaffolding for sale, source equipment from trusted sellers, and access a nationwide network built by industry insiders.</p>
-        <a href="https://scaffoldexchange.com/" target="_blank" rel="noopener noreferrer" class="btn-green">Visit Scaffold Exchange</a>
+        <div class="co-actions"><a href="https://scaffoldexchange.com/" target="_blank" rel="noopener noreferrer" class="btn-green">Visit Scaffold Exchange</a><a href="contact.html?interest=exchange" class="btn-outline-dark">Get a Quote</a></div>
       </div>
       <figure class="feature-img" aria-label="Scaffold Exchange">
-        <img decoding="async" width="1920" height="1080" src="images/scaffolding-equipment-construction-project.webp" alt="Scaffold Exchange : online marketplace for buying and selling new and used scaffolding equipment, connecting contractors and suppliers across all 50 states" loading="lazy" srcset="images/scaffolding-equipment-construction-project-640w.webp 640w, images/scaffolding-equipment-construction-project-800w.webp 800w, images/scaffolding-equipment-construction-project-1280w.webp 1280w, images/scaffolding-equipment-construction-project-1920w.webp 1920w" sizes="(max-width: 900px) 94vw, 583px">
+        <span class="fi-frame"><img decoding="async" width="1920" height="1080" src="images/scaffolding-equipment-construction-project.webp" alt="Scaffold Exchange : online marketplace for buying and selling new and used scaffolding equipment, connecting contractors and suppliers across all 50 states" loading="lazy" srcset="images/scaffolding-equipment-construction-project-640w.webp 640w, images/scaffolding-equipment-construction-project-800w.webp 800w, images/scaffolding-equipment-construction-project-1280w.webp 1280w, images/scaffolding-equipment-construction-project-1920w.webp 1920w" sizes="(max-width: 900px) 94vw, 583px"></span>
       </figure>
     </div>
   </div>
@@ -1237,7 +1284,7 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
     <table class="of-table">
       <thead><tr><th scope="col">Product or service</th><th scope="col">Key facts</th></tr></thead>
       <tbody>
-        <tr><td><a href="adjustastairspecs.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™</a></td><td>6 to 40 steps, reaching about 3 to 32 feet, in 24, 36 or 48 inch widths. Ships to all 50 states from California.</td></tr>
+        <tr><td><a href="adjustastair.html#models" style="color:#00703a;text-decoration:underline;">AdjustaStairs™</a></td><td>6 to 40 steps, reaching about 3 to 32 feet, in 24, 36 or 48 inch widths. Ships to all 50 states from California.</td></tr>
         <tr><td>OSHA stair rule</td><td>Construction sites need a stairway or ladder at any break in elevation of 19 inches or more (<a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1926/1926.1051" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">OSHA 1926.1051</a>).</td></tr>
         <tr><td><a href="debris-netting.html#ds-1320" style="color:#00703a;text-decoration:underline;">DS-1320 debris netting</a></td><td>Arm extends 13 feet from the slab edge, fits decks 4 to 22 inches deep, weighs 86 lbs.</td></tr>
         <tr><td><a href="debris-netting.html#rb-412" style="color:#00703a;text-decoration:underline;">RB-412 safety netting</a></td><td>Pole extends 20 feet, fits decks 4 to 22 inches deep, weighs 105 lbs. OSHA requires personnel nets no more than 30 feet below the work.</td></tr>
@@ -1303,7 +1350,6 @@ body .page-body > section[itemtype$="FAQPage"] > div > div { background: #fff; b
             <a href="offerings.html">See everything we offer</a>
             <p class="footer-dd-h"><a href="offerings.html#construction-products">Construction Products</a></p>
             <a href="adjustastair.html">AdjustaStairs™ System</a>
-            <a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a>
             <a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a>
             <a href="debris-netting.html">Debris and Safety Netting</a>
             <a href="nationwide-construction-supply.html">Nationwide Construction Supply</a>
@@ -1476,6 +1522,28 @@ document.addEventListener('keydown', function(e) {
     var sub = document.getElementById(mb.getAttribute('aria-controls')), o = sub.hidden;
     sub.hidden = !o; mb.setAttribute('aria-expanded', String(o));
   });
+})();
+</script>
+<script>
+// Company photos drift slightly as their section scrolls past (skipped when reduced motion is on)
+(function () {
+  var imgs = [].slice.call(document.querySelectorAll('.co-band .fi-frame img'));
+  if (!imgs.length || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var queued = false;
+  function update() {
+    queued = false;
+    var vh = window.innerHeight;
+    imgs.forEach(function (img) {
+      var r = img.parentNode.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      var p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+      img.style.setProperty('--py', ((0.5 - p) * 100).toFixed(1) + 'px');
+    });
+  }
+  function queue() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  update();
 })();
 </script>
 </body>

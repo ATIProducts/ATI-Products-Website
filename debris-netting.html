@@ -961,6 +961,40 @@ body .swatch img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 
 body .swatch:hover img { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(15,26,46,0.14); }
 body .swatch figcaption { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--text-dark); }
 body figure.photo-tile { margin: 0; }
+/* Page bands (the What We Offer look): full-width alternating bands, big faded numbers,
+   an offset color block behind intro photos and a dark FAQ band. Classes added per page. */
+body .pg-cp { --pg: #00703a; --pg-soft: rgba(0,112,58,0.16); --pg-tint: #eef6f1; --pg-on-dark: #3ddc84; }
+body .pg-be { --pg: #1d4ed8; --pg-soft: rgba(29,78,216,0.16); --pg-tint: #eef3fd; --pg-on-dark: #8db8ff; }
+body .pg-se { --pg: #c2410c; --pg-soft: rgba(194,65,12,0.16); --pg-tint: #fff4ec; --pg-on-dark: #fdba74; }
+body .pg-band, body .pg-faq { --band: #fff; position: relative; margin: 0 !important; padding: 80px 0 !important; background: var(--band) !important; border: 0 !important; border-radius: 0 !important; box-shadow: 0 0 0 100vmax var(--band) !important; clip-path: inset(0 -100vmax); }
+body .pg-band-tint { --band: var(--pg-tint); }
+body .pg-band[data-num]::after { content: attr(data-num); position: absolute; top: 20px; right: 0; font-size: clamp(90px, 12vw, 170px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: var(--pg); opacity: 0.07; pointer-events: none; }
+body .pg-band .section-label, body .pg-band .feature-eyebrow { color: var(--pg); }
+body .pg-band-tint [style*="background:#f7f8f9"], body .pg-band-tint [style*="background: #f7f8f9"] { background: #fff !important; }
+body .page-body .pg-shot { border-radius: 16px; box-shadow: 18px 18px 0 var(--pg-soft), 0 20px 50px rgba(15,26,46,0.16) !important; }
+body .pg-faq { --band: #0f1a2e; color: #fff; padding: 88px 0 !important; }
+body .pg-faq .faq-head .section-label { color: var(--pg-on-dark); }
+body .pg-faq .faq-head h2 { color: #fff !important; }
+body .pg-faq .faq-head p { color: rgba(255,255,255,0.8) !important; }
+body .pg-faq .faq-head a { color: var(--pg-on-dark) !important; }
+body .pg-faq .faq-list > div[style*="margin-top"] { margin-top: 0 !important; }
+body .pg-faq .faq-list [itemprop="mainEntity"] { background: #fff; color: var(--text-dark); border: 0 !important; border-radius: 12px; padding: 20px 24px !important; margin-bottom: 12px; }
+body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
+@media (min-width: 901px) {
+  body .pg-faq { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 56px; align-items: start; }
+  body .pg-faq .faq-head { position: sticky; top: 100px; }
+}
+@media (max-width: 900px) { body .pg-faq .faq-head { margin-bottom: 24px; } }
+@media (max-width: 700px) {
+  body .pg-band, body .pg-faq { padding: 56px 0 !important; }
+  body .page-body .pg-shot { box-shadow: 10px 10px 0 var(--pg-soft), 0 14px 32px rgba(15,26,46,0.14) !important; }
+}
+/* Wider content on large screens (pages were capped at 1100px) */
+@media (min-width: 1200px) {
+  body .page-body, body .page-header-inner, body .footer-inner, body .geo-section-inner { max-width: 1320px; }
+  body section[style*="max-width:1100px"] { max-width: 1320px !important; }
+  body .page-body p { max-width: 1000px; }
+}
 @media (max-width: 700px) {
   body .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
   body .photo-tiles { grid-template-columns: 1fr; }
@@ -985,7 +1019,7 @@ body figure.photo-tile { margin: 0; }
   <a href="index.html" class="nav-logo">
     <img src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding and Business Growth | Arvada, Colorado" title="ATI Products LLC | Arvada, CO | Serving All 50 States" width="1726" height="922" decoding="async" itemprop="logo" srcset="images/ati-products-logo-mark-320w.webp 320w" sizes="(max-width: 900px) 35vw, 140px">
   </a>
-  <ul class="nav-links"><li><a href="index.html" class="">Home</a></li><li class="nav-dd"><a href="offerings.html" class="active">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html" aria-current="page">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+  <ul class="nav-links"><li><a href="index.html" class="">Home</a></li><li class="nav-dd"><a href="offerings.html" class="active">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html" aria-current="page">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   <a href="contact.html" class="nav-cta">Get in Touch</a>
   <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="toggleNav(this)">
     <span></span><span></span><span></span>
@@ -993,7 +1027,7 @@ body figure.photo-tile { margin: 0; }
 </nav>
 <div class="mobile-nav" id="mobile-nav-drawer" role="navigation" aria-label="Mobile navigation">
   <a href="index.html">Home</a>
-  <span class="mnav-group"><a href="offerings.html">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="true" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub"><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html" aria-current="page">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
+  <span class="mnav-group"><a href="offerings.html">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="true" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub"><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html" aria-current="page">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
   <a href="about.html">About</a>
   <a href="affiliates.html">Affiliates</a>
     <a href="blog.html" class="">Blog</a>
@@ -1019,12 +1053,12 @@ body figure.photo-tile { margin: 0; }
   </div>
 </div>
 
-<div class="page-body">
+<div class="page-body pg-cp">
 
   <!-- Intro -->
-  <div class="dn-intro">
+  <div class="dn-intro pg-band">
     <figure itemscope itemtype="https://schema.org/ImageObject" style="margin:0;">
-      <img class="dn-intro-img" src="images/debris-netting-installed-on-building-exterior.webp" alt="Debris netting installed along the exterior of a building under construction, with boom lifts and a covered walkway below" width="960" height="480" decoding="async" itemprop="contentUrl" fetchpriority="low" srcset="images/debris-netting-installed-on-building-exterior-800w.webp 800w, images/debris-netting-installed-on-building-exterior-960w.webp 960w" sizes="(max-width: 900px) 94vw, 486px">
+      <img class="dn-intro-img pg-shot" src="images/debris-netting-installed-on-building-exterior.webp" alt="Debris netting installed along the exterior of a building under construction, with boom lifts and a covered walkway below" width="960" height="480" decoding="async" itemprop="contentUrl" fetchpriority="low" srcset="images/debris-netting-installed-on-building-exterior-800w.webp 800w, images/debris-netting-installed-on-building-exterior-960w.webp 960w" sizes="(max-width: 900px) 94vw, 486px">
       <figcaption class="sr-only" itemprop="description">Debris netting from ATI Construction Products installed on a building exterior during construction</figcaption>
     </figure>
     <div>
@@ -1048,7 +1082,7 @@ body figure.photo-tile { margin: 0; }
   </div>
 
   <!-- Products -->
-  <section class="dn-panel" aria-labelledby="dn-products-title">
+  <section class="dn-panel pg-band pg-band-tint" aria-labelledby="dn-products-title" data-num="01">
     <span class="section-label">The Systems</span>
     <h2 class="block-title reveal" id="dn-products-title" style="margin-bottom:32px;">Two Netting Systems, One Slab Bracket</h2>
 
@@ -1085,7 +1119,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Compare -->
-  <section class="dn-panel" id="compare" aria-labelledby="dn-compare-title">
+  <section class="dn-panel pg-band" id="compare" aria-labelledby="dn-compare-title" data-num="02">
     <span class="section-label">Which One Do I Need?</span>
     <h2 class="block-title reveal" id="dn-compare-title" style="margin-bottom:24px;">DS-1320 vs. RB-412 at a Glance</h2>
     <div class="dn-compare-wrap">
@@ -1107,7 +1141,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Install -->
-  <section class="dn-panel" aria-labelledby="dn-install-title">
+  <section class="dn-panel pg-band pg-band-tint" aria-labelledby="dn-install-title" data-num="03">
     <span class="section-label">Installation</span>
     <h2 class="block-title reveal" id="dn-install-title" style="margin-bottom:28px;">Easy to Install at the Working Level</h2>
     <ol class="dn-steps">
@@ -1119,7 +1153,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Custom + containment -->
-  <section class="dn-panel" id="custom-netting" aria-labelledby="dn-custom-title">
+  <section class="dn-panel pg-band" id="custom-netting" aria-labelledby="dn-custom-title" data-num="04">
     <span class="section-label">Custom Netting and Containment</span>
     <h2 class="block-title reveal" id="dn-custom-title" style="margin-bottom:16px;">When a Standard System Doesn't Fit</h2>
     <p class="dn-lead" style="max-width:760px;">Odd building shapes, tight sites, and demolition work often need something built to fit. ATI designs custom netting and supplies the sheeting and containment materials that go with it, along with <a href="offerings.html" style="color:#00703a;text-decoration:underline;">scaffolding, access systems and fall protection</a>.</p>
@@ -1150,7 +1184,7 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Who -->
-  <section class="dn-panel" aria-labelledby="dn-who-title">
+  <section class="dn-panel pg-band pg-band-tint" aria-labelledby="dn-who-title" data-num="05">
     <span class="section-label">Who Uses It</span>
     <h2 class="block-title reveal" id="dn-who-title" style="margin-bottom:24px;">Built for Sites Where Things Can Fall</h2>
     <div class="dn-cards">
@@ -1162,18 +1196,19 @@ body figure.photo-tile { margin: 0; }
   </section>
 
   <!-- Downloads -->
-  <section class="dn-panel" id="downloads" aria-labelledby="dn-downloads-title">
+  <section class="dn-panel pg-band" id="downloads" aria-labelledby="dn-downloads-title" data-num="06">
     <span class="section-label">Downloads</span>
     <h2 class="block-title reveal" id="dn-downloads-title" style="margin-bottom:24px;">Spec Sheets and Installation Guide</h2>
     <div class="doc-cards"><a class="doc-card" href="downloads/ds-1320-debris-netting-system-spec-sheet.pdf" target="_blank" rel="noopener noreferrer"><span class="doc-thumb"><img src="images/ds-1320-debris-netting-system-spec-sheet-preview.webp" alt="Cover of the DS-1320 Debris Netting System spec sheet (PDF)" width="420" height="544" loading="lazy" decoding="async" srcset="images/ds-1320-debris-netting-system-spec-sheet-preview-160w.webp 160w, images/ds-1320-debris-netting-system-spec-sheet-preview-320w.webp 320w" sizes="(max-width: 900px) 25vw, 96px"></span><span class="doc-info"><span class="doc-type">Spec Sheet</span><span class="doc-title">DS-1320 Debris Netting System</span><span class="doc-meta">PDF &middot; 1 page &middot; 1.1 MB</span><span class="doc-cta">Download the Spec Sheet</span></span></a><a class="doc-card" href="downloads/ds-1320-debris-netting-system-installation-guide.pdf" target="_blank" rel="noopener noreferrer"><span class="doc-thumb"><img src="images/ds-1320-debris-netting-system-installation-guide-preview.webp" alt="Cover of the DS-1320 Debris Netting System installation guide (PDF)" width="420" height="544" loading="lazy" decoding="async" srcset="images/ds-1320-debris-netting-system-installation-guide-preview-160w.webp 160w, images/ds-1320-debris-netting-system-installation-guide-preview-320w.webp 320w" sizes="(max-width: 900px) 25vw, 96px"></span><span class="doc-info"><span class="doc-type">Installation Guide</span><span class="doc-title">DS-1320 Debris Netting System</span><span class="doc-meta">PDF &middot; 1 page &middot; 198 KB</span><span class="doc-cta">Download the Guide</span></span></a><a class="doc-card" href="downloads/rb-412-psn-personnel-safety-netting-spec-sheet.pdf" target="_blank" rel="noopener noreferrer"><span class="doc-thumb"><img src="images/rb-412-psn-personnel-safety-netting-spec-sheet-preview.webp" alt="Cover of the RB-412 PSN Personnel Safety Netting spec sheet (PDF)" width="420" height="544" loading="lazy" decoding="async" srcset="images/rb-412-psn-personnel-safety-netting-spec-sheet-preview-160w.webp 160w, images/rb-412-psn-personnel-safety-netting-spec-sheet-preview-320w.webp 320w" sizes="(max-width: 900px) 25vw, 96px"></span><span class="doc-info"><span class="doc-type">Spec Sheet</span><span class="doc-title">RB-412 PSN Personnel Safety Netting</span><span class="doc-meta">PDF &middot; 1 page &middot; 1.1 MB</span><span class="doc-cta">Download the Spec Sheet</span></span></a></div>
   </section>
 
   <!-- FAQ -->
-  <section itemscope itemtype="https://schema.org/FAQPage" style="margin-bottom:40px;">
-    <span class="section-label">Frequently Asked Questions</span>
+  <section class="pg-faq" itemscope itemtype="https://schema.org/FAQPage" style="margin-bottom:40px;">
+    <div class="faq-head"><span class="section-label">Frequently Asked Questions</span>
     <h2 class="block-title reveal" style="margin-bottom:8px;">Debris and Safety Netting FAQ</h2>
     <p style="font-size:15px;color:#5e6876;margin-bottom:16px;">Answers from <a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">ATI Construction Products</a>.</p>
-    <div class="dn-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+    </div>
+    <div class="faq-list"><div class="dn-faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <h3 itemprop="name">What is the DS-1320 Debris Netting System?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">The DS-1320 is a galvanized steel debris netting system from ATI Construction Products that installs at the working level, clamped to the edge of the slab. Its adjustable arm extends 13 feet from the slab edge to catch material falling from the levels above, and it is designed to meet ANSI A10.37.</p></div>
     </div>
@@ -1205,6 +1240,7 @@ body figure.photo-tile { margin: 0; }
       <h3 itemprop="name">How fast can I get a quote, and do you ship?</h3>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text">ATI offers same-day quotes on most products and ships nationwide from Arvada, Colorado. Call (800) 360-6115 or send the online quote form.</p></div>
     </div>
+  </div>
   </section>
 
   <!-- CTA Strip -->
@@ -1278,7 +1314,6 @@ body figure.photo-tile { margin: 0; }
             <a href="offerings.html">See everything we offer</a>
             <p class="footer-dd-h"><a href="offerings.html#construction-products">Construction Products</a></p>
             <a href="adjustastair.html">AdjustaStairs™ System</a>
-            <a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a>
             <a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a>
             <a href="debris-netting.html">Debris and Safety Netting</a>
             <a href="nationwide-construction-supply.html">Nationwide Construction Supply</a>

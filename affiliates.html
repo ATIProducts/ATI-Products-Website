@@ -903,6 +903,40 @@ body .swatch img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 
 body .swatch:hover img { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(15,26,46,0.14); }
 body .swatch figcaption { margin-top: 8px; font-size: 13px; font-weight: 600; color: var(--text-dark); }
 body figure.photo-tile { margin: 0; }
+/* Page bands (the What We Offer look): full-width alternating bands, big faded numbers,
+   an offset color block behind intro photos and a dark FAQ band. Classes added per page. */
+body .pg-cp { --pg: #00703a; --pg-soft: rgba(0,112,58,0.16); --pg-tint: #eef6f1; --pg-on-dark: #3ddc84; }
+body .pg-be { --pg: #1d4ed8; --pg-soft: rgba(29,78,216,0.16); --pg-tint: #eef3fd; --pg-on-dark: #8db8ff; }
+body .pg-se { --pg: #c2410c; --pg-soft: rgba(194,65,12,0.16); --pg-tint: #fff4ec; --pg-on-dark: #fdba74; }
+body .pg-band, body .pg-faq { --band: #fff; position: relative; margin: 0 !important; padding: 80px 0 !important; background: var(--band) !important; border: 0 !important; border-radius: 0 !important; box-shadow: 0 0 0 100vmax var(--band) !important; clip-path: inset(0 -100vmax); }
+body .pg-band-tint { --band: var(--pg-tint); }
+body .pg-band[data-num]::after { content: attr(data-num); position: absolute; top: 20px; right: 0; font-size: clamp(90px, 12vw, 170px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: var(--pg); opacity: 0.07; pointer-events: none; }
+body .pg-band .section-label, body .pg-band .feature-eyebrow { color: var(--pg); }
+body .pg-band-tint [style*="background:#f7f8f9"], body .pg-band-tint [style*="background: #f7f8f9"] { background: #fff !important; }
+body .page-body .pg-shot { border-radius: 16px; box-shadow: 18px 18px 0 var(--pg-soft), 0 20px 50px rgba(15,26,46,0.16) !important; }
+body .pg-faq { --band: #0f1a2e; color: #fff; padding: 88px 0 !important; }
+body .pg-faq .faq-head .section-label { color: var(--pg-on-dark); }
+body .pg-faq .faq-head h2 { color: #fff !important; }
+body .pg-faq .faq-head p { color: rgba(255,255,255,0.8) !important; }
+body .pg-faq .faq-head a { color: var(--pg-on-dark) !important; }
+body .pg-faq .faq-list > div[style*="margin-top"] { margin-top: 0 !important; }
+body .pg-faq .faq-list [itemprop="mainEntity"] { background: #fff; color: var(--text-dark); border: 0 !important; border-radius: 12px; padding: 20px 24px !important; margin-bottom: 12px; }
+body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
+@media (min-width: 901px) {
+  body .pg-faq { display: grid !important; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); column-gap: 56px; align-items: start; }
+  body .pg-faq .faq-head { position: sticky; top: 100px; }
+}
+@media (max-width: 900px) { body .pg-faq .faq-head { margin-bottom: 24px; } }
+@media (max-width: 700px) {
+  body .pg-band, body .pg-faq { padding: 56px 0 !important; }
+  body .page-body .pg-shot { box-shadow: 10px 10px 0 var(--pg-soft), 0 14px 32px rgba(15,26,46,0.14) !important; }
+}
+/* Wider content on large screens (pages were capped at 1100px) */
+@media (min-width: 1200px) {
+  body .page-body, body .page-header-inner, body .footer-inner, body .geo-section-inner { max-width: 1320px; }
+  body section[style*="max-width:1100px"] { max-width: 1320px !important; }
+  body .page-body p { max-width: 1000px; }
+}
 @media (max-width: 700px) {
   body .photo-mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 150px; }
   body .photo-tiles { grid-template-columns: 1fr; }
@@ -927,7 +961,7 @@ body figure.photo-tile { margin: 0; }
   <a href="index.html" class="nav-logo">
     <img decoding="async" width="1726" height="922" src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding, Lead Generation and Business Growth | Arvada, Colorado" itemprop="logo" style="height:auto;width:140px;max-height:34px;object-fit:contain;display:block;" title="ATI Products LLC | Headquartered in Arvada, Colorado | Serving Contractors in All 50 States Since 1999" srcset="images/ati-products-logo-mark-320w.webp 320w" sizes="(max-width: 900px) 35vw, 140px">
   </a>
-  <ul class="nav-links"><li class="nav-dd"><a href="offerings.html" class="">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="active">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+  <ul class="nav-links"><li class="nav-dd"><a href="offerings.html" class="">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="active">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   <a href="contact.html" class="nav-cta">Get in Touch</a>
   <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="toggleNav(this)">
     <span></span><span></span><span></span>
@@ -935,7 +969,7 @@ body figure.photo-tile { margin: 0; }
 </nav>
 <div class="mobile-nav" id="mobile-nav-drawer" role="navigation" aria-label="Mobile navigation">
     <a href="index.html" class="">Home</a>
-    <span class="mnav-group"><a href="offerings.html" class="">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="false" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub" hidden><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
+    <span class="mnav-group"><a href="offerings.html" class="">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="false" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub" hidden><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
     <a href="about.html" class="">About</a>
     <a href="affiliates.html" class="active">Affiliates</a>
     <a href="blog.html" class="">Blog</a>
@@ -959,7 +993,7 @@ body figure.photo-tile { margin: 0; }
   </div>
 </div>
 
-<div class="page-body">
+<div class="page-body pg-cp">
 
   <figure class="section-banner reveal">
     <img decoding="async" width="1280" height="720" src="images/arvada-colorado-ati-products-headquarters.webp" alt="Aerial view of Arvada, Colorado : ATI Products LLC headquarters location, serving construction contractors and service businesses across all 50 states since 1999" title="ATI Products, LLC | Arvada, Colorado | (800) 360-6115" srcset="images/arvada-colorado-ati-products-headquarters-800w.webp 800w, images/arvada-colorado-ati-products-headquarters-900w.webp 900w" sizes="(max-width: 900px) 94vw, 1004px" fetchpriority="low">
@@ -1021,7 +1055,7 @@ body figure.photo-tile { margin: 0; }
     <a class="photo-tile" href="oshastairwayrequirements.html"><img src="images/adjustastairs-shoring-wall-stair-tower.jpg" srcset="images/adjustastairs-shoring-wall-stair-tower-640w.jpg 640w, images/adjustastairs-shoring-wall-stair-tower.jpg 800w" sizes="(max-width: 700px) 92vw, 340px" alt="Temporary stairs and a stair tower running up a tall concrete shoring wall" width="800" height="450" loading="lazy" decoding="async"><span class="pt-txt"><small>OSHA guide</small><strong>Stairway access requirements</strong></span></a>
   </div>
 
-  <section class="aff-more reveal" aria-labelledby="aff-how">
+  <section class="aff-more reveal pg-band" aria-labelledby="aff-how">
     <h2 id="aff-how">How ATI Uses Each Tool</h2>
     <p>ATI Products, LLC has served contractors and service businesses in all 50 states since 1999. Three of the partners on this page are tools ATI uses in its own work: two for building and hosting WordPress websites, and one for keeping jobsite safety paperwork in order. The other two, OSHAWISE and MSHAWISE, are compliance resources we recommend for OSHA and MSHA questions.</p>
     <div class="aff-table-wrap"><table class="aff-table">
@@ -1054,14 +1088,16 @@ body figure.photo-tile { margin: 0; }
     Some links on this page are affiliate links. If you sign up through them, ATI may earn a commission at no additional cost to you. We only recommend products and services we use and trust.
   </div>
 
-  <section itemscope itemtype="https://schema.org/FAQPage" style="margin:64px 0;">
-    <span class="section-label">FAQ</span><h2 class="block-title reveal" style="margin-bottom:8px;">Affiliate Partnership Questions</h2>
-    <div style="margin-top:28px;">
+  <section class="pg-faq" itemscope itemtype="https://schema.org/FAQPage" style="margin:64px 0;">
+    <div class="faq-head"><span class="section-label">FAQ</span><h2 class="block-title reveal" style="margin-bottom:8px;">Affiliate Partnership Questions</h2>
+    </div>
+    <div class="faq-list"><div style="margin-top:28px;">
       <div style="border-bottom:1px solid #e4e7ec;padding:24px 0;" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name" style="font-size:17px;font-weight:700;color:#0d1117;margin-bottom:10px;">Does ATI Products LLC have affiliate partnerships?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="font-size:15px;color:#5e6876;line-height:1.75;">Yes. ATI Products LLC partners with <a href="https://elementor.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">Elementor</a> for WordPress website building, <a href="https://www.siteground.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">SiteGround</a> for managed WordPress hosting, and <a href="https://www.sitedocs.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">SiteDocs</a> for paperless safety and compliance software. These are tools ATI uses and trusts. ATI also recommends <a href="https://oshawise.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">OSHAWISE</a> and <a href="https://mshawise.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">MSHAWISE</a> for OSHA and MSHA compliance questions. Affiliate links may earn ATI a commission at no additional cost to you.</p></div></div>
       <div style="border-bottom:1px solid #e4e7ec;padding:24px 0;" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name" style="font-size:17px;font-weight:700;color:#0d1117;margin-bottom:10px;">Do I pay more if I use ATI Products' affiliate links?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="font-size:15px;color:#5e6876;line-height:1.75;">No. Using an <a href="about.html" style="color:#00703a;text-decoration:underline;">ATI Products, LLC</a> affiliate link costs you nothing extra. ATI may earn a small commission from partners like Elementor, SiteGround, or SiteDocs at no additional cost to you, which helps support the tools and resources we share.</p></div></div>
       <div style="border-bottom:1px solid #e4e7ec;padding:24px 0;" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name" style="font-size:17px;font-weight:700;color:#0d1117;margin-bottom:10px;">What is SiteDocs used for?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="font-size:15px;color:#5e6876;line-height:1.75;"><a href="https://www.sitedocs.com/" target="_blank" rel="noopener noreferrer nofollow" style="color:#00703a;text-decoration:underline;">SiteDocs</a> is paperless safety management software for construction teams. It keeps OSHA and MSHA compliance documentation, inspections and safety meetings organized in the field, so ATI and its clients stay audit-ready without the paperwork.</p></div></div>
       <div style="border-bottom:1px solid #e4e7ec;padding:24px 0;" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question"><h3 itemprop="name" style="font-size:17px;font-weight:700;color:#0d1117;margin-bottom:10px;">How long do I have to keep OSHA injury records?</h3><div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer"><p itemprop="text" style="font-size:15px;color:#5e6876;line-height:1.75;">Five years. Under <a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1904/1904.33" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">OSHA 1904.33</a>, employers must keep the OSHA 300 log, the 300A annual summary and the 301 incident reports for 5 years after the end of the calendar year they cover. Software like SiteDocs keeps these records organized and easy to find.</p></div></div>
     </div>
+  </div>
   </section>
 
   <div class="cta-strip">
@@ -1105,7 +1141,6 @@ body figure.photo-tile { margin: 0; }
             <a href="offerings.html">See everything we offer</a>
             <p class="footer-dd-h"><a href="offerings.html#construction-products">Construction Products</a></p>
             <a href="adjustastair.html">AdjustaStairs™ System</a>
-            <a href="adjustastairspecs.html">AdjustaStairs™ Specs and Sizing</a>
             <a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a>
             <a href="debris-netting.html">Debris and Safety Netting</a>
             <a href="nationwide-construction-supply.html">Nationwide Construction Supply</a>
