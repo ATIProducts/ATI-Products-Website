@@ -831,6 +831,22 @@ nav[data-dark] .hamburger span { background: #ffffff; }
 .mobile-nav .mnav-sub a { padding:10px 24px 10px 40px; font-size:14.5px; font-weight:500; border-bottom:0; }
 .mobile-nav .mnav-sub a[aria-current="page"] { color:#00703a; font-weight:700; }
 
+/* Affiliates: tools table on a photo, guide cards */
+.aff-tools { max-width:none; margin:0; }
+.aff-guides { max-width:none; }
+.aff-guide-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:24px; }
+.aff-guide { background:#fff; border:1px solid #e4e7ec; border-top:4px solid #00703a; border-radius:14px; overflow:hidden; display:flex; flex-direction:column; }
+.aff-guide-photo { display:block; width:100%; height:220px; object-fit:cover; }
+.aff-guide-body { padding:26px 28px 28px; }
+.aff-guide-tag { display:inline-block; font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:#00703a; background:#eef6f1; padding:4px 10px; border-radius:999px; margin-bottom:12px; }
+.aff-more.aff-tools h2, .aff-guide h2 { margin-top:0 !important; }
+.aff-guide h2 { font-size:22px; font-weight:700; color:#0d1117; line-height:1.25; margin:0 0 12px; }
+.aff-guide p, .aff-guide li { font-size:15px; color:#5e6876; line-height:1.75; }
+.aff-guide p { margin:0 0 14px; }
+.aff-guide ul { margin:0 0 14px; padding-left:20px; }
+.aff-guide li { margin-bottom:8px; }
+.aff-guide a { color:#00703a; text-decoration:underline; }
+@media (max-width: 900px) { .aff-guide-grid { grid-template-columns:1fr; } }
 /* ══ SITE THEME (matches the homepage) ══
    Selectors start with "body" so they win over each page's own rules without !important. */
 body { --accent-bright: #3ddc84; --wash: #eef6f1; --wash-border: #cfe6d7; --be-blue: #1d4ed8; --se-orange: #c2410c; }
@@ -950,6 +966,9 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   body .pg-band, body .pg-faq { padding: 56px 0 !important; }
   body .page-body .pg-shot { box-shadow: 10px 10px 0 var(--pg-soft), 0 14px 32px rgba(15,26,46,0.14) !important; }
 }
+/* Narrower blocks sit in the middle of the wider page instead of hugging the left edge */
+body .page-body .ab-glance, body .page-body .affiliate-grid, body .page-body .disclaimer, body .page-body .lp-table, body .page-body .article-body, body .page-body .post-faq, body .page-body .related-heading, body .page-body .related-grid { margin-left: auto !important; margin-right: auto !important; }
+body .page-body > p[style*="max-width"] { margin-left: auto; margin-right: auto; }
 /* "On this page" jump links: centered with even space above and below */
 body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; }
 /* Wider content on large screens (pages were capped at 1100px) */
@@ -982,7 +1001,7 @@ body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; 
   <a href="index.html" class="nav-logo">
     <img decoding="async" width="1726" height="922" src="images/ati-products-logo-mark.webp" alt="ATI Products LLC : Construction Products, Scaffolding, Lead Generation and Business Growth | Arvada, Colorado" itemprop="logo" style="height:auto;width:140px;max-height:34px;object-fit:contain;display:block;" title="ATI Products LLC | Headquartered in Arvada, Colorado | Serving Contractors in All 50 States Since 1999" srcset="images/ati-products-logo-mark-320w.webp 320w" sizes="(max-width: 900px) 35vw, 140px">
   </a>
-  <ul class="nav-links"><li class="nav-dd"><a href="offerings.html" class="">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adaptastep.html">AdaptaStep™ Platforms</a><a href="aluminum-scaffolding.html">Aluminum Scaffold Towers</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="active">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
+  <ul class="nav-links"><li class="nav-dd"><a href="offerings.html" class="">What We Offer</a><button type="button" class="nav-dd-btn" aria-expanded="false" aria-controls="nav-dd-menu" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button><div class="nav-dd-menu" id="nav-dd-menu"><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adaptastep.html">AdaptaStep™ Platforms</a><a href="aluminum-scaffolding.html">Aluminum Scaffold Towers</a><a href="studson-helmets.html">Studson Safety Helmets</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a></div><div class="nav-dd-col"><a class="nav-dd-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></div><a class="nav-dd-all" href="offerings.html">See everything we offer &rarr;</a></div></li><li><a href="about.html" class="">About</a></li><li><a href="affiliates.html" class="active">Affiliates</a></li><li><a href="blog.html" class="">Blog</a></li><li><a href="contact.html" class="">Contact</a></li></ul>
   <a href="contact.html" class="nav-cta">Get in Touch</a>
   <button class="hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-nav-drawer" onclick="toggleNav(this)">
     <span></span><span></span><span></span>
@@ -990,7 +1009,7 @@ body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; 
 </nav>
 <div class="mobile-nav" id="mobile-nav-drawer" role="navigation" aria-label="Mobile navigation">
     <a href="index.html" class="">Home</a>
-    <span class="mnav-group"><a href="offerings.html" class="">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="false" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub" hidden><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adaptastep.html">AdaptaStep™ Platforms</a><a href="aluminum-scaffolding.html">Aluminum Scaffold Towers</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
+    <span class="mnav-group"><a href="offerings.html" class="">What We Offer</a><button type="button" class="mnav-sub-btn" aria-expanded="false" aria-controls="mnav-sub" aria-label="Show What We Offer pages"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button></span><span class="mnav-sub" id="mnav-sub" hidden><a class="mnav-sub-h" href="offerings.html#construction-products">Construction Products</a><a href="adjustastair.html">AdjustaStairs™ System</a><a href="adaptastep.html">AdaptaStep™ Platforms</a><a href="aluminum-scaffolding.html">Aluminum Scaffold Towers</a><a href="studson-helmets.html">Studson Safety Helmets</a><a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a><a href="debris-netting.html">Debris and Safety Netting</a><a href="nationwide-construction-supply.html">Nationwide Construction Supply</a><a class="mnav-sub-h" href="offerings.html#business-essentials">Business Essentials</a><a href="leadgeneration.html">Leads Plus</a><a href="marketinghub.html">Marketing Hub</a><a href="googleadsmanagement.html">Google Ads Management</a><a href="website-design-for-contractors.html">Website Design</a><a class="mnav-sub-h" href="offerings.html#scaffold-exchange">Scaffold Exchange</a><a href="scaffoldingmarketplace.html">Scaffold Exchange Marketplace</a><a href="used-scaffolding.html">Used Scaffolding</a></span>
     <a href="about.html" class="">About</a>
     <a href="affiliates.html" class="active">Affiliates</a>
     <a href="blog.html" class="">Blog</a>
@@ -1076,7 +1095,7 @@ body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; 
     <a class="photo-tile" href="oshastairwayrequirements.html"><img src="images/adjustastairs-shoring-wall-stair-tower.jpg" srcset="images/adjustastairs-shoring-wall-stair-tower-640w.jpg 640w, images/adjustastairs-shoring-wall-stair-tower.jpg 800w" sizes="(max-width: 700px) 92vw, 340px" alt="Temporary stairs and a stair tower running up a tall concrete shoring wall" width="800" height="450" loading="lazy" decoding="async"><span class="pt-txt"><small>OSHA guide</small><strong>Stairway access requirements</strong></span></a>
   </div>
 
-  <section class="aff-more reveal pg-band" aria-labelledby="aff-how">
+  <div class="pg-photo-wrap" style="--band-img:url('images/9321e10df38c.webp')"><section class="aff-more aff-tools reveal pg-band" aria-labelledby="aff-how">
     <h2 id="aff-how">How ATI Uses Each Tool</h2>
     <p>ATI Products, LLC has served contractors and service businesses in all 50 states since 1999. Three of the partners on this page are tools ATI uses in its own work: two for building and hosting WordPress websites, and one for keeping jobsite safety paperwork in order. The other two, OSHAWISE and MSHAWISE, are compliance resources we recommend for OSHA and MSHA questions.</p>
     <div class="aff-table-wrap"><table class="aff-table">
@@ -1089,11 +1108,20 @@ body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; 
         <tr><td data-label="Tool">MSHAWISE</td><td data-label="What it is">MSHA regulations, guidance and case law database with AI copilots</td><td data-label="How ATI uses it">Recommended for MSHA compliance and citations</td><td data-label="Best for">Mining operations preparing for an MSHA Informal Conference</td></tr>
       </tbody>
     </table></div>
+  </section></div>
 
-    <h2>Why WordPress, Elementor and SiteGround</h2>
-    <p><a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">WordPress</a> is free, open-source website software first released in 2003. Elementor adds a visual editor on top of it, so text, photos and whole pages can be changed without writing code. SiteGround is a host built around WordPress, so updates, daily backups, security and support are handled by the host instead of the business owner. For a contractor who wants a site they can edit themselves, that pairing works well. If you would rather have ATI build and run a fast site for you, see <a href="website-design-for-contractors.html" style="color:#00703a;text-decoration:underline;">website design for contractors</a>.</p>
-
-    <h2>Safety Records OSHA Expects You to Keep</h2>
+  <section class="aff-guides pg-band" aria-label="Websites and safety records">
+    <div class="aff-guide-grid">
+      <article class="aff-guide">
+        <img class="aff-guide-photo" src="images/7559f8843436.webp" alt="Two people reviewing a business dashboard on a computer screen in an office" width="768" height="452" loading="lazy" decoding="async">
+        <div class="aff-guide-body"><span class="aff-guide-tag">Websites</span><h2>Why WordPress, Elementor and SiteGround</h2>
+        
+    <p><a href="https://wordpress.org/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">WordPress</a> is free, open-source website software first released in 2003. Elementor adds a visual editor on top of it, so text, photos and whole pages can be changed without writing code. SiteGround is a host built around WordPress, so updates, daily backups, security and support are handled by the host instead of the business owner. For a contractor who wants a site they can edit themselves, that pairing works well. If you would rather have ATI build and run a fast site for you, see <a href="website-design-for-contractors.html" style="color:#00703a;text-decoration:underline;">website design for contractors</a>.</p></div>
+      </article>
+      <article class="aff-guide">
+        <img class="aff-guide-photo" src="images/construction-crew-crane-site-768w.jpg" alt="Construction workers in safety vests walking across a building site under a tower crane" width="768" height="512" loading="lazy" decoding="async">
+        <div class="aff-guide-body"><span class="aff-guide-tag">Safety records</span><h2>Safety Records OSHA Expects You to Keep</h2>
+        
     <p>SiteDocs is built for the paperwork side of safety. Under OSHA&rsquo;s recordkeeping rule, <a href="https://www.osha.gov/recordkeeping" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">29 CFR Part 1904</a>, construction employers with more than 10 employees must keep injury and illness records:</p>
     <ul>
       <li>Record each work-related injury and illness on the OSHA 300 log, with a 301 incident report for each case.</li>
@@ -1101,7 +1129,9 @@ body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; 
       <li>Keep the 300 log, 300A summary and 301 reports for 5 years after the end of the year they cover (<a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1904/1904.33" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">OSHA 1904.33</a>).</li>
       <li>Every employer, of any size, must report a work-related death to OSHA within 8 hours, and an in-patient hospitalization, amputation or loss of an eye within 24 hours (<a href="https://www.osha.gov/laws-regs/regulations/standardnumber/1904/1904.39" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">OSHA 1904.39</a>).</li>
     </ul>
-    <p>Paper binders make these deadlines easy to miss. Safety software such as SiteDocs keeps inspections, safety meetings and compliance documents in one place on the jobsite, so records are ready when an inspector or a general contractor asks for them.</p>
+    <p>Paper binders make these deadlines easy to miss. Safety software such as SiteDocs keeps inspections, safety meetings and compliance documents in one place on the jobsite, so records are ready when an inspector or a general contractor asks for them.</p></div>
+      </article>
+    </div>
   </section>
 
   <p style="font-size:14px;color:var(--text-muted);line-height:1.7;max-width:720px;margin-bottom:24px;">ATI Products, LLC also offers construction products including <a href="offerings.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™ adjustable stair systems, scaffolding, and fall protection</a> through <a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">ATI Construction Products</a>, and <a href="offerings.html" style="color:#00703a;text-decoration:underline;">lead generation services</a> through <a href="https://ati-businessessentials.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">ATI Business Essentials</a>.</p>
@@ -1161,7 +1191,7 @@ body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; 
           <div class="footer-dd-panel">
             <a href="offerings.html">See everything we offer</a>
             <p class="footer-dd-h"><a href="offerings.html#construction-products">Construction Products</a></p>
-            <a href="adjustastair.html">AdjustaStairs™ System</a><a href="adaptastep.html">AdaptaStep™ Platforms</a><a href="aluminum-scaffolding.html">Aluminum Scaffold Towers</a>
+            <a href="adjustastair.html">AdjustaStairs™ System</a><a href="adaptastep.html">AdaptaStep™ Platforms</a><a href="aluminum-scaffolding.html">Aluminum Scaffold Towers</a><a href="studson-helmets.html">Studson Safety Helmets</a>
             <a href="z-stack-stair-tower.html">Z-Stack™ Stair Towers</a>
             <a href="debris-netting.html">Debris and Safety Netting</a>
             <a href="nationwide-construction-supply.html">Nationwide Construction Supply</a>
