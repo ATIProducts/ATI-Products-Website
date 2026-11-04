@@ -882,7 +882,6 @@ body .pg-be { --pg: #1d4ed8; --pg-soft: rgba(29,78,216,0.16); --pg-tint: #eef3fd
 body .pg-se { --pg: #c2410c; --pg-soft: rgba(194,65,12,0.16); --pg-tint: #fff4ec; --pg-on-dark: #fdba74; }
 body .pg-band, body .pg-faq { --band: #fff; position: relative; margin: 0 !important; padding: 80px 0 !important; background: var(--band) !important; border: 0 !important; border-radius: 0 !important; box-shadow: 0 0 0 100vmax var(--band) !important; clip-path: inset(0 -100vmax); }
 body .pg-band-tint { --band: var(--pg-tint); }
-body .pg-band[data-num]::after { content: attr(data-num); position: absolute; top: 20px; right: 0; font-size: clamp(90px, 12vw, 170px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: var(--pg); opacity: 0.07; pointer-events: none; }
 body .pg-band .section-label, body .pg-band .feature-eyebrow { color: var(--pg); }
 body .pg-band-tint [style*="background:#f7f8f9"], body .pg-band-tint [style*="background: #f7f8f9"] { background: #fff !important; }
 body .page-body .pg-shot { border-radius: 16px; box-shadow: 18px 18px 0 var(--pg-soft), 0 20px 50px rgba(15,26,46,0.16) !important; }
@@ -894,6 +893,18 @@ body .pg-band-photo > h2 { color: #fff !important; }
 body .pg-band-photo > p { color: rgba(255,255,255,0.84) !important; }
 body .pg-band-photo > p a { color: var(--pg-on-dark) !important; }
 body .pg-band-photo [style*="background:#f7f8f9"] { background: rgba(255,255,255,0.96) !important; }
+body .pg-band-photo .section-label { color: var(--pg-on-dark); }
+body .pg-band-photo h2, body .pg-band-photo .block-title { color: #fff !important; }
+body .pg-band-photo .dn-lead, body .pg-band-photo .mosaic-head p, body .pg-band-photo .as-split > div > p, body .pg-band-photo > figure figcaption { color: rgba(255,255,255,0.84) !important; }
+body .pg-band-photo .dn-lead a, body .pg-band-photo .mosaic-head p a, body .pg-band-photo .as-split > div > p a { color: var(--pg-on-dark) !important; }
+body .pg-band-photo table { background: #fff; border-radius: 12px; overflow: hidden; }
+body .pg-band-photo .btn-outline-dark { color: #fff; border-color: rgba(255,255,255,0.75); }
+body .pg-band-photo .btn-outline-dark:hover { background: #fff; color: #0f1a2e; }
+/* Photo behind a frosted white panel, for sections with lots of dark text */
+body .pg-photo-wrap { position: relative; isolation: isolate; padding: 72px 0; }
+body .pg-photo-wrap::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(50% - 50vw); width: 100vw; z-index: -1; background: linear-gradient(rgba(10,18,35,0.35), rgba(10,18,35,0.35)), var(--band-img) center/cover no-repeat; }
+body .pg-photo-wrap > .pg-band { background: rgba(255,255,255,0.96) !important; box-shadow: 0 24px 60px rgba(10,18,35,0.35) !important; clip-path: none; border-radius: 18px !important; padding: 48px !important; }
+@media (max-width: 700px) { body .pg-photo-wrap { padding: 40px 0; } body .pg-photo-wrap > .pg-band { padding: 28px 20px !important; } }
 body .pg-faq { --band: #0f1a2e; color: #fff; padding: 88px 0 !important; }
 body .pg-faq .faq-head .section-label { color: var(--pg-on-dark); }
 body .pg-faq .faq-head h2 { color: #fff !important; }
@@ -911,6 +922,8 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   body .pg-band, body .pg-faq { padding: 56px 0 !important; }
   body .page-body .pg-shot { box-shadow: 10px 10px 0 var(--pg-soft), 0 14px 32px rgba(15,26,46,0.14) !important; }
 }
+/* "On this page" jump links: centered with even space above and below */
+body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; }
 /* Wider content on large screens (pages were capped at 1100px) */
 @media (min-width: 1200px) {
   body .page-body, body .page-header-inner, body .footer-inner, body .geo-section-inner { max-width: 1320px; }
@@ -989,7 +1002,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
     </div>
   </section>
 
-  <section class="pg-band pg-band-tint" style="margin-bottom:40px;" data-num="01">
+  <section class="pg-band pg-band-photo" style="--band-img:url('images/aec325e3e8ce.webp')">
     <span class="section-label">From the Marketplace</span>
     <h2 class="block-title reveal" style="margin-bottom:8px;">See Scaffold Exchange in Action</h2>
     <p style="font-size:15px;color:#5e6876;max-width:640px;margin:12px 0 28px;line-height:1.7;">Real photos from the Scaffold Exchange platform: the marketplace itself, our nationwide vendor network, and the consulting services that back every transaction.</p>
@@ -1024,7 +1037,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
     </div>
   </section>
 
-  <section class="pg-band" style="margin-bottom:40px;" data-num="02">
+  <section class="pg-band" style="margin-bottom:40px;">
     <span class="section-label">Leadership</span>
     <h2 class="block-title reveal" style="margin-bottom:8px;">The Team Behind Scaffold Exchange</h2>
     <div class="grid-2 reveal-group" style="max-width:min(600px,100%);">
@@ -1045,7 +1058,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
     </div>
   </section>
 
-  <section class="pg-band pg-band-tint" style="background:#fff;border:1px solid #e4e7ec;border-radius:16px;padding:48px;margin-bottom:40px;" data-num="03">
+  <section class="pg-band pg-band-photo" style="--band-img:url('images/da7ff76163a2.webp')">
     <span class="section-label">Need Scaffolding Now?</span><h2 class="block-title reveal" style="margin-bottom:8px;">Shop Scaffolding from ATI Construction Products Today</h2><p style="font-size:16px;color:#5e6876;max-width:640px;margin:12px 0 0;line-height:1.7;">In addition to Scaffold Exchange, <a href="https://ati-constructionproducts.com/" target="_blank" rel="noopener noreferrer" style="color:#00703a;text-decoration:underline;">ATI Construction Products</a> offers same-day quotes on scaffolding systems with nationwide shipping from Arvada, Colorado.</p>
     <div class="three-col reveal" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:28px;"><div style="padding:24px;background:#f7f8f9;border-radius:12px;"><div style="font-size:26px;margin-bottom:12px;">🏗️</div><h3 style="font-size:15px;font-weight:700;color:#0d1117;margin-bottom:8px;">Aluminum Scaffolding</h3><p style="font-size:14px;color:#5e6876;line-height:1.65;">Lightweight aluminum scaffolding for commercial and residential construction. Same-day quotes, nationwide shipping.</p></div><div style="padding:24px;background:#f7f8f9;border-radius:12px;"><div style="font-size:26px;margin-bottom:12px;">🪜</div><h3 style="font-size:15px;font-weight:700;color:#0d1117;margin-bottom:8px;">AdjustaStairs™ Systems</h3><p style="font-size:14px;color:#5e6876;line-height:1.65;"><a href="adjustastair.html" style="color:#00703a;text-decoration:underline;">AdjustaStairs™</a> adjustable temporary stair systems for OSHA-compliant roof and elevated site access.</p></div></div>
     <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;">

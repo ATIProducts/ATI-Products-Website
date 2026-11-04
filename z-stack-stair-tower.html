@@ -1120,7 +1120,6 @@ body .pg-be { --pg: #1d4ed8; --pg-soft: rgba(29,78,216,0.16); --pg-tint: #eef3fd
 body .pg-se { --pg: #c2410c; --pg-soft: rgba(194,65,12,0.16); --pg-tint: #fff4ec; --pg-on-dark: #fdba74; }
 body .pg-band, body .pg-faq { --band: #fff; position: relative; margin: 0 !important; padding: 80px 0 !important; background: var(--band) !important; border: 0 !important; border-radius: 0 !important; box-shadow: 0 0 0 100vmax var(--band) !important; clip-path: inset(0 -100vmax); }
 body .pg-band-tint { --band: var(--pg-tint); }
-body .pg-band[data-num]::after { content: attr(data-num); position: absolute; top: 20px; right: 0; font-size: clamp(90px, 12vw, 170px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; color: var(--pg); opacity: 0.07; pointer-events: none; }
 body .pg-band .section-label, body .pg-band .feature-eyebrow { color: var(--pg); }
 body .pg-band-tint [style*="background:#f7f8f9"], body .pg-band-tint [style*="background: #f7f8f9"] { background: #fff !important; }
 body .page-body .pg-shot { border-radius: 16px; box-shadow: 18px 18px 0 var(--pg-soft), 0 20px 50px rgba(15,26,46,0.16) !important; }
@@ -1132,6 +1131,18 @@ body .pg-band-photo > h2 { color: #fff !important; }
 body .pg-band-photo > p { color: rgba(255,255,255,0.84) !important; }
 body .pg-band-photo > p a { color: var(--pg-on-dark) !important; }
 body .pg-band-photo [style*="background:#f7f8f9"] { background: rgba(255,255,255,0.96) !important; }
+body .pg-band-photo .section-label { color: var(--pg-on-dark); }
+body .pg-band-photo h2, body .pg-band-photo .block-title { color: #fff !important; }
+body .pg-band-photo .dn-lead, body .pg-band-photo .mosaic-head p, body .pg-band-photo .as-split > div > p, body .pg-band-photo > figure figcaption { color: rgba(255,255,255,0.84) !important; }
+body .pg-band-photo .dn-lead a, body .pg-band-photo .mosaic-head p a, body .pg-band-photo .as-split > div > p a { color: var(--pg-on-dark) !important; }
+body .pg-band-photo table { background: #fff; border-radius: 12px; overflow: hidden; }
+body .pg-band-photo .btn-outline-dark { color: #fff; border-color: rgba(255,255,255,0.75); }
+body .pg-band-photo .btn-outline-dark:hover { background: #fff; color: #0f1a2e; }
+/* Photo behind a frosted white panel, for sections with lots of dark text */
+body .pg-photo-wrap { position: relative; isolation: isolate; padding: 72px 0; }
+body .pg-photo-wrap::before { content: ''; position: absolute; top: 0; bottom: 0; left: calc(50% - 50vw); width: 100vw; z-index: -1; background: linear-gradient(rgba(10,18,35,0.35), rgba(10,18,35,0.35)), var(--band-img) center/cover no-repeat; }
+body .pg-photo-wrap > .pg-band { background: rgba(255,255,255,0.96) !important; box-shadow: 0 24px 60px rgba(10,18,35,0.35) !important; clip-path: none; border-radius: 18px !important; padding: 48px !important; }
+@media (max-width: 700px) { body .pg-photo-wrap { padding: 40px 0; } body .pg-photo-wrap > .pg-band { padding: 28px 20px !important; } }
 body .pg-faq { --band: #0f1a2e; color: #fff; padding: 88px 0 !important; }
 body .pg-faq .faq-head .section-label { color: var(--pg-on-dark); }
 body .pg-faq .faq-head h2 { color: #fff !important; }
@@ -1149,6 +1160,8 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   body .pg-band, body .pg-faq { padding: 56px 0 !important; }
   body .page-body .pg-shot { box-shadow: 10px 10px 0 var(--pg-soft), 0 14px 32px rgba(15,26,46,0.14) !important; }
 }
+/* "On this page" jump links: centered with even space above and below */
+body .dn-jump { justify-content: center; margin: 0 !important; padding: 28px 0; }
 /* Wider content on large screens (pages were capped at 1100px) */
 @media (min-width: 1200px) {
   body .page-body, body .page-header-inner, body .footer-inner, body .geo-section-inner { max-width: 1320px; }
@@ -1219,7 +1232,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   <div class="zs-intro pg-band">
     <figure itemscope itemtype="https://schema.org/ImageObject">
       <img itemprop="contentUrl" fetchpriority="low" title="ATI Products, LLC | Arvada, Colorado | (800) 360-6115" class="zs-tall pg-shot" src="images/z-stack-compact-stair-tower-roof-access.webp" alt="Compact Z-Stack™ aluminum stair tower standing against an industrial building wall, with red guardrails at the top landing for roof access" width="438" height="803" decoding="async">
-      <figcaption itemprop="description">A Compact Z-Stack™ tower giving stair access to a roof edge.</figcaption>
+      <figcaption class="sr-only" itemprop="description">A Compact Z-Stack™ tower giving stair access to a roof edge.</figcaption>
     </figure>
     <div>
       <span class="section-label">Modular Stair Towers</span>
@@ -1244,7 +1257,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   </div>
 
   <!-- Height calculator -->
-  <section id="sizing" class="zsz-section pg-band pg-band-tint" aria-labelledby="zsz-title" data-num="01">
+  <div class="pg-photo-wrap" style="--band-img:url('images/z-stack-adaptastep-roof-access-sign.jpg')"><section id="sizing" class="zsz-section pg-band" aria-labelledby="zsz-title">
     <span class="section-label">Size and Quote</span><h2 class="block-title" id="zsz-title" style="margin-bottom:8px;">How Many Z-Stack™ Modules Do You Need?</h2>
     <p class="zsz-intro">Enter the height you need to reach. The calculator stacks Standard and Compact stair modules up to your height, adds the top module that forms the guardrail around the top landing, and picks the AdaptaStep™ bridge or AdjustaStairs™ that connects the landing to the roof. It also shows tie-off brackets and the footprint. Pick a tower to send the setup to ATI for a quote.</p>
     <div class="zsz-layout" id="zsz" data-cms-skip>
@@ -1268,10 +1281,10 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
       </div>
       <aside class="zsz-panel" aria-live="polite" aria-label="Your tower"><p class="zsz-panel-label">Your tower</p><p class="zsz-panel-title">Z-Stack™ Standard Tower</p><dl class="zsz-facts"><dt>Height to reach</dt><dd>28'</dd><dt>Modules</dt><dd>4 <span class="zsz-muted">(3 stair, 1 top railing)</span></dd><dt>Top landing</dt><dd>26' 7&quot;</dd><dt>Overall height</dt><dd>About 35' 3 3/4&quot; <span class="zsz-muted">with the railing module</span></dd><dt>To the roof</dt><dd>AdaptaStep™ bridge to the roof, stepping up 1' 5&quot;.</dd><dt>Tie-off brackets</dt><dd>1 <span class="zsz-muted">(one every third module)</span></dd><dt>Stair width</dt><dd>36"</dd><dt>Footprint</dt><dd>9' 4&quot; x 6' 10&quot;</dd><dt>Quantity</dt><dd>1</dd></dl><p class="zsz-tip">Craning the whole tower in one lift? Lifting bars are required for 4 or more modules.</p><p class="zsz-panel-note">ATI confirms the final layout, anchoring and pricing, usually the same business day.</p><a class="zsz-quote" href="contact.html?interest=zstack" data-quote>Request a quote</a><p class="zsz-panel-call">Or call <a href="tel:+18003606115">(800) 360-6115</a></p></aside>
     </div>
-  </section>
+  </section></div>
 
   <!-- Sizes -->
-  <section class="dn-panel pg-band" id="sizes" aria-labelledby="zs-sizes-title" data-num="02">
+  <section class="dn-panel pg-band" id="sizes" aria-labelledby="zs-sizes-title">
     <span class="section-label">Two Tower Sizes</span>
     <h2 class="block-title reveal" id="zs-sizes-title" style="margin-bottom:12px;">What Is the Difference Between Standard and Compact Z-Stack™?</h2>
     <p class="dn-lead" style="max-width:780px;">Both sizes use the same bolt-together module system. Standard towers have wider stairs for crews moving tools and materials. Compact towers fit where space is tight and work as a true ladder replacement for roof and equipment access.</p>
@@ -1299,7 +1312,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   </section>
 
   <!-- Assembly -->
-  <section class="dn-panel pg-band pg-band-tint" id="assembly" aria-labelledby="zs-asm-title" data-num="03">
+  <div class="pg-photo-wrap" style="--band-img:url('images/z-stack-rooftop-stair-tower-building-wall.jpg')"><section class="dn-panel pg-band" id="assembly" aria-labelledby="zs-asm-title">
     <span class="section-label">How It Assembles</span>
     <h2 class="block-title reveal" id="zs-asm-title" style="margin-bottom:12px;">How Do Z-Stack™ Modules Stack Together?</h2>
     <div class="zs-split">
@@ -1321,10 +1334,10 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
       <div><h3>Middle module (repeat)</h3><ul><li>End frame</li><li>Diagonal brace and left brace</li><li>2 Z-Stairs</li><li>Middle handrail and gate stand</li><li>4 joiners</li></ul></div>
       <div><h3>Top module</h3><ul><li>Entry frame and end frame</li><li>Diagonal brace and left brace</li><li>Top handrail</li><li>Gate stand</li><li>Optional joiners and lift bars</li></ul></div>
     </div>
-  </section>
+  </section></div>
 
   <!-- Crane -->
-  <section class="dn-panel pg-band" id="crane" aria-labelledby="zs-crane-title" data-num="04">
+  <section class="dn-panel pg-band" id="crane" aria-labelledby="zs-crane-title">
     <span class="section-label">Craneable</span>
     <h2 class="block-title reveal" id="zs-crane-title" style="margin-bottom:16px;">Can a Z-Stack™ Tower Be Moved by Crane?</h2>
     <div class="zs-split">
@@ -1340,7 +1353,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   </section>
 
   <!-- Compare -->
-  <section class="dn-panel pg-band pg-band-tint" id="compare" aria-labelledby="zs-cmp-title" data-num="05">
+  <section class="dn-panel pg-band pg-band-photo" id="compare" aria-labelledby="zs-cmp-title" style="--band-img:url('images/z-stack-stair-tower-crane-lift.webp')">
     <span class="section-label">Compare</span>
     <h2 class="block-title reveal" id="zs-cmp-title" style="margin-bottom:16px;">Is a Z-Stack™ Better Than a Scaffold Stair Tower or a Ladder?</h2>
     <p class="dn-lead" style="max-width:780px;">For repeated trips between levels, usually yes. Scaffold stair towers take a crew and time to build piece by piece, and ladders make workers climb hand over hand without tools. Here is how they compare.</p>
@@ -1368,7 +1381,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   </section>
 
   <!-- Landing solutions -->
-  <section class="dn-panel pg-band" id="landing" aria-labelledby="zs-land-title" data-num="06">
+  <section class="dn-panel pg-band" id="landing" aria-labelledby="zs-land-title">
     <span class="section-label">Top Landing</span>
     <h2 class="block-title reveal" id="zs-land-title" style="margin-bottom:12px;">What If the Tower Doesn&rsquo;t Line Up With the Roof?</h2>
     <p class="dn-lead" style="max-width:780px;">Modules come in fixed heights, so the top landing rarely matches the roof or platform exactly. Every tower finishes with a transition from the top landing to the roof: an AdaptaStep™ bridge when the difference is 24" or less, and AdjustaStairs™ from 24" to 48". If 48" or more would be left, the tower gets another stair module. The height calculator above picks the right one for your height.</p>
@@ -1385,7 +1398,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   </section>
 
   <!-- Accessories -->
-  <section class="dn-panel pg-band pg-band-tint" id="accessories" aria-labelledby="zs-acc-title" data-num="07">
+  <section class="dn-panel pg-band pg-band-photo" id="accessories" aria-labelledby="zs-acc-title" style="--band-img:url('images/z-stack-permanent-roof-access-tower.webp')">
     <span class="section-label">Accessories</span>
     <h2 class="block-title reveal" id="zs-acc-title" style="margin-bottom:12px;">Which Accessories Are Available for Z-Stack™?</h2>
     <p class="dn-lead" style="max-width:780px;">Add-ons adapt a tower to the site, the people using it and how long it will stay.</p>
@@ -1400,7 +1413,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   </section>
 
   <!-- Uses -->
-  <section class="dn-panel pg-band" id="uses" aria-labelledby="zs-uses-title" data-num="08">
+  <section class="dn-panel pg-band" id="uses" aria-labelledby="zs-uses-title">
     <span class="section-label">Applications</span>
     <h2 class="block-title reveal" id="zs-uses-title" style="margin-bottom:16px;">Where Are Z-Stack™ Stair Towers Used?</h2>
     <div class="zs-split" style="margin-bottom:24px;">
@@ -1422,7 +1435,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   </section>
 
   <!-- Projects -->
-  <section class="dn-panel pg-band pg-band-tint" id="projects" aria-labelledby="zs-proj-title" data-num="09">
+  <section class="dn-panel pg-band pg-band-photo" id="projects" aria-labelledby="zs-proj-title" style="--band-img:url('images/z-stack-stair-tower-multi-level-construction.webp')">
     <span class="section-label">Project Profiles</span>
     <h2 class="block-title reveal" id="zs-proj-title" style="margin-bottom:12px;"><img class="brand-logo" src="images/safesmart-logo-red.webp" alt="SafeSmart" width="600" height="83" loading="lazy" decoding="async"> Z-Stack™ on Real Projects</h2>
     <p class="dn-lead" style="max-width:780px;">Two project profiles from SafeSmart, the manufacturer of Z-Stack™.</p>
@@ -1450,7 +1463,7 @@ body .pg-faq .faq-list [itemprop="mainEntity"]:last-child { margin-bottom: 0; }
   </section>
 
   <!-- Brochure -->
-  <section class="dn-panel pg-band" id="brochure" aria-labelledby="zs-doc-title" data-num="10">
+  <section class="dn-panel pg-band" id="brochure" aria-labelledby="zs-doc-title">
     <span class="section-label">Download</span>
     <h2 class="block-title reveal" id="zs-doc-title" style="margin-bottom:12px;">Z-Stack™ Brochure</h2>
     <p class="dn-lead" style="max-width:780px;">Full module layouts, component lists, accessories, landing solutions and project profiles, in one PDF. The AdaptaStep™ brochure covers the bridging platforms, catwalks and crossovers that connect a tower to the roof.</p>
