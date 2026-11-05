@@ -17,10 +17,10 @@
   "errors": []
  },
  "cron": {
-  "at": "2026-11-04T13:26:00.721Z",
+  "at": "2026-11-05T13:26:00.752Z",
   "steps": [
    "index: 24 checked",
-   "pagespeed: /adaptastep, /aluminum-scaffolding, /studson-helmets"
+   "pagespeed: /z-stack-stair-tower, /debris-netting, /oshastairwayrequirements"
   ],
   "ok": true
  }
