@@ -145,12 +145,12 @@
    "a11y": 100,
    "bp": 100,
    "seo": 100,
-   "lcp": 1651.5,
-   "fcp": 914.5,
-   "cls": 0,
+   "lcp": 1353,
+   "fcp": 933,
+   "cls": 0.0001149109580009783,
    "tbt": 0,
-   "si": 914.5,
-   "at": "2026-10-28T13:26:11.719Z"
+   "si": 2411.7278980002393,
+   "at": "2026-11-06T13:26:10.828Z"
   }
  },
  "/coloradoconstructionsupply": {
@@ -253,30 +253,30 @@
  },
  "/buyingvsrentingscaffolding": {
   "mobile": {
-   "perf": 97,
-   "a11y": 100,
-   "bp": 100,
-   "seo": 100,
-   "lcp": 1663,
-   "fcp": 973,
-   "cls": 0,
-   "tbt": 0,
-   "si": 4313.739485995173,
-   "at": "2026-10-29T13:26:16.145Z"
-  }
- },
- "/choosingtemporaryroofaccess": {
-  "mobile": {
    "perf": 98,
    "a11y": 100,
    "bp": 100,
    "seo": 100,
-   "lcp": 1730.5,
-   "fcp": 923.5,
+   "lcp": 1508,
+   "fcp": 920,
    "cls": 0,
    "tbt": 0,
-   "si": 3814.8999599530694,
-   "at": "2026-10-28T13:26:11.695Z"
+   "si": 4131.933394006834,
+   "at": "2026-11-06T13:26:11.749Z"
+  }
+ },
+ "/choosingtemporaryroofaccess": {
+  "mobile": {
+   "perf": 100,
+   "a11y": 100,
+   "bp": 100,
+   "seo": 100,
+   "lcp": 1354,
+   "fcp": 935,
+   "cls": 0,
+   "tbt": 0,
+   "si": 935,
+   "at": "2026-11-06T13:26:12.694Z"
   }
  },
  "/crmreplacementforcontractors": {
