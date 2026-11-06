@@ -17,10 +17,10 @@
   "errors": []
  },
  "cron": {
-  "at": "2026-11-05T13:26:00.752Z",
+  "at": "2026-11-06T13:26:00.591Z",
   "steps": [
    "index: 24 checked",
-   "pagespeed: /z-stack-stair-tower, /debris-netting, /oshastairwayrequirements"
+   "pagespeed: /choosingtemporaryroofaccess, /scaffoldingmarketplace, /buyingvsrentingscaffolding"
   ],
   "ok": true
  }
