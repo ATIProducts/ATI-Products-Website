@@ -17,10 +17,10 @@
   "errors": []
  },
  "cron": {
-  "at": "2026-11-07T13:26:00.657Z",
+  "at": "2026-11-08T13:26:00.688Z",
   "steps": [
    "index: 24 checked",
-   "pagespeed: /used-scaffolding, /blog, /crmreplacementforcontractors"
+   "pagespeed: /affiliates, /marketingchannelsforservicebusinesses, /"
   ],
   "ok": true
  }
