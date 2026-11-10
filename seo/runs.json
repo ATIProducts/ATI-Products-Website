@@ -17,10 +17,10 @@
   "errors": []
  },
  "cron": {
-  "at": "2026-11-09T13:26:00.647Z",
+  "at": "2026-11-10T13:26:00.776Z",
   "steps": [
    "index: 24 checked",
-   "pagespeed: /marketinghub, /offerings, /about"
+   "pagespeed: /website-design-for-contractors, /googleadsmanagement, /contact"
   ],
   "ok": true
  }
