@@ -17,10 +17,10 @@
   "errors": []
  },
  "cron": {
-  "at": "2026-11-10T13:26:00.776Z",
+  "at": "2026-11-11T13:26:00.830Z",
   "steps": [
    "index: 24 checked",
-   "pagespeed: /website-design-for-contractors, /googleadsmanagement, /contact"
+   "pagespeed: /leadgeneration, /nationwide-construction-supply, /adjustastair"
   ],
   "ok": true
  }
