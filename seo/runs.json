@@ -1,12 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-11-14T13:26:15.316Z",
+  "at": "2026-11-15T13:26:12.826Z",
   "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/scaffoldingmarketplace",
-   "/buyingvsrentingscaffolding",
-   "/choosingtemporaryroofaccess"
+   "/crmreplacementforcontractors",
+   "/blog",
+   "/used-scaffolding"
   ],
   "errors": []
  },
