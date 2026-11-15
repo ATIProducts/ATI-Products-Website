@@ -17,10 +17,10 @@
   "errors": []
  },
  "cron": {
-  "at": "2026-11-14T13:26:00.772Z",
+  "at": "2026-11-15T13:26:00.717Z",
   "steps": [
    "index: 24 checked",
-   "pagespeed: /scaffoldingmarketplace, /buyingvsrentingscaffolding, /choosingtemporaryroofaccess"
+   "pagespeed: /crmreplacementforcontractors, /blog, /used-scaffolding"
   ],
   "ok": true
  }
