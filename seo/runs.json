@@ -1,12 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-11-17T13:26:21.633Z",
+  "at": "2026-11-18T13:26:14.277Z",
   "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/about",
-   "/offerings",
-   "/marketinghub"
+   "/website-design-for-contractors",
+   "/googleadsmanagement",
+   "/contact"
   ],
   "errors": []
  },
