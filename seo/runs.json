@@ -17,10 +17,10 @@
   "errors": []
  },
  "cron": {
-  "at": "2026-11-19T13:26:00.870Z",
+  "at": "2026-11-21T13:26:00.713Z",
   "steps": [
-   "index: 24 checked",
-   "pagespeed: /adjustastair, /nationwide-construction-supply, /leadgeneration"
+   "index: 28 checked",
+   "pagespeed: /choosingtemporaryroofaccess, /buyingvsrentingscaffolding, /scaffoldingmarketplace"
   ],
   "ok": true
  }
