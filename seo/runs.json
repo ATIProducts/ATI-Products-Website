@@ -1,12 +1,12 @@
 {
  "pagespeed": {
-  "at": "2026-11-23T13:26:15.582Z",
+  "at": "2026-11-24T13:26:18.761Z",
   "by": "Daily check",
   "strategy": "mobile",
   "pages": [
-   "/affiliates",
-   "/",
-   "/marketingchannelsforservicebusinesses"
+   "/about",
+   "/marketinghub",
+   "/offerings"
   ],
   "errors": []
  },
